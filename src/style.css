@@ -386,11 +386,11 @@ a:focus {
 	display: inline-block;
 	transition: 0.3s;
 	margin: 0;
-	padding-right: 2rem;
+	padding-right: 1.2rem;
 }
 
 .link-item > a > svg {
-	font-size: var(--fontSize-5);
+	font-size: var(--fontSize-4);
 	display: block;
 	margin: 0 auto var(--spacing-2) auto;
 	padding: 0;

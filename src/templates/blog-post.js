@@ -1,17 +1,11 @@
 import * as React from "react"
-import { 
-  // Link, 
-  graphql 
-} from "gatsby"
+import {  Link, graphql } from "gatsby"
 
 import Bio from "../components/bio"
 import Seo from "../components/seo"
 
 const BlogPostTemplate = ({
-  data: { 
-    // previous, 
-    // next, 
-    markdownRemark: post },
+  data: { previous, next, markdownRemark: post }, 
   pageContext: { locale }
 }) => {
   return (
@@ -34,7 +28,7 @@ const BlogPostTemplate = ({
           <Bio locale={locale} />
         </footer>
       </article>
-      {/* <nav className="blog-post-nav">
+      <nav className="blog-post-nav">
         <ul
           style={{
             display: `flex`,
@@ -59,7 +53,7 @@ const BlogPostTemplate = ({
             )}
           </li>
         </ul>
-      </nav> */}
+      </nav>
     </>
   )
 }
