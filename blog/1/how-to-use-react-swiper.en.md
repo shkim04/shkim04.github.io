@@ -1,18 +1,17 @@
 ---
 title: How To Use React Swiper
 date: "2022-11-13T00:00:00.000Z"
-description: "If you just began learning React or working on a React project, you probably want to create a beautiful slider that adds an aesthetic boost to your pictures."
+description: "We will talk about how to make a use of React Swiper library by creating a simple React app"
 tag: "ReactJS"
 ---
 
 If you just began learning React or working on a React project, you probably want to create a beautiful slider that adds an aesthetic boost to your pictures. In this post, I will walk you through the React Swiper basics and help you create a slider component using the library.
-
 ![React Swiper](./react-swiper-1.gif)
 
 # Prerequisite
 
 - Basic knowledge about react such as component, props
-- Create basic react app if you do not have it and remove unnecessary codes
+- A basic react app if you do not have it
 - Open the terminal and enter this command shown below
 
 ```js
@@ -31,7 +30,7 @@ npm install swiper
 ```
 
 # Install Swiper modules
-In index.js under the Swiper folder, I imported only 4 modules from swiper library that are Navigation, Pagination, EffectFade, Autoplay. If you want to use other modules, you need to import the modules as well. you can find other modules on [the website](https://swiperjs.com/swiper-api#modules) and their purposes.
+In index.js under the Slider folder, I imported only 4 modules from swiper library that are Navigation, Pagination, EffectFade, Autoplay. If you want to use other modules, you need to import the modules as well. you can find other modules on [the website](https://swiperjs.com/swiper-api#modules) and their purposes.
 
 Now, the Slider component could look like:
 ```js
@@ -271,7 +270,7 @@ Finally, we created a simple Slider component. There are a lot of different opti
 
 I hope you enjoyed this article!
 
-THANKS FOR READING. SEE YOU NEXT TIME!
+_THANKS FOR READING. SEE YOU NEXT TIME!_
 
-This is originally posted on my [Medium](https://medium.com/@shkim04/how-to-use-react-swiper-58eef325b09f).
-Let's connect!
+_This is originally posted on my [Medium](https://medium.com/@shkim04/how-to-use-react-swiper-58eef325b09f)._
+_Let's connect!_

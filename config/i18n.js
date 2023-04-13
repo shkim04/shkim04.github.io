@@ -14,7 +14,7 @@ module.exports = {
     path: `/en`,
     text: `English`,
     locale: `en-US`,
-    dateFormat: `MM DD, YYYY`,
+    dateFormat: `DD MMM, YYYY`,
     siteLanguage: `en`,
     ogLanguage: `en_US`,
     defaultTitle: `Gatsby Starter with multi-language and CMS`,
