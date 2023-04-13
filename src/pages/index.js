@@ -6,8 +6,7 @@ import Seo from "../components/seo"
 
 const blogTagsList = ["NodeJS", "ReactJS", "NextJS", "Python", "MongoDB", "Linux", "Docker", "Log"]
 
-const Index = ({ data, pageContext: { locale, titleByLang } }) => {
-  console.log(titleByLang)
+const Index = ({ data, pageContext: { locale } }) => {
   const posts = data.allMarkdownRemark.nodes
   const [selectedTag, setSelectedTag] = useState("")
 

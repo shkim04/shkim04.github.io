@@ -8,17 +8,15 @@ module.exports = {
     siteLanguage: `ko`,
     ogLanguage: `ko-KR`,
     defaultTitle: `Gatsby 다중 언어 사이트`,
-    defaultDescription: `ㅋㄷㅋㄷㅋㄷ`,
   },
   en: {
     default: false,
     path: `/en`,
     text: `English`,
     locale: `en-US`,
-    dateFormat: `MMMM DD, YYYY`,
+    dateFormat: `MM DD, YYYY`,
     siteLanguage: `en`,
     ogLanguage: `en_US`,
     defaultTitle: `Gatsby Starter with multi-language and CMS`,
-    defaultDescription: `Gatsby example site using Markdown, i18n and CMS`,
   }
 }

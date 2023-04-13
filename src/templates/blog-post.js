@@ -1,13 +1,19 @@
 import * as React from "react"
-import { Link, graphql } from "gatsby"
+import { 
+  // Link, 
+  graphql 
+} from "gatsby"
 
 import Bio from "../components/bio"
 import Seo from "../components/seo"
 
 const BlogPostTemplate = ({
-  data: { previous, next, markdownRemark: post },
+  data: { 
+    // previous, 
+    // next, 
+    markdownRemark: post },
+  pageContext: { locale }
 }) => {
-  const locale = post.fields.locale
   return (
     <>
       <article
@@ -28,7 +34,7 @@ const BlogPostTemplate = ({
           <Bio locale={locale} />
         </footer>
       </article>
-      <nav className="blog-post-nav">
+      {/* <nav className="blog-post-nav">
         <ul
           style={{
             display: `flex`,
@@ -53,7 +59,7 @@ const BlogPostTemplate = ({
             )}
           </li>
         </ul>
-      </nav>
+      </nav> */}
     </>
   )
 }
@@ -99,7 +105,10 @@ export const pageQuery = graphql`
         locale
       }
     }
-    previous: markdownRemark(id: { eq: $previousPostId }) {
+    previous: markdownRemark(
+      id: { eq: $previousPostId }
+      fields: { locale: { eq: $locale } }
+    ) {
       fields {
         slug
       }
@@ -107,7 +116,10 @@ export const pageQuery = graphql`
         title
       }
     }
-    next: markdownRemark(id: { eq: $nextPostId }) {
+    next: markdownRemark(
+      id: { eq: $nextPostId }
+      fields: { locale: { eq: $locale } }
+    ) {
       fields {
         slug
       }

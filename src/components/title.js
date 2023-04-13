@@ -3,11 +3,10 @@ import { Link } from "gatsby"
 
 import siteMetadata from "../../config/siteMetadata";
 
-const Title = ({ isHome, isNotFound, isDefaultLang, locale }) => {
-  if(isNotFound) return null
+const Title = ({ isHome, isDefaultLang, locale }) => {
   const title = siteMetadata[locale].title
   let header
-  let toPath = isDefaultLang ? "/" : `/${locale}`
+  let toPath = isDefaultLang ? `/` : `/${locale}`
   if (isHome) {
     header = (
       <h1 className="main-heading">

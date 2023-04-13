@@ -50,8 +50,9 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 
   if (node.internal.type === `MarkdownRemark`) {
     const postTitleInfo = createFilePath({ node, getNode }).split(".")
-    const order = postTitleInfo[0].match(/^\/([0-9])/)[1]
-    const slug = postTitleInfo[0].replace(/^\/([0-9])/, "")
+    
+    const order = postTitleInfo[0].match(/^\/([0-9]+)/)[1]
+    const slug = postTitleInfo[0].replace(/^\/([0-9]+)/, "")
     const lang = postTitleInfo[1].replace("/", "")
     const defaultKey = findKey(locales, o => o.default === true)
     const isDefaultLang = lang === defaultKey
@@ -113,6 +114,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       const locale = post.fields.locale
       const slug = post.fields.slug
       const titleByLang = post.fields.titleByLang
+      const dateFormat = locales[locale].dateFormat
 
       createPage({
         path: slug,
@@ -122,6 +124,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           isDefaultLang: isDefaultLang,
           slug: slug,
           titleByLang: titleByLang,
+          dateFormat: dateFormat,
           id: post.id,
           previousPostId,
           nextPostId,

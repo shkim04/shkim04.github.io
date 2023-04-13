@@ -1,13 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 
-import { isNotFound } from "../utils/gatsby-node-helpers";
-
-const LanguageSwitcher = ({ url, langsConfig, locale, titleByLang, isHome }) => {
-  if(isNotFound(url)) {
-    return null
-  }
-  
+const LanguageSwitcher = ({ langsConfig, locale, titleByLang, isHome }) => {
   const langsMenu = langsConfig.map((lang, index) => {
     const toPath = isHome ? lang[1].path : lang[1].default ? `/${titleByLang[lang[1].siteLanguage]}` : `${lang[1].path}/${titleByLang[lang[1].siteLanguage]}`
     

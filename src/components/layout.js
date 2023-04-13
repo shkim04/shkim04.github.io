@@ -18,6 +18,14 @@ const Layout = ({ location, pageContext: { locale, isDefaultLang, titleByLang },
     changeLocale(locale)
   }, [locale, changeLocale])
 
+  if(isNotFound(url)) {
+    return (
+      <div className="global-wrapper" data-is-root-path={isHome}>
+        {children}
+      </div>
+    )
+  }
+
   return (
     <div className="global-wrapper" data-is-root-path={isHome}>
       <header className="global-header">
@@ -26,12 +34,10 @@ const Layout = ({ location, pageContext: { locale, isDefaultLang, titleByLang },
           locale={locale}
           titleByLang={titleByLang}
           isHome={isHome}
-          url={url}
         />
         <div className="global-header-message">
           <Title 
             isHome={isHome}
-            isNotFound={isNotFound(url)} 
             isDefaultLang={isDefaultLang}
             locale={locale}
           />
@@ -39,15 +45,11 @@ const Layout = ({ location, pageContext: { locale, isDefaultLang, titleByLang },
         
       </header>
       <main>{children}</main>
-      {!isNotFound(url) && (
-          <footer>
-          
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.com">Gatsby</a> by Seunghyun Kim
-          </footer>
-        )
-      }
+      <footer>
+        © {new Date().getFullYear()}, Built with
+        {` `}
+        <a href="https://www.gatsbyjs.com">Gatsby</a> by Seunghyun Kim
+      </footer>
     </div>
   )
 }
