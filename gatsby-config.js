@@ -35,7 +35,7 @@ module.exports = {
             resolve: `gatsby-remark-copy-linked-files`,
             options: {
               destinationDir: `static`,
-              ignoreFileExtensions: [`png`, `jpg`, `jpeg`, `bmp`, `tiff`],
+              // ignoreFileExtensions: [`png`, `jpg`, `jpeg`, `bmp`, `tiff`],
             }
           },
           {
