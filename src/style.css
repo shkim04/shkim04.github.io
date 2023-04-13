@@ -165,6 +165,10 @@ p {
   padding: var(--spacing-0);
 }
 
+p > img {
+  width: 100%;
+}
+
 ul,
 ol {
   margin-left: var(--spacing-0);

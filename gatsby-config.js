@@ -32,11 +32,7 @@ module.exports = {
       options: {
         plugins: [
           {
-            resolve: `gatsby-remark-copy-linked-files`,
-            options: {
-              destinationDir: `static`,
-              // ignoreFileExtensions: [`png`, `jpg`, `jpeg`, `bmp`, `tiff`],
-            }
+            resolve: `gatsby-remark-copy-linked-files`
           },
           {
             resolve: `gatsby-remark-images`,

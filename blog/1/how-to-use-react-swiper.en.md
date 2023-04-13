@@ -6,7 +6,8 @@ tag: "ReactJS"
 ---
 
 If you just began learning React or working on a React project, you probably want to create a beautiful slider that adds an aesthetic boost to your pictures. In this post, I will walk you through the React Swiper basics and help you create a slider component using the library.
-![React Swiper](./react-swiper-1.gif)
+
+![React Swiper](../gifs/react-swiper-1.gif)
 
 # Prerequisite
 
@@ -18,7 +19,7 @@ If you just began learning React or working on a React project, you probably wan
 npx create-react-app [your project folder name]
 ```
 # Structure
-![Structure](./react-swiper-2.png)
+![Structure](../imgs/react-swiper-2.png)
 
 The picture above shows how the initial structure should look like. First, I imported a few modules from the Swiper library. Next, I created the Slider component index.js under the Slider folder and imported the Slider component App.js. Then, I created a Slider that shows the pictures. I created an array of data which is stored in a data folder with images in an asset folder.
 

@@ -7,7 +7,7 @@ tag: "ReactJS"
 
 React를 배우기 시작하고 실제 웹사이트를 개발할 때, 그림 및 사진을 자주 활용할 기회가 있다. 특히 여러 사진을 한 영역 내에서 보여주는 형식을 흔하게 접할 수 있는데 React Swiper 라이브러리가 이 기능을 구현할 때 적합하다. 이 글을 통해 해당 라이브러리의 기본을 알아보도록 하겠습니다.
 
-![React Swiper](./react-swiper-1.gif)
+![React Swiper](../gifs/react-swiper-1.gif)
 
 # 필수
 
@@ -19,7 +19,7 @@ React를 배우기 시작하고 실제 웹사이트를 개발할 때, 그림 및
 npx create-react-app [your project folder name]
 ```
 # 폴더 구조
-![Structure](./react-swiper-2.png)
+![Structure](../imgs/react-swiper-2.png)
 
 최종적으로 생성할 App의 폴더 구조를 나타내는 그림이니 참고하시면 됩니다. 우선, Swiper 라이브러리에서 필요한 모듈을 import하고 Slder folder 하위에 Slider 컴포넌트가 들어있는 index.js를 생성합니다. 이 컴포넌트 안에 우리가 원하는 Slider를 생성하게 됩니다. 마지막으로 asset 폴더 안에 있는 data 폴더에서 Slider를 통해 보여줄 사진들이 저장되어 있습니다.
 
