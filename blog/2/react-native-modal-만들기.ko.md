@@ -23,7 +23,7 @@ expo init [your project name]
 
 아래 그림과 같이 선택지가 출력이 되는데 엔터를 눌러 항목을 선택합니다.
 
-![Create Expo Command](../imgs/2/2-react-native-command.png)
+![Create Expo 터미널](../imgs/2/2-react-native-command.png)
 
 ## dependencies 설치
 Expo 앱이 설치가 완료되면 프로젝트를 실행할 폴더를 열고 dependencies 설치합니다.
@@ -45,11 +45,11 @@ npm start
 ```
 터미널에 QR code와 간단한 설명이 출력이 됩니다. 이 때 실제 기기(Android, iOS)를 통해 프로젝트를 실행하거나 에뮬레이터를 통해 프로젝트를 실행할 수 있습니다. 하지만 iOS같은 경우에는 데스크탑, 노트북은 Apple 제품이 아니라면 에뮬레이터를 사용할 수 없으니 주의 바랍니다. 휴대전화를 통해 프로젝트를 실행시키려면 _**Expo Go**_ 앱을 다운받아 QR code를 스캔하면 프로젝트가 실행됩니다. 아래 사진은 프로젝트를 실행한 결과입니다:
 
-![Expo basic screen](../imgs/2/2_react-native-expo-basic.png)
+![Expo 기본 화면](../imgs/2/2_react-native-expo-basic.png)
 
 ## Modal을 활용한 Popup 컴포넌트
 
-![Folder structure](../imgs/2/2_folder-structure.png)
+![폴더 구조](../imgs/2/2_folder-structure.png)
 
 먼저 _StyleSheet, View, Modal, TouchableWithoutFeedback_ 모듈을 import합니다. **StyleSheet**는 한 컴포넌트 안에서 css rule이 담긴 객체를 생성하여 해당 컴포넌트에 적용하는 기능을 제공합니다.. **View**는 React에서 div 태그에 해당됩니다. **TouchableWithoutFeedback**는 이름에서 알 수 있듯이 클릭을 했을 시 다른 효과없이 터치만 가능하게 만들어주는 모듈입니다. 마지막으로 **Modal**은 Popup 컴포넌의 반환 값이 됩니다. 이 모듈들을 활용해 다음과 같이 코드를 작성합니다:
 

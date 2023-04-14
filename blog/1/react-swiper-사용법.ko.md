@@ -19,7 +19,7 @@ React를 배우기 시작하고 실제 웹사이트를 개발할 때, 그림 및
 npx create-react-app [your project folder name]
 ```
 ## 폴더 구조
-![Folder structure](../imgs/1/1_folder-structure.png)
+![폴더 구조](../imgs/1/1_structure.png)
 
 최종적으로 생성할 App의 폴더 구조를 나타내는 그림이니 참고하시면 됩니다. 우선, Swiper 라이브러리에서 필요한 모듈을 import하고 Slder folder 하위에 Slider 컴포넌트가 들어있는 index.js를 생성합니다. 이 컴포넌트 안에 우리가 원하는 Slider를 생성하게 됩니다. 마지막으로 asset 폴더 안에 있는 data 폴더에서 Slider를 통해 보여줄 사진들이 저장되어 있습니다.
 

@@ -19,7 +19,7 @@ If you just began learning React or working on a React project, you probably wan
 npx create-react-app [your project folder name]
 ```
 ## Structure
-![Folder structure](../imgs/1/1_folder-structure.png)
+![Folder structure](../imgs/1/1_structure.png)
 
 The picture above shows how the initial structure should look like. First, I imported a few modules from the Swiper library. Next, I created the Slider component index.js under the Slider folder and imported the Slider component App.js. Then, I created a Slider that shows the pictures. I created an array of data which is stored in a data folder with images in an asset folder.
 
