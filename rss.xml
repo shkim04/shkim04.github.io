@@ -1,20 +1,484 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[My perosnal blog that shows who I am]]></description><link>http://github.com/dylang/node-rss</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 13 Apr 2023 16:11:23 GMT</lastBuildDate><item><title><![CDATA[How To Use React Swiper]]></title><description><![CDATA[If you just began learning React or working on a React project, you probably want to create a beautiful slider that adds an aesthetic boost…]]></description><link>null/en/how-to-use-react-swiper</link><guid isPermaLink="false">null/en/how-to-use-react-swiper</guid><pubDate>Sun, 13 Nov 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;If you just began learning React or working on a React project, you probably want to create a beautiful slider that adds an aesthetic boost to your pictures. In this post, I will walk you through the React Swiper basics and help you create a slider component using the library.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/c94c02669c776953c1bf653f728a0352/react-swiper-1.gif&quot; alt=&quot;React Swiper&quot;&gt;&lt;/p&gt;
-&lt;h1&gt;Prerequisite&lt;/h1&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[My perosnal blog that shows what I am working on and thoughts]]></description><link>http://github.com/dylang/node-rss</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 14 Apr 2023 14:22:36 GMT</lastBuildDate><item><title><![CDATA[How To Create React Native Modal With Expo]]></title><description><![CDATA[When I first developed a mobile application, I needed to have a small popup window on the same page in order to set up different dates to…]]></description><link>null/en/how-to-create-react-native-modal-with-expo</link><guid isPermaLink="false">null/en/how-to-create-react-native-modal-with-expo</guid><pubDate>Fri, 18 Nov 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;When I first developed a mobile application, I needed to have a small popup window on the same page in order to set up different dates to each items in a list and I wanted the popup window to disappear when I touched the outside of it. Thus, the popup window should be shorter than the full width of a screen. After a few of struggles, I found a simple but great way to create the popup window that fulfilled the conditions by using React Native Modal. Here, I will share the way to create it.&lt;/p&gt;
+&lt;h2&gt;Prerequisite&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Basic knowledge about Javascript or React&lt;/li&gt;
+&lt;li&gt;Prepare for development by installing requirement tools such as Node js and Git&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Create Expo App&lt;/h2&gt;
+&lt;p&gt;Open the terminal and enter the command shown below to create your expo app.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;npm install -g expo-cli
+// install expo-cli
+expo init [your project name]
+// once installed, initialize your project&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You will see these options, choose blank(simply, press the enter key when highlighted)&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/6033e0ad9d8de9b93fe1eff9b76ef6b7/d48f1/2-react-native-command.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 19.62025316455696%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAECAYAAACOXx+WAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAuUlEQVR42l2PyW7DMAxEc7Us1dbijZTiLa3z/z/4irhxUfTwyOEQGJC3QQTJmXlZEFVCTIRuwKeONkR8fPfU8eEDxjUYU2OMoa7rk7/61ouwHAfrvjNvK1LulP3JtDzQ9RNdv5B5Pz1ZHuTtQDQTY6RpGtq2JYSA9x5rLbcuJfZto5TCOAwMfc98L2QVSlamcSSrvhFUplPra86ZlNIZ/hv4Ks658+yqqqitxTr3g3Vc+4v/3vXy9fY3Co5isjqOHsMAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Create Expo Command&quot;
+        title=&quot;&quot;
+        src=&quot;/static/6033e0ad9d8de9b93fe1eff9b76ef6b7/f058b/2-react-native-command.png&quot;
+        srcset=&quot;/static/6033e0ad9d8de9b93fe1eff9b76ef6b7/c26ae/2-react-native-command.png 158w,
+/static/6033e0ad9d8de9b93fe1eff9b76ef6b7/6bdcf/2-react-native-command.png 315w,
+/static/6033e0ad9d8de9b93fe1eff9b76ef6b7/f058b/2-react-native-command.png 630w,
+/static/6033e0ad9d8de9b93fe1eff9b76ef6b7/d48f1/2-react-native-command.png 796w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h2&gt;Install dependencies&lt;/h2&gt;
+&lt;p&gt;Once the expo app is installed, change the directory to the project folder and install dependencies.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;cd [your project name]
+// change the directory to the project folder
+npm install
+// install dependecies
+npx expo install react-dom react-native-web @expo/webpack-config
+// if you run the project on the web, you need to install these dependecies too&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Start a project&lt;/h2&gt;
+&lt;p&gt;To start your project, enter the command shown below&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;npm start&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You will see a QR code and some instructions in the terminal. You can open your expo project on an actual device(Android, iOS) and an emulator. In order to start your project on an actual device, you need to download &lt;em&gt;&lt;strong&gt;Expo Go&lt;/strong&gt;&lt;/em&gt; app. I scanned the QR code with my iPhone camera. It showed my project and it looked like:&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 347px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/05e745b2fa68b00bb88b241e19aff447/39e45/2_react-native-expo-basic.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 217.08860759493672%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAArCAIAAAD3xz8iAAAACXBIWXMAAAsTAAALEwEAmpwYAAABBUlEQVR42u2WzWqFMBCFff9XctE8gEtRo0ZMkBEMahBRMT9zuQ3YC729tJR2lbMIh2E+zmKYIZGUEgCSJGGMnee5bdv+hY7jUEoVRUEpHccxTdMIAIQQeZ5LKRHROYfP5OvLslBKu65b17WqqmiaJq31cRzGGPyerLWIWNd1pJR6Efg53znnY34M/yo5wAEO8P/A1lq/6N5ce39VHs3HMZjnGRHbtq2qqgdomqYsSwDgnN8rfU8pZYwJITjnAMAY45wj4v2G+WRjjNbav954WWsv/9gQ5hzgAAf4Neye6Q+Sh2E4z9N/8PZ9N8aUZRnHMSHk7V2EkDiOKaVaa9+2bRsiZll2A2IT3LXgLCNXAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Expo basic screen&quot;
+        title=&quot;&quot;
+        src=&quot;/static/05e745b2fa68b00bb88b241e19aff447/39e45/2_react-native-expo-basic.png&quot;
+        srcset=&quot;/static/05e745b2fa68b00bb88b241e19aff447/c26ae/2_react-native-expo-basic.png 158w,
+/static/05e745b2fa68b00bb88b241e19aff447/6bdcf/2_react-native-expo-basic.png 315w,
+/static/05e745b2fa68b00bb88b241e19aff447/39e45/2_react-native-expo-basic.png 347w&quot;
+        sizes=&quot;(max-width: 347px) 100vw, 347px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h2&gt;Use Modal to create Popup component&lt;/h2&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 234px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/84462f1adbc5f94e896401a30dbb96a1/7235c/2_folder-structure.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 70.25316455696203%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAAAsTAAALEwEAmpwYAAABm0lEQVR42pWS707bMBTFeROaOIntOrZjx46blGasIEYQ04T4ONSB9v7PcCYbhY7BWPbhKLn21fHv/jmpKor1WqDrOmxCj0Y3UKpBCAHed1BSoSAFyrJapBMlNYZ+i6cfj3h6/IlpusHdt3scDgc8PHzH7TQhz/LlhoQUoJQhfqMY46AVxenpCqtVhiwnKbEoyqRFhnUtEUmd8xh3I4QQyHOC2I7Z7L8IYw+jjLHofIez4QyNNol4qdErQyHqRLkddjgfR0xX1xj6IVHOiUspXwhlrdBaB+8DWmuRpUHQV8mLehiTOFtDK439/hL7zxc4Hz+lciPhrNnsT9Pf4/j/MpRIqJRC27oUu9alfoawgXc+Deg9wjeGz4QcnAtoqWG0hZZNGoo1Nj1gTQtK6V/p0kqR8lhyLSR006C/7tFddAiXARWrkGXLSqaMoQn2SMgoT5JOww4Wpjcoy+OrHw1lPqOcPRvGgJASX28V3EZje7PD8GWL4WqAUAIk/3gXZ0Lbt0fCeKEUAxcc0irURkJ7DcroP1dlvudinQx/AecFoOyK8GoKAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Folder structure&quot;
+        title=&quot;&quot;
+        src=&quot;/static/84462f1adbc5f94e896401a30dbb96a1/7235c/2_folder-structure.png&quot;
+        srcset=&quot;/static/84462f1adbc5f94e896401a30dbb96a1/c26ae/2_folder-structure.png 158w,
+/static/84462f1adbc5f94e896401a30dbb96a1/7235c/2_folder-structure.png 234w&quot;
+        sizes=&quot;(max-width: 234px) 100vw, 234px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;First, you should import &lt;em&gt;StyleSheet, View, Modal, TouchableWithoutFeedback&lt;/em&gt; from React Native. &lt;strong&gt;StyleSheet&lt;/strong&gt; allows us to create a style object that stores and manages css rules for a component. &lt;strong&gt;View&lt;/strong&gt; is simply an equivalent of a div in React. &lt;strong&gt;TouchableWithoutFeedback&lt;/strong&gt; is actually self-explanatory which makes things inside of it touchable without any effect when clicked. &lt;strong&gt;Modal&lt;/strong&gt; is the essential element we need to create Popup component. Here is the code:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; StyleSheet&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; View&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; Modal &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;react-native&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Popup&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; children&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; visible&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; transparent&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; dismiss&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; margin &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;Modal
+      visible&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;visible&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+      transparent&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;transparent&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+      onRequestClose&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;dismiss&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+      &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;TouchableWithoutFeedback onPress&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;dismiss&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+        &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;View style&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;styles&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;modalOverlay&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+      &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;TouchableWithoutFeedback&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+
+      &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;View 
+        style&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;styles&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;modalContent&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+          &lt;span class=&quot;token literal-property property&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; margin
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;children&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;View&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+    &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;Modal&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; styles &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; StyleSheet&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token literal-property property&quot;&gt;modalContent&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;justifyContent&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;center&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;marginVertical&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;100%&quot;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token literal-property property&quot;&gt;modalOverlay&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;absolute&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;top&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;bottom&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;backgroundColor&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;rgba(0,0,0,0.5)&quot;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Popup component&lt;/strong&gt; takes &lt;em&gt;children, visible, transparent, dismiss, margin&lt;/em&gt; as props. The component returns Modal. Here, Modal only takes &lt;em&gt;visible, transparent, onRequestClose&lt;/em&gt; as props. But, there are other props you can use. You can check them on &lt;em&gt;&lt;strong&gt;&lt;a href=&quot;https://reactnative.dev/docs/modal&quot;&gt;the official website&lt;/a&gt;&lt;/strong&gt;&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Recall that I want the popup window to disappear when I click the outside of it. TouchableWithoutFeedback is where we do the trick. So, we will make it take up the full screen. To do that, we will set position to “absolute” and set top, bottom, left, right to “0”.&lt;/p&gt;
+&lt;p&gt;Children prop under View is where the popup window goes. We will pass a content as a prop from the parent component later. Margin prop will be used to set margin for View. What it actually does is to adjust the width of the popup window. If you pass “0” from the parent component, the popup window will take up 100% of the width of the screen. Also, if you pass “20px” or “10%”, the width of the popup content will be shortened.&lt;/p&gt;
+&lt;h2&gt;App.js&lt;/h2&gt;
+&lt;p&gt;Now, we will import &lt;strong&gt;Popup component&lt;/strong&gt; and create a button. If we click the button, the Popup will show up. Instead of importing Button from “react-native”, we will import &lt;strong&gt;TouchableOpacity&lt;/strong&gt; and make it look like a button because it is easily noticeable when clicked.&lt;/p&gt;
+&lt;p&gt;To open and close the popup window, we should store the state of visibility, so we will import useState from “react”. Also, we need to create openPopup, closePopup handlers to set the state of visibility. When we press the button, it will trigger openPopup handler and set the state to “true”. The closePoup handler will be passed to Popup component we created to close itself by setting the state to “false”. Finally, We will add some css rules to the popup window so that we can see them properly.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; useState &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;react&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; TouchableOpacity&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; StyleSheet&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; Text&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; View &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;react-native&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; Popup &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;./Popup&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+
+&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;App&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+ &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;visible&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; setVisible&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;useState&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+ 
+ &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;openPopup&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token function&quot;&gt;setVisible&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+ &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+ &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;closePopup&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token function&quot;&gt;setVisible&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+ &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;View style&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;styles&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;container&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+     &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;TouchableOpacity 
+      style&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;styles&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;popupButton&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+      onPress&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;openPopup&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+     &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+      &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;Text style&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token literal-property property&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;#fff&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;Open Popup&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;Text&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; 
+     &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;TouchableOpacity&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+     &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;Popup
+      visible&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;visible&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+      transparent&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+      dismiss&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;closePopup&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+      margin&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;25%&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+     &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+      &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;View
+       style&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;styles&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;popupContent&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+       &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;Text style&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token literal-property property&quot;&gt;fontSize&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;18&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;Popup opened&lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;Text&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+      &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;View&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+     &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;Popup&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+    &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;View&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; styles &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; StyleSheet&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token literal-property property&quot;&gt;container&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;flex&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;backgroundColor&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;#fff&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;alignItems&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;center&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;marginTop&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;150&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token literal-property property&quot;&gt;popupButton&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;justifyContent&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;center&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;alignItems&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;center&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;backgroundColor&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;#000&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;50&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token literal-property property&quot;&gt;popupContent&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;justifyContent&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;center&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;alignItems&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;center&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;backgroundColor&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;#fff&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;borderColor&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;#000&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;borderWidth&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;1px&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;150&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;When we save and start the project, it will look like:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/0047e88dd988a65a3886f3b3b9060f82/2_react-native-modal.gif&quot; alt=&quot;Modal&quot;&gt;&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;We created a simple but great popup window. It could be an alert message or date management box depending on your demand. You can add some more content to the popup window to see if it works great for you.&lt;/p&gt;
+&lt;p&gt;I hope you enjoyed this article!&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;THANKS FOR READING. SEE YOU NEXT TIME!&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;This is originally posted on my &lt;a href=&quot;https://medium.com/@shkim04/how-to-use-react-swiper-58eef325b09f&quot;&gt;Medium&lt;/a&gt;.&lt;/em&gt;
+&lt;em&gt;Let&apos;s connect!&lt;/em&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[React Native Modal Expo로 만들기]]></title><description><![CDATA[…]]></description><link>null/react-native-modal-만들기</link><guid isPermaLink="false">null/react-native-modal-만들기</guid><pubDate>Fri, 18 Nov 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;개발자로 일을 시작한 이후 처음으로 모바일 앱을 개발했을 때, 동일 페이지 안에 팝업 창을 띄워 날짜를 선택할 수 있으며 팝업 창 외의 영역을 눌렀을 때 사라질 수 있도록 구현하고 싶었습니다. 팝업 창은 화면 폭보다는 작은 크기로 만들려고 했으나 생각보다 쉽지 않았습니다. 여러 번의 시도 끝에 간단하지만 쓸만한 팝업 창을 만들었습니다. 이 글을 통해 어떻게 만들었는지 알아보겠습니다.&lt;/p&gt;
+&lt;h2&gt;필수&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Javascript, React 기본 지식&lt;/li&gt;
+&lt;li&gt;Node, git 등 개발에 필요한 기타 등등&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Expo App 만들기&lt;/h2&gt;
+&lt;p&gt;다음의 명령어를 통해 expo app을 생성합니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;npm install -g expo-cli
+// install expo-cli
+expo init [your project name]
+// once installed, initialize your project&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;아래 그림과 같이 선택지가 출력이 되는데 엔터를 눌러 항목을 선택합니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/6033e0ad9d8de9b93fe1eff9b76ef6b7/d48f1/2-react-native-command.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 19.62025316455696%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAECAYAAACOXx+WAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAuUlEQVR42l2PyW7DMAxEc7Us1dbijZTiLa3z/z/4irhxUfTwyOEQGJC3QQTJmXlZEFVCTIRuwKeONkR8fPfU8eEDxjUYU2OMoa7rk7/61ouwHAfrvjNvK1LulP3JtDzQ9RNdv5B5Pz1ZHuTtQDQTY6RpGtq2JYSA9x5rLbcuJfZto5TCOAwMfc98L2QVSlamcSSrvhFUplPra86ZlNIZ/hv4Ks658+yqqqitxTr3g3Vc+4v/3vXy9fY3Co5isjqOHsMAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Create Expo Command&quot;
+        title=&quot;&quot;
+        src=&quot;/static/6033e0ad9d8de9b93fe1eff9b76ef6b7/f058b/2-react-native-command.png&quot;
+        srcset=&quot;/static/6033e0ad9d8de9b93fe1eff9b76ef6b7/c26ae/2-react-native-command.png 158w,
+/static/6033e0ad9d8de9b93fe1eff9b76ef6b7/6bdcf/2-react-native-command.png 315w,
+/static/6033e0ad9d8de9b93fe1eff9b76ef6b7/f058b/2-react-native-command.png 630w,
+/static/6033e0ad9d8de9b93fe1eff9b76ef6b7/d48f1/2-react-native-command.png 796w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h2&gt;dependencies 설치&lt;/h2&gt;
+&lt;p&gt;Expo 앱이 설치가 완료되면 프로젝트를 실행할 폴더를 열고 dependencies 설치합니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;cd [your project name]
+// change the directory to the project folder
+npm install
+// install dependecies
+npx expo install react-dom react-native-web @expo/webpack-config
+// if you run the project on the web, you need to install these dependecies too&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;프로젝트 시작&lt;/h2&gt;
+&lt;p&gt;다음의 명령어를 입력해서 프로젝트를 시작합니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;npm start&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;터미널에 QR code와 간단한 설명이 출력이 됩니다. 이 때 실제 기기(Android, iOS)를 통해 프로젝트를 실행하거나 에뮬레이터를 통해 프로젝트를 실행할 수 있습니다. 하지만 iOS같은 경우에는 데스크탑, 노트북은 Apple 제품이 아니라면 에뮬레이터를 사용할 수 없으니 주의 바랍니다. 휴대전화를 통해 프로젝트를 실행시키려면 &lt;em&gt;&lt;strong&gt;Expo Go&lt;/strong&gt;&lt;/em&gt; 앱을 다운받아 QR code를 스캔하면 프로젝트가 실행됩니다. 아래 사진은 프로젝트를 실행한 결과입니다:&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 347px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/05e745b2fa68b00bb88b241e19aff447/39e45/2_react-native-expo-basic.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 217.08860759493672%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAArCAIAAAD3xz8iAAAACXBIWXMAAAsTAAALEwEAmpwYAAABBUlEQVR42u2WzWqFMBCFff9XctE8gEtRo0ZMkBEMahBRMT9zuQ3YC729tJR2lbMIh2E+zmKYIZGUEgCSJGGMnee5bdv+hY7jUEoVRUEpHccxTdMIAIQQeZ5LKRHROYfP5OvLslBKu65b17WqqmiaJq31cRzGGPyerLWIWNd1pJR6Efg53znnY34M/yo5wAEO8P/A1lq/6N5ce39VHs3HMZjnGRHbtq2qqgdomqYsSwDgnN8rfU8pZYwJITjnAMAY45wj4v2G+WRjjNbav954WWsv/9gQ5hzgAAf4Neye6Q+Sh2E4z9N/8PZ9N8aUZRnHMSHk7V2EkDiOKaVaa9+2bRsiZll2A2IT3LXgLCNXAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Expo basic screen&quot;
+        title=&quot;&quot;
+        src=&quot;/static/05e745b2fa68b00bb88b241e19aff447/39e45/2_react-native-expo-basic.png&quot;
+        srcset=&quot;/static/05e745b2fa68b00bb88b241e19aff447/c26ae/2_react-native-expo-basic.png 158w,
+/static/05e745b2fa68b00bb88b241e19aff447/6bdcf/2_react-native-expo-basic.png 315w,
+/static/05e745b2fa68b00bb88b241e19aff447/39e45/2_react-native-expo-basic.png 347w&quot;
+        sizes=&quot;(max-width: 347px) 100vw, 347px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h2&gt;Modal을 활용한 Popup 컴포넌트&lt;/h2&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 234px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/84462f1adbc5f94e896401a30dbb96a1/7235c/2_folder-structure.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 70.25316455696203%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAAAsTAAALEwEAmpwYAAABm0lEQVR42pWS707bMBTFeROaOIntOrZjx46blGasIEYQ04T4ONSB9v7PcCYbhY7BWPbhKLn21fHv/jmpKor1WqDrOmxCj0Y3UKpBCAHed1BSoSAFyrJapBMlNYZ+i6cfj3h6/IlpusHdt3scDgc8PHzH7TQhz/LlhoQUoJQhfqMY46AVxenpCqtVhiwnKbEoyqRFhnUtEUmd8xh3I4QQyHOC2I7Z7L8IYw+jjLHofIez4QyNNol4qdErQyHqRLkddjgfR0xX1xj6IVHOiUspXwhlrdBaB+8DWmuRpUHQV8mLehiTOFtDK439/hL7zxc4Hz+lciPhrNnsT9Pf4/j/MpRIqJRC27oUu9alfoawgXc+Deg9wjeGz4QcnAtoqWG0hZZNGoo1Nj1gTQtK6V/p0kqR8lhyLSR006C/7tFddAiXARWrkGXLSqaMoQn2SMgoT5JOww4Wpjcoy+OrHw1lPqOcPRvGgJASX28V3EZje7PD8GWL4WqAUAIk/3gXZ0Lbt0fCeKEUAxcc0irURkJ7DcroP1dlvudinQx/AecFoOyK8GoKAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Folder structure&quot;
+        title=&quot;&quot;
+        src=&quot;/static/84462f1adbc5f94e896401a30dbb96a1/7235c/2_folder-structure.png&quot;
+        srcset=&quot;/static/84462f1adbc5f94e896401a30dbb96a1/c26ae/2_folder-structure.png 158w,
+/static/84462f1adbc5f94e896401a30dbb96a1/7235c/2_folder-structure.png 234w&quot;
+        sizes=&quot;(max-width: 234px) 100vw, 234px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;먼저 &lt;em&gt;StyleSheet, View, Modal, TouchableWithoutFeedback&lt;/em&gt; 모듈을 import합니다. &lt;strong&gt;StyleSheet&lt;/strong&gt;는 한 컴포넌트 안에서 css rule이 담긴 객체를 생성하여 해당 컴포넌트에 적용하는 기능을 제공합니다.. &lt;strong&gt;View&lt;/strong&gt;는 React에서 div 태그에 해당됩니다. &lt;strong&gt;TouchableWithoutFeedback&lt;/strong&gt;는 이름에서 알 수 있듯이 클릭을 했을 시 다른 효과없이 터치만 가능하게 만들어주는 모듈입니다. 마지막으로 &lt;strong&gt;Modal&lt;/strong&gt;은 Popup 컴포넌의 반환 값이 됩니다. 이 모듈들을 활용해 다음과 같이 코드를 작성합니다:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; StyleSheet&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; View&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; Modal &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;react-native&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Popup&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; children&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; visible&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; transparent&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; dismiss&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; margin &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;Modal
+      visible&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;visible&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+      transparent&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;transparent&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+      onRequestClose&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;dismiss&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+      &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;TouchableWithoutFeedback onPress&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;dismiss&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+        &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;View style&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;styles&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;modalOverlay&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+      &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;TouchableWithoutFeedback&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+
+      &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;View 
+        style&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;styles&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;modalContent&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+          &lt;span class=&quot;token literal-property property&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; margin
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;children&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;View&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+    &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;Modal&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; styles &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; StyleSheet&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token literal-property property&quot;&gt;modalContent&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;justifyContent&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;center&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;marginVertical&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;100%&quot;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token literal-property property&quot;&gt;modalOverlay&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;absolute&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;top&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;bottom&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;backgroundColor&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;rgba(0,0,0,0.5)&quot;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Popup component&lt;/strong&gt;에 전달되는 props은 &lt;em&gt;children, visible, transparent, dismiss, margin&lt;/em&gt; 이고 Modal을 반환합니다. 이 Modal은 &lt;em&gt;visible, transparent, onRequestClose&lt;/em&gt; 을 props으로 전달하고 있지만 더 많은 기능들이 있으니 &lt;em&gt;&lt;strong&gt;&lt;a href=&quot;https://reactnative.dev/docs/modal&quot;&gt;공식 웹사이트&lt;/a&gt;&lt;/strong&gt;&lt;/em&gt; 를 참조하시기 바랍니다.&lt;/p&gt;
+&lt;p&gt;앞서 필자는 팝업 창 이외의 영역을 눌렀을 때 팝업 창이 닫힐 수 있게 개발하고 싶다고 했습니다. TouchableWithoutFeedback이 이 기능을 구현하는데 핵심이 되는데 이 모듈의 크기를 화면을 모두 채울 수 있도록 설정해야 합니다. position을 &quot;absolute&quot;로 두고 top, bottom, left, right을 &quot;0&quot;으로 설정하면 됩니다.&lt;/p&gt;
+&lt;p&gt;View 하위에 있는 children prop에 팝업 창이 가게 될 것이고 parent 컴포넌트에서 content를 보내는 구조를 갖추게 됩니다. Prop으로 보내는 margin은 View에 적용할 margin을 나타내며 실제로는 팝업 창의 폭을 조절하는 데 쓰이게 됩니다. parent 컴포넌트로에서 margin에 &quot;0&quot;을 주면 팝업 창은 화면 폭을 꽉 채우게 되고 &quot;20px&quot; 혹은 &quot;10%&quot;를 주면 팝업 창이 줄어들게 됩니다.&lt;/p&gt;
+&lt;h2&gt;App.js&lt;/h2&gt;
+&lt;p&gt;App.js 스크립트 안에  &lt;strong&gt;Popup&lt;/strong&gt; 컴포넌트와 버튼을 import를 합니다. 이 버튼은 팝업 창에 대한 스위치 역할을 위해 쓰입니다. 클릭을 더 쉽고 간단하게 확인할 수 있기 때문에  react-native에서 Button을 import하는 대신 &lt;strong&gt;TouchableOpacity&lt;/strong&gt;을 import합니다.&lt;/p&gt;
+&lt;p&gt;useState 훅을 활용해서 팝업 창의 개폐 여부를 저장하는 visibility라는 이름의 state를 만들어 줍니다. state의 상태를 변화 시켜줄 핸들러 함수인 openPopup, closePopup을 만들어줍니다. 위에서 생성한 버튼을 누르면 openPopup을 실행시키고 visibility에 &lt;code class=&quot;language-text&quot;&gt;true&lt;/code&gt;로 저장해주게 됩니다. 반대로 closePopup은 visibility를 &lt;code class=&quot;language-text&quot;&gt;false&lt;/code&gt;로 저장해주어 팝업을 닫게 합니다. 마지막으로 적절하게 효과를 확인할 수 있도록 css 규칙을 적용해줍니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; useState &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;react&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; TouchableOpacity&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; StyleSheet&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; Text&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; View &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;react-native&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; Popup &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;./Popup&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+
+&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;App&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+ &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;visible&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; setVisible&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;useState&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+ 
+ &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;openPopup&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token function&quot;&gt;setVisible&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+ &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+ &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;closePopup&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token function&quot;&gt;setVisible&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+ &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;View style&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;styles&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;container&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+     &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;TouchableOpacity 
+      style&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;styles&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;popupButton&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+      onPress&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;openPopup&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+     &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+      &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;Text style&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token literal-property property&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;#fff&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;Open Popup&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;Text&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; 
+     &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;TouchableOpacity&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+     &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;Popup
+      visible&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;visible&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+      transparent&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+      dismiss&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;closePopup&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+      margin&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;25%&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+     &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+      &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;View
+       style&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;styles&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;popupContent&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+       &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;Text style&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token literal-property property&quot;&gt;fontSize&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;18&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;Popup opened&lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;Text&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+      &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;View&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+     &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;Popup&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+    &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;View&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; styles &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; StyleSheet&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token literal-property property&quot;&gt;container&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;flex&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;backgroundColor&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;#fff&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;alignItems&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;center&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;marginTop&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;150&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token literal-property property&quot;&gt;popupButton&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;justifyContent&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;center&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;alignItems&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;center&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;backgroundColor&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;#000&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;50&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token literal-property property&quot;&gt;popupContent&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;justifyContent&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;center&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;alignItems&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;center&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;backgroundColor&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;#fff&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;borderColor&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;#000&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;borderWidth&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;1px&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;150&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;프로젝트를 실행하게 되면 다음과 같이 동작하게 됩니다:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/0047e88dd988a65a3886f3b3b9060f82/2_react-native-modal.gif&quot; alt=&quot;Modal&quot;&gt;&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;팝업 창은 간단하지만 그 쓰임새는 다양할 것입니다. 개발하는 사람에 따라 경고를 띄우는 창이 될 수도 있고 날짜를 선택할 수 있는 창이 될 수도 있습니다. 이 글의 내용을 토대로 적절하게 팝업 창을 사용하시길 바라면서 마치겠습니다.&lt;/p&gt;
+&lt;p&gt;이 글이 많은 분들께 도움이 되었으면 좋겠습니다!&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;읽어 주셔서 감사합니다. To be continued!&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;이 글은 &lt;a href=&quot;https://medium.com/@shkim04/how-to-use-react-swiper-58eef325b09f&quot;&gt;Medium&lt;/a&gt;에도 업로드 되었습니다.&lt;/em&gt;
+&lt;em&gt;놀러 오세요!&lt;/em&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[How To Use React Swiper]]></title><description><![CDATA[If you just began learning React or working on a React project, you probably want to create a beautiful slider that adds an aesthetic boost…]]></description><link>null/en/how-to-use-react-swiper</link><guid isPermaLink="false">null/en/how-to-use-react-swiper</guid><pubDate>Sun, 13 Nov 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;If you just began learning React or working on a React project, you probably want to create a beautiful slider that adds an aesthetic boost to your pictures. In this post, I will walk you through the React Swiper basics and help you create a slider component using the library.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/c94c02669c776953c1bf653f728a0352/1_react-swiper.gif&quot; alt=&quot;React Swiper&quot;&gt;&lt;/p&gt;
+&lt;h2&gt;Prerequisite&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Basic knowledge about react such as component, props&lt;/li&gt;
 &lt;li&gt;A basic react app if you do not have it&lt;/li&gt;
 &lt;li&gt;Open the terminal and enter this command shown below&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;npx create&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;react&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;app &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;your project folder name&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1&gt;Structure&lt;/h1&gt;
+&lt;h2&gt;Structure&lt;/h2&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 191px; &quot;
     &gt;
       &lt;a
     class=&quot;gatsby-resp-image-link&quot;
-    href=&quot;/static/27b81ad132efc4bf4f6e719d4e6599d6/c540e/react-swiper-2.png&quot;
+    href=&quot;/static/27b81ad132efc4bf4f6e719d4e6599d6/c540e/1_folder-structure.png&quot;
     style=&quot;display: block&quot;
     target=&quot;_blank&quot;
     rel=&quot;noopener&quot;
@@ -25,11 +489,11 @@
   &gt;&lt;/span&gt;
   &lt;img
         class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;Structure&quot;
+        alt=&quot;Folder structure&quot;
         title=&quot;&quot;
-        src=&quot;/static/27b81ad132efc4bf4f6e719d4e6599d6/c540e/react-swiper-2.png&quot;
-        srcset=&quot;/static/27b81ad132efc4bf4f6e719d4e6599d6/c26ae/react-swiper-2.png 158w,
-/static/27b81ad132efc4bf4f6e719d4e6599d6/c540e/react-swiper-2.png 191w&quot;
+        src=&quot;/static/27b81ad132efc4bf4f6e719d4e6599d6/c540e/1_folder-structure.png&quot;
+        srcset=&quot;/static/27b81ad132efc4bf4f6e719d4e6599d6/c26ae/1_folder-structure.png 158w,
+/static/27b81ad132efc4bf4f6e719d4e6599d6/c540e/1_folder-structure.png 191w&quot;
         sizes=&quot;(max-width: 191px) 100vw, 191px&quot;
         style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
         loading=&quot;lazy&quot;
@@ -38,10 +502,10 @@
   &lt;/a&gt;
     &lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;The picture above shows how the initial structure should look like. First, I imported a few modules from the Swiper library. Next, I created the Slider component index.js under the Slider folder and imported the Slider component App.js. Then, I created a Slider that shows the pictures. I created an array of data which is stored in a data folder with images in an asset folder.&lt;/p&gt;
-&lt;h1&gt;Install Swiper library&lt;/h1&gt;
+&lt;h2&gt;Install Swiper library&lt;/h2&gt;
 &lt;p&gt;Open the terminal and enter this command shown below&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;npm install swiper&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1&gt;Install Swiper modules&lt;/h1&gt;
+&lt;h2&gt;Install Swiper modules&lt;/h2&gt;
 &lt;p&gt;In index.js under the Slider folder, I imported only 4 modules from swiper library that are Navigation, Pagination, EffectFade, Autoplay. If you want to use other modules, you need to import the modules as well. you can find other modules on &lt;a href=&quot;https://swiperjs.com/swiper-api#modules&quot;&gt;the website&lt;/a&gt; and their purposes.&lt;/p&gt;
 &lt;p&gt;Now, the Slider component could look like:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;SliderWrap&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;./swiper.style&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
@@ -197,7 +661,7 @@ SwiperCore&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span
     }
   &lt;/span&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 `&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1&gt;Pictures&lt;/h1&gt;
+&lt;h2&gt;Pictures&lt;/h2&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; Athelete &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;../assets/image/athelete.png&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; Books &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;../assets/image/books.png&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; Hands &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;../assets/image/hands.png&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
@@ -226,7 +690,7 @@ SwiperCore&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span
   &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;You can replace these with your own images. Just make sure the path to the images is correct.&lt;/p&gt;
-&lt;h1&gt;App.js&lt;/h1&gt;
+&lt;h2&gt;App.js&lt;/h2&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; Slider&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;Slide&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;./Slider&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; pictures &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;./data&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 
@@ -261,28 +725,28 @@ SwiperCore&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span
 
 &lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; App&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Notice that I imported all the css files that are required.&lt;/p&gt;
-&lt;h1&gt;Conclusion&lt;/h1&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;Finally, we created a simple Slider component. There are a lot of different options to implement Swiper library. You might want to play with these variation by yourself and find what works for you!&lt;/p&gt;
 &lt;p&gt;I hope you enjoyed this article!&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;THANKS FOR READING. SEE YOU NEXT TIME!&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;THANKS FOR READING. SEE YOU NEXT TIME!&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;This is originally posted on my &lt;a href=&quot;https://medium.com/@shkim04/how-to-use-react-swiper-58eef325b09f&quot;&gt;Medium&lt;/a&gt;.&lt;/em&gt;
 &lt;em&gt;Let&apos;s connect!&lt;/em&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[React Swiper 사용법]]></title><description><![CDATA[React를 배우기 시작하고 실제 웹사이트를 개발할 때, 그림 및 사진을 자주 활용할 기회가 있다. 특히 여러 사진을 한 영역 내에서 보여주는 형식을 흔하게 접할 수 있는데 React Swiper…]]></description><link>null/react-swiper-사용법</link><guid isPermaLink="false">null/react-swiper-사용법</guid><pubDate>Sun, 13 Nov 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;React를 배우기 시작하고 실제 웹사이트를 개발할 때, 그림 및 사진을 자주 활용할 기회가 있다. 특히 여러 사진을 한 영역 내에서 보여주는 형식을 흔하게 접할 수 있는데 React Swiper 라이브러리가 이 기능을 구현할 때 적합하다. 이 글을 통해 해당 라이브러리의 기본을 알아보도록 하겠습니다.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/c94c02669c776953c1bf653f728a0352/react-swiper-1.gif&quot; alt=&quot;React Swiper&quot;&gt;&lt;/p&gt;
-&lt;h1&gt;필수&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&quot;/c94c02669c776953c1bf653f728a0352/1_react-swiper.gif&quot; alt=&quot;React Swiper&quot;&gt;&lt;/p&gt;
+&lt;h2&gt;필수&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Component, props 등등 기초 React 배경지식&lt;/li&gt;
 &lt;li&gt;기본 React App&lt;/li&gt;
 &lt;li&gt;React App이 없을 시, 아래 명령어로 입력하여 생성&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;npx create&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;react&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;app &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;your project folder name&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1&gt;폴더 구조&lt;/h1&gt;
+&lt;h2&gt;폴더 구조&lt;/h2&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 191px; &quot;
     &gt;
       &lt;a
     class=&quot;gatsby-resp-image-link&quot;
-    href=&quot;/static/27b81ad132efc4bf4f6e719d4e6599d6/c540e/react-swiper-2.png&quot;
+    href=&quot;/static/27b81ad132efc4bf4f6e719d4e6599d6/c540e/1_folder-structure.png&quot;
     style=&quot;display: block&quot;
     target=&quot;_blank&quot;
     rel=&quot;noopener&quot;
@@ -293,11 +757,11 @@ SwiperCore&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span
   &gt;&lt;/span&gt;
   &lt;img
         class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;Structure&quot;
+        alt=&quot;Folder structure&quot;
         title=&quot;&quot;
-        src=&quot;/static/27b81ad132efc4bf4f6e719d4e6599d6/c540e/react-swiper-2.png&quot;
-        srcset=&quot;/static/27b81ad132efc4bf4f6e719d4e6599d6/c26ae/react-swiper-2.png 158w,
-/static/27b81ad132efc4bf4f6e719d4e6599d6/c540e/react-swiper-2.png 191w&quot;
+        src=&quot;/static/27b81ad132efc4bf4f6e719d4e6599d6/c540e/1_folder-structure.png&quot;
+        srcset=&quot;/static/27b81ad132efc4bf4f6e719d4e6599d6/c26ae/1_folder-structure.png 158w,
+/static/27b81ad132efc4bf4f6e719d4e6599d6/c540e/1_folder-structure.png 191w&quot;
         sizes=&quot;(max-width: 191px) 100vw, 191px&quot;
         style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
         loading=&quot;lazy&quot;
@@ -306,10 +770,10 @@ SwiperCore&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span
   &lt;/a&gt;
     &lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;최종적으로 생성할 App의 폴더 구조를 나타내는 그림이니 참고하시면 됩니다. 우선, Swiper 라이브러리에서 필요한 모듈을 import하고 Slder folder 하위에 Slider 컴포넌트가 들어있는 index.js를 생성합니다. 이 컴포넌트 안에 우리가 원하는 Slider를 생성하게 됩니다. 마지막으로 asset 폴더 안에 있는 data 폴더에서 Slider를 통해 보여줄 사진들이 저장되어 있습니다.&lt;/p&gt;
-&lt;h1&gt;Swiper library 설치&lt;/h1&gt;
+&lt;h2&gt;Swiper library 설치&lt;/h2&gt;
 &lt;p&gt;아래 명령어를 입력하여 라이브러리를 설치합니다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;npm install swiper&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1&gt;Swiper modules 설치&lt;/h1&gt;
+&lt;h2&gt;Swiper modules 설치&lt;/h2&gt;
 &lt;p&gt;Slider 폴더 안에 있는 index.js에 swiper 라이브러리에서 이 App에 활용할 4가지 모듈을 import 합니다. 해당 모듈은 Navigation, Pagination, EffectFade, Autoplay 입니다. 다른 기능을 사용하고 싶다면 해당 모듈을 import하기만 하면 됩니다. 다른 모듈에 관한 설명은 Swiper 라이브러리 공식 &lt;a href=&quot;https://swiperjs.com/swiper-api#modules&quot;&gt;웹사이트&lt;/a&gt;에 나와 있으니 확인바랍니다.&lt;/p&gt;
 &lt;p&gt;Slider 컴포넌트:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;SliderWrap&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;./swiper.style&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
@@ -465,7 +929,7 @@ SwiperCore&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span
     }
   &lt;/span&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 `&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1&gt;사진&lt;/h1&gt;
+&lt;h2&gt;사진&lt;/h2&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; Athelete &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;../assets/image/athelete.png&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; Books &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;../assets/image/books.png&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; Hands &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;../assets/image/hands.png&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
@@ -494,7 +958,7 @@ SwiperCore&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span
   &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;사진을 import 할 때, 정확한 path를 적어주셔야 됩니다.&lt;/p&gt;
-&lt;h1&gt;App.js&lt;/h1&gt;
+&lt;h2&gt;App.js&lt;/h2&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; Slider&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;Slide&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;./Slider&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; pictures &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;./data&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 
@@ -529,9 +993,9 @@ SwiperCore&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span
 
 &lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; App&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;필수적으로 import 해야 하는 css 파일들이 있어야 동작이 됩니다.&lt;/p&gt;
-&lt;h1&gt;Conclusion&lt;/h1&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;간단한 React App으로 Slider를 구현해봤습니다. Swiper 라이브러리는 이 글에서 보여준 기능 이외에도 다른 기능들이 있으니 사용자의 의도와 목적에 맞게 적절하게 개발하면 되겠습니다.&lt;/p&gt;
 &lt;p&gt;이 글이 React Swiper에 관해 찾는 분들께 도움이 되었으면 좋겠습니다!&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;읽어 주셔서 감사합니다. To be continued!&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;읽어 주셔서 감사합니다. To be continued!&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;이 글은 &lt;a href=&quot;https://medium.com/@shkim04/how-to-use-react-swiper-58eef325b09f&quot;&gt;Medium&lt;/a&gt;에도 업로드 되었습니다.&lt;/em&gt;
 &lt;em&gt;놀러 오세요!&lt;/em&gt;&lt;/p&gt;</content:encoded></item></channel></rss>
