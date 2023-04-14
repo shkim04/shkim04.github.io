@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[My perosnal blog that shows what I am working on and thoughts]]></description><link>http://github.com/dylang/node-rss</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 14 Apr 2023 14:22:36 GMT</lastBuildDate><item><title><![CDATA[How To Create React Native Modal With Expo]]></title><description><![CDATA[When I first developed a mobile application, I needed to have a small popup window on the same page in order to set up different dates to…]]></description><link>null/en/how-to-create-react-native-modal-with-expo</link><guid isPermaLink="false">null/en/how-to-create-react-native-modal-with-expo</guid><pubDate>Fri, 18 Nov 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;When I first developed a mobile application, I needed to have a small popup window on the same page in order to set up different dates to each items in a list and I wanted the popup window to disappear when I touched the outside of it. Thus, the popup window should be shorter than the full width of a screen. After a few of struggles, I found a simple but great way to create the popup window that fulfilled the conditions by using React Native Modal. Here, I will share the way to create it.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[My perosnal blog that shows what I am working on and thoughts]]></description><link>http://github.com/dylang/node-rss</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 14 Apr 2023 14:25:19 GMT</lastBuildDate><item><title><![CDATA[How To Create React Native Modal With Expo]]></title><description><![CDATA[When I first developed a mobile application, I needed to have a small popup window on the same page in order to set up different dates to…]]></description><link>null/en/how-to-create-react-native-modal-with-expo</link><guid isPermaLink="false">null/en/how-to-create-react-native-modal-with-expo</guid><pubDate>Fri, 18 Nov 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;When I first developed a mobile application, I needed to have a small popup window on the same page in order to set up different dates to each items in a list and I wanted the popup window to disappear when I touched the outside of it. Thus, the popup window should be shorter than the full width of a screen. After a few of struggles, I found a simple but great way to create the popup window that fulfilled the conditions by using React Native Modal. Here, I will share the way to create it.&lt;/p&gt;
 &lt;h2&gt;Prerequisite&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Basic knowledge about Javascript or React&lt;/li&gt;
@@ -462,6 +462,274 @@ npx expo install react-dom react-native-web @expo/webpack-config
 &lt;p&gt;이 글이 많은 분들께 도움이 되었으면 좋겠습니다!&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;&lt;strong&gt;읽어 주셔서 감사합니다. To be continued!&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;이 글은 &lt;a href=&quot;https://medium.com/@shkim04/how-to-use-react-swiper-58eef325b09f&quot;&gt;Medium&lt;/a&gt;에도 업로드 되었습니다.&lt;/em&gt;
+&lt;em&gt;놀러 오세요!&lt;/em&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[React Swiper 사용법]]></title><description><![CDATA[React를 배우기 시작하고 실제 웹사이트를 개발할 때, 그림 및 사진을 자주 활용할 기회가 있다. 특히 여러 사진을 한 영역 내에서 보여주는 형식을 흔하게 접할 수 있는데 React Swiper…]]></description><link>null/react-swiper-사용법</link><guid isPermaLink="false">null/react-swiper-사용법</guid><pubDate>Sun, 13 Nov 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;React를 배우기 시작하고 실제 웹사이트를 개발할 때, 그림 및 사진을 자주 활용할 기회가 있다. 특히 여러 사진을 한 영역 내에서 보여주는 형식을 흔하게 접할 수 있는데 React Swiper 라이브러리가 이 기능을 구현할 때 적합하다. 이 글을 통해 해당 라이브러리의 기본을 알아보도록 하겠습니다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/c94c02669c776953c1bf653f728a0352/1_react-swiper.gif&quot; alt=&quot;React Swiper&quot;&gt;&lt;/p&gt;
+&lt;h2&gt;필수&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Component, props 등등 기초 React 배경지식&lt;/li&gt;
+&lt;li&gt;기본 React App&lt;/li&gt;
+&lt;li&gt;React App이 없을 시, 아래 명령어로 입력하여 생성&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;npx create&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;react&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;app &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;your project folder name&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;폴더 구조&lt;/h2&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 191px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/27b81ad132efc4bf4f6e719d4e6599d6/c540e/1_folder-structure.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 162.0253164556962%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAgCAYAAAASYli2AAAACXBIWXMAAAsTAAALEwEAmpwYAAAEBElEQVR42pWV6VYaSxSFeZMrPc8TPQAyGAZBZBSCRlswJivv/wbfXVXEXHKjaH7sVd101eacffY5VVFVnTwrSJIat9s76nmdalVB13Q0TfsJ/RdUVTuJiudHeF4oEccprhtiWR627eG6AY7ty3fLcuXqeRG+PHNY/49Kvd6h2ewxupwxHM64/7KnvN/z/PSD8dWC3e6Z/e4bu/I7u4evNJtd6vW3UanV6qRpgzxvUG+2GV1e0+sN6fdGFEWLyWTGYrnhZnXLarkhTeuIM2+housGilol8zucBwM8P2TYG9NqNOj3B7RbbZIoIk0zkijBNCyppTj3Gn4SKsReg15tRqt9wWa1ZXY1ZjFfspgvWM2vWc4W3H2+JQpCFEWVh4+L9YKK43pYjkMU5sRBgR9EOJ6HFwjhfXTTIggjLNvBclxs1zuJiheEWJ5Dp7hm3tpzOZiye3piV35ld19yf19Slo+UjzvEXtcPTqJiWjYCLzYRkWgiHd3AtBwcx5PPrudj2Ye9p1DRNYMz5YzzeMQ4vaPd+MSuLLm5XrKer5mML7mZr7kajhB7X9PtNw1fxLVMl9grsC2HPC+Iw5goSjhvNqglGa3zFmdn1ZMVPqpylTzo0o5GxGFKt92h07mgf9GnWW/SqBe0zzt0211sy0b9iG1CJ6cdTWjmHZneoHfJZDBhPByxmF8zHo5ZzVeEfoCiam8THlIwsWwLzdCIk5q0i/DaP2dnnFUVOSxEuuL5JeW3UpeEpmlT5AVprWD/9J3n/Z4iyyWpYZh/HHq3U8SGw+H/qqjrh1F1TPBedL8Iq1WdvO7x7blGo+iwf3zkYXvLcr5gejXFNIx3q/tHhJqmYlkHPV3Xw3M9ORCKrPgw2ZGGFrUkpZYWbOZrppfXDPsjDF2XhTgeBB8iFMJ7boBhBgwu+tJ/7VZXEiqK9iHtfktZ3Cu2Y/DpwsE0HbIsI00S4jghiWt/X2VF0amlDut1SD1vc393x+1aTOkVi+lCRiq7Q3uftPLyQURpWqa0jzBx9cjEAsKrwkpSS/HbG5oeIqzqZLnLbhdz3uywL5/5Vj6zXW+YXk/5sn3gYVvyZbvlsj+UfyjccFLDqiKKc7hbLcsmCiJsW8xDV04d3/OlpmJVT/WyIHMci6enhDzPWC5W0syj0YgwDKkqCqqqShIhx3H3vJqy9KFlUEttXNfhotuTk2bQ7+PYzqvRnKzyy8fBwCfwAzlczxtNYnF11jJp+r/qFJGy61rM5y5ZkvN5s+Hz8oblYsFmucax7T+GxLudIipmOAcDG7opo5LPhikL9FGyA6GqYrsx3VlJlhWUdw88Pjxys1wxGY2ZT2c4jiOd8OHhICLUVO3Q054viyHs8oK/ifBfqd/cSlhr4rkAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Folder structure&quot;
+        title=&quot;&quot;
+        src=&quot;/static/27b81ad132efc4bf4f6e719d4e6599d6/c540e/1_folder-structure.png&quot;
+        srcset=&quot;/static/27b81ad132efc4bf4f6e719d4e6599d6/c26ae/1_folder-structure.png 158w,
+/static/27b81ad132efc4bf4f6e719d4e6599d6/c540e/1_folder-structure.png 191w&quot;
+        sizes=&quot;(max-width: 191px) 100vw, 191px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;최종적으로 생성할 App의 폴더 구조를 나타내는 그림이니 참고하시면 됩니다. 우선, Swiper 라이브러리에서 필요한 모듈을 import하고 Slder folder 하위에 Slider 컴포넌트가 들어있는 index.js를 생성합니다. 이 컴포넌트 안에 우리가 원하는 Slider를 생성하게 됩니다. 마지막으로 asset 폴더 안에 있는 data 폴더에서 Slider를 통해 보여줄 사진들이 저장되어 있습니다.&lt;/p&gt;
+&lt;h2&gt;Swiper library 설치&lt;/h2&gt;
+&lt;p&gt;아래 명령어를 입력하여 라이브러리를 설치합니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;npm install swiper&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Swiper modules 설치&lt;/h2&gt;
+&lt;p&gt;Slider 폴더 안에 있는 index.js에 swiper 라이브러리에서 이 App에 활용할 4가지 모듈을 import 합니다. 해당 모듈은 Navigation, Pagination, EffectFade, Autoplay 입니다. 다른 기능을 사용하고 싶다면 해당 모듈을 import하기만 하면 됩니다. 다른 모듈에 관한 설명은 Swiper 라이브러리 공식 &lt;a href=&quot;https://swiperjs.com/swiper-api#modules&quot;&gt;웹사이트&lt;/a&gt;에 나와 있으니 확인바랍니다.&lt;/p&gt;
+&lt;p&gt;Slider 컴포넌트:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;SliderWrap&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;./swiper.style&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;// styled-component wrap&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;Swiper&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; SwiperSlide&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;swiper/react&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;// SwiperSlide is pretty self-explantory. it is one slide that would contain&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;// one of data you want to show&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; SwiperCore&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;Navigation&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; Pagination&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; EffectFade&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; Autoplay &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;swiper&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// install Swiper modules&lt;/span&gt;
+SwiperCore&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;use&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;Navigation&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; Pagination&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; EffectFade&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; Autoplay&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;Slider&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;children&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; settings&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; sliderOptions &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;slidesPerView&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;pagination&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;navigation&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;loop&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// autoplay: {&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;//  delay: 1000,&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;//  disableOnInteraction: false,&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// },&lt;/span&gt;
+    &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;settings
+    &lt;span class=&quot;token comment&quot;&gt;// Uncomment autoply option then you can see the swiper play automatically&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// you can override setting options pass settings props to this component&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// swiper takes options as props&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// you can find more about options on the website link above&lt;/span&gt;
+
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;SliderWrap
+      dots&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;sliderOptions&lt;span class=&quot;token operator&quot;&gt;?.&lt;/span&gt;pagination&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+      arrows&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;sliderOptions&lt;span class=&quot;token operator&quot;&gt;?.&lt;/span&gt;navigation&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;token comment&quot;&gt;// I pass dots and arrow props to custom pagination and navigation in styled-component&lt;/span&gt;
+    &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+      &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;Swiper
+        &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;sliderOptions&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;children&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;Swiper&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+    &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;SliderWrap&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;SwiperSlide &lt;span class=&quot;token keyword&quot;&gt;as&lt;/span&gt; Slide&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; Slider&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;주석에 코드에 대한 설명들이 자세히 적혀 있으나 React를 처음 접하게 되신 분들은 swiper.style.js가 정확하게 어떤 역할을 하는지 그리고 어떻게 활용하는지 궁금하실 수도 있습니다. styled-component라는 라이브러리로 Slider 컴포넌트를 감싸서 해당 컴포넌트에 css를 적용하는 역할을 합니다. swiper.style.js 안에 아래 코드와 같이 적을 수 있습니다&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; styled&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;css&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;styled-components&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; SliderWrap &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; styled&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;div&lt;span class=&quot;token template-string&quot;&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;
+  position: relative;
+  .swiper {
+    border: 1px solid #000;
+    width: 80%;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+ 
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    img {
+      max-width: 50%;
+      height: 300px;
+    }
+  }
+  &lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;arrows&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; arrows &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; css`
+    &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;swiper&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;button &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;next&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;prev &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;top&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        z&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;index&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; 40px&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; 40px&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; auto&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        line&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;height&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; 40px&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; absolute&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;visibility&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; hidden&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        text&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;align&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; center&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;transform&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;translateY&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; #&lt;span class=&quot;token number&quot;&gt;000000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;transition&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; all &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;4s ease 0s&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        border&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;radius&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        background&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;color&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; #ffffff&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        box&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;shadow&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt; 3px &lt;span class=&quot;token number&quot;&gt;25&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;5px &lt;span class=&quot;token number&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;5px &lt;span class=&quot;token function&quot;&gt;rgba&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;.06&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt;hover &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;token literal-property property&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; #&lt;span class=&quot;token number&quot;&gt;212121&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+          background&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;color&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; #ff7004&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt;after &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+          font&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;size&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; 14px&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;prev &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;outline&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; 
+        &lt;span class=&quot;token literal-property property&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; auto&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;20px&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt;after &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+          margin&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;right&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; 3px&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;next &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;outline&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; auto&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;20px&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt;after &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+          margin&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;left&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; 3px&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;disabled &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;opacity&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0.1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;
+    &amp;amp;:hover {
+      .swiper-button {
+        &amp;amp;-prev, &amp;amp;-next {
+          visibility: visible;
+        }
+        &amp;amp;-prev {
+          left: 10px;
+        }
+        &amp;amp;-next {
+          right: 10px;
+        }
+      }
+    }
+  &lt;/span&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  $&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;dots&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; dots &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; css&lt;span class=&quot;token template-string&quot;&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;
+    .swiper-pagination {
+      &amp;amp;-bullet {
+        cursor: pointer;
+        width: 10px;
+        height: 10px;
+        display: inline-block;
+        border-radius: 50%;
+        background: #ff7004;
+        opacity: 0.2;
+        border: 1px solid #ff7004;
+        margin: 0 5px;
+        box-shadow: none;
+        transition: all 0.4s ease 0s;
+        transform: scale(0.8);
+        &amp;amp;:hover, &amp;amp;-active {
+          background-color: #ff7004;
+          border-color: #ff7004;
+          transform: scale(1.0);
+          opacity: 1;
+        }
+      }
+    }
+  &lt;/span&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+`&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;사진&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; Athelete &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;../assets/image/athelete.png&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; Books &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;../assets/image/books.png&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; Hands &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;../assets/image/hands.png&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; PicPromise &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;../assets/image/promise.png&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; pictures &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;athelete&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;thumbnail&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Athelete
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;books&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;thumbnail&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Books
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;hands&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;thumbnail&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Hands
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;promise&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;thumbnail&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; PicPromise
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;사진을 import 할 때, 정확한 path를 적어주셔야 됩니다.&lt;/p&gt;
+&lt;h2&gt;App.js&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; Slider&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;Slide&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;./Slider&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; pictures &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;./data&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;./styles.css&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;swiper/css&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;swiper/css/autoplay&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;swiper/css/navigation&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;swiper/css/pagination&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;swiper/css/effect-fade&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;App&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;Slider
+      settings&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;navigation&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;pictures&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;slide&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; index&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+        &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;Slide 
+          key&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;slide&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;id &lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt; slide&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;id &lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; index&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+          &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;img 
+            src&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;slide&lt;span class=&quot;token operator&quot;&gt;?.&lt;/span&gt;thumbnail&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+            alt&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;slide&lt;span class=&quot;token operator&quot;&gt;?.&lt;/span&gt;title&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+          &lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+        &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;Slide&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;Slider&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; App&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;필수적으로 import 해야 하는 css 파일들이 있어야 동작이 됩니다.&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;간단한 React App으로 Slider를 구현해봤습니다. Swiper 라이브러리는 이 글에서 보여준 기능 이외에도 다른 기능들이 있으니 사용자의 의도와 목적에 맞게 적절하게 개발하면 되겠습니다.&lt;/p&gt;
+&lt;p&gt;이 글이 React Swiper에 관해 찾는 분들께 도움이 되었으면 좋겠습니다!&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;읽어 주셔서 감사합니다. To be continued!&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;이 글은 &lt;a href=&quot;https://medium.com/@shkim04/how-to-use-react-swiper-58eef325b09f&quot;&gt;Medium&lt;/a&gt;에도 업로드 되었습니다.&lt;/em&gt;
 &lt;em&gt;놀러 오세요!&lt;/em&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[How To Use React Swiper]]></title><description><![CDATA[If you just began learning React or working on a React project, you probably want to create a beautiful slider that adds an aesthetic boost…]]></description><link>null/en/how-to-use-react-swiper</link><guid isPermaLink="false">null/en/how-to-use-react-swiper</guid><pubDate>Sun, 13 Nov 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;If you just began learning React or working on a React project, you probably want to create a beautiful slider that adds an aesthetic boost to your pictures. In this post, I will walk you through the React Swiper basics and help you create a slider component using the library.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/c94c02669c776953c1bf653f728a0352/1_react-swiper.gif&quot; alt=&quot;React Swiper&quot;&gt;&lt;/p&gt;
 &lt;h2&gt;Prerequisite&lt;/h2&gt;
@@ -730,272 +998,4 @@ SwiperCore&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span
 &lt;p&gt;I hope you enjoyed this article!&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;&lt;strong&gt;THANKS FOR READING. SEE YOU NEXT TIME!&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;This is originally posted on my &lt;a href=&quot;https://medium.com/@shkim04/how-to-use-react-swiper-58eef325b09f&quot;&gt;Medium&lt;/a&gt;.&lt;/em&gt;
-&lt;em&gt;Let&apos;s connect!&lt;/em&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[React Swiper 사용법]]></title><description><![CDATA[React를 배우기 시작하고 실제 웹사이트를 개발할 때, 그림 및 사진을 자주 활용할 기회가 있다. 특히 여러 사진을 한 영역 내에서 보여주는 형식을 흔하게 접할 수 있는데 React Swiper…]]></description><link>null/react-swiper-사용법</link><guid isPermaLink="false">null/react-swiper-사용법</guid><pubDate>Sun, 13 Nov 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;React를 배우기 시작하고 실제 웹사이트를 개발할 때, 그림 및 사진을 자주 활용할 기회가 있다. 특히 여러 사진을 한 영역 내에서 보여주는 형식을 흔하게 접할 수 있는데 React Swiper 라이브러리가 이 기능을 구현할 때 적합하다. 이 글을 통해 해당 라이브러리의 기본을 알아보도록 하겠습니다.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/c94c02669c776953c1bf653f728a0352/1_react-swiper.gif&quot; alt=&quot;React Swiper&quot;&gt;&lt;/p&gt;
-&lt;h2&gt;필수&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Component, props 등등 기초 React 배경지식&lt;/li&gt;
-&lt;li&gt;기본 React App&lt;/li&gt;
-&lt;li&gt;React App이 없을 시, 아래 명령어로 입력하여 생성&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;npx create&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;react&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;app &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;your project folder name&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2&gt;폴더 구조&lt;/h2&gt;
-&lt;p&gt;&lt;span
-      class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 191px; &quot;
-    &gt;
-      &lt;a
-    class=&quot;gatsby-resp-image-link&quot;
-    href=&quot;/static/27b81ad132efc4bf4f6e719d4e6599d6/c540e/1_folder-structure.png&quot;
-    style=&quot;display: block&quot;
-    target=&quot;_blank&quot;
-    rel=&quot;noopener&quot;
-  &gt;
-    &lt;span
-    class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 162.0253164556962%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAgCAYAAAASYli2AAAACXBIWXMAAAsTAAALEwEAmpwYAAAEBElEQVR42pWV6VYaSxSFeZMrPc8TPQAyGAZBZBSCRlswJivv/wbfXVXEXHKjaH7sVd101eacffY5VVFVnTwrSJIat9s76nmdalVB13Q0TfsJ/RdUVTuJiudHeF4oEccprhtiWR627eG6AY7ty3fLcuXqeRG+PHNY/49Kvd6h2ewxupwxHM64/7KnvN/z/PSD8dWC3e6Z/e4bu/I7u4evNJtd6vW3UanV6qRpgzxvUG+2GV1e0+sN6fdGFEWLyWTGYrnhZnXLarkhTeuIM2+housGilol8zucBwM8P2TYG9NqNOj3B7RbbZIoIk0zkijBNCyppTj3Gn4SKsReg15tRqt9wWa1ZXY1ZjFfspgvWM2vWc4W3H2+JQpCFEWVh4+L9YKK43pYjkMU5sRBgR9EOJ6HFwjhfXTTIggjLNvBclxs1zuJiheEWJ5Dp7hm3tpzOZiye3piV35ld19yf19Slo+UjzvEXtcPTqJiWjYCLzYRkWgiHd3AtBwcx5PPrudj2Ye9p1DRNYMz5YzzeMQ4vaPd+MSuLLm5XrKer5mML7mZr7kajhB7X9PtNw1fxLVMl9grsC2HPC+Iw5goSjhvNqglGa3zFmdn1ZMVPqpylTzo0o5GxGFKt92h07mgf9GnWW/SqBe0zzt0211sy0b9iG1CJ6cdTWjmHZneoHfJZDBhPByxmF8zHo5ZzVeEfoCiam8THlIwsWwLzdCIk5q0i/DaP2dnnFUVOSxEuuL5JeW3UpeEpmlT5AVprWD/9J3n/Z4iyyWpYZh/HHq3U8SGw+H/qqjrh1F1TPBedL8Iq1WdvO7x7blGo+iwf3zkYXvLcr5gejXFNIx3q/tHhJqmYlkHPV3Xw3M9ORCKrPgw2ZGGFrUkpZYWbOZrppfXDPsjDF2XhTgeBB8iFMJ7boBhBgwu+tJ/7VZXEiqK9iHtfktZ3Cu2Y/DpwsE0HbIsI00S4jghiWt/X2VF0amlDut1SD1vc393x+1aTOkVi+lCRiq7Q3uftPLyQURpWqa0jzBx9cjEAsKrwkpSS/HbG5oeIqzqZLnLbhdz3uywL5/5Vj6zXW+YXk/5sn3gYVvyZbvlsj+UfyjccFLDqiKKc7hbLcsmCiJsW8xDV04d3/OlpmJVT/WyIHMci6enhDzPWC5W0syj0YgwDKkqCqqqShIhx3H3vJqy9KFlUEttXNfhotuTk2bQ7+PYzqvRnKzyy8fBwCfwAzlczxtNYnF11jJp+r/qFJGy61rM5y5ZkvN5s+Hz8oblYsFmucax7T+GxLudIipmOAcDG7opo5LPhikL9FGyA6GqYrsx3VlJlhWUdw88Pjxys1wxGY2ZT2c4jiOd8OHhICLUVO3Q054viyHs8oK/ifBfqd/cSlhr4rkAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
-  &gt;&lt;/span&gt;
-  &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;Folder structure&quot;
-        title=&quot;&quot;
-        src=&quot;/static/27b81ad132efc4bf4f6e719d4e6599d6/c540e/1_folder-structure.png&quot;
-        srcset=&quot;/static/27b81ad132efc4bf4f6e719d4e6599d6/c26ae/1_folder-structure.png 158w,
-/static/27b81ad132efc4bf4f6e719d4e6599d6/c540e/1_folder-structure.png 191w&quot;
-        sizes=&quot;(max-width: 191px) 100vw, 191px&quot;
-        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
-        loading=&quot;lazy&quot;
-        decoding=&quot;async&quot;
-      /&gt;
-  &lt;/a&gt;
-    &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;최종적으로 생성할 App의 폴더 구조를 나타내는 그림이니 참고하시면 됩니다. 우선, Swiper 라이브러리에서 필요한 모듈을 import하고 Slder folder 하위에 Slider 컴포넌트가 들어있는 index.js를 생성합니다. 이 컴포넌트 안에 우리가 원하는 Slider를 생성하게 됩니다. 마지막으로 asset 폴더 안에 있는 data 폴더에서 Slider를 통해 보여줄 사진들이 저장되어 있습니다.&lt;/p&gt;
-&lt;h2&gt;Swiper library 설치&lt;/h2&gt;
-&lt;p&gt;아래 명령어를 입력하여 라이브러리를 설치합니다.&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;npm install swiper&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2&gt;Swiper modules 설치&lt;/h2&gt;
-&lt;p&gt;Slider 폴더 안에 있는 index.js에 swiper 라이브러리에서 이 App에 활용할 4가지 모듈을 import 합니다. 해당 모듈은 Navigation, Pagination, EffectFade, Autoplay 입니다. 다른 기능을 사용하고 싶다면 해당 모듈을 import하기만 하면 됩니다. 다른 모듈에 관한 설명은 Swiper 라이브러리 공식 &lt;a href=&quot;https://swiperjs.com/swiper-api#modules&quot;&gt;웹사이트&lt;/a&gt;에 나와 있으니 확인바랍니다.&lt;/p&gt;
-&lt;p&gt;Slider 컴포넌트:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;SliderWrap&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;./swiper.style&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;token comment&quot;&gt;// styled-component wrap&lt;/span&gt;
-&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;Swiper&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; SwiperSlide&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;swiper/react&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;token comment&quot;&gt;// SwiperSlide is pretty self-explantory. it is one slide that would contain&lt;/span&gt;
-&lt;span class=&quot;token comment&quot;&gt;// one of data you want to show&lt;/span&gt;
-&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; SwiperCore&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;Navigation&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; Pagination&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; EffectFade&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; Autoplay &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;swiper&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;token comment&quot;&gt;// install Swiper modules&lt;/span&gt;
-SwiperCore&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;use&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;Navigation&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; Pagination&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; EffectFade&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; Autoplay&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;Slider&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;children&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; settings&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; sliderOptions &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;token literal-property property&quot;&gt;slidesPerView&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;token literal-property property&quot;&gt;pagination&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;token literal-property property&quot;&gt;navigation&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;token literal-property property&quot;&gt;loop&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;token comment&quot;&gt;// autoplay: {&lt;/span&gt;
-    &lt;span class=&quot;token comment&quot;&gt;//  delay: 1000,&lt;/span&gt;
-    &lt;span class=&quot;token comment&quot;&gt;//  disableOnInteraction: false,&lt;/span&gt;
-    &lt;span class=&quot;token comment&quot;&gt;// },&lt;/span&gt;
-    &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;settings
-    &lt;span class=&quot;token comment&quot;&gt;// Uncomment autoply option then you can see the swiper play automatically&lt;/span&gt;
-    &lt;span class=&quot;token comment&quot;&gt;// you can override setting options pass settings props to this component&lt;/span&gt;
-  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;token comment&quot;&gt;// swiper takes options as props&lt;/span&gt;
-  &lt;span class=&quot;token comment&quot;&gt;// you can find more about options on the website link above&lt;/span&gt;
-
-  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
-    &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;SliderWrap
-      dots&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;sliderOptions&lt;span class=&quot;token operator&quot;&gt;?.&lt;/span&gt;pagination&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-      arrows&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;sliderOptions&lt;span class=&quot;token operator&quot;&gt;?.&lt;/span&gt;navigation&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-      &lt;span class=&quot;token comment&quot;&gt;// I pass dots and arrow props to custom pagination and navigation in styled-component&lt;/span&gt;
-    &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
-      &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;Swiper
-        &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;sliderOptions&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-      &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
-        &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;children&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-      &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;Swiper&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
-    &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;SliderWrap&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
-  &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;SwiperSlide &lt;span class=&quot;token keyword&quot;&gt;as&lt;/span&gt; Slide&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; Slider&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;주석에 코드에 대한 설명들이 자세히 적혀 있으나 React를 처음 접하게 되신 분들은 swiper.style.js가 정확하게 어떤 역할을 하는지 그리고 어떻게 활용하는지 궁금하실 수도 있습니다. styled-component라는 라이브러리로 Slider 컴포넌트를 감싸서 해당 컴포넌트에 css를 적용하는 역할을 합니다. swiper.style.js 안에 아래 코드와 같이 적을 수 있습니다&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; styled&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;css&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;styled-components&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; SliderWrap &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; styled&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;div&lt;span class=&quot;token template-string&quot;&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;
-  position: relative;
-  .swiper {
-    border: 1px solid #000;
-    width: 80%;
-    margin-top: 30px;
-    margin-left: auto;
-    margin-right: auto;
-  }
- 
-  .swiper-slide {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #fff;
-    img {
-      max-width: 50%;
-      height: 300px;
-    }
-  }
-  &lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;arrows&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; arrows &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; css`
-    &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;swiper&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;button &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;next&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-      &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;prev &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;token literal-property property&quot;&gt;top&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-        z&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;index&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;token literal-property property&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; 40px&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;token literal-property property&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; 40px&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;token literal-property property&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; auto&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-        line&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;height&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; 40px&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;token literal-property property&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; absolute&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;token literal-property property&quot;&gt;visibility&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; hidden&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-        text&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;align&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; center&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;token literal-property property&quot;&gt;transform&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;translateY&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;token literal-property property&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; #&lt;span class=&quot;token number&quot;&gt;000000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;token literal-property property&quot;&gt;transition&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; all &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;4s ease 0s&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-        border&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;radius&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-        background&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;color&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; #ffffff&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-        box&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;shadow&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt; 3px &lt;span class=&quot;token number&quot;&gt;25&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;5px &lt;span class=&quot;token number&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;5px &lt;span class=&quot;token function&quot;&gt;rgba&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;.06&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt;hover &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-          &lt;span class=&quot;token literal-property property&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; #&lt;span class=&quot;token number&quot;&gt;212121&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-          background&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;color&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; #ff7004&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt;after &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-          font&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;size&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; 14px&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-      &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;prev &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;token literal-property property&quot;&gt;outline&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; 
-        &lt;span class=&quot;token literal-property property&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; auto&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;token literal-property property&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;20px&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt;after &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-          margin&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;right&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; 3px&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-      &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;next &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;token literal-property property&quot;&gt;outline&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;token literal-property property&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; auto&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;token literal-property property&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;20px&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt;after &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-          margin&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;left&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; 3px&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-      &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;disabled &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;token literal-property property&quot;&gt;opacity&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0.1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;
-    &amp;amp;:hover {
-      .swiper-button {
-        &amp;amp;-prev, &amp;amp;-next {
-          visibility: visible;
-        }
-        &amp;amp;-prev {
-          left: 10px;
-        }
-        &amp;amp;-next {
-          right: 10px;
-        }
-      }
-    }
-  &lt;/span&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-  $&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;dots&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; dots &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; css&lt;span class=&quot;token template-string&quot;&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;
-    .swiper-pagination {
-      &amp;amp;-bullet {
-        cursor: pointer;
-        width: 10px;
-        height: 10px;
-        display: inline-block;
-        border-radius: 50%;
-        background: #ff7004;
-        opacity: 0.2;
-        border: 1px solid #ff7004;
-        margin: 0 5px;
-        box-shadow: none;
-        transition: all 0.4s ease 0s;
-        transform: scale(0.8);
-        &amp;amp;:hover, &amp;amp;-active {
-          background-color: #ff7004;
-          border-color: #ff7004;
-          transform: scale(1.0);
-          opacity: 1;
-        }
-      }
-    }
-  &lt;/span&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-`&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2&gt;사진&lt;/h2&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; Athelete &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;../assets/image/athelete.png&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; Books &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;../assets/image/books.png&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; Hands &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;../assets/image/hands.png&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; PicPromise &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;../assets/image/promise.png&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; pictures &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;
-  &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;token literal-property property&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;token literal-property property&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;athelete&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;token literal-property property&quot;&gt;thumbnail&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Athelete
-  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;token literal-property property&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;token literal-property property&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;books&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;token literal-property property&quot;&gt;thumbnail&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Books
-  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;token literal-property property&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;token literal-property property&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;hands&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;token literal-property property&quot;&gt;thumbnail&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Hands
-  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;token literal-property property&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;token literal-property property&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;promise&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;token literal-property property&quot;&gt;thumbnail&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; PicPromise
-  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;사진을 import 할 때, 정확한 path를 적어주셔야 됩니다.&lt;/p&gt;
-&lt;h2&gt;App.js&lt;/h2&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; Slider&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;Slide&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;./Slider&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; pictures &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;./data&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;./styles.css&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;swiper/css&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;swiper/css/autoplay&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;swiper/css/navigation&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;swiper/css/pagination&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;swiper/css/effect-fade&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;App&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
-    &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;Slider
-      settings&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;token literal-property property&quot;&gt;navigation&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;
-      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
-      &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;pictures&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;slide&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; index&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
-        &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;Slide 
-          key&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;slide&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;id &lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt; slide&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;id &lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; index&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
-          &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;img 
-            src&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;slide&lt;span class=&quot;token operator&quot;&gt;?.&lt;/span&gt;thumbnail&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-            alt&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;slide&lt;span class=&quot;token operator&quot;&gt;?.&lt;/span&gt;title&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-          &lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
-        &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;Slide&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
-      &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;Slider&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
-  &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; App&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;필수적으로 import 해야 하는 css 파일들이 있어야 동작이 됩니다.&lt;/p&gt;
-&lt;h2&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;간단한 React App으로 Slider를 구현해봤습니다. Swiper 라이브러리는 이 글에서 보여준 기능 이외에도 다른 기능들이 있으니 사용자의 의도와 목적에 맞게 적절하게 개발하면 되겠습니다.&lt;/p&gt;
-&lt;p&gt;이 글이 React Swiper에 관해 찾는 분들께 도움이 되었으면 좋겠습니다!&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;읽어 주셔서 감사합니다. To be continued!&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;이 글은 &lt;a href=&quot;https://medium.com/@shkim04/how-to-use-react-swiper-58eef325b09f&quot;&gt;Medium&lt;/a&gt;에도 업로드 되었습니다.&lt;/em&gt;
-&lt;em&gt;놀러 오세요!&lt;/em&gt;&lt;/p&gt;</content:encoded></item></channel></rss>
+&lt;em&gt;Let&apos;s connect!&lt;/em&gt;&lt;/p&gt;</content:encoded></item></channel></rss>
