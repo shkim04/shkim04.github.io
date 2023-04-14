@@ -1,15 +1,15 @@
 ---
 title: React Swiper 사용법
 date: "2022-11-13T00:00:00.000Z"
-description: "React를 개발하면서 자주 활용하는 React Swiper 라이브러리를 대해 설명을 하고 어떻게 사용되는지 알아보기"
+description: "React Swiper는 화면에 사진들을 효과적으로 보여줄 수 있는 라이브러리입니다. Swiper 라이브러리에 대한 기초를 알아보고 간단한 App을 구현하여 어떻게 응용하는지 알아봅니다."
 tag: "ReactJS"
 ---
 
 React를 배우기 시작하고 실제 웹사이트를 개발할 때, 그림 및 사진을 자주 활용할 기회가 있다. 특히 여러 사진을 한 영역 내에서 보여주는 형식을 흔하게 접할 수 있는데 React Swiper 라이브러리가 이 기능을 구현할 때 적합하다. 이 글을 통해 해당 라이브러리의 기본을 알아보도록 하겠습니다.
 
-![React Swiper](../gifs/react-swiper-1.gif)
+![React Swiper](../gifs/1_react-swiper.gif)
 
-# 필수
+## 필수
 
 - Component, props 등등 기초 React 배경지식
 - 기본 React App
@@ -18,19 +18,19 @@ React를 배우기 시작하고 실제 웹사이트를 개발할 때, 그림 및
 ```js
 npx create-react-app [your project folder name]
 ```
-# 폴더 구조
-![Structure](../imgs/react-swiper-2.png)
+## 폴더 구조
+![Folder structure](../imgs/1/1_folder-structure.png)
 
 최종적으로 생성할 App의 폴더 구조를 나타내는 그림이니 참고하시면 됩니다. 우선, Swiper 라이브러리에서 필요한 모듈을 import하고 Slder folder 하위에 Slider 컴포넌트가 들어있는 index.js를 생성합니다. 이 컴포넌트 안에 우리가 원하는 Slider를 생성하게 됩니다. 마지막으로 asset 폴더 안에 있는 data 폴더에서 Slider를 통해 보여줄 사진들이 저장되어 있습니다.
 
-# Swiper library 설치
+## Swiper library 설치
 아래 명령어를 입력하여 라이브러리를 설치합니다.
 
 ```js
 npm install swiper
 ```
 
-# Swiper modules 설치
+## Swiper modules 설치
 Slider 폴더 안에 있는 index.js에 swiper 라이브러리에서 이 App에 활용할 4가지 모듈을 import 합니다. 해당 모듈은 Navigation, Pagination, EffectFade, Autoplay 입니다. 다른 기능을 사용하고 싶다면 해당 모듈을 import하기만 하면 됩니다. 다른 모듈에 관한 설명은 Swiper 라이브러리 공식 [웹사이트](https://swiperjs.com/swiper-api#modules)에 나와 있으니 확인바랍니다.
 
 Slider 컴포넌트:
@@ -194,7 +194,7 @@ export const SliderWrap = styled.div`
 `
 ```
 
-# 사진
+## 사진
 ```js
 import Athelete from "../assets/image/athelete.png";
 import Books from "../assets/image/books.png";
@@ -227,7 +227,7 @@ export const pictures = [
 
 사진을 import 할 때, 정확한 path를 적어주셔야 됩니다.
 
-# App.js
+## App.js
 ```js
 import Slider, {Slide} from "./Slider";
 import { pictures } from "./data";
@@ -266,12 +266,12 @@ export default App;
 
 필수적으로 import 해야 하는 css 파일들이 있어야 동작이 됩니다.
 
-# Conclusion
+## Conclusion
 간단한 React App으로 Slider를 구현해봤습니다. Swiper 라이브러리는 이 글에서 보여준 기능 이외에도 다른 기능들이 있으니 사용자의 의도와 목적에 맞게 적절하게 개발하면 되겠습니다.
 
 이 글이 React Swiper에 관해 찾는 분들께 도움이 되었으면 좋겠습니다!
 
-_읽어 주셔서 감사합니다. To be continued!_
+_**읽어 주셔서 감사합니다. To be continued!**_
 
 _이 글은 [Medium](https://medium.com/@shkim04/how-to-use-react-swiper-58eef325b09f)에도 업로드 되었습니다._
 _놀러 오세요!_

@@ -1,15 +1,15 @@
 ---
 title: How To Use React Swiper
 date: "2022-11-13T00:00:00.000Z"
-description: "We will talk about how to make a use of React Swiper library by creating a simple React app"
+description: "React Swiper makes an app look better with pictures and such. Throughout the article, We will figure out how to make a use of React Swiper library by creating a simple React app."
 tag: "ReactJS"
 ---
 
 If you just began learning React or working on a React project, you probably want to create a beautiful slider that adds an aesthetic boost to your pictures. In this post, I will walk you through the React Swiper basics and help you create a slider component using the library.
 
-![React Swiper](../gifs/react-swiper-1.gif)
+![React Swiper](../gifs/1_react-swiper.gif)
 
-# Prerequisite
+## Prerequisite
 
 - Basic knowledge about react such as component, props
 - A basic react app if you do not have it
@@ -18,19 +18,19 @@ If you just began learning React or working on a React project, you probably wan
 ```js
 npx create-react-app [your project folder name]
 ```
-# Structure
-![Structure](../imgs/react-swiper-2.png)
+## Structure
+![Folder structure](../imgs/1/1_folder-structure.png)
 
 The picture above shows how the initial structure should look like. First, I imported a few modules from the Swiper library. Next, I created the Slider component index.js under the Slider folder and imported the Slider component App.js. Then, I created a Slider that shows the pictures. I created an array of data which is stored in a data folder with images in an asset folder.
 
-# Install Swiper library
+## Install Swiper library
 Open the terminal and enter this command shown below
 
 ```js
 npm install swiper
 ```
 
-# Install Swiper modules
+## Install Swiper modules
 In index.js under the Slider folder, I imported only 4 modules from swiper library that are Navigation, Pagination, EffectFade, Autoplay. If you want to use other modules, you need to import the modules as well. you can find other modules on [the website](https://swiperjs.com/swiper-api#modules) and their purposes.
 
 Now, the Slider component could look like:
@@ -194,7 +194,7 @@ export const SliderWrap = styled.div`
 `
 ```
 
-# Pictures
+## Pictures
 ```js
 import Athelete from "../assets/image/athelete.png";
 import Books from "../assets/image/books.png";
@@ -227,7 +227,7 @@ export const pictures = [
 
 You can replace these with your own images. Just make sure the path to the images is correct.
 
-# App.js
+## App.js
 ```js
 import Slider, {Slide} from "./Slider";
 import { pictures } from "./data";
@@ -266,12 +266,12 @@ export default App;
 
 Notice that I imported all the css files that are required.
 
-# Conclusion
+## Conclusion
 Finally, we created a simple Slider component. There are a lot of different options to implement Swiper library. You might want to play with these variation by yourself and find what works for you!
 
 I hope you enjoyed this article!
 
-_THANKS FOR READING. SEE YOU NEXT TIME!_
+_**THANKS FOR READING. SEE YOU NEXT TIME!**_
 
 _This is originally posted on my [Medium](https://medium.com/@shkim04/how-to-use-react-swiper-58eef325b09f)._
 _Let's connect!_

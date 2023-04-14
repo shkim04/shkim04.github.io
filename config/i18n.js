@@ -7,7 +7,7 @@ module.exports = {
     dateFormat: `YYYY년 MM월 DD일`,
     siteLanguage: `ko`,
     ogLanguage: `ko-KR`,
-    defaultTitle: `Gatsby 다중 언어 사이트`,
+    defaultTitle: `Gatsby 한/영 언어 사이트`,
   },
   en: {
     default: false,
@@ -17,6 +17,6 @@ module.exports = {
     dateFormat: `DD MMM, YYYY`,
     siteLanguage: `en`,
     ogLanguage: `en_US`,
-    defaultTitle: `Gatsby Starter with multi-language and CMS`,
+    defaultTitle: `Gatsby Starter with Korean/English and CMS`,
   }
 }

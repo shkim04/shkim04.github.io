@@ -4,7 +4,7 @@ module.exports = {
     en: 'how-to-use-react-swiper'
   },
   2: {
-    ko: '안녕-세상',
-    en: 'hello-world'
+    ko: 'react-native-modal-만들기',
+    en: 'how-to-create-react-native-modal-with-expo'
   }
 }
