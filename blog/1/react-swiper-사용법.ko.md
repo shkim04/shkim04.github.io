@@ -5,7 +5,7 @@ description: "React Swiper는 화면에 사진들을 효과적으로 보여줄 �
 tag: "ReactJS"
 ---
 
-React를 배우기 시작하고 실제 웹사이트를 개발할 때, 그림 및 사진을 자주 활용할 기회가 있다. 특히 여러 사진을 한 영역 내에서 보여주는 형식을 흔하게 접할 수 있는데 React Swiper 라이브러리가 이 기능을 구현할 때 적합하다. 이 글을 통해 해당 라이브러리의 기본을 알아보도록 하겠습니다.
+React를 배우기 시작하고 실제 웹사이트를 개발할 때, 그림 및 사진을 자주 활용할 기회가 있다. 특히 여러 사진을 한 영역 내에서 보여주는 형식을 흔하게 접할 수 있는데 React Swiper 라이브러리가 이 기능을 구현할 때 적합하다. 이 글을 통해 해당 라이브러리의 기본을 알아보자.
 
 ![React Swiper](../gifs/1_react-swiper.gif)
 
@@ -21,17 +21,17 @@ npx create-react-app [your project folder name]
 ## 폴더 구조
 ![폴더 구조](../imgs/1/1_structure.png)
 
-최종적으로 생성할 App의 폴더 구조를 나타내는 그림이니 참고하시면 됩니다. 우선, Swiper 라이브러리에서 필요한 모듈을 import하고 Slder folder 하위에 Slider 컴포넌트가 들어있는 index.js를 생성합니다. 이 컴포넌트 안에 우리가 원하는 Slider를 생성하게 됩니다. 마지막으로 asset 폴더 안에 있는 data 폴더에서 Slider를 통해 보여줄 사진들이 저장되어 있습니다.
+최종적으로 생성할 App의 폴더 구조를 나타내는 그림이니 참고하면 된다. 우선, Swiper 라이브러리에서 필요한 모듈을 import하고 Slder folder 하위에 Slider 컴포넌트가 들어있는 index.js를 생성한다. 이 컴포넌트 안에 우리가 원하는 Slider를 생성한다. 마지막으로 asset 폴더 안에 있는 data 폴더에서 Slider를 통해 보여줄 사진들이 저장되어 있다.
 
 ## Swiper library 설치
-아래 명령어를 입력하여 라이브러리를 설치합니다.
+아래 명령어를 입력하여 라이브러리를 설치한다.
 
 ```js
 npm install swiper
 ```
 
 ## Swiper modules 설치
-Slider 폴더 안에 있는 index.js에 swiper 라이브러리에서 이 App에 활용할 4가지 모듈을 import 합니다. 해당 모듈은 Navigation, Pagination, EffectFade, Autoplay 입니다. 다른 기능을 사용하고 싶다면 해당 모듈을 import하기만 하면 됩니다. 다른 모듈에 관한 설명은 Swiper 라이브러리 공식 [웹사이트](https://swiperjs.com/swiper-api#modules)에 나와 있으니 확인바랍니다.
+Slider 폴더 안에 있는 index.js에 swiper 라이브러리에서 이 App에 활용할 4가지 모듈을 import한다. Navigation, Pagination, EffectFade, Autoplay가 해당 4가지 모듈이다. 다른 기능을 사용하고 싶다면 해당 모듈을 import하면 된다. 다른 모듈에 관한 설명은 Swiper 라이브러리 공식 [웹사이트](https://swiperjs.com/swiper-api#modules)에 나와 있으니 참고하면 된다.
 
 Slider 컴포넌트:
 ```js
@@ -81,7 +81,7 @@ export {SwiperSlide as Slide};
 export default Slider;
 ```
 
-주석에 코드에 대한 설명들이 자세히 적혀 있으나 React를 처음 접하게 되신 분들은 swiper.style.js가 정확하게 어떤 역할을 하는지 그리고 어떻게 활용하는지 궁금하실 수도 있습니다. styled-component라는 라이브러리로 Slider 컴포넌트를 감싸서 해당 컴포넌트에 css를 적용하는 역할을 합니다. swiper.style.js 안에 아래 코드와 같이 적을 수 있습니다
+주석에 코드에 대한 설명들이 자세히 적혀 있으나 React를 처음 접하게 된 사람들은 swiper.style.js가 정확하게 어떤 역할을 하는지 그리고 어떻게 활용하는지 궁금하실 수도 있다. styled-component라는 라이브러리로 Slider 컴포넌트를 감싸서 해당 컴포넌트에 css를 적용하는 역할을 한다. swiper.style.js 안에 아래 코드와 같이 적어본다:
 
 ```js
 import styled, {css} from "styled-components";
@@ -225,7 +225,7 @@ export const pictures = [
 ];
 ```
 
-사진을 import 할 때, 정확한 path를 적어주셔야 됩니다.
+사진을 import 할 때, 정확한 path를 적어야 한다.
 
 ## App.js
 ```js
@@ -264,10 +264,10 @@ function App() {
 export default App;
 ```
 
-필수적으로 import 해야 하는 css 파일들이 있어야 동작이 됩니다.
+필수적으로 import 해야 하는 css 파일들이 있어야 동작이 된다.
 
 ## Conclusion
-간단한 React App으로 Slider를 구현해봤습니다. Swiper 라이브러리는 이 글에서 보여준 기능 이외에도 다른 기능들이 있으니 사용자의 의도와 목적에 맞게 적절하게 개발하면 되겠습니다.
+간단한 React App으로 Slider를 구현했다. Swiper 라이브러리는 이 글에서 보여준 기능 이외에도 다른 기능들이 있으니 사용자의 의도와 목적에 맞게 적절하게 개발하면 되겠다.
 
 이 글이 React Swiper에 관해 찾는 분들께 도움이 되었으면 좋겠습니다!
 
