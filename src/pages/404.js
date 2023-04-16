@@ -12,6 +12,6 @@ const NotFoundPage = () => {
   )
 }
 
-export const Head = () => <Seo title="404: Not Found" />
+export const Head = ({ pageContext: { locale } }) => <Seo title="404: Not Found" locale={locale} />
 
 export default NotFoundPage

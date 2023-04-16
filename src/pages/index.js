@@ -4,7 +4,7 @@ import { Link, graphql } from "gatsby"
 import Bio from "../components/bio"
 import Seo from "../components/seo"
 
-const blogTagsList = ["NodeJS", "ReactJS", "NextJS", "Python", "MongoDB", "Linux", "Docker", "Log"]
+const blogTagsList = ["NodeJS", "ReactJS", "NextJS", "Python", "MongoDB", "Linux", "Docker", "Log", "Others"]
 
 const Index = ({ data, pageContext: { locale } }) => {
   const posts = data.allMarkdownRemark.nodes
@@ -90,7 +90,7 @@ export default Index
  *
  * See: https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-head/
  */
-export const Head = () => <Seo title="Home Page" />
+export const Head = ({ pageContext: { locale } }) => <Seo title="Home Page" locale={locale} />
 
 export const pageQuery = graphql`
 query Index(

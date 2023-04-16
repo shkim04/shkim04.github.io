@@ -5,29 +5,14 @@
  * See: https://www.gatsbyjs.com/docs/how-to/querying-data/use-static-query/
  */
 
+import siteMetaData from '../../config/siteMetadata'
+
 import * as React from "react"
-import { useStaticQuery, graphql } from "gatsby"
 
-const Seo = ({ description, title, children }) => {
-  const { site } = useStaticQuery(
-    graphql`
-      query {
-        site {
-          siteMetadata {
-            title
-            description
-            social {
-              linkedin
-              medium
-            }
-          }
-        }
-      }
-    `
-  )
+const Seo = ({ description, title, locale, children }) => {
 
-  const metaDescription = description || site.siteMetadata.description
-  const defaultTitle = site.siteMetadata?.title
+  const metaDescription = description || siteMetaData[locale].description
+  const defaultTitle = siteMetaData[locale]?.title
 
   return (
     <>
@@ -39,7 +24,7 @@ const Seo = ({ description, title, children }) => {
       <meta name="medium:card" content="summary" />
       <meta
         name="meidum:creator"
-        content={site.siteMetadata?.social?.medium || ``}
+        content={siteMetaData[locale]?.social?.medium || ``}
       />
       <meta name="medium:title" content={title} />
       <meta name="medium:description" content={metaDescription} />

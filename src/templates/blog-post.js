@@ -58,11 +58,12 @@ const BlogPostTemplate = ({
   )
 }
 
-export const Head = ({ data: { markdownRemark: post } }) => {
+export const Head = ({ data: { markdownRemark: post }, pageContext: { locale } }) => {
   return (
     <Seo
       title={post.frontmatter.title}
       description={post.frontmatter.description || post.excerpt}
+      locale={locale}
     />
   )
 }
