@@ -1,4 +1,1077 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[My perosnal blog that shows what I am working on and thoughts]]></description><link>http://github.com/dylang/node-rss</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 16 Apr 2023 15:22:29 GMT</lastBuildDate><item><title><![CDATA[How To Create React Native Modal With Expo]]></title><description><![CDATA[When I first developed a mobile application, I needed to have a small popup window on the same page in order to set up different dates to…]]></description><link>null/en/how-to-create-react-native-modal-with-expo</link><guid isPermaLink="false">null/en/how-to-create-react-native-modal-with-expo</guid><pubDate>Fri, 18 Nov 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;When I first developed a mobile application, I needed to have a small popup window on the same page in order to set up different dates to each items in a list and I wanted the popup window to disappear when I touched the outside of it. Thus, the popup window should be shorter than the full width of a screen. After a few of struggles, I found a simple but great way to create the popup window that fulfilled the conditions by using React Native Modal. Here, I will share the way to create it.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[My perosnal blog that shows what I am working on and thoughts]]></description><link>http://github.com/dylang/node-rss</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 17 Apr 2023 15:43:58 GMT</lastBuildDate><item><title><![CDATA[Express, MongoDB, Typescript로 REST API 개발하기]]></title><description><![CDATA[REST API는 마치 음식점의 메뉴와 같다. 손님이 메뉴를 보면 그 음식점이 어떤 음식들을 요리하는지 알 수 있는 것처럼 개발자가 한 소프트웨어 상품의 API 문서를 보면 무슨 기능을 제공하는지 알 수 있다. API 문서에는 흔히 요청 url…]]></description><link>null/express-mongodb-typescript로-restapi-개발하기</link><guid isPermaLink="false">null/express-mongodb-typescript로-restapi-개발하기</guid><pubDate>Thu, 01 Dec 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;REST API는 마치 음식점의 메뉴와 같다. 손님이 메뉴를 보면 그 음식점이 어떤 음식들을 요리하는지 알 수 있는 것처럼 개발자가 한 소프트웨어 상품의 API 문서를 보면 무슨 기능을 제공하는지 알 수 있다. API 문서에는 흔히 요청 url이 적혀 있고 각 url에 대한 설명을 찾아볼 수 있다. 이 중 한 url에 요청을 보내면 그에 대한 응답을 받는 것이다. 개발자는 이 응답을 받아 가공 후 자신의 앱에 사용하면 된다. 이제 API를 만들어 보자.&lt;/p&gt;
+&lt;h2&gt;필수&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Node.js + Typescript&lt;/li&gt;
+&lt;li&gt;MongoDB&lt;/li&gt;
+&lt;li&gt;Insomnia&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;MongoDB 데이터베이스 만들기&lt;/h2&gt;
+&lt;p&gt;먼저 MongoDB 설정부터 시작하겠다. MongoDB는 NoSQL 데이터베이스로 아주 많이 사용되는 데이터베이스 중 하나이다. 흔히 CRUD라고 말하는 create, retrieve, update, delete 요청을 적용하는 것이 아주 용이하다.&lt;/p&gt;
+&lt;p&gt;MongoDB 사용을 위해서 계정을 만들어야 한다. google이나 github 계정과 연동해서 쉽게 만들 수 있다. 계정을 생성해도 먼저 돈을 지불하지 않으며 추후에 큰 규모의 데이터를 처리할 때 처리량에 따라 지불하면 된다.&lt;/p&gt;
+&lt;p&gt;계정을 생성하고 로그인을 하면 다음과 같은 대시보드가 나온다:&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/3a8ad2fc6c44825ba1ca050587fc4387/c0255/mongodb-1.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 55.69620253164557%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB2UlEQVR42m2SSW/UQBSE/f+vIA5IkL+AcgERJDiAcuBKQELARJklHi+9eOl2rx+yHSImSUmlbr/nKlW/7uJGVmzaknroCCnS2cBWTGylY68ce+nYScdBOaz35JyZMa9Psfha3vCtLvk9KvZupB00f6oD182RnajY1CXXTclO1mxFTUzpkeH/KG5Vz1ZoftYHjr0ixQR55fLzA8FTOEm4r48c2oreGkIIpJwYXMC4jJ0mhnFkNIZuGBjMuu/HcanP/VlzYlgJQas0U/A474kp0BiPtCyC2Uj3PY0Q6K5HdR21EAilMNYuhidHrmXL9naP0ooQAyFG5pqQLXW7Cmf4uzQPkVLCOY8xhnEcKXbfr/j144pms8F1HTFnZCMRlaAtG0Y9LEKh+yXp3dDuZrtyNu0Hg5kcRX2zZb+5RpUlYbK4EHj16S3PL97w4sM5Z1/eY/ycLjNMEevzI4aYsS4y+UzRaE0pWkbv8DHgguf15QUvP7/j7PKCZx/P6Se7Hi+vmVLOxJSXkCmdPp1iHnqrFNqOSzofPNn5tevjspjJYt2E1Gq5nNGapSY7fd/Tfbf4FLPBv2TzfvKOsm0QneZQ1wuPbYseehopua2q+++yaWiURGiN1JpaCv4CMGROJxLpjUIAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;mongodb-1&quot;
+        title=&quot;&quot;
+        src=&quot;/static/3a8ad2fc6c44825ba1ca050587fc4387/f058b/mongodb-1.png&quot;
+        srcset=&quot;/static/3a8ad2fc6c44825ba1ca050587fc4387/c26ae/mongodb-1.png 158w,
+/static/3a8ad2fc6c44825ba1ca050587fc4387/6bdcf/mongodb-1.png 315w,
+/static/3a8ad2fc6c44825ba1ca050587fc4387/f058b/mongodb-1.png 630w,
+/static/3a8ad2fc6c44825ba1ca050587fc4387/c0255/mongodb-1.png 920w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;개발하려고 하는 앱이 데이터베이스에 접근하게 하려면 데이터베이스 사용자를 생성하고 역할을 주어야 한다. 좌측 사이드바에 있는 &lt;em&gt;&lt;strong&gt;Database Access&lt;/strong&gt;&lt;/em&gt; 누르고 넘어간 페이지의 우측에 보이는 &lt;strong&gt;ADD NEW DATABASE USER&lt;/strong&gt; 클릭한다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/eb846077747d9323877832016910ecf5/c4b7c/mongodb-2.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 81.64556962025317%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAQCAYAAAAWGF8bAAAACXBIWXMAAAsTAAALEwEAmpwYAAACK0lEQVR42o1TiW7sIAzM/39i270TIFy5OEIgmSfYTbvbVtWzNMKYeDLGppJKo+UCQirwB7Lv5xnFtq1g21as6x1p3f3tZZ+tYpyDMo6aMBDWoia0+OfrDdeG4ly3ONesoKEMjAvUlKEVsvg5h7a8rH4OqAhluBKCS9OUoOq6At31UN0EOUaoKaEzEcuyYIkR8QlZWV5zPKUV1TuvcZMtDrTGO7lhjB5T8uiCwfYo1TqLOcxln1JCTKkQzSFgNKbE9uuo2DwgYoN2ExotYOIMG2dQ05XEGBNaodANY0nIKkMIhUT3PW6EwTn/UJxQ2WXGFBxMDHApFn+YLea4lKSM3dai+Au7PceqfpzQ9wPEMEMOHtYYeOdgrYV1Ds65ouyZ4DeifV+1HwfQjyPE6Yz2cMSy5At4VfIX7kxfP6ksoTDWldK2rseWO7dtn5f8A4+z8v2Tss+Sx+MJqm6gbjXcrQYeSdsfpLkBISw/yAqhGUcIziGFKMgD2w0DWinhQ/hM+l+rMkEe6Dz1DWvhvL+PRwhYS4e3gu9K9kY9V1IUHk4nvB1P+Dhf8HY44toQXOsaVypwoQoXIlEzCakkhJRQWpdV5IqkglQKSilwztH1PSrXdRgbAtMyeM5hOcdEGUYmYHuLaU4w/v7M9rnc/fiAD7EgxytDKM5v7yBMw9gEOxl4a+/d1vp1Jn6xfNpOsSC/oCpwDp47nRXpEU5peK0R+gGBtb928mUOvzXsH7Q82LeDGspyAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;mongodb-2&quot;
+        title=&quot;&quot;
+        src=&quot;/static/eb846077747d9323877832016910ecf5/f058b/mongodb-2.png&quot;
+        srcset=&quot;/static/eb846077747d9323877832016910ecf5/c26ae/mongodb-2.png 158w,
+/static/eb846077747d9323877832016910ecf5/6bdcf/mongodb-2.png 315w,
+/static/eb846077747d9323877832016910ecf5/f058b/mongodb-2.png 630w,
+/static/eb846077747d9323877832016910ecf5/c4b7c/mongodb-2.png 903w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;사용자 이름과 비밀번호를 입력한다. 데이터베이스에 연결할 때 이 두 정보가 필요하니 꼭 기억해두어야 한다. 그리고 해당 사용자에 &lt;em&gt;Atlas admin&lt;/em&gt; 역할을 부여한다. 만약 단순히 읽기 역할만 주고 싶거나 읽기/쓰기 역할만 주고 싶을 때는 그에 맞게 권한을 부여하면 된다.&lt;/p&gt;
+&lt;p&gt;다시 대시보드로 페이지를 이동하고 &lt;em&gt;connect&lt;/em&gt; 를 클릭하면 개발할 API에 사용될 URI를 얻어야 한다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 440px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/6e847138a836b8c5c19669a5a558fc2e/48c0e/mongodb-3.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 57.59493670886076%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMCAYAAABiDJ37AAAACXBIWXMAAAsTAAALEwEAmpwYAAABuUlEQVR42n2RC4+iMBSF/f+/bLPj7iQzo6syKljKwzegKMjl27QNLGM20+Rwem7paXvPKMkEg/AkbI6O9VnY5kJ4FNTRrceZEJ2dDs9C3bS0rYMZHY+OVzhcQJ8gOEKSOewKiM6u3uk0dzXDw9GZWcOpXvKhVyy3ikWyxtsq1ntNsI/4TAOm8Rov3TBLAsJTwnqn8NKAeRIy0T6n6+XrDZfbiHftM40V02hj8a4D/sQKf5/yqlb8WM2YxMrWPlPN2PeYRMZUsS/yr4ZleaNtxFRAHFpxWprGstXfjGEfR5eypLzfqR81dV1TVRWV4bpyc6srHk1D0zSISB/GMJS+h+Yj5jYG4tj+aE58gjF7Rmv3/dOjpn/OYGsrSF5AnkNR0GYZUtf/fa48tWMk0uDlCf7xwWrXsjjAdZ9RvL2RLDzi+YLdx4RsNidIUzZhSKA1QRgSb7fklwsqilBxjE4SYyhE5Ql1aljtBP8Mt0PO+WVM8PuV1csv4p9j8vkCP0lQWluDINSEcUxxvVpeq9DyyDR6kFcPud3A4H6nLW8u8W8S7p9sk+sCkUEwXRDdEV3zbYDSz9s+UKf/AoR4niIIHTLYAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;mongodb-3&quot;
+        title=&quot;&quot;
+        src=&quot;/static/6e847138a836b8c5c19669a5a558fc2e/48c0e/mongodb-3.png&quot;
+        srcset=&quot;/static/6e847138a836b8c5c19669a5a558fc2e/c26ae/mongodb-3.png 158w,
+/static/6e847138a836b8c5c19669a5a558fc2e/6bdcf/mongodb-3.png 315w,
+/static/6e847138a836b8c5c19669a5a558fc2e/48c0e/mongodb-3.png 440w&quot;
+        sizes=&quot;(max-width: 440px) 100vw, 440px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;다음과 같은 버튼을 클릭한다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/0025ae2a27a14902400eb32cda23fdf0/13e20/mongodb-4.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 10.759493670886075%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAACCAYAAABYBvyLAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAcUlEQVR42k2NMQ4CIRQF9/7H8RB29jYmrhHNBvbDBwtZPhkjamLxMq+amXZyYC9HZBFm57hcHafzjObC1hrPWqm1Dn7+Nmhm9N6x38xorTHdH8ItBVJS/Cr4sLL4QNJMLmXwvZiUqDpCUfOI9a/oX/gCLeaZgnQ6wsYAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;mongodb-4&quot;
+        title=&quot;&quot;
+        src=&quot;/static/0025ae2a27a14902400eb32cda23fdf0/f058b/mongodb-4.png&quot;
+        srcset=&quot;/static/0025ae2a27a14902400eb32cda23fdf0/c26ae/mongodb-4.png 158w,
+/static/0025ae2a27a14902400eb32cda23fdf0/6bdcf/mongodb-4.png 315w,
+/static/0025ae2a27a14902400eb32cda23fdf0/f058b/mongodb-4.png 630w,
+/static/0025ae2a27a14902400eb32cda23fdf0/13e20/mongodb-4.png 741w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/7a7afdf2faffeb26bfe1b80c0e13a6f5/6c2f2/mongodb-5.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 70.25316455696203%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB1UlEQVR42o2TbY+bMBCE8///XNVWuvbb3elCAgGDDfgd+6nsXCIu7bW1NCy28Ozs7nDYUsIEh4keXWJw2OiJaatn5d28Q0dH2CLOOXwI5Jx/wyGkSO9mLjsIv1Si1kguVtXYGclJTyzeIsYJNS+UVUj26/D88krTnBhHyTCMjGJiGAQP3/1x3cg+KgyB12NTs3rvaznzvPDWnFi0Zts2YozE91j2t8t7srvC8lhWjVQzKSViDATvkUrVsm6Et2QlPqr6oPD55YXmdGaSiq7vuQyCixgRk6TtLpzbC70YP6h4JNmfHUrGaZKM01RJSunduWUcRFVXXFCU/08v7yXLeea5aei6Dv3tO+7HT/yXr8inJzqp6IWg7XuObUdfEoqBdhjohEBIWftrncN5fyWc15W3tkWpGd+2VxyP2L7HxoD1rsI4iwv+vneh+NHhY6i+LBVVQmMsk1k42pEpWIwPrN6jnWOLkeIEY0yF1oZVa1ZtkSYzrBkfdyUba1HzjFoW1Lpcp7sGZpOY1q1ekiahyl4nfEzkXPqaK7b0MOViCed8RRlQ7UXIuAg25B2o+Md8OJQJppzI7H+N/Dk+8V/pX+E6zMvC2/lcJ/Q3w36G251uGGrbfgEhukQ89N/sUgAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;mongodb-5&quot;
+        title=&quot;&quot;
+        src=&quot;/static/7a7afdf2faffeb26bfe1b80c0e13a6f5/f058b/mongodb-5.png&quot;
+        srcset=&quot;/static/7a7afdf2faffeb26bfe1b80c0e13a6f5/c26ae/mongodb-5.png 158w,
+/static/7a7afdf2faffeb26bfe1b80c0e13a6f5/6bdcf/mongodb-5.png 315w,
+/static/7a7afdf2faffeb26bfe1b80c0e13a6f5/f058b/mongodb-5.png 630w,
+/static/7a7afdf2faffeb26bfe1b80c0e13a6f5/6c2f2/mongodb-5.png 767w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;위에 보이는 URI가 API에 사용될 예정이다 - &lt;em&gt;Node.js API를 개발하는 것이기 때문에 driver 옵션은 넘어가도 된다&lt;/em&gt;. 이 전 단계에서 생성한 사용자 이름과 비밀번호를 위 사진 속 빨간색 빈 칸에 &lt;em&gt;[your username:your password]&lt;/em&gt; 형태로 넣어야 한다. 필자와 함께 API를 개발하는 것이니 예시는 넘어가도 된다.&lt;/p&gt;
+&lt;h2&gt;프로젝트 폴더 생성하기&lt;/h2&gt;
+&lt;p&gt;새로운 프로젝트 폴더를 생성하고 터미널을 열어 아래와 같이 명령어를 입력한다. 해당 명령어를 입력하면 pacakge.json 파일이 생기는데 앱에 필요한 정보나 dependency들을 담고 있는 역할을 한다. 그리고 app.ts 파일을 만든다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;cd [project folder directory]
+npm init -y&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Dependencies 설치&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;npm install &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;g typescript
+npm install express ts&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;node dotenv nodemon mongodb
+npm install &lt;span class=&quot;token operator&quot;&gt;--&lt;/span&gt;save&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;dev cross&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;env @types&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;node @types&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;express&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Express&lt;/strong&gt; &lt;em&gt;Node.js 웹 어플리케이션 프레임워크이며 가볍고 다양한 기능을 제공하며 특히 웹과 모바일 어플리케이션에 최적화되어 있다. Express가 API의 핵심 기능을 제공한다고 생각하면 된다.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Dotenv&lt;/strong&gt; &lt;em&gt;.env 파일에 선언한 환경 변수들을 process.env라는 객체를 통해 접근할 수 있게 도와주는 라이브러리이다.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Nodemon&lt;/strong&gt; &lt;em&gt;Node.js를 기반으로 하는 어플리케이션을 개발할 때 자주 쓰이며 코드를 수정할 시 자동으로 감지하여 어플리케이션을 재시작시켜준다. 배포에는 활용이 되지 않는다.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Typescript&lt;/strong&gt; &lt;em&gt;Javascript에 추가적인 문법이 적용되어 에디터에서 재빠르게 에러를 찾아낼 수 있도록 도와준다.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Ts-node&lt;/strong&gt; &lt;em&gt;Typescript가 적용된 스크립트가 실행되도록 Javascript로 변환해주는 역할을 한다.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;MongoDB&lt;/strong&gt; &lt;em&gt;Node.js 용 &lt;a href=&quot;https://www.mongodb.com/&quot;&gt;MongoDB&lt;/a&gt; 드라이버이다.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;Typescript 설정&lt;/h2&gt;
+&lt;p&gt;앞서 설명했듯이 Typescript는 타입 확인을 엄격하게 적용하여 에디터에서 쉽게 에러를 찾을 수 있도록 도와준다. 프로젝트 폴더 하위에 tsconfig.json이라는 파일을 만들고 아래 코드를 입력한다. 개발자의 원하는대로 &lt;em&gt;compilerOptions&lt;/em&gt; 을 바꿔주면서 사용하면 된다. 이 설정에 관해서 자세한 설명은 생략하오니 더 많은 정보를 원한다면 &lt;a href=&quot;https://www.typescriptlang.org/docs/handbook/tsconfig-json.html&quot;&gt;공식 웹사이트&lt;/a&gt; 확인해주길 바란다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token string-property property&quot;&gt;&quot;buildOnSave&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token string-property property&quot;&gt;&quot;compileOnSave&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token string-property property&quot;&gt;&quot;compilerOptions&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token string-property property&quot;&gt;&quot;charset&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;utf8&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token string-property property&quot;&gt;&quot;module&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;commonjs&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token string-property property&quot;&gt;&quot;target&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;es2018&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token string-property property&quot;&gt;&quot;lib&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;
+            &lt;span class=&quot;token string&quot;&gt;&quot;es2018&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;token string&quot;&gt;&quot;dom&quot;&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token string-property property&quot;&gt;&quot;noImplicitAny&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token string-property property&quot;&gt;&quot;removeComments&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token string-property property&quot;&gt;&quot;strictNullChecks&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token comment&quot;&gt;// &quot;noImplicitThis&quot;: true,&lt;/span&gt;
+        &lt;span class=&quot;token string-property property&quot;&gt;&quot;noImplicitThis&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token string-property property&quot;&gt;&quot;alwaysStrict&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token string-property property&quot;&gt;&quot;preserveConstEnums&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token string-property property&quot;&gt;&quot;sourceMap&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token comment&quot;&gt;// &quot;esModuleInterop&quot;: true,&lt;/span&gt;
+        &lt;span class=&quot;token string-property property&quot;&gt;&quot;esModuleInterop&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token string-property property&quot;&gt;&quot;noImplicitReturns&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token string-property property&quot;&gt;&quot;allowJs&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token string-property property&quot;&gt;&quot;include&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;token string&quot;&gt;&quot;src&quot;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token string-property property&quot;&gt;&quot;exclude&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;node_modules&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;reference_deprecated&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;dist&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;scripts&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token string-property property&quot;&gt;&quot;typeRoots&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;token string&quot;&gt;&quot;node_modules/@types&quot;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;package.json 스크립트 수정&lt;/h2&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 587px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/f6a56c7b7eecf5b00c935aa498ef8b1f/d72eb/package-json.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 17.088607594936708%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAADCAYAAACTWi8uAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAmUlEQVR42lWOSw7DIAxEcxLcBLDBQNOf1C57/0u9KmTVxWjk55HHS/HB8/2leWf3iqaVZhmLGzVHSo7UnOiWcUs0S5PHdSWEgITw50tW4/r4YKrc3bhW49kr771NvYbz2TuPg90691YYVdm9zJKqaRYeT8RtZWm14+NGTBlL21y4noFDoyi96DkXo2nCUpz8OCASuIggIgQRfm/hV3/PLoNZAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;package-json&quot;
+        title=&quot;&quot;
+        src=&quot;/static/f6a56c7b7eecf5b00c935aa498ef8b1f/d72eb/package-json.png&quot;
+        srcset=&quot;/static/f6a56c7b7eecf5b00c935aa498ef8b1f/c26ae/package-json.png 158w,
+/static/f6a56c7b7eecf5b00c935aa498ef8b1f/6bdcf/package-json.png 315w,
+/static/f6a56c7b7eecf5b00c935aa498ef8b1f/d72eb/package-json.png 587w&quot;
+        sizes=&quot;(max-width: 587px) 100vw, 587px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;package.json 안에 script 필드 하위에 명령어 두개를 추가해보자. 복잡한 명령어를 key 이름에 저장한 후 간단하게 &lt;em&gt;npm run [key name]&lt;/em&gt; 입력하는 방식으로 해당 명령어를 실행할 수 있다.&lt;/p&gt;
+&lt;p&gt;“npm run dev”를 터미널에 입력하고 엔터를 누르면 실제로 &lt;em&gt;cross-env NODE-ENV=development nodemon --exec ts-node ./app.ts&lt;/em&gt; 가 실행된다. 개발모드로 실행되고 nodemon이 코드 수정이 있을 시 자동으로 재시작한다. &quot;start&quot;는 배포 시 사용된다.&lt;/p&gt;
+&lt;h2&gt;Express 서버 시작&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; express&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; Request&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; Response&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; NextFunction &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;express&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; app &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;express&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;use&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;express&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;urlencoded&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;extended&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;use&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;express&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;// to parse json of body object&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// get route -&gt; path &apos;/&apos;&lt;/span&gt;
+app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;/&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;req&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Request&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Response&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token parameter&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    res&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Here is the response&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;listen&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;4000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Server is running on 4000&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;위 코드를 app.ts 파일에 입력한 뒤 npm run dev를 터미널에 입력하여 서버를 시작한다. 터미널에 다음과 같이 로그가 뜬다:&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;the server is listening to the port 4000&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;각각의 라우트는 API를 사용하는 사람이 요청을 보낼 때 쓰이는 url이라고 보면 된다. 위의 코드에는 get 라우트 있는데 경로가 &apos;/&apos;이며 콜백 함수를 파라미터로 가지고 있다. 이 라우트에 요청을 보내게 되면 &quot;Here is the response&quot;라는 응답을 받게 된다. 브라우저를 열고 주소 창에 &lt;a href=&quot;http://localhost:4000%EB%A5%BC&quot;&gt;http://localhost:4000를&lt;/a&gt; 입력해보자 - &lt;em&gt;로컬 환경에서 개발하기 때문에 localhost에 접근할 수 있다&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;콜백함수는 주로 2가지 객체를 인자 값으로 받는데 Request와 Response 객체이다.&lt;/p&gt;
+&lt;p&gt;Request 객체는 API 사용자가로부터 서버가 받는 정보들의 집합이라고 생각하면 된다. API 개발자는 이 Request 객체가 어떤 필드 값을 가지고 있어야 하는지 목적과 방향에 맞게 사용할 수 있다. 사용자로부터 API 키 값을 필수적으로 받아야 하는 상황이 예가 될 수 있다.&lt;/p&gt;
+&lt;p&gt;Response 객체는 API 사용자가 해당 API 라우트로부터 받는 정보이다. API 서버의 목적과 개발 방향에 따라 그 정보가 달라질 것이다.&lt;/p&gt;
+&lt;h2&gt;환경 변수 설정&lt;/h2&gt;
+&lt;p&gt;환경 변수는 보통 영어는 대문자로 쓰는 것이 일반적이다.&lt;/p&gt;
+&lt;p&gt;프로젝트 폴더 하위에 development.env와 production.env 파일을 만들고 아래와 같이 변수 이름들을 적어 준다.&lt;/p&gt;
+&lt;p&gt;MongoDB로부터 얻은 uri를 &lt;strong&gt;MONGODB_URI&lt;/strong&gt;로 설정한다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token constant&quot;&gt;PORT&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;4000&lt;/span&gt;
+
+&lt;span class=&quot;token constant&quot;&gt;MONGO_URI&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;your mongodb uri&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;token constant&quot;&gt;MONGO_DB&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;test&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;db &lt;span class=&quot;token comment&quot;&gt;// just name whatever you want for development&lt;/span&gt;
+&lt;span class=&quot;token constant&quot;&gt;MONGO_COLLECTION&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;test&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;collection &lt;span class=&quot;token comment&quot;&gt;// just name whatever you want for development&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;환경에 따른 설정&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; dotenv &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;dotenv&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; envFound &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; dotenv&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token template-string&quot;&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;${&lt;/span&gt;process&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;env&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token constant&quot;&gt;NODE_ENV&lt;/span&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;.env&lt;/span&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;envFound&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Error&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;Could not find any .env file.&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; config &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token literal-property property&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;parseInt&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;process&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;env&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token constant&quot;&gt;PORT&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token literal-property property&quot;&gt;mongodb&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;uri&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; process&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;env&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token constant&quot;&gt;MONGO_URI&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;db&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; process&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;env&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token constant&quot;&gt;MONGO_DB&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;collection&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; process&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;env&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token constant&quot;&gt;MONGO_COLLECTION&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; config&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;어플리케이션을 개발할 때 배포 전에 무수히 많은 테스트를 거치는 것이 일반적이다. 이 때문에 개발 설정과 배포 설정을 나누는 것은 굉장히 중요하다.&lt;/p&gt;
+&lt;p&gt;cross-env는 환경에 따른 설정을 다르게 적용할 수 있게 도와주는 라이브러리인데 “cross-env NODE_ENV=production” 처럼 입력할 명령어 앞에 두어 어떤 환경인지 명시해 준다. 이 덕분에 다른 .env 파일을 환경에 맞게 설정해주기 때문에 같은 코드를 두번 작성할 필요가 없다.&lt;/p&gt;
+&lt;p&gt;config.ts 하위에 파일을 만든 뒤 dotenv를 import한다. 이 dotenv가 &lt;strong&gt;[process.env.NODE_ENV].env&lt;/strong&gt; 파일에 담긴 정보를 읽어 오는 역할을 한다. 이 때 NODE_ENV는 명령어에서 명시해 줬던 development 혹은 production이 되겠다.&lt;/p&gt;
+&lt;p&gt;위 코드 안에 모든 환경 변수 앞에 process.env가 붙어 있다. Node.js에 전역에서 접근할 수 있는 객체이기 때문에 어플리케이션 전체에서 사용될 수 있다.&lt;/p&gt;
+&lt;h2&gt;어플리케이션에 MongoDB 연결&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; config &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;./config&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; MongoClient &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;mongodb&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;connectMongoDB&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; Promise&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;any&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Promise&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;resolve&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; reject&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    MongoClient&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;connect&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+      config&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;mongodb&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;uri&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;useUnifiedTopology&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;useNewUrlParser&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;&lt;span class=&quot;token literal-property property&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Error&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; object&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;err&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;token function&quot;&gt;reject&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;err&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+          &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    
+        &lt;span class=&quot;token function&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;client&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; connectMongoDB&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;프로젝트 폴더 하위에 파일 db.ts를 만든 뒤, MongoClient를 import한다. 그리고 파일 config.ts 만든 뒤 &lt;em&gt;config.mongodb.uri&lt;/em&gt; 을 인자 값으로 입력한다. 이 uri는 MongoDB 설정 시 얻었던 uri이다.&lt;/p&gt;
+&lt;p&gt;마지막으로 MongoDB를 비동기적으로 연결하도록 promise를 반환 값으로 받게 한다. 이제 API에 테스트 요청을 위해 코드를 수정해보자.&lt;/p&gt;
+&lt;h2&gt;Create A Test User in MongoDB&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; express&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; Request&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; Response&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; NextFunction &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;express&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; config &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;./config&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; connectMongoDB &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;./db&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; app &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;express&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;use&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;express&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;urlencoded&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;extended&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;use&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;express&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;/&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;req&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Request&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Response&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token parameter&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    res&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Here is the response&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;post&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;/&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;req&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Request&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Response&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Promise&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; firstName &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; req&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;body&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;firstName&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; lastName &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; req&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;body&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;lastName&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; client &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;connectMongoDB&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; db &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; client&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;db&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;config&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;mongodb&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;db&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; collection &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; db&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;collection&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;config&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;mongodb&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;collection&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; collection&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;insertOne&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+       &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;firstName&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; firstName&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;lastName&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; lastName
+       &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  
+    res&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Successfully Created in DB&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;catch&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;err&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    res&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;500&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Error Occured in Server&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;&amp;lt;POST&gt; &apos;/&apos; error occured&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; err&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;listen&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;config&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;port&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Server is running on&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; config&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;port&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;post 라우트를 추가한다. 이 라우트는 API 사용자로부터 성과 이름을 받고 이를 데이터베이스에 넣는 기능이 목적이다. Request 객체의 body라는 필드에 사용자가 입력한 성과 이름이 저장이 된다.&lt;/p&gt;
+&lt;p&gt;MongoDB promise가 resolve한 값을 connect라는 변수를 선언하여 저장한다 - &lt;em&gt;config.ts에 저장한 데이터베이스와 콜렉션 이름이 여기 쓰인다&lt;/em&gt; - 요청에서 받은 성과 이름을 &lt;em&gt;insertOne&lt;/em&gt; 이라는 함수로 데이터베이스에 입력하게 된다.&lt;/p&gt;
+&lt;p&gt;에러 없이 코드가 실행된다면 post 라우트가 status 코드 200과 함께 &quot;Successfully Created in DB&quot;라는 정보를 사용자에게 보낸다.&lt;/p&gt;
+&lt;h2&gt;Insomnia로 요청 테스트&lt;/h2&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 548px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/21f9724b06b007f1b24f728d04bfc897/a58fe/insomnia-1.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 77.21518987341771%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAPCAYAAADkmO9VAAAACXBIWXMAAAsTAAALEwEAmpwYAAACN0lEQVR42qWTS28SURiG55dwkctwmYEZnGlSmoIF9i5csQIS2LDgD/g/5FYgmhjDD2jVhUIMuse4kQVgpCQ2dEbKNYH6mu/UIWBtrHGSJ9/M4nvOd855hzv/MoV2oWG5WGIxm2M2neF/Hu5F5QS10nOUy0UU8gWUSiUUi0Xkn+RRrVRxfFxGoVBApVJFrVZDtXpdb4N7pD7GA/UhXB4HeN4Ft9sNURThdnuwp6gIyDLsdjvMZjMsFstf4faDewiHQjgKHyEY3IfPJ0KSJEQjESjKfQiCAKfDAcct0GLbcJJfAuHz+Rgk8Pv9DBILogg7NRpsNZOQ5/kdOGo0RLRVqrIkMyFNGT44gCLLUAMBKJIERVGgqCpUVYUsy3C5ro/JgPN6vSBIRFUURDh5HqHDQ7x7+gyfXr1G++QU7dOX6Lx5i977D/jc6WAwGKBer8NqtcLj8TAZyTkSGTJjSho9Fo1i2P6I1bdzLM6GmA/O2Dsmk01EWq0WuyzqvTGhgSGMRCL4Ohzi+2SCka5DG4+hX15iDWC1WjFho9G4KTQmNCCh0+lENBpFv9eDpmnQNQ0XoxGWiwV+XF1thM1m8x+F/T7GNJmus0ry+XyO9Xq9EVL27iSMxWLodruYTqcMEuHXdun7zlsm6NYoEolEAul0GslkkpFKpZDJZJDNZpHL5RCPx9l578Tmd9l2hGw2G4O2RZOYTCZYrfc2f4iLd7HFt7P4xwm3I0ShNxJAzRR4CjUFnKooCDvCn6yHiyWjnxLUAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;insomnia-1&quot;
+        title=&quot;&quot;
+        src=&quot;/static/21f9724b06b007f1b24f728d04bfc897/a58fe/insomnia-1.png&quot;
+        srcset=&quot;/static/21f9724b06b007f1b24f728d04bfc897/c26ae/insomnia-1.png 158w,
+/static/21f9724b06b007f1b24f728d04bfc897/6bdcf/insomnia-1.png 315w,
+/static/21f9724b06b007f1b24f728d04bfc897/a58fe/insomnia-1.png 548w&quot;
+        sizes=&quot;(max-width: 548px) 100vw, 548px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Insomnia는 오픈 소스 API 클라이언트인데 쉽게 말해서 API를 개발할 때 기능을 확인하는 데 유용한 도구이다. Insomnia를 통해 지금까지 개발한 API의 post 라우트에 요청을 해보자. Insomnia를 다운로드 받았다면 실행한 뒤 위 그림처럼 HTTP Request를 누른다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 475px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/d0c4c2e2644da1b0f59ab116f99b73ec/466da/insomnia-2.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 46.202531645569614%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAACXBIWXMAAAsTAAALEwEAmpwYAAABTUlEQVR42pVRO04DMRDdU1AA2mwIydoe25v9KGxC2E+IhGgQDR0VJVI4ADUFB+ACNNyFa1Bzh4fGK0OCQiSKp5nxjN/4PQfS9iH0EcZ2jHIyQZqmyMYppuUUeZYjDENEUeQio9fruTqK+tg/2MPD7Rtenz/x8viBp9U7AqkkiBSklCBFMFqDVFdrIhfjOIbRBtZaaK0hhICUCqPREO3pDa4vVrha3uOyvUNgbYKiKKCUhBASeZ67i3wpTTPXY9JZOUNTNyjyHESELMuQJAmOhxH6g0OHwTBEoJQCQ2sDY4wbZoLf8HMdaO2coMnAaOtiwFvYq6aucTafo64qJ7mTJSHi2L1keb5EWzVYtAuUJ+VPXwiniJUl1rLkzhf2i0i7fP1FPncz7C/RxrnP/YKAf9WT+rhNLtuxy5JvQv5BLtaxbXhXf4Pwr+Z/F3jCL3hSFNfCwZshAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;insomnia-1&quot;
+        title=&quot;&quot;
+        src=&quot;/static/d0c4c2e2644da1b0f59ab116f99b73ec/466da/insomnia-2.png&quot;
+        srcset=&quot;/static/d0c4c2e2644da1b0f59ab116f99b73ec/c26ae/insomnia-2.png 158w,
+/static/d0c4c2e2644da1b0f59ab116f99b73ec/6bdcf/insomnia-2.png 315w,
+/static/d0c4c2e2644da1b0f59ab116f99b73ec/466da/insomnia-2.png 475w&quot;
+        sizes=&quot;(max-width: 475px) 100vw, 475px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;헤더 안에 Content-Type을 application/json으로 설정하여 body 객체에 접근하게 한다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 474px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/99d9d57ec0466b20709cd661b263fc9b/5595f/insomnia-3.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 32.911392405063296%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAAAsTAAALEwEAmpwYAAABMklEQVR42pWQPU4DMRCF9xxIRGR/bK/t9f5ls2RJooQmEiUFKVLSRJSEA3CAHCASHVdCHICTfMiLEgpoUnya5xnpzRsH0ibkZcVoNKIoCsqypK5ruq4jSRKGwyFhGP4himIuBxds128cXr/Yv3yw330SFCKiUSnjqsJYS5ZlOOd64ziOiaKor0cjv+SnH3M1HHC/2vH8+M7T5sB2fSB4WN6yyQvmQuJGNVVZopREa03btr35UXt8eqXU6SIhY+IkJBERQkQES5dz53JqkaJSi0ktUqYopXEuwxjTG/rkHq/TNMVae5r5arTXhkBqjbKGcqK5XhiaqaVtLTddhhCyT+sTSSl7vP7vfSTInaOqSibznPmqYDwtWC4qZrMCrW2f5BwC/0dN02CNxWh/xi9Zdr7hN3Ol28m4u97JAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;insomnia-1&quot;
+        title=&quot;&quot;
+        src=&quot;/static/99d9d57ec0466b20709cd661b263fc9b/5595f/insomnia-3.png&quot;
+        srcset=&quot;/static/99d9d57ec0466b20709cd661b263fc9b/c26ae/insomnia-3.png 158w,
+/static/99d9d57ec0466b20709cd661b263fc9b/6bdcf/insomnia-3.png 315w,
+/static/99d9d57ec0466b20709cd661b263fc9b/5595f/insomnia-3.png 474w&quot;
+        sizes=&quot;(max-width: 474px) 100vw, 474px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;타입을 JSON으로 두고 firstname, lastname이라는 필드를 가진 객체 형식으로 입력한 뒤 Send 버튼을 누른다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 364px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/7297d056ce9e0ca2da867cc47b51918b/e45a9/insomnia-4.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 31.645569620253163%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAGCAYAAADDl76dAAAACXBIWXMAAAsTAAALEwEAmpwYAAABQUlEQVR42o2Oy2rCUBRF8yk+UmPzvkZ8pCbRoBbUfktHjkon/YFOOnDUQX+kgoiiDgUfn2BABQcOV8kthU4KvbBh7c25+xyl5N/w/N7j5eOB4SiiVC/i1xrEcQvLshBC0O10KQlBNpsln8+Ty+X+lOLWVIZv9zyNBjy+BoiqJgubzSamaeA4Lu12RxZmMhlZ+rv4x6ecZoqum9imwDIcdM2iWLylULhB13Vs25YyDANVVTFNU15sWxaapqHrBsJ1Ea6Q82mmVKpV+r0eg36fVqtJuezheR5RFBHHMY3GHfVaHcdxqFSqRGGI7/tykeeVCYKAMAjlnzRTFosF0+mU2WzGZDJhPp+zXC6lT7Varfgcj1mv1+z3ezabDdvtVvJut5M+VcppplyvV06nE+fzmSRJJF8uF5LDgePx+M1Jwn/fF+z3ExSitnwvAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;insomnia-1&quot;
+        title=&quot;&quot;
+        src=&quot;/static/7297d056ce9e0ca2da867cc47b51918b/e45a9/insomnia-4.png&quot;
+        srcset=&quot;/static/7297d056ce9e0ca2da867cc47b51918b/c26ae/insomnia-4.png 158w,
+/static/7297d056ce9e0ca2da867cc47b51918b/6bdcf/insomnia-4.png 315w,
+/static/7297d056ce9e0ca2da867cc47b51918b/e45a9/insomnia-4.png 364w&quot;
+        sizes=&quot;(max-width: 364px) 100vw, 364px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;MongoDB에 정보가 입력되었다면 다음과 같이 나타난다:&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/2e3f18a7711812153d456cc8711d9d52/d67fd/result.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 56.9620253164557%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAAAsTAAALEwEAmpwYAAABVUlEQVR42p2Sh26TMRCA/f6PB1RAA0ilWW3Tf3j7PD5kk1QRgiD1pE++Yd+wrYy1fN585+7+G3f3G378fOTT181gd3yitUbOGREhxkSplZwLKckgxkithYsoKZnJmRHUxowNkjPWOZZ1RWvNojWr1vgQcM4zzQurNoQYmeYZYywxJaQWVMiJU9DU1jDO4byntoq2dth97VjvaLRRaF7Xkax33/f3eC/qJKJyySMQJdG7TSUPPWUZSJHf/iwEiWffxU5v9sWnXqdXdvs9SRIxxUESGWP/Sf6P3VHHpyPb7RbbR9N60HXv/btQl9F8DIRzh113wePfgVqtYTEa7Qwvy8zD4UAQIdVCKtfkt3u9xXiUUgq5FFoWSnC0FMZar0mBWgq11puo/sJddsdnvnz8wLzf4qcTrCdYXs48g5nh6gP/S1TP2qX/o4f9gdUnwvlc+xut3eQXOORYZKHhD2oAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;result&quot;
+        title=&quot;&quot;
+        src=&quot;/static/2e3f18a7711812153d456cc8711d9d52/f058b/result.png&quot;
+        srcset=&quot;/static/2e3f18a7711812153d456cc8711d9d52/c26ae/result.png 158w,
+/static/2e3f18a7711812153d456cc8711d9d52/6bdcf/result.png 315w,
+/static/2e3f18a7711812153d456cc8711d9d52/f058b/result.png 630w,
+/static/2e3f18a7711812153d456cc8711d9d52/d67fd/result.png 670w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;API 서버는 보통 개발자 자신 혹은 회사의 목적에 따라 더욱 커지거나 복잡해진다. 크고 복잡한 API 서버를 개발하는 실력을 키우려면 직접 더 많은 크고 작은 프로젝트들을 개발해보는 방법이 가장 도움이 될 가능성이 높습니다. 예를 들면, 더 많은 라우트를 추가하거나 더 많은 타입 정의들을 써보거나 다른 데이터베이스를 써보는 것입니다. 이 간단한 API로부터 더 멋진 API를 개발하셨으면 좋겠습니다!&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;읽어 주셔서 감사합니다. To be continued!&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;이 글은 &lt;a href=&quot;https://medium.com/@shkim04/node-js-how-to-create-a-simple-rest-api-with-express-mongodb-and-typescript-54b1d801d073&quot;&gt;Medium&lt;/a&gt;에도 업로드 되었습니다.&lt;/em&gt;
+&lt;em&gt;놀러 오세요!&lt;/em&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[REST API with Express, MongoDB and Typescript]]></title><description><![CDATA[I usually think of REST API as a menu book of a restaurant. When customers look at the menu book, they are able to know what foods the…]]></description><link>null/en/restapi-with-express-mongodb-typescript</link><guid isPermaLink="false">null/en/restapi-with-express-mongodb-typescript</guid><pubDate>Thu, 01 Dec 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;I usually think of REST API as a menu book of a restaurant. When customers look at the menu book, they are able to know what foods the restaurant serves. Similarly, when developers look at a REST API document, they are able to know what kind of features the company, which provides the REST API, serves. In an API document, you can see a list of URLs and descriptions of each URL. If you make a request to one of those URLs, you will get a response from it. Then, you can modify the response as you want for your application.&lt;/p&gt;
+&lt;h2&gt;Prerequisite&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Node.js + Typescript&lt;/li&gt;
+&lt;li&gt;MongoDB&lt;/li&gt;
+&lt;li&gt;Insomnia&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Create MongoDB Database&lt;/h2&gt;
+&lt;p&gt;Let’s go into how to set up MongoDB. MongoDB is a NoSQL database which is one of the most widely used databases in the world and it is so easy to implement CRUD operation which is for create, retrieve, update and delete.&lt;/p&gt;
+&lt;p&gt;You will need to create an account or sign up with your google or github account. You don’t have to pay first. It means you can try it for free and as your application handles lots of data coming in and out, you may have to pay for it as you go.&lt;/p&gt;
+&lt;p&gt;Once you created the account and sign in, you can see the dashboard that looks like:&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/3a8ad2fc6c44825ba1ca050587fc4387/c0255/mongodb-1.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 55.69620253164557%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB2UlEQVR42m2SSW/UQBSE/f+vIA5IkL+AcgERJDiAcuBKQELARJklHi+9eOl2rx+yHSImSUmlbr/nKlW/7uJGVmzaknroCCnS2cBWTGylY68ce+nYScdBOaz35JyZMa9Psfha3vCtLvk9KvZupB00f6oD182RnajY1CXXTclO1mxFTUzpkeH/KG5Vz1ZoftYHjr0ixQR55fLzA8FTOEm4r48c2oreGkIIpJwYXMC4jJ0mhnFkNIZuGBjMuu/HcanP/VlzYlgJQas0U/A474kp0BiPtCyC2Uj3PY0Q6K5HdR21EAilMNYuhidHrmXL9naP0ooQAyFG5pqQLXW7Cmf4uzQPkVLCOY8xhnEcKXbfr/j144pms8F1HTFnZCMRlaAtG0Y9LEKh+yXp3dDuZrtyNu0Hg5kcRX2zZb+5RpUlYbK4EHj16S3PL97w4sM5Z1/eY/ycLjNMEevzI4aYsS4y+UzRaE0pWkbv8DHgguf15QUvP7/j7PKCZx/P6Se7Hi+vmVLOxJSXkCmdPp1iHnqrFNqOSzofPNn5tevjspjJYt2E1Gq5nNGapSY7fd/Tfbf4FLPBv2TzfvKOsm0QneZQ1wuPbYseehopua2q+++yaWiURGiN1JpaCv4CMGROJxLpjUIAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;mongodb-1&quot;
+        title=&quot;&quot;
+        src=&quot;/static/3a8ad2fc6c44825ba1ca050587fc4387/f058b/mongodb-1.png&quot;
+        srcset=&quot;/static/3a8ad2fc6c44825ba1ca050587fc4387/c26ae/mongodb-1.png 158w,
+/static/3a8ad2fc6c44825ba1ca050587fc4387/6bdcf/mongodb-1.png 315w,
+/static/3a8ad2fc6c44825ba1ca050587fc4387/f058b/mongodb-1.png 630w,
+/static/3a8ad2fc6c44825ba1ca050587fc4387/c0255/mongodb-1.png 920w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;It is necessary to create a database user and give it a role so that you can have an access to the database from an application. Click &lt;em&gt;&lt;strong&gt;Database Access&lt;/strong&gt;&lt;/em&gt; in the left side bar to do it and then, click &lt;strong&gt;ADD NEW DATABASE USER&lt;/strong&gt; in the right side of the page.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/eb846077747d9323877832016910ecf5/c4b7c/mongodb-2.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 81.64556962025317%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAQCAYAAAAWGF8bAAAACXBIWXMAAAsTAAALEwEAmpwYAAACK0lEQVR42o1TiW7sIAzM/39i270TIFy5OEIgmSfYTbvbVtWzNMKYeDLGppJKo+UCQirwB7Lv5xnFtq1g21as6x1p3f3tZZ+tYpyDMo6aMBDWoia0+OfrDdeG4ly3ONesoKEMjAvUlKEVsvg5h7a8rH4OqAhluBKCS9OUoOq6At31UN0EOUaoKaEzEcuyYIkR8QlZWV5zPKUV1TuvcZMtDrTGO7lhjB5T8uiCwfYo1TqLOcxln1JCTKkQzSFgNKbE9uuo2DwgYoN2ExotYOIMG2dQ05XEGBNaodANY0nIKkMIhUT3PW6EwTn/UJxQ2WXGFBxMDHApFn+YLea4lKSM3dai+Au7PceqfpzQ9wPEMEMOHtYYeOdgrYV1Ds65ouyZ4DeifV+1HwfQjyPE6Yz2cMSy5At4VfIX7kxfP6ksoTDWldK2rseWO7dtn5f8A4+z8v2Tss+Sx+MJqm6gbjXcrQYeSdsfpLkBISw/yAqhGUcIziGFKMgD2w0DWinhQ/hM+l+rMkEe6Dz1DWvhvL+PRwhYS4e3gu9K9kY9V1IUHk4nvB1P+Dhf8HY44toQXOsaVypwoQoXIlEzCakkhJRQWpdV5IqkglQKSilwztH1PSrXdRgbAtMyeM5hOcdEGUYmYHuLaU4w/v7M9rnc/fiAD7EgxytDKM5v7yBMw9gEOxl4a+/d1vp1Jn6xfNpOsSC/oCpwDp47nRXpEU5peK0R+gGBtb928mUOvzXsH7Q82LeDGspyAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;mongodb-2&quot;
+        title=&quot;&quot;
+        src=&quot;/static/eb846077747d9323877832016910ecf5/f058b/mongodb-2.png&quot;
+        srcset=&quot;/static/eb846077747d9323877832016910ecf5/c26ae/mongodb-2.png 158w,
+/static/eb846077747d9323877832016910ecf5/6bdcf/mongodb-2.png 315w,
+/static/eb846077747d9323877832016910ecf5/f058b/mongodb-2.png 630w,
+/static/eb846077747d9323877832016910ecf5/c4b7c/mongodb-2.png 903w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Enter a username and password. You will need to remember the username and password to use them to connect to the database. Next, select &lt;em&gt;Atlas admin&lt;/em&gt; for the role. You can give another role to the user if you allow the user to write and read or just read.&lt;/p&gt;
+&lt;p&gt;Now, go back to the dashboard. Click &lt;em&gt;connect&lt;/em&gt; so you will get URI to connect our Node.js API server to the database.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 440px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/6e847138a836b8c5c19669a5a558fc2e/48c0e/mongodb-3.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 57.59493670886076%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMCAYAAABiDJ37AAAACXBIWXMAAAsTAAALEwEAmpwYAAABuUlEQVR42n2RC4+iMBSF/f+/bLPj7iQzo6syKljKwzegKMjl27QNLGM20+Rwem7paXvPKMkEg/AkbI6O9VnY5kJ4FNTRrceZEJ2dDs9C3bS0rYMZHY+OVzhcQJ8gOEKSOewKiM6u3uk0dzXDw9GZWcOpXvKhVyy3ikWyxtsq1ntNsI/4TAOm8Rov3TBLAsJTwnqn8NKAeRIy0T6n6+XrDZfbiHftM40V02hj8a4D/sQKf5/yqlb8WM2YxMrWPlPN2PeYRMZUsS/yr4ZleaNtxFRAHFpxWprGstXfjGEfR5eypLzfqR81dV1TVRWV4bpyc6srHk1D0zSISB/GMJS+h+Yj5jYG4tj+aE58gjF7Rmv3/dOjpn/OYGsrSF5AnkNR0GYZUtf/fa48tWMk0uDlCf7xwWrXsjjAdZ9RvL2RLDzi+YLdx4RsNidIUzZhSKA1QRgSb7fklwsqilBxjE4SYyhE5Ql1aljtBP8Mt0PO+WVM8PuV1csv4p9j8vkCP0lQWluDINSEcUxxvVpeq9DyyDR6kFcPud3A4H6nLW8u8W8S7p9sk+sCkUEwXRDdEV3zbYDSz9s+UKf/AoR4niIIHTLYAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;mongodb-3&quot;
+        title=&quot;&quot;
+        src=&quot;/static/6e847138a836b8c5c19669a5a558fc2e/48c0e/mongodb-3.png&quot;
+        srcset=&quot;/static/6e847138a836b8c5c19669a5a558fc2e/c26ae/mongodb-3.png 158w,
+/static/6e847138a836b8c5c19669a5a558fc2e/6bdcf/mongodb-3.png 315w,
+/static/6e847138a836b8c5c19669a5a558fc2e/48c0e/mongodb-3.png 440w&quot;
+        sizes=&quot;(max-width: 440px) 100vw, 440px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Click the one below when prompt.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/0025ae2a27a14902400eb32cda23fdf0/13e20/mongodb-4.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 10.759493670886075%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAACCAYAAABYBvyLAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAcUlEQVR42k2NMQ4CIRQF9/7H8RB29jYmrhHNBvbDBwtZPhkjamLxMq+amXZyYC9HZBFm57hcHafzjObC1hrPWqm1Dn7+Nmhm9N6x38xorTHdH8ItBVJS/Cr4sLL4QNJMLmXwvZiUqDpCUfOI9a/oX/gCLeaZgnQ6wsYAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;mongodb-4&quot;
+        title=&quot;&quot;
+        src=&quot;/static/0025ae2a27a14902400eb32cda23fdf0/f058b/mongodb-4.png&quot;
+        srcset=&quot;/static/0025ae2a27a14902400eb32cda23fdf0/c26ae/mongodb-4.png 158w,
+/static/0025ae2a27a14902400eb32cda23fdf0/6bdcf/mongodb-4.png 315w,
+/static/0025ae2a27a14902400eb32cda23fdf0/f058b/mongodb-4.png 630w,
+/static/0025ae2a27a14902400eb32cda23fdf0/13e20/mongodb-4.png 741w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/7a7afdf2faffeb26bfe1b80c0e13a6f5/6c2f2/mongodb-5.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 70.25316455696203%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB1UlEQVR42o2TbY+bMBCE8///XNVWuvbb3elCAgGDDfgd+6nsXCIu7bW1NCy28Ozs7nDYUsIEh4keXWJw2OiJaatn5d28Q0dH2CLOOXwI5Jx/wyGkSO9mLjsIv1Si1kguVtXYGclJTyzeIsYJNS+UVUj26/D88krTnBhHyTCMjGJiGAQP3/1x3cg+KgyB12NTs3rvaznzvPDWnFi0Zts2YozE91j2t8t7srvC8lhWjVQzKSViDATvkUrVsm6Et2QlPqr6oPD55YXmdGaSiq7vuQyCixgRk6TtLpzbC70YP6h4JNmfHUrGaZKM01RJSunduWUcRFVXXFCU/08v7yXLeea5aei6Dv3tO+7HT/yXr8inJzqp6IWg7XuObUdfEoqBdhjohEBIWftrncN5fyWc15W3tkWpGd+2VxyP2L7HxoD1rsI4iwv+vneh+NHhY6i+LBVVQmMsk1k42pEpWIwPrN6jnWOLkeIEY0yF1oZVa1ZtkSYzrBkfdyUba1HzjFoW1Lpcp7sGZpOY1q1ekiahyl4nfEzkXPqaK7b0MOViCed8RRlQ7UXIuAg25B2o+Md8OJQJppzI7H+N/Dk+8V/pX+E6zMvC2/lcJ/Q3w36G251uGGrbfgEhukQ89N/sUgAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;mongodb-5&quot;
+        title=&quot;&quot;
+        src=&quot;/static/7a7afdf2faffeb26bfe1b80c0e13a6f5/f058b/mongodb-5.png&quot;
+        srcset=&quot;/static/7a7afdf2faffeb26bfe1b80c0e13a6f5/c26ae/mongodb-5.png 158w,
+/static/7a7afdf2faffeb26bfe1b80c0e13a6f5/6bdcf/mongodb-5.png 315w,
+/static/7a7afdf2faffeb26bfe1b80c0e13a6f5/f058b/mongodb-5.png 630w,
+/static/7a7afdf2faffeb26bfe1b80c0e13a6f5/6c2f2/mongodb-5.png 767w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;This is the URI that we want to have - &lt;em&gt;You do not have to care about driver option because we will build a Node.js API&lt;/em&gt;. Make sure you put &lt;em&gt;[your username:your password]&lt;/em&gt; you created in the previous step in the red blank. You do not have to check include full driver code example because I will cover that in this post. Let’s move on.&lt;/p&gt;
+&lt;h2&gt;Create A Project Folder And Initialize A Node.js API server&lt;/h2&gt;
+&lt;p&gt;Create a new project folder and go to the directory. After that, open the terminal and enter the command as shown below. It will create a package.json in which you manage the information and dependencies of the application. Then, create app.ts file under the project folder.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;cd [project folder directory]
+npm init -y&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Install Dependencies For Development&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;npm install &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;g typescript
+npm install express ts&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;node dotenv nodemon mongodb
+npm install &lt;span class=&quot;token operator&quot;&gt;--&lt;/span&gt;save&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;dev cross&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;env @types&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;node @types&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;express&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Express&lt;/strong&gt; &lt;em&gt;is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications. So, Express is the core of the API we will be creating.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Dotenv&lt;/strong&gt; &lt;em&gt;is a zero-dependency module that loads environment variables from a .env file into process.env. We will talk more about Dotenv later in this post.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Nodemon&lt;/strong&gt; &lt;em&gt;is a tool that helps develop Node.js based applications by automatically restarting the node application when file changes in the directory are detected. Nodemon is meant to be for development, not for production. It is very useful because you do not have to kill and restart the application while developing it.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Typescript&lt;/strong&gt; &lt;em&gt;adds additional syntax to JavaScript to support &lt;strong&gt;a tighter integration with your editor&lt;/strong&gt;. Catch errors early in your editor.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Ts-node&lt;/strong&gt; &lt;em&gt;is a TypeScript execution engine. You can’t execute Typescript. It needs to transpile to Javascript. Ts-node enables us to transform the ts.file to js. file and execute the js.file at once.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;MongoDB&lt;/strong&gt; &lt;em&gt;is the official &lt;a href=&quot;https://www.mongodb.com/&quot;&gt;MongoDB&lt;/a&gt; driver for Node.js.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;Configure Typescript&lt;/h2&gt;
+&lt;p&gt;Since typescript support to a strong type checking, potential errors can be easily caught in your editor. To apply it, create tsconfig.json under the project directory and configure typescript. Then, copy and paste the codes shown below. You can change a few of fields under &lt;em&gt;compilerOptions&lt;/em&gt; depending on your needs. I won’t go into the detail of the options so, check the official &lt;a href=&quot;https://www.typescriptlang.org/docs/handbook/tsconfig-json.html&quot;&gt;website&lt;/a&gt; if you want to know more about it.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token string-property property&quot;&gt;&quot;buildOnSave&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token string-property property&quot;&gt;&quot;compileOnSave&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token string-property property&quot;&gt;&quot;compilerOptions&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token string-property property&quot;&gt;&quot;charset&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;utf8&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token string-property property&quot;&gt;&quot;module&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;commonjs&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token string-property property&quot;&gt;&quot;target&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;es2018&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token string-property property&quot;&gt;&quot;lib&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;
+            &lt;span class=&quot;token string&quot;&gt;&quot;es2018&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;token string&quot;&gt;&quot;dom&quot;&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token string-property property&quot;&gt;&quot;noImplicitAny&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token string-property property&quot;&gt;&quot;removeComments&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token string-property property&quot;&gt;&quot;strictNullChecks&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token comment&quot;&gt;// &quot;noImplicitThis&quot;: true,&lt;/span&gt;
+        &lt;span class=&quot;token string-property property&quot;&gt;&quot;noImplicitThis&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token string-property property&quot;&gt;&quot;alwaysStrict&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token string-property property&quot;&gt;&quot;preserveConstEnums&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token string-property property&quot;&gt;&quot;sourceMap&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token comment&quot;&gt;// &quot;esModuleInterop&quot;: true,&lt;/span&gt;
+        &lt;span class=&quot;token string-property property&quot;&gt;&quot;esModuleInterop&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token string-property property&quot;&gt;&quot;noImplicitReturns&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token string-property property&quot;&gt;&quot;allowJs&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token string-property property&quot;&gt;&quot;include&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;token string&quot;&gt;&quot;src&quot;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token string-property property&quot;&gt;&quot;exclude&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;node_modules&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;reference_deprecated&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;dist&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;scripts&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token string-property property&quot;&gt;&quot;typeRoots&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;token string&quot;&gt;&quot;node_modules/@types&quot;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Modify Scripts in package.json&lt;/h2&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 587px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/f6a56c7b7eecf5b00c935aa498ef8b1f/d72eb/package-json.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 17.088607594936708%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAADCAYAAACTWi8uAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAmUlEQVR42lWOSw7DIAxEcxLcBLDBQNOf1C57/0u9KmTVxWjk55HHS/HB8/2leWf3iqaVZhmLGzVHSo7UnOiWcUs0S5PHdSWEgITw50tW4/r4YKrc3bhW49kr771NvYbz2TuPg90691YYVdm9zJKqaRYeT8RtZWm14+NGTBlL21y4noFDoyi96DkXo2nCUpz8OCASuIggIgQRfm/hV3/PLoNZAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;package-json&quot;
+        title=&quot;&quot;
+        src=&quot;/static/f6a56c7b7eecf5b00c935aa498ef8b1f/d72eb/package-json.png&quot;
+        srcset=&quot;/static/f6a56c7b7eecf5b00c935aa498ef8b1f/c26ae/package-json.png 158w,
+/static/f6a56c7b7eecf5b00c935aa498ef8b1f/6bdcf/package-json.png 315w,
+/static/f6a56c7b7eecf5b00c935aa498ef8b1f/d72eb/package-json.png 587w&quot;
+        sizes=&quot;(max-width: 587px) 100vw, 587px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Let’s add two commands under scripts in package.json. You can assign a complicated command to one of those keys and then, simply run the command by entering &lt;em&gt;npm run [key name]&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;You can run the application by entering “npm run dev” which actually executes &lt;em&gt;cross-env NODE-ENV=development nodemon --exec ts-node ./app.ts&lt;/em&gt;. When file changes occur, the application will be restarted automatically thanks to nodemon. The script, “start” is for when you run the application in production.&lt;/p&gt;
+&lt;h2&gt;Start Express Server&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; express&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; Request&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; Response&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; NextFunction &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;express&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; app &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;express&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;use&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;express&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;urlencoded&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;extended&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;use&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;express&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;// to parse json of body object&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// get route -&gt; path &apos;/&apos;&lt;/span&gt;
+app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;/&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;req&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Request&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Response&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token parameter&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    res&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Here is the response&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;listen&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;4000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Server is running on 4000&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;After copying and pasting the code in app.ts, enter npm run dev as mentioned above to start the server. You can see the terminal saying:&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;the server is listening to the port 4000&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Each of the routes represents a URL that API users make a request to. Here, you will have a get route and then, pass &apos;/&apos; as its path and a call back function. What happens in the route is that when the API users make a request to the URL of this API, they will get a response showing “Here is the response”. Open a browser and enter &lt;a href=&quot;http://localhost:4000&quot;&gt;http://localhost:4000&lt;/a&gt; to see the response - Since we develop in our own local computer, we can have an access to the API with localhost_.&lt;/p&gt;
+&lt;p&gt;The call back function takes mainly 2 objects as its arguments. They are Request and Response object.&lt;/p&gt;
+&lt;p&gt;Request object is like a set of information that the server receives from API users. API developers can make a certain rule about how the request object looks for the API. For example, it could have a few of data required to be sent to the API such as API key.&lt;/p&gt;
+&lt;p&gt;Response object is what the API users will get from the API route. It can be a set of data such as users or billing depending on what the purpose of the API and the route is.&lt;/p&gt;
+&lt;h2&gt;Set Environment Variables&lt;/h2&gt;
+&lt;p&gt;It is conventional to write environment variables in capital letters.&lt;/p&gt;
+&lt;p&gt;Create development.env and production.env files under the project directory. In both files, write the variable names as shown below.&lt;/p&gt;
+&lt;p&gt;Then, assign the mongodb uri that we have gotten in the section above to &lt;strong&gt;MONGODB_URI&lt;/strong&gt;.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token constant&quot;&gt;PORT&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;4000&lt;/span&gt;
+
+&lt;span class=&quot;token constant&quot;&gt;MONGO_URI&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;your mongodb uri&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;token constant&quot;&gt;MONGO_DB&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;test&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;db &lt;span class=&quot;token comment&quot;&gt;// just name whatever you want for development&lt;/span&gt;
+&lt;span class=&quot;token constant&quot;&gt;MONGO_COLLECTION&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;test&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;collection &lt;span class=&quot;token comment&quot;&gt;// just name whatever you want for development&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Set Up Configuration By Environments&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; dotenv &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;dotenv&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; envFound &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; dotenv&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token template-string&quot;&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;${&lt;/span&gt;process&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;env&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token constant&quot;&gt;NODE_ENV&lt;/span&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;.env&lt;/span&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;envFound&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Error&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;Could not find any .env file.&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; config &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token literal-property property&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;parseInt&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;process&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;env&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token constant&quot;&gt;PORT&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token literal-property property&quot;&gt;mongodb&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;uri&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; process&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;env&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token constant&quot;&gt;MONGO_URI&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;db&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; process&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;env&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token constant&quot;&gt;MONGO_DB&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;collection&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; process&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;env&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token constant&quot;&gt;MONGO_COLLECTION&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; config&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;When you develop an application, it is required to test the application so many times before the production. Therefore, you need to set up an environment for testing as well as an environment for production.&lt;/p&gt;
+&lt;p&gt;cross-env allows you to set the environment by putting “cross-env NODE_ENV=production” in front of the command to run the application. Then, it can access to a different .env files that you have created so you can create the same code that has two or more different environments.&lt;/p&gt;
+&lt;p&gt;Create a file named config.ts under the project directory and import dotenv to enable us to access to &lt;strong&gt;[process.env.NODE_ENV].env&lt;/strong&gt; file. If you set development to NODE_ENV in the command, Dotenv will read variables from development.env here.&lt;/p&gt;
+&lt;p&gt;Notice that process.env is preceded by the environment variables. You can access to the object globally in Node.js. In other words, you can use it throughout a whole application.&lt;/p&gt;
+&lt;h2&gt;Access MongoDB From The Application&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; config &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;./config&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; MongoClient &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;mongodb&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;connectMongoDB&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; Promise&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;any&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Promise&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;resolve&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; reject&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    MongoClient&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;connect&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+      config&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;mongodb&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;uri&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;useUnifiedTopology&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;useNewUrlParser&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;&lt;span class=&quot;token literal-property property&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Error&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; object&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;err&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;token function&quot;&gt;reject&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;err&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+          &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    
+        &lt;span class=&quot;token function&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;client&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; connectMongoDB&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Create a file named db.ts under the project directory. Then, import MongoClient and also config object from config.ts and pass &lt;em&gt;config.mongodb.uri&lt;/em&gt; you have assigned to connect the application to MongoDB database.&lt;/p&gt;
+&lt;p&gt;Finally, wrap it in the promise so you can connect the application to MongoDB asynchronously through the whole application. Then, we will edit the code to make a test request to the API.&lt;/p&gt;
+&lt;h2&gt;Create A Test User in MongoDB&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; express&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; Request&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; Response&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; NextFunction &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;express&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; config &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;./config&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; connectMongoDB &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;./db&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; app &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;express&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;use&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;express&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;urlencoded&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;extended&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;use&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;express&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;/&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;req&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Request&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Response&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token parameter&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    res&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Here is the response&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;post&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;/&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;req&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Request&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Response&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Promise&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; firstName &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; req&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;body&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;firstName&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; lastName &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; req&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;body&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;lastName&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; client &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;connectMongoDB&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; db &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; client&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;db&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;config&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;mongodb&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;db&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; collection &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; db&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;collection&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;config&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;mongodb&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;collection&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; collection&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;insertOne&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+       &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;firstName&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; firstName&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;lastName&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; lastName
+       &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  
+    res&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Successfully Created in DB&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;catch&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;err&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    res&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;500&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Error Occured in Server&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;&amp;lt;POST&gt; &apos;/&apos; error occured&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; err&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;listen&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;config&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;port&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Server is running on&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; config&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;port&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Add a post route that will receive a first name and a last name from the API users and will insert the information to the database. These data can be accessed by the property of request object called body.&lt;/p&gt;
+&lt;p&gt;Assign what the MongoDB promise resolves to a variable named connection — Notice that the database name and collection name you set in config.ts are passed — and we will insert the first name and last name by the method called &lt;em&gt;insertOne&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;If there is no error that is caught, the post route will send the status code which is 200 and the string saying “Successfully Created in DB” to the API users.&lt;/p&gt;
+&lt;h2&gt;Make A Post Request With Insomnia&lt;/h2&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 548px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/21f9724b06b007f1b24f728d04bfc897/a58fe/insomnia-1.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 77.21518987341771%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAPCAYAAADkmO9VAAAACXBIWXMAAAsTAAALEwEAmpwYAAACN0lEQVR42qWTS28SURiG55dwkctwmYEZnGlSmoIF9i5csQIS2LDgD/g/5FYgmhjDD2jVhUIMuse4kQVgpCQ2dEbKNYH6mu/UIWBtrHGSJ9/M4nvOd855hzv/MoV2oWG5WGIxm2M2neF/Hu5F5QS10nOUy0UU8gWUSiUUi0Xkn+RRrVRxfFxGoVBApVJFrVZDtXpdb4N7pD7GA/UhXB4HeN4Ft9sNURThdnuwp6gIyDLsdjvMZjMsFstf4faDewiHQjgKHyEY3IfPJ0KSJEQjESjKfQiCAKfDAcct0GLbcJJfAuHz+Rgk8Pv9DBILogg7NRpsNZOQ5/kdOGo0RLRVqrIkMyFNGT44gCLLUAMBKJIERVGgqCpUVYUsy3C5ro/JgPN6vSBIRFUURDh5HqHDQ7x7+gyfXr1G++QU7dOX6Lx5i977D/jc6WAwGKBer8NqtcLj8TAZyTkSGTJjSho9Fo1i2P6I1bdzLM6GmA/O2Dsmk01EWq0WuyzqvTGhgSGMRCL4Ohzi+2SCka5DG4+hX15iDWC1WjFho9G4KTQmNCCh0+lENBpFv9eDpmnQNQ0XoxGWiwV+XF1thM1m8x+F/T7GNJmus0ry+XyO9Xq9EVL27iSMxWLodruYTqcMEuHXdun7zlsm6NYoEolEAul0GslkkpFKpZDJZJDNZpHL5RCPx9l578Tmd9l2hGw2G4O2RZOYTCZYrfc2f4iLd7HFt7P4xwm3I0ShNxJAzRR4CjUFnKooCDvCn6yHiyWjnxLUAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;insomnia-1&quot;
+        title=&quot;&quot;
+        src=&quot;/static/21f9724b06b007f1b24f728d04bfc897/a58fe/insomnia-1.png&quot;
+        srcset=&quot;/static/21f9724b06b007f1b24f728d04bfc897/c26ae/insomnia-1.png 158w,
+/static/21f9724b06b007f1b24f728d04bfc897/6bdcf/insomnia-1.png 315w,
+/static/21f9724b06b007f1b24f728d04bfc897/a58fe/insomnia-1.png 548w&quot;
+        sizes=&quot;(max-width: 548px) 100vw, 548px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Insomnia is open source API client. You can test your API and design it with Insomnia. We will make a post request to the post route of the API we just have created the above. Once you downloaded Insomnia, click the plus button to create a HTTP Request as shown above.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 475px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/d0c4c2e2644da1b0f59ab116f99b73ec/466da/insomnia-2.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 46.202531645569614%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAACXBIWXMAAAsTAAALEwEAmpwYAAABTUlEQVR42pVRO04DMRDdU1AA2mwIydoe25v9KGxC2E+IhGgQDR0VJVI4ADUFB+ACNNyFa1Bzh4fGK0OCQiSKp5nxjN/4PQfS9iH0EcZ2jHIyQZqmyMYppuUUeZYjDENEUeQio9fruTqK+tg/2MPD7Rtenz/x8viBp9U7AqkkiBSklCBFMFqDVFdrIhfjOIbRBtZaaK0hhICUCqPREO3pDa4vVrha3uOyvUNgbYKiKKCUhBASeZ67i3wpTTPXY9JZOUNTNyjyHESELMuQJAmOhxH6g0OHwTBEoJQCQ2sDY4wbZoLf8HMdaO2coMnAaOtiwFvYq6aucTafo64qJ7mTJSHi2L1keb5EWzVYtAuUJ+VPXwiniJUl1rLkzhf2i0i7fP1FPncz7C/RxrnP/YKAf9WT+rhNLtuxy5JvQv5BLtaxbXhXf4Pwr+Z/F3jCL3hSFNfCwZshAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;insomnia-1&quot;
+        title=&quot;&quot;
+        src=&quot;/static/d0c4c2e2644da1b0f59ab116f99b73ec/466da/insomnia-2.png&quot;
+        srcset=&quot;/static/d0c4c2e2644da1b0f59ab116f99b73ec/c26ae/insomnia-2.png 158w,
+/static/d0c4c2e2644da1b0f59ab116f99b73ec/6bdcf/insomnia-2.png 315w,
+/static/d0c4c2e2644da1b0f59ab116f99b73ec/466da/insomnia-2.png 475w&quot;
+        sizes=&quot;(max-width: 475px) 100vw, 475px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Set content-type to application/json in the headers to send the data to the API server so, you can send some data stored in body object to the API server.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 474px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/99d9d57ec0466b20709cd661b263fc9b/5595f/insomnia-3.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 32.911392405063296%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAAAsTAAALEwEAmpwYAAABMklEQVR42pWQPU4DMRCF9xxIRGR/bK/t9f5ls2RJooQmEiUFKVLSRJSEA3CAHCASHVdCHICTfMiLEgpoUnya5xnpzRsH0ibkZcVoNKIoCsqypK5ruq4jSRKGwyFhGP4himIuBxds128cXr/Yv3yw330SFCKiUSnjqsJYS5ZlOOd64ziOiaKor0cjv+SnH3M1HHC/2vH8+M7T5sB2fSB4WN6yyQvmQuJGNVVZopREa03btr35UXt8eqXU6SIhY+IkJBERQkQES5dz53JqkaJSi0ktUqYopXEuwxjTG/rkHq/TNMVae5r5arTXhkBqjbKGcqK5XhiaqaVtLTddhhCyT+sTSSl7vP7vfSTInaOqSibznPmqYDwtWC4qZrMCrW2f5BwC/0dN02CNxWh/xi9Zdr7hN3Ol28m4u97JAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;insomnia-1&quot;
+        title=&quot;&quot;
+        src=&quot;/static/99d9d57ec0466b20709cd661b263fc9b/5595f/insomnia-3.png&quot;
+        srcset=&quot;/static/99d9d57ec0466b20709cd661b263fc9b/c26ae/insomnia-3.png 158w,
+/static/99d9d57ec0466b20709cd661b263fc9b/6bdcf/insomnia-3.png 315w,
+/static/99d9d57ec0466b20709cd661b263fc9b/5595f/insomnia-3.png 474w&quot;
+        sizes=&quot;(max-width: 474px) 100vw, 474px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;After setting the data type to JSON and write the object that has first name and last name, enter Send on the right and check out the response as shown below.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 364px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/7297d056ce9e0ca2da867cc47b51918b/e45a9/insomnia-4.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 31.645569620253163%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAGCAYAAADDl76dAAAACXBIWXMAAAsTAAALEwEAmpwYAAABQUlEQVR42o2Oy2rCUBRF8yk+UmPzvkZ8pCbRoBbUfktHjkon/YFOOnDUQX+kgoiiDgUfn2BABQcOV8kthU4KvbBh7c25+xyl5N/w/N7j5eOB4SiiVC/i1xrEcQvLshBC0O10KQlBNpsln8+Ty+X+lOLWVIZv9zyNBjy+BoiqJgubzSamaeA4Lu12RxZmMhlZ+rv4x6ecZoqum9imwDIcdM2iWLylULhB13Vs25YyDANVVTFNU15sWxaapqHrBsJ1Ea6Q82mmVKpV+r0eg36fVqtJuezheR5RFBHHMY3GHfVaHcdxqFSqRGGI7/tykeeVCYKAMAjlnzRTFosF0+mU2WzGZDJhPp+zXC6lT7Varfgcj1mv1+z3ezabDdvtVvJut5M+VcppplyvV06nE+fzmSRJJF8uF5LDgePx+M1Jwn/fF+z3ExSitnwvAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;insomnia-1&quot;
+        title=&quot;&quot;
+        src=&quot;/static/7297d056ce9e0ca2da867cc47b51918b/e45a9/insomnia-4.png&quot;
+        srcset=&quot;/static/7297d056ce9e0ca2da867cc47b51918b/c26ae/insomnia-4.png 158w,
+/static/7297d056ce9e0ca2da867cc47b51918b/6bdcf/insomnia-4.png 315w,
+/static/7297d056ce9e0ca2da867cc47b51918b/e45a9/insomnia-4.png 364w&quot;
+        sizes=&quot;(max-width: 364px) 100vw, 364px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Check out to see if there is a document created in your MongoDB. It should look like:&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/2e3f18a7711812153d456cc8711d9d52/d67fd/result.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 56.9620253164557%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAAAsTAAALEwEAmpwYAAABVUlEQVR42p2Sh26TMRCA/f6PB1RAA0ilWW3Tf3j7PD5kk1QRgiD1pE++Yd+wrYy1fN585+7+G3f3G378fOTT181gd3yitUbOGREhxkSplZwLKckgxkithYsoKZnJmRHUxowNkjPWOZZ1RWvNojWr1vgQcM4zzQurNoQYmeYZYywxJaQWVMiJU9DU1jDO4byntoq2dth97VjvaLRRaF7Xkax33/f3eC/qJKJyySMQJdG7TSUPPWUZSJHf/iwEiWffxU5v9sWnXqdXdvs9SRIxxUESGWP/Sf6P3VHHpyPb7RbbR9N60HXv/btQl9F8DIRzh113wePfgVqtYTEa7Qwvy8zD4UAQIdVCKtfkt3u9xXiUUgq5FFoWSnC0FMZar0mBWgq11puo/sJddsdnvnz8wLzf4qcTrCdYXs48g5nh6gP/S1TP2qX/o4f9gdUnwvlc+xut3eQXOORYZKHhD2oAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;result&quot;
+        title=&quot;&quot;
+        src=&quot;/static/2e3f18a7711812153d456cc8711d9d52/f058b/result.png&quot;
+        srcset=&quot;/static/2e3f18a7711812153d456cc8711d9d52/c26ae/result.png 158w,
+/static/2e3f18a7711812153d456cc8711d9d52/6bdcf/result.png 315w,
+/static/2e3f18a7711812153d456cc8711d9d52/f058b/result.png 630w,
+/static/2e3f18a7711812153d456cc8711d9d52/d67fd/result.png 670w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;You have just created a new user in your database!&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;API server can become bigger and more complicated depending on the purpose of the API you develop. To have a better coding skill to create and handle it, I think that you should develop various projects by yourself. For example, it could be achieved as you add some more routes, define more types for variables with Typescript or try another database. I hope you can make this simple API a better version of it by yourself!&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;THANKS FOR READING. SEE YOU NEXT TIME!&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;This is originally posted on my &lt;a href=&quot;https://medium.com/@shkim04/node-js-how-to-create-a-simple-rest-api-with-express-mongodb-and-typescript-54b1d801d073&quot;&gt;Medium&lt;/a&gt;.&lt;/em&gt;
+&lt;em&gt;Let&apos;s connect!&lt;/em&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[How To Create React Native Modal With Expo]]></title><description><![CDATA[When I first developed a mobile application, I needed to have a small popup window on the same page in order to set up different dates to…]]></description><link>null/en/how-to-create-react-native-modal-with-expo</link><guid isPermaLink="false">null/en/how-to-create-react-native-modal-with-expo</guid><pubDate>Fri, 18 Nov 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;When I first developed a mobile application, I needed to have a small popup window on the same page in order to set up different dates to each items in a list and I wanted the popup window to disappear when I touched the outside of it. Thus, the popup window should be shorter than the full width of a screen. After a few of struggles, I found a simple but great way to create the popup window that fulfilled the conditions by using React Native Modal. Here, I will share the way to create it.&lt;/p&gt;
 &lt;h2&gt;Prerequisite&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Basic knowledge about Javascript or React&lt;/li&gt;
@@ -229,8 +1302,8 @@ npx expo install react-dom react-native-web @expo/webpack-config
 &lt;p&gt;We created a simple but great popup window. It could be an alert message or date management box depending on your demand. You can add some more content to the popup window to see if it works great for you.&lt;/p&gt;
 &lt;p&gt;I hope you enjoyed this article!&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;&lt;strong&gt;THANKS FOR READING. SEE YOU NEXT TIME!&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;This is originally posted on my &lt;a href=&quot;https://medium.com/@shkim04/how-to-use-react-swiper-58eef325b09f&quot;&gt;Medium&lt;/a&gt;.&lt;/em&gt;
-&lt;em&gt;Let&apos;s connect!&lt;/em&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[React Native Modal Expo로 구현하기]]></title><description><![CDATA[…]]></description><link>null/react-native-modal-만들기</link><guid isPermaLink="false">null/react-native-modal-만들기</guid><pubDate>Fri, 18 Nov 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;개발자로 일을 시작한 이후 처음으로 모바일 앱을 개발했을 때, 동일 페이지 안에 팝업 창을 띄워 날짜를 선택할 수 있으며 팝업 창 외의 영역을 눌렀을 때 사라질 수 있도록 구현하고 싶었다. 팝업 창은 화면 폭보다는 작은 크기로 만들려고 했으나 생각보다 쉽지 않았다. 하지만 여러 번의 시도 끝에 간단하지만 쓸만한 팝업 창을 만들게 되었고 이 글을 통해 어떻게 만들었는지 알아보려고 한다.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;This is originally posted on my &lt;a href=&quot;https://medium.com/@shkim04/rn-how-to-create-react-native-modal-component-with-expo-dfc87c406b0a&quot;&gt;Medium&lt;/a&gt;.&lt;/em&gt;
+&lt;em&gt;Let&apos;s connect!&lt;/em&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[React Native Modal Expo로 구현하기]]></title><description><![CDATA[…]]></description><link>null/react-native-modal-구현하기</link><guid isPermaLink="false">null/react-native-modal-구현하기</guid><pubDate>Fri, 18 Nov 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;개발자로 일을 시작한 이후 처음으로 모바일 앱을 개발했을 때, 동일 페이지 안에 팝업 창을 띄워 날짜를 선택할 수 있으며 팝업 창 외의 영역을 눌렀을 때 사라질 수 있도록 구현하고 싶었다. 팝업 창은 화면 폭보다는 작은 크기로 만들려고 했으나 생각보다 쉽지 않았다. 하지만 여러 번의 시도 끝에 간단하지만 쓸만한 팝업 창을 만들게 되었고 이 글을 통해 어떻게 만들었는지 알아보려고 한다.&lt;/p&gt;
 &lt;h2&gt;필수&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Javascript, React 기본 지식&lt;/li&gt;
@@ -461,7 +1534,7 @@ npx expo install react-dom react-native-web @expo/webpack-config
 &lt;p&gt;팝업 창은 간단하지만 그 쓰임새는 다양할 것이다. 개발하는 사람에 따라 경고를 띄우는 창이 될 수도 있고 날짜를 선택할 수 있는 창이 될 수도 있다. 이 글의 내용을 토대로 적절하게 팝업 창을 사용하면 되겠다.&lt;/p&gt;
 &lt;p&gt;이 글이 많은 분들께 도움이 되었으면 좋겠습니다!&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;&lt;strong&gt;읽어 주셔서 감사합니다. To be continued!&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;이 글은 &lt;a href=&quot;https://medium.com/@shkim04/how-to-use-react-swiper-58eef325b09f&quot;&gt;Medium&lt;/a&gt;에도 업로드 되었습니다.&lt;/em&gt;
+&lt;p&gt;&lt;em&gt;이 글은 &lt;a href=&quot;https://medium.com/@shkim04/rn-how-to-create-react-native-modal-component-with-expo-dfc87c406b0a&quot;&gt;Medium&lt;/a&gt;에도 업로드 되었습니다.&lt;/em&gt;
 &lt;em&gt;놀러 오세요!&lt;/em&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[How To Use React Swiper]]></title><description><![CDATA[If you just began learning React or working on a React project, you probably want to create a beautiful slider that adds an aesthetic boost…]]></description><link>null/en/how-to-use-react-swiper</link><guid isPermaLink="false">null/en/how-to-use-react-swiper</guid><pubDate>Sun, 13 Nov 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;If you just began learning React or working on a React project, you probably want to create a beautiful slider that adds an aesthetic boost to your pictures. In this post, I will walk you through the React Swiper basics and help you create a slider component using the library.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/c94c02669c776953c1bf653f728a0352/1_react-swiper.gif&quot; alt=&quot;React Swiper&quot;&gt;&lt;/p&gt;
 &lt;h2&gt;Prerequisite&lt;/h2&gt;
