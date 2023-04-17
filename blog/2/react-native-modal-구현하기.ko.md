@@ -183,5 +183,5 @@ const styles = StyleSheet.create({
 
 _**읽어 주셔서 감사합니다. To be continued!**_
 
-_이 글은 [Medium](https://medium.com/@shkim04/how-to-use-react-swiper-58eef325b09f)에도 업로드 되었습니다._
+_이 글은 [Medium](https://medium.com/@shkim04/rn-how-to-create-react-native-modal-component-with-expo-dfc87c406b0a)에도 업로드 되었습니다._
 _놀러 오세요!_

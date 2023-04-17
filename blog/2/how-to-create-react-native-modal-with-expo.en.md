@@ -183,5 +183,5 @@ I hope you enjoyed this article!
 
 _**THANKS FOR READING. SEE YOU NEXT TIME!**_
 
-_This is originally posted on my [Medium](https://medium.com/@shkim04/how-to-use-react-swiper-58eef325b09f)._
+_This is originally posted on my [Medium](https://medium.com/@shkim04/rn-how-to-create-react-native-modal-component-with-expo-dfc87c406b0a)._
 _Let's connect!_
