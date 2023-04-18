@@ -12,7 +12,7 @@ REST API는 마치 음식점의 메뉴와 같다. 손님이 메뉴를 보면 그
 - MongoDB
 - Insomnia
 
-## MongoDB 데이터베이스 만들기
+## MongoDB 데이터베이스
 먼저 MongoDB 설정부터 시작하겠다. MongoDB는 NoSQL 데이터베이스로 아주 많이 사용되는 데이터베이스 중 하나이다. 흔히 CRUD라고 말하는 create, retrieve, update, delete 요청을 적용하는 것이 아주 용이하다.
 
 MongoDB 사용을 위해서 계정을 만들어야 한다. google이나 github 계정과 연동해서 쉽게 만들 수 있다. 계정을 생성해도 먼저 돈을 지불하지 않으며 추후에 큰 규모의 데이터를 처리할 때 처리량에 따라 지불하면 된다.
@@ -39,7 +39,7 @@ MongoDB 사용을 위해서 계정을 만들어야 한다. google이나 github �
 
 위에 보이는 URI가 API에 사용될 예정이다 - _Node.js API를 개발하는 것이기 때문에 driver 옵션은 넘어가도 된다_. 이 전 단계에서 생성한 사용자 이름과 비밀번호를 위 사진 속 빨간색 빈 칸에 _[your username:your password]_ 형태로 넣어야 한다. 필자와 함께 API를 개발하는 것이니 예시는 넘어가도 된다.
 
-## 프로젝트 폴더 생성하기
+## 프로젝트 폴더 생성
 새로운 프로젝트 폴더를 생성하고 터미널을 열어 아래와 같이 명령어를 입력한다. 해당 명령어를 입력하면 pacakge.json 파일이 생기는데 앱에 필요한 정보나 dependency들을 담고 있는 역할을 한다. 그리고 app.ts 파일을 만든다.
 
 
@@ -105,14 +105,14 @@ npm install --save-dev cross-env @types/node @types/express
 }
 ```
 
-## package.json 스크립트 수정
+## package.json
 ![package-json](../imgs/3/package-json.png)
 
 package.json 안에 script 필드 하위에 명령어 두개를 추가해보자. 복잡한 명령어를 key 이름에 저장한 후 간단하게 _npm run [key name]_ 입력하는 방식으로 해당 명령어를 실행할 수 있다.
 
 “npm run dev”를 터미널에 입력하고 엔터를 누르면 실제로 _cross-env NODE-ENV=development nodemon --exec ts-node ./app.ts_ 가 실행된다. 개발모드로 실행되고 nodemon이 코드 수정이 있을 시 자동으로 재시작한다. "start"는 배포 시 사용된다.
 
-## Express 서버 시작
+## Express 서버
 ```js
 import express, { Request, Response, NextFunction } from 'express';
 
@@ -143,7 +143,7 @@ Request 객체는 API 사용자가로부터 서버가 받는 정보들의 집합
 
 Response 객체는 API 사용자가 해당 API 라우트로부터 받는 정보이다. API 서버의 목적과 개발 방향에 따라 그 정보가 달라질 것이다.
 
-## 환경 변수 설정
+## 환경 변수
 환경 변수는 보통 영어는 대문자로 쓰는 것이 일반적이다.
 
 프로젝트 폴더 하위에 development.env와 production.env 파일을 만들고 아래와 같이 변수 이름들을 적어 준다.
@@ -158,7 +158,7 @@ MONGO_DB=test-db // just name whatever you want for development
 MONGO_COLLECTION=test-collection // just name whatever you want for development
 ```
 
-## 환경에 따른 설정
+## 환경 변수 지정
 ```js
 const dotenv = require('dotenv');
 let envFound = dotenv.config({ path: `${process.env.NODE_ENV}.env` });
@@ -216,7 +216,7 @@ export default connectMongoDB;
 
 마지막으로 MongoDB를 비동기적으로 연결하도록 promise를 반환 값으로 받게 한다. 이제 API에 테스트 요청을 위해 코드를 수정해보자.
 
-## Create A Test User in MongoDB
+## 테스트 사용자 DB 등록
 ```js
 import express, { Request, Response, NextFunction } from "express";
 import config from "./config";
@@ -265,7 +265,7 @@ MongoDB promise가 resolve한 값을 connect라는 변수를 선언하여 저장
 
 에러 없이 코드가 실행된다면 post 라우트가 status 코드 200과 함께 "Successfully Created in DB"라는 정보를 사용자에게 보낸다.
 
-## Insomnia로 요청 테스트
+## Insomnia 요청 테스트
 
 ![insomnia-1](../imgs/3/insomnia-1.png)
 
@@ -287,7 +287,7 @@ MongoDB에 정보가 입력되었다면 다음과 같이 나타난다:
 
 
 
-## Conclusion
+## 결론
 API 서버는 보통 개발자 자신 혹은 회사의 목적에 따라 더욱 커지거나 복잡해진다. 크고 복잡한 API 서버를 개발하는 실력을 키우려면 직접 더 많은 크고 작은 프로젝트들을 개발해보는 방법이 가장 도움이 될 가능성이 높습니다. 예를 들면, 더 많은 라우트를 추가하거나 더 많은 타입 정의들을 써보거나 다른 데이터베이스를 써보는 것입니다. 이 간단한 API로부터 더 멋진 API를 개발하셨으면 좋겠습니다!
 
 

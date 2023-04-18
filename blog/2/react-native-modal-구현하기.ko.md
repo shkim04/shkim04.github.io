@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
 
 ![Modal](../gifs/2_react-native-modal.gif)
 
-## Conclusion
+## 결론
 팝업 창은 간단하지만 그 쓰임새는 다양할 것이다. 개발하는 사람에 따라 경고를 띄우는 창이 될 수도 있고 날짜를 선택할 수 있는 창이 될 수도 있다. 이 글의 내용을 토대로 적절하게 팝업 창을 사용하면 되겠다.
 
 이 글이 많은 분들께 도움이 되었으면 좋겠습니다!
