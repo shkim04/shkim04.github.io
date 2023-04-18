@@ -1,11 +1,1679 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[My perosnal blog that shows what I am working on and thoughts]]></description><link>http://github.com/dylang/node-rss</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 17 Apr 2023 15:43:58 GMT</lastBuildDate><item><title><![CDATA[Express, MongoDB, Typescript로 REST API 개발하기]]></title><description><![CDATA[REST API는 마치 음식점의 메뉴와 같다. 손님이 메뉴를 보면 그 음식점이 어떤 음식들을 요리하는지 알 수 있는 것처럼 개발자가 한 소프트웨어 상품의 API 문서를 보면 무슨 기능을 제공하는지 알 수 있다. API 문서에는 흔히 요청 url…]]></description><link>null/express-mongodb-typescript로-restapi-개발하기</link><guid isPermaLink="false">null/express-mongodb-typescript로-restapi-개발하기</guid><pubDate>Thu, 01 Dec 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;REST API는 마치 음식점의 메뉴와 같다. 손님이 메뉴를 보면 그 음식점이 어떤 음식들을 요리하는지 알 수 있는 것처럼 개발자가 한 소프트웨어 상품의 API 문서를 보면 무슨 기능을 제공하는지 알 수 있다. API 문서에는 흔히 요청 url이 적혀 있고 각 url에 대한 설명을 찾아볼 수 있다. 이 중 한 url에 요청을 보내면 그에 대한 응답을 받는 것이다. 개발자는 이 응답을 받아 가공 후 자신의 앱에 사용하면 된다. 이제 API를 만들어 보자.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[My perosnal blog that shows what I am working on and thoughts]]></description><link>http://github.com/dylang/node-rss</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 18 Apr 2023 15:31:45 GMT</lastBuildDate><item><title><![CDATA[How To Use Google Sheet API On Node.js]]></title><description><![CDATA[Google Sheet is very handy due to its incredible flexibility and easy access no matter where you are because it works on browsers. It is…]]></description><link>null/en/how-to-use-google-sheet-on-nodejs</link><guid isPermaLink="false">null/en/how-to-use-google-sheet-on-nodejs</guid><pubDate>Tue, 03 Jan 2023 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;strong&gt;Google Sheet&lt;/strong&gt; is very handy due to its incredible flexibility and easy access no matter where you are because it works on browsers. It is also easy to access your Google Sheet from any of your applications via &lt;strong&gt;Google Sheet API&lt;/strong&gt;. You can write something to your google sheet via the API or can let the API read data from your google sheet so you can manipulate it for any purpose.&lt;/p&gt;
+&lt;p&gt;Before you start using Google Sheet API, you have to create a virtual user to use every google API on your behalf. Let’s take a look at it first.&lt;/p&gt;
+&lt;h2&gt;Prerequisite&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;google cloud account — &lt;em&gt;you can google how to create one. registering a billing account is required&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;google sheet - &lt;em&gt;easy to create one with your google account&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Node&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Create Service Account&lt;/h2&gt;
+&lt;p&gt;If you have already sign up google cloud account, go to &lt;strong&gt;Google Cloud IAM and admin&lt;/strong&gt;. Service account is the virtual user I mentioned in the beginning. Click &lt;strong&gt;Service accounts&lt;/strong&gt; in the red box shown below, under the side bar on the left.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 386px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/f95711c1640409667128513600121e18/7bc0b/iam-admin.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 108.86075949367088%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAWCAYAAADAQbwGAAAACXBIWXMAAAsTAAALEwEAmpwYAAAD0ElEQVR42n2UWW/bRhSF+Q/TFkULFG1sZDMSoGnsIlvbh6Zv/T19yEPR2Imj2I0TL7Jl7eIiktpISeYucfmKGcWOEhu9wMG95HDOnLlzhsrtRya3Hpms/mxy/3ebn571JNZ+sVh7anHjocl3P3a595vNyoYp3609sbj92GJ1w+SHByZf3TH48vYCysq6wcp6l2/vtVl7avDgWZe7vxqsbmjceWJwfV3jm7ttVjdUvr/f4eZDjZV1lVuPda4/0Ph6rc21my2u3Wjxxa0WyvO/K/z1/IijypjtnS7bOyY7ez129mxKuya772wOjh32yy4Hxy7vDkfslx3evLV586/J4Ykr5x5VxJiDsv9+l9LrTcgTyvvvaJweobXrVI8POS3v027WoZjxeTSqxzSqJ5++a4Uos9mMJEnIspyCgjwvZC1wXqdpJjGfpwRBKOuiKCRJUYjv8g9zMpShmzJyU7wgY+DMZfbDHC/MPkEQgzMOMAyDPAdND6k1fJrtgI4WEie5XEDRzBltPcGdZjTUhKlf4IUFZ+EiXyACuz/h+KSK684wrQjNCNC7IYYZ0h9EJEmKEscJAvM0xw8CgiAiCGOCIMYPIgnPD8lymEzOqNfr/F8oo9EIx3GYJQmnp6e02y25rU6nQ61WQ1U71Os10jTF9z3q9Ybs1daLF2y/2mb7VYmtzU1ebm5xsH+AIgZFUxeNXTRb5I/IL1Y/O/uo0BmNGPQHDAdDbMum3+sjxCnT6RSBOI6lQk3TaDabVKs1Wq0mqtpiNosvEVrdLp22imkYmIaJ1tGwTBPlXN3CAoWEsAsUxEnGYJgQxdklwuXvl2tlMpng+z5RFFEul6XCymmVRqPC7t6AP/5s8/b9RE6aTj8SnhNdOpTl1S6yLAviOMOyE8LwaoUL4xcXWUARigTSPKdSq9JSVeqtFrrokaZi2jppOrtEmGcFdi+hWvfRjIi2ujC6Mp/PmacpqecR2D3C/oB4MCQZjoj6A3zHJfvQ42VC102wbI9+32c4inDcmJETo4zHY0aOw6C0Q/mfF7R2d6m9LlHdfk2tVCI4qZBnV2+517No1mrYtkUch4zH7odTLgoiw+BMVQmMLp6m4+k6vq6TDodX+lDYzHVdppMpo+FIPouDlQoFZllGW9PQTROz18OwLLRuV2bhS0Hmed4FoZiz9fIlhq5zUj7mzPOlW2QPxbUSiMIQ3/OYTiaSQEwKfB9hLfGL+1zh3t4e54JEyN/X+U0RW9d1/WLwqlgmFAJs25aqBBY2ylHEvoMgkOymaUo1y85f3Jz8ykNZjvOb8h+nJFaUoe8KwwAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;iam-admin&quot;
+        title=&quot;&quot;
+        src=&quot;/static/f95711c1640409667128513600121e18/7bc0b/iam-admin.png&quot;
+        srcset=&quot;/static/f95711c1640409667128513600121e18/c26ae/iam-admin.png 158w,
+/static/f95711c1640409667128513600121e18/6bdcf/iam-admin.png 315w,
+/static/f95711c1640409667128513600121e18/7bc0b/iam-admin.png 386w&quot;
+        sizes=&quot;(max-width: 386px) 100vw, 386px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Then, click create service account in the red box shown below.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/e012a21a5e0cf20e995633b9509e2b2c/d0cc0/create-service-account.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 53.79746835443038%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAAAsTAAALEwEAmpwYAAACEklEQVR42m2RW2sUQRCF5w8q6pugRqPGPCgSMSL5VyIqmJibShAVYgySxexuZmd37j237pmdmb180p1EQkjBoaq7q07VqbburTgsr41Yej3kwcsht5+ecOf5CQsrNgsvHG4t2dx4pHHCtcUe1+93ubn4l7vPuiy/6rO40uPxap+Hqw5P1oZY61vH7H612dztsbF1zPd9we8jxc8DwaedLpufbda3emx/cdg/zNl5+4eNN0dsv+uw+6HDzvsOex87fNuz+fHLx2obRTOWtLU0HubAFGiZTipmk4pJo2BWY6ySTJVippTxbSGZywLaEmiwlKooqzEXLUlSoijGHXn4XmC8xmjoYg8cgiDCcYbY9oAkTU2NHmM+B6soCsIwNHBdlyzLTFKapuR5hhACEQviKCJJEqIwIhGCROg4JE1SsjQ1b1JKrLIszSGOY+I4ZD6fGjIhUlw3Iy8kpVIoVaKUQucrc74AeQpZFFh13ZDnBUrlHBxmDIYNUuoJc9oWptPZqSSt58yfx1eZVRQ5vu/h+yN6fR+lJuRZil6Fluy5rmloViEEeZ4b1HVN27Y0TcN4PGYymRhYYVwRRBVeWCLSknYKfnBaqKUHvo/neoZg6DjIM2mDgWNywiCk1+0hC2mIrSRriJMxmjhOKmTZ4gWxmVB314vWhTq+LPmi9PN7q64r0kQYCBH9/1kt87JdRXB5p/8Ajxsu3XUMBqQAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;create-service-account&quot;
+        title=&quot;&quot;
+        src=&quot;/static/e012a21a5e0cf20e995633b9509e2b2c/f058b/create-service-account.png&quot;
+        srcset=&quot;/static/e012a21a5e0cf20e995633b9509e2b2c/c26ae/create-service-account.png 158w,
+/static/e012a21a5e0cf20e995633b9509e2b2c/6bdcf/create-service-account.png 315w,
+/static/e012a21a5e0cf20e995633b9509e2b2c/f058b/create-service-account.png 630w,
+/static/e012a21a5e0cf20e995633b9509e2b2c/d0cc0/create-service-account.png 732w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Name it properly so that you can remember what it will do.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 556px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/b0c6a3a2eb85b184d4df83ddf7975eab/96638/service-account-detail.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 65.18987341772153%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAAAsTAAALEwEAmpwYAAABmElEQVR42qVTi46bMBDM//9aq94lup56FyBASAPYgB0escEw1S6Ba6tEPakrDQvYOzvegU10NNj7CoH/hsAPcEpOiMIQvufBe99j+7SFUhoU0zThX7FRuocQLV5fdtg977B9esa3L1/heT6klEiOCeq6gXMOfT9gGO6D1qjhBpjgXI/0nCKOYkSHEKdjwpuWGMdxLnTuA8OSB25mreW8cW5E3/eoqgpCCJRFMd/nAlJIpGm6KrynjN5TQ1LHCumBCMPggLcf73h9+Q5/78GN0zq3exhv8yRldV1DKTUT0qXrOpyShE0JDwfEYcTzK6SElMWaq7JEWZaoyoozkeRZjjiOIaT8UEhdgiCAVhpt26KhjpXioxNUNROQkvpy4TWtNbRSuOgL16wuu9uAqdv/xDJHVmiM4SNlWc5mZGmG888zZ2Mtn8CYx6D16/U6u7yYQjMjgjzLmDjPxep0IQsuoL1U9Ai/uTw8PMri6mfjRmihlIWQBrIwnNPsirrpiRLE9+jz+RszobVoGgOtuxVKdWhb8wfhZ/7nX/CI72zwlcp7AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;service-account-detail&quot;
+        title=&quot;&quot;
+        src=&quot;/static/b0c6a3a2eb85b184d4df83ddf7975eab/96638/service-account-detail.png&quot;
+        srcset=&quot;/static/b0c6a3a2eb85b184d4df83ddf7975eab/c26ae/service-account-detail.png 158w,
+/static/b0c6a3a2eb85b184d4df83ddf7975eab/6bdcf/service-account-detail.png 315w,
+/static/b0c6a3a2eb85b184d4df83ddf7975eab/96638/service-account-detail.png 556w&quot;
+        sizes=&quot;(max-width: 556px) 100vw, 556px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;For the sake of convenience, we will give &lt;em&gt;&lt;strong&gt;Owner role&lt;/strong&gt;&lt;/em&gt; to the service account that we have just created. But, you have to know that the service account should be given different roles depending on the purpose of the usage.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 524px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/acb0db6dadc281f4ab780babf54fde92/664c8/select-role.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 90.50632911392405%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAASCAYAAABb0P4QAAAACXBIWXMAAAsTAAALEwEAmpwYAAAClElEQVR42nVU25KbMAzNz/epH9CH/ktn+tLpD2wIECAhC8ZgCBBuBpPTkbLusjtZz2iwZOvo6MjJTus7mrpDcAwQn8/wPQ9xfIF3cHE+n3GKIkRkQYgoDOF7Pl4vr/BcD2EQ8P2jf8Q0adDaOW6Pl72C5+7huS6cvYM0FchlDqUUZJYhEwJFnr/tM5RliTwvIDOJNEkgZY51XR+A6/0OrTXyPGdTqsQ0TnxhWQyMMbjf7/yd5xnLssDQ2TzDLDOMmTFrjWkc+d6OLgxDD89x4B0O8F0XR8/D4WWPo+u9xch34Lw4cJ0DguMRvhsgDCV8XyB5zVCViknsbNWqvKGqbijLFnXdo6o6/tbXAW3TYRxHtG3LbUohoIorpGyRplc0bcftMsPVLCjUiPjSIBU1sqxFJm8QooXMO2SyQ92MWFcDVRQ4RSecoxMu5xjxKWK2YRi+AxqzoGlHVFUNVUgIkUAVpGeGrmuxrgvmWWOaJtbQrOZhhmzFut6ZPRXkoXDLs2YdaU+JZFrP7I+j9fVTozu32+19yhSg5K7rUFUVmqZB3/f/WxBCsHZkX61hGN4BaSDbSnEcs9Fbo1XXNQ9NSok0TbmILWb3HwAJiALEkBKSJGGGZBS37RBTurMF2wKSpgxoHy0lFkXBvw4SmXwCtYAU30qxBSSN7doliUAURmibhjUkJpRMX6ps2yH2VobPgEWhUJbqAdh1Na6VgNYjJxNLAsuyjLUjVgRIxexgPgNSITLydr9+X/Hte4BE9LhWBZzDgdkQMC3SzQr+Gexpy3/+Kvz46ULmPZrmCtf1PmhFgNvJbtfToTyODD9uSiZm9h+GjJ7N1n/G8MOzoRg9bJqsrUqHNoH2W39rNt73A4AV0wD8A6+wZuRvbsUMAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;select-role&quot;
+        title=&quot;&quot;
+        src=&quot;/static/acb0db6dadc281f4ab780babf54fde92/664c8/select-role.png&quot;
+        srcset=&quot;/static/acb0db6dadc281f4ab780babf54fde92/c26ae/select-role.png 158w,
+/static/acb0db6dadc281f4ab780babf54fde92/6bdcf/select-role.png 315w,
+/static/acb0db6dadc281f4ab780babf54fde92/664c8/select-role.png 524w&quot;
+        sizes=&quot;(max-width: 524px) 100vw, 524px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Once created, go to the service account detail as below.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 420px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/f2c12e1824fe836da24b521ee843c8b9/d10fb/service-account.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 66.45569620253164%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB8UlEQVR42q1S2Y6cMBDk/z8pyUMSZTeHtEledg4wN3MwgDEe2xhmoCL3HNKusnmKpXK7q7uLthtPdh3yLMduu8WhLLHf7bHb7lDkBcr9HnVVUazIclSHGnsXKwpEYYRNUVCttRa35R2lBAsY4jBCmqSUGLIQLAioIIlj+Ks1ls9LbDe7a16CwA+IX6/WMKbH+XzGaRzhuU1rDWMMWXVUUEqj6zpIKYkXQlDMfdxBawN1POIoj+j7Hp0Q4E0D0bbwhsGiaWpwAr+AtyTStgKcc4jWnVuy5AtBxS635Zw414DL8URn8bw4IEkbaK2oQ9cNQem7r5S6+M5qA62uuc5eOWe983nGMALThP+yPLedTiOMuXQ1jiOGYSB7x80fRpxOJ0zT9CZI0Am5yTGfwdqe3sQ9cl3XdG55A9lJ4tw13Zrn+e8dukCWZSjLEtpopFkOqRTsOMBYi34YXsHCOFj74u+4gTpcLBaIkwRVyPDz3Xsc1muIKAJnIRqfkeWBw/XsBxBZDtP3L8TuglEYYleWkL4P/2mF4qlE/G2D9MeWED0WSL5vCPHXAvmvPeSSvX3lebq8B/+9RPzJR/oYInkIEXxYI/nCEH0MEH8OkD5ceL2toBnDNM80CNK4ggSJdNOWEkNVYWxqDPU/4HKkpJr5leAf6W/d494PDVsAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;service-account&quot;
+        title=&quot;&quot;
+        src=&quot;/static/f2c12e1824fe836da24b521ee843c8b9/d10fb/service-account.png&quot;
+        srcset=&quot;/static/f2c12e1824fe836da24b521ee843c8b9/c26ae/service-account.png 158w,
+/static/f2c12e1824fe836da24b521ee843c8b9/6bdcf/service-account.png 315w,
+/static/f2c12e1824fe836da24b521ee843c8b9/d10fb/service-account.png 420w&quot;
+        sizes=&quot;(max-width: 420px) 100vw, 420px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;In order to connect the API from applications, we should create &lt;strong&gt;key&lt;/strong&gt; which will be downloaded into the drive of your computer directly as a &lt;code class=&quot;language-text&quot;&gt;json&lt;/code&gt; format after naming the key.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 533px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/37867e6fe0db2357ba5962ff4395ed63/a1aa0/add-key.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 63.291139240506325%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB6ElEQVR42o1Uia7bIBD0/39dWyW+nvLiG7Ax+AQfjadi00QvaqS+lUa7C2iMdgZ7nHEMwwAX4ziiKkswxtC2CsCB2eyQ7UL71hiwikErjeMArLWQTYPb7YbjuFH29n3Huq44jgPbtmEaRyJ2h7ftN5FxYTHNO/Z9wzRNtPc4P88zET3gpUmCfdvxv3A3+k54URhhmg3cTbd1pdsuy0L5LZav9fLaryu8oeVQokAYRPj54xcCP0Jw9hH4AaIgxPl0RhSG1Ie+j9APEccf8E8n+KczwiBEHMUIfB9xGMPrdYux12BVhc9LgaJy8zM0G2MtZjPDGENzm42h+glrKY/TSLN12dO6wzhO6LuexJjGAapVGPoBrWzR9wOUUlRrrdH3PTqtqe/+9k6gpyiyFtCthKxrtE2DTimqlZRkCUeutYJ05F2HTnfQ9AFJcP2LKEkmUJQNikoiLwSSK0OecSTXEnkmkCYCl6tBki3I8gWfiYVsd9yOrw44nvDYpUadNig/BHjeg4sFjFvynoOoF3BuUcsFdXOHO6P1+kL0JGzSBvzCMQkJm6X0Or4Xd4J/fKhTBpVUGHKGtW6edO+M/H7tddGrG4HBKasVSsZIfiEEKe7edFHkyPMcnN/XyrKkviwK+gc42ziLPfAHzcPlStC16rAAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;add-key&quot;
+        title=&quot;&quot;
+        src=&quot;/static/37867e6fe0db2357ba5962ff4395ed63/a1aa0/add-key.png&quot;
+        srcset=&quot;/static/37867e6fe0db2357ba5962ff4395ed63/c26ae/add-key.png 158w,
+/static/37867e6fe0db2357ba5962ff4395ed63/6bdcf/add-key.png 315w,
+/static/37867e6fe0db2357ba5962ff4395ed63/a1aa0/add-key.png 533w&quot;
+        sizes=&quot;(max-width: 533px) 100vw, 533px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;It will look like:&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 516px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/74757499d6b24a2750361802a556f514/75dcb/json-key.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 44.93670886075949%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAACXBIWXMAAAsTAAALEwEAmpwYAAABeklEQVR42n1SW27kIBCcq9jmYYwH8BODB8fxZjZRcv/zVESPk6xW2v0oFQ2iqK7m0igOzjlqpYk5q1ALDsE5pHigqioUZUn8L5Tn+YUxBqVa7McH+mHG2I8YnMHkrpg7g2VwaBsFJcVDuCjp8t/4Er0wVqHRBvF2R1gP+HCgHyOsceiuDYn63hJ606IzGkpKlFX5H4dNi3j7BR82bPs7ut5Tq7ZtSGhyBuvUYTlFcxy6kailgOCM6m9BzhmkVFjTC3zYEW4HrM3uNF3OGGwL2+qzbUZtE8oHSOxPh3WtsaY7/LLD2B6uVUhzh8FoxNEhDBZzbxAGR+I5hq8oRnelvaxTFMVPy+npjRwOU4SzDke6YfUztrgghYAtzHjdFuxhQpw6PC0j7snT0JpaQtWS+HTYkGAeStreyG1ML8TODYjeo7ePHPcw4ogzfqcFz2HCczwRRqovqhZQSoAxAS4EhJDE+U+yM2wlOb2eh5BZq5o4Dy7vZXc537z+BKkVEt6pvwMtAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;json-key&quot;
+        title=&quot;&quot;
+        src=&quot;/static/74757499d6b24a2750361802a556f514/75dcb/json-key.png&quot;
+        srcset=&quot;/static/74757499d6b24a2750361802a556f514/c26ae/json-key.png 158w,
+/static/74757499d6b24a2750361802a556f514/6bdcf/json-key.png 315w,
+/static/74757499d6b24a2750361802a556f514/75dcb/json-key.png 516w&quot;
+        sizes=&quot;(max-width: 516px) 100vw, 516px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Keep in mind that there are two important values here in the &lt;code class=&quot;language-text&quot;&gt;json&lt;/code&gt; in order to connect google products on your behalf. One is &lt;strong&gt;client email&lt;/strong&gt; and the other is &lt;strong&gt;private key&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2&gt;Enable Google Sheet API&lt;/h2&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/5b602c08ad3acf7d5a39b6e0a28b8d7e/99072/enable-api.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 14.556962025316455%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAADCAYAAACTWi8uAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA3UlEQVR42j2J0UrCYABG9wixK28D7SKSgsCnsoIuoiRM0vdQ1NKyuirLC1nUhdBNLxDomPu3/99M2rJtFJ5IoQMfB76jZQqS7VNFrqLInijSR5L0ocP6scNmSbJWkKT2XfRdB31HsJK30fcEqweCrZJLrizJFpfeKEq0umHTNCxaT4Lmo03DsOkMfG5fQ64GatFqfYtqf8z5s+L65YNWd8jZ3YiLB5NOz6R9P+KyZ3LTfUObJwHJ55Q4fCcOJ0SBD/OYBT8Ryeyv+USBB9+z5T+dkLgesev/70t4ICW/XffBhbxT7NsAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;enable-api&quot;
+        title=&quot;&quot;
+        src=&quot;/static/5b602c08ad3acf7d5a39b6e0a28b8d7e/f058b/enable-api.png&quot;
+        srcset=&quot;/static/5b602c08ad3acf7d5a39b6e0a28b8d7e/c26ae/enable-api.png 158w,
+/static/5b602c08ad3acf7d5a39b6e0a28b8d7e/6bdcf/enable-api.png 315w,
+/static/5b602c08ad3acf7d5a39b6e0a28b8d7e/f058b/enable-api.png 630w,
+/static/5b602c08ad3acf7d5a39b6e0a28b8d7e/99072/enable-api.png 842w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;We will have to enable Google Sheet API in order to use it. &lt;strong&gt;Go to API and services&lt;/strong&gt; under your project and click &lt;strong&gt;ENABLE APIS AND SERVICES&lt;/strong&gt;, then enter &lt;em&gt;google sheet api&lt;/em&gt; in the searching bar and enable it.&lt;/p&gt;
+&lt;h2&gt;Set Up a Test Google Sheet&lt;/h2&gt;
+&lt;p&gt;Go to &lt;em&gt;google sheets&lt;/em&gt; and create a blank sheet for testing purpose. There is one thing you must do to have an application access your google sheet. It is to authorize the service account you have just created to use your google sheet. In order to do it, click &lt;strong&gt;Share&lt;/strong&gt; on the right.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 331px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/ee3dbceb7c282c0d163b7cfafa426a96/62452/share-1.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 51.89873417721519%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAAAsTAAALEwEAmpwYAAABHklEQVR42q1STUvDQBDdf+UPEE9e9NhevXjwItaL+HEQRRFKpQ216kHwIAjehIL0H7VkY5LdTba7eTK7aVKwQhQHhnm8HR7zZpYVRYEmSZHnOWZhCGiDt6drXPX3cDvsoBvs47K3i/FLHwwNYiE4nc4w/pjAxAKds21sXmygfbOFnV4L6ydrOD1vg/1mQmstVJYBeo735y6C4SHuR0d4fDjGIDjA5PUOzBiDxmmtE6f6UzSyvMo+TWusgS3TmDk452D08B9JDrTWqwVpir/wVJlSCkJIpKmAUpmrnEcOS6lK3veQJc/LildSIQw5hPQ93wSFEIjjpBJMktRjJxgtCXqeBKPos+xN6NvUOyC8+CbLu3G4sNUx6v7aKgUd5QuY0PoJ1r5zdAAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;share-1&quot;
+        title=&quot;&quot;
+        src=&quot;/static/ee3dbceb7c282c0d163b7cfafa426a96/62452/share-1.png&quot;
+        srcset=&quot;/static/ee3dbceb7c282c0d163b7cfafa426a96/c26ae/share-1.png 158w,
+/static/ee3dbceb7c282c0d163b7cfafa426a96/6bdcf/share-1.png 315w,
+/static/ee3dbceb7c282c0d163b7cfafa426a96/62452/share-1.png 331w&quot;
+        sizes=&quot;(max-width: 331px) 100vw, 331px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;When the pop-up screen as shown below shows up, copy and paste your &lt;strong&gt;client email&lt;/strong&gt; in the &lt;code class=&quot;language-text&quot;&gt;json&lt;/code&gt; file you have just created in the previous section.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 602px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/ae86f727bbbf4abca8a40bdd1fc1144b/32056/share-2.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 34.177215189873415%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAAAsTAAALEwEAmpwYAAABCElEQVR42o2PyW7CMBBA859wQ+IKfAYSSfhAuFQtCWSzHW9ZyKscSnsCdaTnGXtGT+NovV6z3W7Z7XYzoX7eQ95sNi95zgaCZ7VaEe33e7TWlGVJVVU0TYMQkqIokFJircUYgzH2BzMT3kM/zEulCJ7lckl0PB6x1nA+n8nznCzLZk6nE23b8i7CInVdz+I0TVksFkRxfKDroRYeqQIdQnpU29Pq4S3ajKh2oB8geH6FxsH1prkVgqKUlJXiklUIaXH+jnXjS1rdo81EHMcPYZIkON/zeblxyUryaz3nRmh8d8e5Eedf4EaMHZgm/oRpmmBNx9dHjlICKQRNU+O9438xzefh8PjyNxmQ5GLpsQJnAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;share-2&quot;
+        title=&quot;&quot;
+        src=&quot;/static/ae86f727bbbf4abca8a40bdd1fc1144b/32056/share-2.png&quot;
+        srcset=&quot;/static/ae86f727bbbf4abca8a40bdd1fc1144b/c26ae/share-2.png 158w,
+/static/ae86f727bbbf4abca8a40bdd1fc1144b/6bdcf/share-2.png 315w,
+/static/ae86f727bbbf4abca8a40bdd1fc1144b/32056/share-2.png 602w&quot;
+        sizes=&quot;(max-width: 602px) 100vw, 602px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Another important thing you should remember for connection is the id of the google sheet you want to handle. You can find the id from the url of the google sheet and It looks like:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://docs.google.com/spreadsheets/d/%5Byour-sheet-id%5D/edit#gid=0&quot;&gt;https://docs.google.com/spreadsheets/d/[your-sheet-id]/edit#gid=0&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Let&apos;s add some simple data which look like the picture below to the sheet. Now, we are good to go to the next step.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 560px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/85ddd65bbec309cedebf91cb37c143fa/b06ae/test-sheet.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 63.291139240506325%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAAAsTAAALEwEAmpwYAAACNUlEQVR42m1T227bMAz1v+4z9ml77lO7oEGaNU3iu5vYiW3d5XvOQHbNBqwECEmQeHiOSAZX32JVbnFbbqjrGlprXqUUGMcRxlhoY+Cc4zPZ7Xb7ciULHqsNvv34DtNbxFGMoigQhiHyPIe1FkIIXK9XCCEhpGRQ8r7vMU0Tuq7j1XvP+6D2Ag/nFcZphFKKQYgRMW2FgLEWVVnC+x5VVaFpGkipUF0u8M7hdD7DGINzWaIsSwTMcwRnJAZF8c6P53lmUO87ljQMA8Zh5JXYUHIpJYY/jEkJnYNxmuC8Y0BiVzcNnPcMSEF9P/CeZJFTMEmzzjFwPwz3t8Q0kErfAz6zW+vQeY/L5Yp5XtinaeZ1Wf53iicVy3JD0DQtsrxAdroge78gLSrk5xpNq9D1PejeWMfSrfPQ2kAI9XG2Ds53EFJBG8v7IMtPSLITHh43ODUewi04yQWr13e8bJ7x9PQTSZKygsNhj/X6Gfv9gc/aaGzWa7xst5BKMcuAsgul8XaIcC5rdMME15PP/F9UuSRJ2NM0RduKe99prfC6+8VsyUh+QFSV1sjSGFEYYrd7hdLq3qhUvSgKmSX1Jr2hQpAZaxAnMReUjP6SAamvojhCGIXI8pzl0CWZkhJpljLDPMsQRxGG4WNiqKoU9wn4l6FSOEZHHI8hxnFiSZ+Vo0ZO0gRRGCFNE+zf9txWnEwrHMPjF4Da8DSUVclA/7ZD27Y8ejwl9ZVHkyaJzHvHMfTXH22z4DfJQd/QrHJOegAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;test-sheet&quot;
+        title=&quot;&quot;
+        src=&quot;/static/85ddd65bbec309cedebf91cb37c143fa/b06ae/test-sheet.png&quot;
+        srcset=&quot;/static/85ddd65bbec309cedebf91cb37c143fa/c26ae/test-sheet.png 158w,
+/static/85ddd65bbec309cedebf91cb37c143fa/6bdcf/test-sheet.png 315w,
+/static/85ddd65bbec309cedebf91cb37c143fa/b06ae/test-sheet.png 560w&quot;
+        sizes=&quot;(max-width: 560px) 100vw, 560px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h2&gt;Connect Node.js Application To Google Sheet&lt;/h2&gt;
+&lt;p&gt;For those who have not had any Node.js application, follow the steps described below to create a basic one.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Create a project folder and open it with the text editor you have&lt;/li&gt;
+&lt;li&gt;Enter &lt;code class=&quot;language-text&quot;&gt;npm init -y&lt;/code&gt; in the terminal&lt;/li&gt;
+&lt;li&gt;Create a file called &lt;code class=&quot;language-text&quot;&gt;app.js&lt;/code&gt; - &lt;em&gt;although you can name whatever you want&lt;/em&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Now, we will download a library to bring google sheet API into the project.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;npm install &lt;span class=&quot;token operator&quot;&gt;--&lt;/span&gt;save googleapis&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Then, we will write the following code in app.js:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; google &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;googleapis&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; clientEmail &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;your service account client email&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; privateKey &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;your service account private key&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; googleSheetId &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;your google sheet id&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; googleSheetPage &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;your google sheet page name&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// authenticate the service account&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; googleAuth &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;google&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;auth&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;JWT&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    clientEmail&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    privateKey&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token regex&quot;&gt;&lt;span class=&quot;token regex-delimiter&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;token regex-source language-regex&quot;&gt;\\n&lt;/span&gt;&lt;span class=&quot;token regex-delimiter&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;token regex-flags&quot;&gt;g&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;\n&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token string&quot;&gt;&apos;https://www.googleapis.com/auth/spreadsheets&apos;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Recall that there are a few of important things to add into the code to connect to your google sheet. They are &lt;strong&gt;client email, private key&lt;/strong&gt; in the json key file, &lt;strong&gt;google sheet id&lt;/strong&gt;, and &lt;strong&gt;the exact name of the sheet&lt;/strong&gt;. The exact name of the sheet can be named as you want and you can find this on the bottom of the screen. Fill each information with the corresponding variables in the code above.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 259px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/40bc58105d6397c3313af7356638d038/a2ead/sheet-name.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 65.82278481012659%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAAAsTAAALEwEAmpwYAAABgklEQVR42q1S207jMBDN/3/OvtHdNxDieYUEBQk2DUnaXHyL40vs5CA7m25bBZYHRjqasWc0Pj4zyeA8sl2GojzADg7GWASbpgmXttwFP47jal0iewXKGBgX6GQPpVQs9t6vIuSc93DOrdYlNjDM3pAXexg7wBhzfPkjxEYnDE8RGbYtAaHsSwxDo8DuQ4aDH1EWJQjlUUNrLf5npxpeWmQY2H2bhmHKu3SHLCuOGn6m31FD71dz/xiymaE+GQqwhssvn+cTpTQoIaCUQWuNum7jTpb7Kvolns/zXdiI/G9u8TMqJIGVVAqBqZQ9WsJQHppYeKgJqoYiL6t4rpvwMAdnXfSMClAqQAgDIRxNS5Ew0WEBlz2qpsG+qqCtxWuaYvv8DKk1mBDxg8pp7LsaxlvIoYcwHdzkMYxunjLvJAJCQ6k0Xv6keNg+IazT7d0drjY/0WuDlrIoU0pybLY32Dxe48f9L/wuHkEVR84O5w2XpkL26Hp1HncSlIt5spg+3c93Uz7wa2YdGgUAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;sheet-name&quot;
+        title=&quot;&quot;
+        src=&quot;/static/40bc58105d6397c3313af7356638d038/a2ead/sheet-name.png&quot;
+        srcset=&quot;/static/40bc58105d6397c3313af7356638d038/c26ae/sheet-name.png 158w,
+/static/40bc58105d6397c3313af7356638d038/a2ead/sheet-name.png 259w&quot;
+        sizes=&quot;(max-width: 259px) 100vw, 259px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h2&gt;Read Data From Sheet&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;readSheet&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// google sheet instance&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; sheetInstance &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; google&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;sheets&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;v4&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;auth&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; googleAuth&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// read data in the range in a sheet&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; infoObjectFromSheet &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; sheetInstance&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;spreadsheets&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;values&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;auth&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; googleAuth&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;spreadsheetId&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; googleSheetId&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token template-string&quot;&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;${&lt;/span&gt;googleSheetPage&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;!A2:D6&lt;/span&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    
+    &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; valuesFromSheet &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; infoObjectFromSheet&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;data&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;values&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;valuesFromSheet&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;catch&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;err&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;readSheet func() error&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; err&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;  
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token function&quot;&gt;readSheet&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In the function, &lt;strong&gt;readSheet&lt;/strong&gt;, we will use &lt;strong&gt;get&lt;/strong&gt; method to bring an object that contains data from the spreadsheet connected to the application. Notice that its range is set to &lt;strong&gt;A2:D6&lt;/strong&gt; which covers the rows and columns of the data we have added to the spreadsheet - &lt;em&gt;To exclude the header row, it is from the second row&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Open the terminal and enter &lt;code class=&quot;language-text&quot;&gt;node app.js&lt;/code&gt;. You will see the log in the terminal that looks like:&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 348px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/29ccf3de1a9fcc2a40b0b576669ec81d/34ea4/read-data-log.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 37.9746835443038%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAYAAAD5nd/tAAAACXBIWXMAAAsTAAALEwEAmpwYAAABZklEQVR42lVS7XKjMAzkUWKDPzD+NgbSpGmadNre+z/Q3sgc1+kPzYhFWmmt7YQQ4JyDnRh4z9EPPfp+D8Ipju9Ww3/XHHVH3jln4cqEfI3ws4MYBKZoEFaPfIl4+Vpg7Ag9KizvBb5YDHxAeU2IZ4fgA5RSYHwf1sXgG+H2UbE+CrZnRbkGSCmRL6mREJZfIrRRbUh9KyjXCFJXX/fcO996Ou8cwuKwPOZ9o+8VafNtKm2RzgGXPyuMMzBuRL4ErM8Cl6ZGsDwyXLbIMUGIAZ33DnH1mG8J9S2j3lMjs3FqhLR5vWcoqRC3vW6+ZWit4GeL+p5hrQMpPbETuhgDQrXYPmaszxk2GBhr2tbUSBsv9wKtdFNAT0BqXLQYrcb5syKWhBgCGBFqrSHk0H4qo5oMuiLletpDatmOJbVo76gmBaVVu+roqF9Aklt6jq6dne22YYz/twrljP3DDpwd+A92WOmwzl8eufHFRMpd2AAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;read-data-log&quot;
+        title=&quot;&quot;
+        src=&quot;/static/29ccf3de1a9fcc2a40b0b576669ec81d/34ea4/read-data-log.png&quot;
+        srcset=&quot;/static/29ccf3de1a9fcc2a40b0b576669ec81d/c26ae/read-data-log.png 158w,
+/static/29ccf3de1a9fcc2a40b0b576669ec81d/6bdcf/read-data-log.png 315w,
+/static/29ccf3de1a9fcc2a40b0b576669ec81d/34ea4/read-data-log.png 348w&quot;
+        sizes=&quot;(max-width: 348px) 100vw, 348px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h2&gt;Clear Data In Sheet&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;clearSheet&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// google sheet instance&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; sheetInstance &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; google&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;sheets&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;v4&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;auth&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; googleAuth&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// clear data in the range&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; sheetInstance&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;spreadsheets&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;values&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;clear&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;auth&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; googleAuth&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;spreadsheetId&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; googleSheetId&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token template-string&quot;&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;${&lt;/span&gt;googleSheetPage&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;!A2:D6&lt;/span&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;catch&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;err&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;clearSheet func() error&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; err&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;  
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token function&quot;&gt;clearSheet&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We will try to clear the rows and columns of the data by using &lt;strong&gt;clear&lt;/strong&gt; method. When you run the application, then, you will see the rows and columns are empty in the range specified.&lt;/p&gt;
+&lt;h2&gt;Update Data To Sheet&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;updateSheet&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// google sheet instance&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; sheetInstance &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; google&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;sheets&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;v4&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;auth&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; googleAuth&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; updateToGsheet &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Seoul&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;9,776,000&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Asia&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;KRW&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Copenhagen&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;602,000&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Europe&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;EUR&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Amsterdam&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;821,000&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Europe&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;EUR&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Helsinki&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;631,000&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Europe&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;EUR&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Sydney&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;5,312,000&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Oceania&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;AUD&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    
+    &lt;span class=&quot;token comment&quot;&gt;// update data in the range&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; sheetInstance&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;spreadsheets&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;values&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;update&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;auth&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; googleAuth&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;spreadsheetId&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; googleSheetId&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token template-string&quot;&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;${&lt;/span&gt;googleSheetPage&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;!A2:D6&lt;/span&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;valueInputOption&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;RAW&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;resource&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;token literal-property property&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; updateToGsheet&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;catch&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;err&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;updateSheet func() error&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; err&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;  
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token function&quot;&gt;updateSheet&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Finally, we will update the values of rows and columns in the range specified by using &lt;strong&gt;update&lt;/strong&gt; method. Values must be in an array of arrays and make sure the range is set as desired. The first element of the variable, &lt;strong&gt;updateToGsheet&lt;/strong&gt;, which is an array will be written &lt;strong&gt;from A2 to D2&lt;/strong&gt;, second element &lt;strong&gt;from A3 to D3&lt;/strong&gt; and others in such way.&lt;/p&gt;
+&lt;p&gt;Run the application and check the google sheet to see if the values are updated in the range specified - &lt;em&gt;If there are values in the range, the new values will be overwritten on the old values&lt;/em&gt;.&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;We have just learned how to connect Node.js application to Google Sheet. Now you can read, write and delete data in the google sheet. Last but not least, it is your job to elaborate this basic model to the next level so that you can fully grasp Google Sheet API.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;THANKS FOR READING. SEE YOU NEXT TIME!&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;This is originally posted on my &lt;a href=&quot;https://medium.com/@shkim04/beginner-guide-on-google-sheet-api-for-node-js-4c0b533b071a&quot;&gt;Medium&lt;/a&gt;.&lt;/em&gt;
+&lt;em&gt;Let&apos;s connect!&lt;/em&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Node.js에서 Googe Sheet API 사용하기]]></title><description><![CDATA[Google Sheet는 브라우저에서 동작하기 때문에 어디서나 사용할 수 있고 기능이 다양해서 아주 유용한 소프트웨어 상품이다. 이 Google Sheet는 Google이 API…]]></description><link>null/nodejs-에서-google-sheet-사용하는법</link><guid isPermaLink="false">null/nodejs-에서-google-sheet-사용하는법</guid><pubDate>Tue, 03 Jan 2023 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;strong&gt;Google Sheet&lt;/strong&gt;는 브라우저에서 동작하기 때문에 어디서나 사용할 수 있고 기능이 다양해서 아주 유용한 소프트웨어 상품이다. 이 Google Sheet는 Google이 API를 제공하기 때문에 어느 어플리케이션이라도 쉽게 연결할 수 있다. &lt;strong&gt;Google Sheet API&lt;/strong&gt;를 통해서 google sheet에서 입력한 정보를 읽고 가공하는 것이 가능하다.&lt;/p&gt;
+&lt;p&gt;Google Sheet API를 사용하려면 먼저 가상의 사용자 계정을 만들어야 한다. 이 단계부터 시작해보자.&lt;/p&gt;
+&lt;h2&gt;필수&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;google cloud 계정 — &lt;em&gt;검색하면 쉽게 나온다. 결제 정보를 입력해야 하니 참고바란다&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;google sheet - &lt;em&gt;구글 계정이 있다면 누구나 만들 수 있다&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Node&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Service 계정&lt;/h2&gt;
+&lt;p&gt;google cloud에 로그인한 후 &lt;strong&gt;Google Cloud IAM and admin&lt;/strong&gt;으로 이동한다. Service 계정이 글머리에서 언급한 가상의 사용자이다. 아래 빨간색으로 표시된 &lt;strong&gt;Service accounts&lt;/strong&gt; 클릭한다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 386px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/f95711c1640409667128513600121e18/7bc0b/iam-admin.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 108.86075949367088%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAWCAYAAADAQbwGAAAACXBIWXMAAAsTAAALEwEAmpwYAAAD0ElEQVR42n2UWW/bRhSF+Q/TFkULFG1sZDMSoGnsIlvbh6Zv/T19yEPR2Imj2I0TL7Jl7eIiktpISeYucfmKGcWOEhu9wMG95HDOnLlzhsrtRya3Hpms/mxy/3ebn571JNZ+sVh7anHjocl3P3a595vNyoYp3609sbj92GJ1w+SHByZf3TH48vYCysq6wcp6l2/vtVl7avDgWZe7vxqsbmjceWJwfV3jm7ttVjdUvr/f4eZDjZV1lVuPda4/0Ph6rc21my2u3Wjxxa0WyvO/K/z1/IijypjtnS7bOyY7ez129mxKuya772wOjh32yy4Hxy7vDkfslx3evLV586/J4Ykr5x5VxJiDsv9+l9LrTcgTyvvvaJweobXrVI8POS3v027WoZjxeTSqxzSqJ5++a4Uos9mMJEnIspyCgjwvZC1wXqdpJjGfpwRBKOuiKCRJUYjv8g9zMpShmzJyU7wgY+DMZfbDHC/MPkEQgzMOMAyDPAdND6k1fJrtgI4WEie5XEDRzBltPcGdZjTUhKlf4IUFZ+EiXyACuz/h+KSK684wrQjNCNC7IYYZ0h9EJEmKEscJAvM0xw8CgiAiCGOCIMYPIgnPD8lymEzOqNfr/F8oo9EIx3GYJQmnp6e02y25rU6nQ61WQ1U71Os10jTF9z3q9Ybs1daLF2y/2mb7VYmtzU1ebm5xsH+AIgZFUxeNXTRb5I/IL1Y/O/uo0BmNGPQHDAdDbMum3+sjxCnT6RSBOI6lQk3TaDabVKs1Wq0mqtpiNosvEVrdLp22imkYmIaJ1tGwTBPlXN3CAoWEsAsUxEnGYJgQxdklwuXvl2tlMpng+z5RFFEul6XCymmVRqPC7t6AP/5s8/b9RE6aTj8SnhNdOpTl1S6yLAviOMOyE8LwaoUL4xcXWUARigTSPKdSq9JSVeqtFrrokaZi2jppOrtEmGcFdi+hWvfRjIi2ujC6Mp/PmacpqecR2D3C/oB4MCQZjoj6A3zHJfvQ42VC102wbI9+32c4inDcmJETo4zHY0aOw6C0Q/mfF7R2d6m9LlHdfk2tVCI4qZBnV2+517No1mrYtkUch4zH7odTLgoiw+BMVQmMLp6m4+k6vq6TDodX+lDYzHVdppMpo+FIPouDlQoFZllGW9PQTROz18OwLLRuV2bhS0Hmed4FoZiz9fIlhq5zUj7mzPOlW2QPxbUSiMIQ3/OYTiaSQEwKfB9hLfGL+1zh3t4e54JEyN/X+U0RW9d1/WLwqlgmFAJs25aqBBY2ylHEvoMgkOymaUo1y85f3Jz8ykNZjvOb8h+nJFaUoe8KwwAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;iam-admin&quot;
+        title=&quot;&quot;
+        src=&quot;/static/f95711c1640409667128513600121e18/7bc0b/iam-admin.png&quot;
+        srcset=&quot;/static/f95711c1640409667128513600121e18/c26ae/iam-admin.png 158w,
+/static/f95711c1640409667128513600121e18/6bdcf/iam-admin.png 315w,
+/static/f95711c1640409667128513600121e18/7bc0b/iam-admin.png 386w&quot;
+        sizes=&quot;(max-width: 386px) 100vw, 386px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;다음, &lt;strong&gt;CREATE SERVICE ACCOUNT&lt;/strong&gt;를 클릭한다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/e012a21a5e0cf20e995633b9509e2b2c/d0cc0/create-service-account.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 53.79746835443038%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAAAsTAAALEwEAmpwYAAACEklEQVR42m2RW2sUQRCF5w8q6pugRqPGPCgSMSL5VyIqmJibShAVYgySxexuZmd37j237pmdmb180p1EQkjBoaq7q07VqbburTgsr41Yej3kwcsht5+ecOf5CQsrNgsvHG4t2dx4pHHCtcUe1+93ubn4l7vPuiy/6rO40uPxap+Hqw5P1oZY61vH7H612dztsbF1zPd9we8jxc8DwaedLpufbda3emx/cdg/zNl5+4eNN0dsv+uw+6HDzvsOex87fNuz+fHLx2obRTOWtLU0HubAFGiZTipmk4pJo2BWY6ySTJVippTxbSGZywLaEmiwlKooqzEXLUlSoijGHXn4XmC8xmjoYg8cgiDCcYbY9oAkTU2NHmM+B6soCsIwNHBdlyzLTFKapuR5hhACEQviKCJJEqIwIhGCROg4JE1SsjQ1b1JKrLIszSGOY+I4ZD6fGjIhUlw3Iy8kpVIoVaKUQucrc74AeQpZFFh13ZDnBUrlHBxmDIYNUuoJc9oWptPZqSSt58yfx1eZVRQ5vu/h+yN6fR+lJuRZil6Fluy5rmloViEEeZ4b1HVN27Y0TcN4PGYymRhYYVwRRBVeWCLSknYKfnBaqKUHvo/neoZg6DjIM2mDgWNywiCk1+0hC2mIrSRriJMxmjhOKmTZ4gWxmVB314vWhTq+LPmi9PN7q64r0kQYCBH9/1kt87JdRXB5p/8Ajxsu3XUMBqQAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;create-service-account&quot;
+        title=&quot;&quot;
+        src=&quot;/static/e012a21a5e0cf20e995633b9509e2b2c/f058b/create-service-account.png&quot;
+        srcset=&quot;/static/e012a21a5e0cf20e995633b9509e2b2c/c26ae/create-service-account.png 158w,
+/static/e012a21a5e0cf20e995633b9509e2b2c/6bdcf/create-service-account.png 315w,
+/static/e012a21a5e0cf20e995633b9509e2b2c/f058b/create-service-account.png 630w,
+/static/e012a21a5e0cf20e995633b9509e2b2c/d0cc0/create-service-account.png 732w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;추후에 잘 기억할 수 있도록 이름을 준다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 556px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/b0c6a3a2eb85b184d4df83ddf7975eab/96638/service-account-detail.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 65.18987341772153%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAAAsTAAALEwEAmpwYAAABmElEQVR42qVTi46bMBDM//9aq94lup56FyBASAPYgB0escEw1S6Ba6tEPakrDQvYOzvegU10NNj7CoH/hsAPcEpOiMIQvufBe99j+7SFUhoU0zThX7FRuocQLV5fdtg977B9esa3L1/heT6klEiOCeq6gXMOfT9gGO6D1qjhBpjgXI/0nCKOYkSHEKdjwpuWGMdxLnTuA8OSB25mreW8cW5E3/eoqgpCCJRFMd/nAlJIpGm6KrynjN5TQ1LHCumBCMPggLcf73h9+Q5/78GN0zq3exhv8yRldV1DKTUT0qXrOpyShE0JDwfEYcTzK6SElMWaq7JEWZaoyoozkeRZjjiOIaT8UEhdgiCAVhpt26KhjpXioxNUNROQkvpy4TWtNbRSuOgL16wuu9uAqdv/xDJHVmiM4SNlWc5mZGmG888zZ2Mtn8CYx6D16/U6u7yYQjMjgjzLmDjPxep0IQsuoL1U9Ai/uTw8PMri6mfjRmihlIWQBrIwnNPsirrpiRLE9+jz+RszobVoGgOtuxVKdWhb8wfhZ/7nX/CI72zwlcp7AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;service-account-detail&quot;
+        title=&quot;&quot;
+        src=&quot;/static/b0c6a3a2eb85b184d4df83ddf7975eab/96638/service-account-detail.png&quot;
+        srcset=&quot;/static/b0c6a3a2eb85b184d4df83ddf7975eab/c26ae/service-account-detail.png 158w,
+/static/b0c6a3a2eb85b184d4df83ddf7975eab/6bdcf/service-account-detail.png 315w,
+/static/b0c6a3a2eb85b184d4df83ddf7975eab/96638/service-account-detail.png 556w&quot;
+        sizes=&quot;(max-width: 556px) 100vw, 556px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;프로젝트나 팀 상황에 따라 이 계정에 부여하는 역할이 달라지지만 테스트이기 때문에 Service 계정에 &lt;strong&gt;Owner role&lt;/strong&gt;을 준다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 524px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/acb0db6dadc281f4ab780babf54fde92/664c8/select-role.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 90.50632911392405%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAASCAYAAABb0P4QAAAACXBIWXMAAAsTAAALEwEAmpwYAAAClElEQVR42nVU25KbMAzNz/epH9CH/ktn+tLpD2wIECAhC8ZgCBBuBpPTkbLusjtZz2iwZOvo6MjJTus7mrpDcAwQn8/wPQ9xfIF3cHE+n3GKIkRkQYgoDOF7Pl4vr/BcD2EQ8P2jf8Q0adDaOW6Pl72C5+7huS6cvYM0FchlDqUUZJYhEwJFnr/tM5RliTwvIDOJNEkgZY51XR+A6/0OrTXyPGdTqsQ0TnxhWQyMMbjf7/yd5xnLssDQ2TzDLDOMmTFrjWkc+d6OLgxDD89x4B0O8F0XR8/D4WWPo+u9xch34Lw4cJ0DguMRvhsgDCV8XyB5zVCViknsbNWqvKGqbijLFnXdo6o6/tbXAW3TYRxHtG3LbUohoIorpGyRplc0bcftMsPVLCjUiPjSIBU1sqxFJm8QooXMO2SyQ92MWFcDVRQ4RSecoxMu5xjxKWK2YRi+AxqzoGlHVFUNVUgIkUAVpGeGrmuxrgvmWWOaJtbQrOZhhmzFut6ZPRXkoXDLs2YdaU+JZFrP7I+j9fVTozu32+19yhSg5K7rUFUVmqZB3/f/WxBCsHZkX61hGN4BaSDbSnEcs9Fbo1XXNQ9NSok0TbmILWb3HwAJiALEkBKSJGGGZBS37RBTurMF2wKSpgxoHy0lFkXBvw4SmXwCtYAU30qxBSSN7doliUAURmibhjUkJpRMX6ps2yH2VobPgEWhUJbqAdh1Na6VgNYjJxNLAsuyjLUjVgRIxexgPgNSITLydr9+X/Hte4BE9LhWBZzDgdkQMC3SzQr+Gexpy3/+Kvz46ULmPZrmCtf1PmhFgNvJbtfToTyODD9uSiZm9h+GjJ7N1n/G8MOzoRg9bJqsrUqHNoH2W39rNt73A4AV0wD8A6+wZuRvbsUMAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;select-role&quot;
+        title=&quot;&quot;
+        src=&quot;/static/acb0db6dadc281f4ab780babf54fde92/664c8/select-role.png&quot;
+        srcset=&quot;/static/acb0db6dadc281f4ab780babf54fde92/c26ae/select-role.png 158w,
+/static/acb0db6dadc281f4ab780babf54fde92/6bdcf/select-role.png 315w,
+/static/acb0db6dadc281f4ab780babf54fde92/664c8/select-role.png 524w&quot;
+        sizes=&quot;(max-width: 524px) 100vw, 524px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;완료되면 아래와 같이 service 계정을 클릭한다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 420px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/f2c12e1824fe836da24b521ee843c8b9/d10fb/service-account.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 66.45569620253164%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB8UlEQVR42q1S2Y6cMBDk/z8pyUMSZTeHtEledg4wN3MwgDEe2xhmoCL3HNKusnmKpXK7q7uLthtPdh3yLMduu8WhLLHf7bHb7lDkBcr9HnVVUazIclSHGnsXKwpEYYRNUVCttRa35R2lBAsY4jBCmqSUGLIQLAioIIlj+Ks1ls9LbDe7a16CwA+IX6/WMKbH+XzGaRzhuU1rDWMMWXVUUEqj6zpIKYkXQlDMfdxBawN1POIoj+j7Hp0Q4E0D0bbwhsGiaWpwAr+AtyTStgKcc4jWnVuy5AtBxS635Zw414DL8URn8bw4IEkbaK2oQ9cNQem7r5S6+M5qA62uuc5eOWe983nGMALThP+yPLedTiOMuXQ1jiOGYSB7x80fRpxOJ0zT9CZI0Am5yTGfwdqe3sQ9cl3XdG55A9lJ4tw13Zrn+e8dukCWZSjLEtpopFkOqRTsOMBYi34YXsHCOFj74u+4gTpcLBaIkwRVyPDz3Xsc1muIKAJnIRqfkeWBw/XsBxBZDtP3L8TuglEYYleWkL4P/2mF4qlE/G2D9MeWED0WSL5vCPHXAvmvPeSSvX3lebq8B/+9RPzJR/oYInkIEXxYI/nCEH0MEH8OkD5ceL2toBnDNM80CNK4ggSJdNOWEkNVYWxqDPU/4HKkpJr5leAf6W/d494PDVsAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;service-account&quot;
+        title=&quot;&quot;
+        src=&quot;/static/f2c12e1824fe836da24b521ee843c8b9/d10fb/service-account.png&quot;
+        srcset=&quot;/static/f2c12e1824fe836da24b521ee843c8b9/c26ae/service-account.png 158w,
+/static/f2c12e1824fe836da24b521ee843c8b9/6bdcf/service-account.png 315w,
+/static/f2c12e1824fe836da24b521ee843c8b9/d10fb/service-account.png 420w&quot;
+        sizes=&quot;(max-width: 420px) 100vw, 420px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;어플리케이션에 API를 연결하기 위해 &lt;em&gt;key&lt;/em&gt;를 생성해야 한다. key에 이름을 주고 다운로드를 누르면 &lt;code class=&quot;language-text&quot;&gt;json&lt;/code&gt; 포맷으로 된 파일이 드라이브로 저장된다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 533px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/37867e6fe0db2357ba5962ff4395ed63/a1aa0/add-key.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 63.291139240506325%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB6ElEQVR42o1Uia7bIBD0/39dWyW+nvLiG7Ax+AQfjadi00QvaqS+lUa7C2iMdgZ7nHEMwwAX4ziiKkswxtC2CsCB2eyQ7UL71hiwikErjeMArLWQTYPb7YbjuFH29n3Huq44jgPbtmEaRyJ2h7ftN5FxYTHNO/Z9wzRNtPc4P88zET3gpUmCfdvxv3A3+k54URhhmg3cTbd1pdsuy0L5LZav9fLaryu8oeVQokAYRPj54xcCP0Jw9hH4AaIgxPl0RhSG1Ie+j9APEccf8E8n+KczwiBEHMUIfB9xGMPrdYux12BVhc9LgaJy8zM0G2MtZjPDGENzm42h+glrKY/TSLN12dO6wzhO6LuexJjGAapVGPoBrWzR9wOUUlRrrdH3PTqtqe/+9k6gpyiyFtCthKxrtE2DTimqlZRkCUeutYJ05F2HTnfQ9AFJcP2LKEkmUJQNikoiLwSSK0OecSTXEnkmkCYCl6tBki3I8gWfiYVsd9yOrw44nvDYpUadNig/BHjeg4sFjFvynoOoF3BuUcsFdXOHO6P1+kL0JGzSBvzCMQkJm6X0Or4Xd4J/fKhTBpVUGHKGtW6edO+M/H7tddGrG4HBKasVSsZIfiEEKe7edFHkyPMcnN/XyrKkviwK+gc42ziLPfAHzcPlStC16rAAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;add-key&quot;
+        title=&quot;&quot;
+        src=&quot;/static/37867e6fe0db2357ba5962ff4395ed63/a1aa0/add-key.png&quot;
+        srcset=&quot;/static/37867e6fe0db2357ba5962ff4395ed63/c26ae/add-key.png 158w,
+/static/37867e6fe0db2357ba5962ff4395ed63/6bdcf/add-key.png 315w,
+/static/37867e6fe0db2357ba5962ff4395ed63/a1aa0/add-key.png 533w&quot;
+        sizes=&quot;(max-width: 533px) 100vw, 533px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;파일은 아래와 같다:&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 516px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/74757499d6b24a2750361802a556f514/75dcb/json-key.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 44.93670886075949%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAACXBIWXMAAAsTAAALEwEAmpwYAAABeklEQVR42n1SW27kIBCcq9jmYYwH8BODB8fxZjZRcv/zVESPk6xW2v0oFQ2iqK7m0igOzjlqpYk5q1ALDsE5pHigqioUZUn8L5Tn+YUxBqVa7McH+mHG2I8YnMHkrpg7g2VwaBsFJcVDuCjp8t/4Er0wVqHRBvF2R1gP+HCgHyOsceiuDYn63hJ606IzGkpKlFX5H4dNi3j7BR82bPs7ut5Tq7ZtSGhyBuvUYTlFcxy6kailgOCM6m9BzhmkVFjTC3zYEW4HrM3uNF3OGGwL2+qzbUZtE8oHSOxPh3WtsaY7/LLD2B6uVUhzh8FoxNEhDBZzbxAGR+I5hq8oRnelvaxTFMVPy+npjRwOU4SzDke6YfUztrgghYAtzHjdFuxhQpw6PC0j7snT0JpaQtWS+HTYkGAeStreyG1ML8TODYjeo7ePHPcw4ogzfqcFz2HCczwRRqovqhZQSoAxAS4EhJDE+U+yM2wlOb2eh5BZq5o4Dy7vZXc537z+BKkVEt6pvwMtAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;json-key&quot;
+        title=&quot;&quot;
+        src=&quot;/static/74757499d6b24a2750361802a556f514/75dcb/json-key.png&quot;
+        srcset=&quot;/static/74757499d6b24a2750361802a556f514/c26ae/json-key.png 158w,
+/static/74757499d6b24a2750361802a556f514/6bdcf/json-key.png 315w,
+/static/74757499d6b24a2750361802a556f514/75dcb/json-key.png 516w&quot;
+        sizes=&quot;(max-width: 516px) 100vw, 516px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;이 &lt;code class=&quot;language-text&quot;&gt;json&lt;/code&gt; 파일 안에는 구글 상품들과 연결할 때 필수적인 두 값이 있는데 하나는 &lt;strong&gt;client email&lt;/strong&gt;이고 다른 하나는 &lt;strong&gt;private key&lt;/strong&gt;이다.&lt;/p&gt;
+&lt;h2&gt;Google Sheet API 허용&lt;/h2&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/5b602c08ad3acf7d5a39b6e0a28b8d7e/99072/enable-api.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 14.556962025316455%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAADCAYAAACTWi8uAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA3UlEQVR42j2J0UrCYABG9wixK28D7SKSgsCnsoIuoiRM0vdQ1NKyuirLC1nUhdBNLxDomPu3/99M2rJtFJ5IoQMfB76jZQqS7VNFrqLInijSR5L0ocP6scNmSbJWkKT2XfRdB31HsJK30fcEqweCrZJLrizJFpfeKEq0umHTNCxaT4Lmo03DsOkMfG5fQ64GatFqfYtqf8z5s+L65YNWd8jZ3YiLB5NOz6R9P+KyZ3LTfUObJwHJ55Q4fCcOJ0SBD/OYBT8Ryeyv+USBB9+z5T+dkLgesev/70t4ICW/XffBhbxT7NsAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;enable-api&quot;
+        title=&quot;&quot;
+        src=&quot;/static/5b602c08ad3acf7d5a39b6e0a28b8d7e/f058b/enable-api.png&quot;
+        srcset=&quot;/static/5b602c08ad3acf7d5a39b6e0a28b8d7e/c26ae/enable-api.png 158w,
+/static/5b602c08ad3acf7d5a39b6e0a28b8d7e/6bdcf/enable-api.png 315w,
+/static/5b602c08ad3acf7d5a39b6e0a28b8d7e/f058b/enable-api.png 630w,
+/static/5b602c08ad3acf7d5a39b6e0a28b8d7e/99072/enable-api.png 842w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Google Sheet API를 대시보드에서 허용해 주어야 사용할 수 있다. 프로젝트 하위에 &lt;strong&gt;Go to API and services&lt;/strong&gt;로 이동하여 &lt;strong&gt;ENABLE APIS AND SERVICES&lt;/strong&gt;를 클릭한다. 검색창에 &lt;em&gt;google sheet api&lt;/em&gt; 를 입력한 후 API를 허용해 준다.&lt;/p&gt;
+&lt;h2&gt;테스트 Google Sheet&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;google sheets&lt;/em&gt; 에서 빈 sheet를 생성한다. 어플리케이션을 google sheet에 연결하기 위해서는 꼭 필요한 절차가 있다. 가상의 사용자인 Service 계정에 sheet를 접근할 권한을 주어야 한다. 우측에 보이는 &lt;strong&gt;Share&lt;/strong&gt;를 통해 가능하다. &lt;strong&gt;Share&lt;/strong&gt; 버튼을 클릭한다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 331px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/ee3dbceb7c282c0d163b7cfafa426a96/62452/share-1.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 51.89873417721519%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAAAsTAAALEwEAmpwYAAABHklEQVR42q1STUvDQBDdf+UPEE9e9NhevXjwItaL+HEQRRFKpQ216kHwIAjehIL0H7VkY5LdTba7eTK7aVKwQhQHhnm8HR7zZpYVRYEmSZHnOWZhCGiDt6drXPX3cDvsoBvs47K3i/FLHwwNYiE4nc4w/pjAxAKds21sXmygfbOFnV4L6ydrOD1vg/1mQmstVJYBeo735y6C4SHuR0d4fDjGIDjA5PUOzBiDxmmtE6f6UzSyvMo+TWusgS3TmDk452D08B9JDrTWqwVpir/wVJlSCkJIpKmAUpmrnEcOS6lK3veQJc/LildSIQw5hPQ93wSFEIjjpBJMktRjJxgtCXqeBKPos+xN6NvUOyC8+CbLu3G4sNUx6v7aKgUd5QuY0PoJ1r5zdAAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;share-1&quot;
+        title=&quot;&quot;
+        src=&quot;/static/ee3dbceb7c282c0d163b7cfafa426a96/62452/share-1.png&quot;
+        srcset=&quot;/static/ee3dbceb7c282c0d163b7cfafa426a96/c26ae/share-1.png 158w,
+/static/ee3dbceb7c282c0d163b7cfafa426a96/6bdcf/share-1.png 315w,
+/static/ee3dbceb7c282c0d163b7cfafa426a96/62452/share-1.png 331w&quot;
+        sizes=&quot;(max-width: 331px) 100vw, 331px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;팝업 창이 아래 사진처럼 나오게 되면 &lt;code class=&quot;language-text&quot;&gt;json&lt;/code&gt; key 파일에 있는 &lt;strong&gt;client email&lt;/strong&gt;을 입력한다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 602px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/ae86f727bbbf4abca8a40bdd1fc1144b/32056/share-2.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 34.177215189873415%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAAAsTAAALEwEAmpwYAAABCElEQVR42o2PyW7CMBBA859wQ+IKfAYSSfhAuFQtCWSzHW9ZyKscSnsCdaTnGXtGT+NovV6z3W7Z7XYzoX7eQ95sNi95zgaCZ7VaEe33e7TWlGVJVVU0TYMQkqIokFJircUYgzH2BzMT3kM/zEulCJ7lckl0PB6x1nA+n8nznCzLZk6nE23b8i7CInVdz+I0TVksFkRxfKDroRYeqQIdQnpU29Pq4S3ajKh2oB8geH6FxsH1prkVgqKUlJXiklUIaXH+jnXjS1rdo81EHMcPYZIkON/zeblxyUryaz3nRmh8d8e5Eedf4EaMHZgm/oRpmmBNx9dHjlICKQRNU+O9438xzefh8PjyNxmQ5GLpsQJnAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;share-2&quot;
+        title=&quot;&quot;
+        src=&quot;/static/ae86f727bbbf4abca8a40bdd1fc1144b/32056/share-2.png&quot;
+        srcset=&quot;/static/ae86f727bbbf4abca8a40bdd1fc1144b/c26ae/share-2.png 158w,
+/static/ae86f727bbbf4abca8a40bdd1fc1144b/6bdcf/share-2.png 315w,
+/static/ae86f727bbbf4abca8a40bdd1fc1144b/32056/share-2.png 602w&quot;
+        sizes=&quot;(max-width: 602px) 100vw, 602px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Google Sheet API를 연결하기 위해서 연결할 sheet의 id도 필요하게 된다. 이 id는 해당 sheet의 url에서 확인할 수 있으며 다음과 같다:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://docs.google.com/spreadsheets/d/%5Byour-sheet-id%5D/edit#gid=0&quot;&gt;https://docs.google.com/spreadsheets/d/[your-sheet-id]/edit#gid=0&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;아래와 같이 간단한 데이터셋을 입력하고 다음 단계로 넘어가자.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 560px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/85ddd65bbec309cedebf91cb37c143fa/b06ae/test-sheet.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 63.291139240506325%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAAAsTAAALEwEAmpwYAAACNUlEQVR42m1T227bMAz1v+4z9ml77lO7oEGaNU3iu5vYiW3d5XvOQHbNBqwECEmQeHiOSAZX32JVbnFbbqjrGlprXqUUGMcRxlhoY+Cc4zPZ7Xb7ciULHqsNvv34DtNbxFGMoigQhiHyPIe1FkIIXK9XCCEhpGRQ8r7vMU0Tuq7j1XvP+6D2Ag/nFcZphFKKQYgRMW2FgLEWVVnC+x5VVaFpGkipUF0u8M7hdD7DGINzWaIsSwTMcwRnJAZF8c6P53lmUO87ljQMA8Zh5JXYUHIpJYY/jEkJnYNxmuC8Y0BiVzcNnPcMSEF9P/CeZJFTMEmzzjFwPwz3t8Q0kErfAz6zW+vQeY/L5Yp5XtinaeZ1Wf53iicVy3JD0DQtsrxAdroge78gLSrk5xpNq9D1PejeWMfSrfPQ2kAI9XG2Ds53EFJBG8v7IMtPSLITHh43ODUewi04yQWr13e8bJ7x9PQTSZKygsNhj/X6Gfv9gc/aaGzWa7xst5BKMcuAsgul8XaIcC5rdMME15PP/F9UuSRJ2NM0RduKe99prfC6+8VsyUh+QFSV1sjSGFEYYrd7hdLq3qhUvSgKmSX1Jr2hQpAZaxAnMReUjP6SAamvojhCGIXI8pzl0CWZkhJpljLDPMsQRxGG4WNiqKoU9wn4l6FSOEZHHI8hxnFiSZ+Vo0ZO0gRRGCFNE+zf9txWnEwrHMPjF4Da8DSUVclA/7ZD27Y8ejwl9ZVHkyaJzHvHMfTXH22z4DfJQd/QrHJOegAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;test-sheet&quot;
+        title=&quot;&quot;
+        src=&quot;/static/85ddd65bbec309cedebf91cb37c143fa/b06ae/test-sheet.png&quot;
+        srcset=&quot;/static/85ddd65bbec309cedebf91cb37c143fa/c26ae/test-sheet.png 158w,
+/static/85ddd65bbec309cedebf91cb37c143fa/6bdcf/test-sheet.png 315w,
+/static/85ddd65bbec309cedebf91cb37c143fa/b06ae/test-sheet.png 560w&quot;
+        sizes=&quot;(max-width: 560px) 100vw, 560px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h2&gt;Node.js 어플리케이션 Google Sheet 연동&lt;/h2&gt;
+&lt;p&gt;Node.js 어플리케이션이 없는 독자들은 아래와 같이 간단하게 생성하면 된다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;프로젝트 폴더를 생성한다&lt;/li&gt;
+&lt;li&gt;터미널에서 &lt;code class=&quot;language-text&quot;&gt;npm init -y&lt;/code&gt;를 입력한다&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;app.js&lt;/code&gt;라는 이름의 파일을 만든다 - &lt;em&gt;이름은 알아서 정해도 된다&lt;/em&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;google sheet API를 사용하기 위해 필요한 라이브러리를 설치한다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;npm install &lt;span class=&quot;token operator&quot;&gt;--&lt;/span&gt;save googleapis&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;아래 코드를 app.js 파일에 복사하여 붙여넣는다.:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; google &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;googleapis&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; clientEmail &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;your service account client email&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; privateKey &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;your service account private key&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; googleSheetId &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;your google sheet id&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; googleSheetPage &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;your google sheet page name&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// authenticate the service account&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; googleAuth &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;google&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;auth&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;JWT&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    clientEmail&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    privateKey&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token regex&quot;&gt;&lt;span class=&quot;token regex-delimiter&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;token regex-source language-regex&quot;&gt;\\n&lt;/span&gt;&lt;span class=&quot;token regex-delimiter&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;token regex-flags&quot;&gt;g&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;\n&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token string&quot;&gt;&apos;https://www.googleapis.com/auth/spreadsheets&apos;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;앞서 언급했듯이 google sheet에 접근하기 위해서 필요한 값들은 &lt;code class=&quot;language-text&quot;&gt;json&lt;/code&gt; key 파일 안에 담긴 &lt;strong&gt;client email, private key&lt;/strong&gt;와  &lt;strong&gt;google sheet id, 해당 sheet 이름&lt;/strong&gt;이다.
+해당 sheet 이름은 화면 아래 탭에 적혀 있다. 위 코드에 각각 알맞은 값을 적어 넣는다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 259px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/40bc58105d6397c3313af7356638d038/a2ead/sheet-name.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 65.82278481012659%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAAAsTAAALEwEAmpwYAAABgklEQVR42q1S207jMBDN/3/OvtHdNxDieYUEBQk2DUnaXHyL40vs5CA7m25bBZYHRjqasWc0Pj4zyeA8sl2GojzADg7GWASbpgmXttwFP47jal0iewXKGBgX6GQPpVQs9t6vIuSc93DOrdYlNjDM3pAXexg7wBhzfPkjxEYnDE8RGbYtAaHsSwxDo8DuQ4aDH1EWJQjlUUNrLf5npxpeWmQY2H2bhmHKu3SHLCuOGn6m31FD71dz/xiymaE+GQqwhssvn+cTpTQoIaCUQWuNum7jTpb7Kvolns/zXdiI/G9u8TMqJIGVVAqBqZQ9WsJQHppYeKgJqoYiL6t4rpvwMAdnXfSMClAqQAgDIRxNS5Ew0WEBlz2qpsG+qqCtxWuaYvv8DKk1mBDxg8pp7LsaxlvIoYcwHdzkMYxunjLvJAJCQ6k0Xv6keNg+IazT7d0drjY/0WuDlrIoU0pybLY32Dxe48f9L/wuHkEVR84O5w2XpkL26Hp1HncSlIt5spg+3c93Uz7wa2YdGgUAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;sheet-name&quot;
+        title=&quot;&quot;
+        src=&quot;/static/40bc58105d6397c3313af7356638d038/a2ead/sheet-name.png&quot;
+        srcset=&quot;/static/40bc58105d6397c3313af7356638d038/c26ae/sheet-name.png 158w,
+/static/40bc58105d6397c3313af7356638d038/a2ead/sheet-name.png 259w&quot;
+        sizes=&quot;(max-width: 259px) 100vw, 259px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h2&gt;Sheet 읽기&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;readSheet&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// google sheet instance&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; sheetInstance &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; google&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;sheets&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;v4&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;auth&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; googleAuth&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// read data in the range in a sheet&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; infoObjectFromSheet &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; sheetInstance&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;spreadsheets&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;values&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;auth&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; googleAuth&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;spreadsheetId&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; googleSheetId&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token template-string&quot;&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;${&lt;/span&gt;googleSheetPage&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;!A2:D6&lt;/span&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    
+    &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; valuesFromSheet &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; infoObjectFromSheet&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;data&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;values&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;valuesFromSheet&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;catch&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;err&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;readSheet func() error&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; err&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;  
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token function&quot;&gt;readSheet&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;readSheet&lt;/strong&gt; 함수에서 &lt;strong&gt;get&lt;/strong&gt; 메소드를 통해 구글 시트에 적혀 있는 정보가 담긴 객체를 얻을 수 있다. 시트 내 범위를 &lt;strong&gt;A2:D6&lt;/strong&gt; 설정해 주었는데 읽어오는 데이터의 행과 열을 나타낸다 - &lt;em&gt;헤더 행을 제외하기 위해 2번째 행부터 시작했다&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;터미널에 &lt;code class=&quot;language-text&quot;&gt;node app.js&lt;/code&gt; 입력하면 다음과 같은 로그를 보게 된다:&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 348px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/29ccf3de1a9fcc2a40b0b576669ec81d/34ea4/read-data-log.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 37.9746835443038%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAYAAAD5nd/tAAAACXBIWXMAAAsTAAALEwEAmpwYAAABZklEQVR42lVS7XKjMAzkUWKDPzD+NgbSpGmadNre+z/Q3sgc1+kPzYhFWmmt7YQQ4JyDnRh4z9EPPfp+D8Ipju9Ww3/XHHVH3jln4cqEfI3ws4MYBKZoEFaPfIl4+Vpg7Ag9KizvBb5YDHxAeU2IZ4fgA5RSYHwf1sXgG+H2UbE+CrZnRbkGSCmRL6mREJZfIrRRbUh9KyjXCFJXX/fcO996Ou8cwuKwPOZ9o+8VafNtKm2RzgGXPyuMMzBuRL4ErM8Cl6ZGsDwyXLbIMUGIAZ33DnH1mG8J9S2j3lMjs3FqhLR5vWcoqRC3vW6+ZWit4GeL+p5hrQMpPbETuhgDQrXYPmaszxk2GBhr2tbUSBsv9wKtdFNAT0BqXLQYrcb5syKWhBgCGBFqrSHk0H4qo5oMuiLletpDatmOJbVo76gmBaVVu+roqF9Aklt6jq6dne22YYz/twrljP3DDpwd+A92WOmwzl8eufHFRMpd2AAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;read-data-log&quot;
+        title=&quot;&quot;
+        src=&quot;/static/29ccf3de1a9fcc2a40b0b576669ec81d/34ea4/read-data-log.png&quot;
+        srcset=&quot;/static/29ccf3de1a9fcc2a40b0b576669ec81d/c26ae/read-data-log.png 158w,
+/static/29ccf3de1a9fcc2a40b0b576669ec81d/6bdcf/read-data-log.png 315w,
+/static/29ccf3de1a9fcc2a40b0b576669ec81d/34ea4/read-data-log.png 348w&quot;
+        sizes=&quot;(max-width: 348px) 100vw, 348px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h2&gt;Sheet 삭제&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;clearSheet&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// google sheet instance&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; sheetInstance &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; google&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;sheets&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;v4&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;auth&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; googleAuth&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// clear data in the range&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; sheetInstance&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;spreadsheets&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;values&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;clear&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;auth&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; googleAuth&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;spreadsheetId&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; googleSheetId&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token template-string&quot;&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;${&lt;/span&gt;googleSheetPage&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;!A2:D6&lt;/span&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;catch&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;err&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;clearSheet func() error&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; err&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;  
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token function&quot;&gt;clearSheet&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;clear&lt;/strong&gt; 메소드로 행과 열에 담긴 데이터를 삭제할 수 있다. 어플리케이션을 실행하면 지정한 범위 내의 행과 열에 담긴 데이터가 삭제된다.&lt;/p&gt;
+&lt;h2&gt;Sheet 업데이트&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;updateSheet&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// google sheet instance&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; sheetInstance &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; google&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;sheets&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;v4&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;auth&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; googleAuth&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; updateToGsheet &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Seoul&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;9,776,000&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Asia&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;KRW&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Copenhagen&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;602,000&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Europe&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;EUR&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Amsterdam&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;821,000&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Europe&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;EUR&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Helsinki&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;631,000&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Europe&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;EUR&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Sydney&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;5,312,000&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Oceania&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;AUD&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    
+    &lt;span class=&quot;token comment&quot;&gt;// update data in the range&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; sheetInstance&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;spreadsheets&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;values&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;update&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;auth&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; googleAuth&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;spreadsheetId&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; googleSheetId&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token template-string&quot;&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;${&lt;/span&gt;googleSheetPage&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;!A2:D6&lt;/span&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;valueInputOption&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;RAW&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;resource&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;token literal-property property&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; updateToGsheet&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;catch&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;err&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;updateSheet func() error&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; err&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;  
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token function&quot;&gt;updateSheet&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;update&lt;/strong&gt; 메소드로 지정된 범위의 값들을 업데이트 시킬 수 있다. 값들은 배열의 배열이어야 하며 지정된 행과 열과 크기가 동일한지 확인할 필요가 있다. &lt;strong&gt;updateToGsheet&lt;/strong&gt; 변수의 처음 인자가 &lt;strong&gt;A2부터 D2&lt;/strong&gt;에 입력되고 다음 인자가 &lt;strong&gt;A3부터 D3&lt;/strong&gt;에 입력되며 차례대로 이 같은 방법으로 입력된다.&lt;/p&gt;
+&lt;p&gt;어플리케이션을 실행하고 시트 안에 값들이 변했는지 확인한다 - &lt;em&gt;지정된 행과 열에 값이 있었다면 새로운 값으로 덮어 씌어진다&lt;/em&gt;.&lt;/p&gt;
+&lt;h2&gt;결론&lt;/h2&gt;
+&lt;p&gt;간단하게 Node.js로 Google Sheet API를 연결하여 읽기, 쓰기, 삭제하는 방법을 알아보았다. 간단한 모델이기에 독자들이 본인의 의도에 맞게 추가 개발하여 심화시키면 좋을 거 같다.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;읽어 주셔서 감사합니다. To be continued!&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;이 글은 &lt;a href=&quot;https://medium.com/@shkim04/beginner-guide-on-google-sheet-api-for-node-js-4c0b533b071a&quot;&gt;Medium&lt;/a&gt;에도 업로드 되었습니다.&lt;/em&gt;
+&lt;em&gt;놀러 오세요!&lt;/em&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[How To Launch AWS EC2 Instance And Download Node]]></title><description><![CDATA[Cloud service is a service delivered on demand to companies or users through the internet. To developers, cloud service is specifically used…]]></description><link>null/en/how-to-launch-aws-ec2-and-download-node</link><guid isPermaLink="false">null/en/how-to-launch-aws-ec2-and-download-node</guid><pubDate>Tue, 27 Dec 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Cloud service is a service delivered on demand to companies or users through the internet. To developers, cloud service is specifically used to process what is done in a server side, such as an API server.&lt;/p&gt;
+&lt;p&gt;Instead of setting up a server computer with a physical hardware, you can just run applications by utilizing the cloud service. We will look into AWS which is the most popular cloud service in the world. We will specifically go over how to begin with EC2 and download node.js.&lt;/p&gt;
+&lt;h2&gt;Prerequisite&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;AWS account — &lt;em&gt;you can google how to create one&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Shallow knowledge about Linux&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Choose EC2 Instance&lt;/h2&gt;
+&lt;p&gt;Once signed in, you can see &lt;strong&gt;Launch instance&lt;/strong&gt; in the middle of EC2 dashboard. Let’s click &lt;strong&gt;Launch instance&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 508px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/f119bc2fc9b1443fea8a28bb2e72a81b/2fd48/launch-instance.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 37.34177215189873%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAAAsTAAALEwEAmpwYAAABR0lEQVR42m2R20odMRiF59m88BX0puCzFB+gQulL9NJboVdqwbNS8YAFlc3emszMnpwzp68k20M9/GGxVv7wL5KsYjadsr+3x+HBEcdHx+zu7HJyckZd11hrMSbBPGnzoWfNYu+cI8ZIYaylrBvKuaLK0MwbjShrhCiRUvLwKJCyRAhJVVVZPz710nnSVVUvDLvoCUoSGvHKjaQ1NW1wtG1H3/d03SunwcTDMLygHwa6vqeQ+5ucri9z8WON841VLr5/4fzbCqdfl5hu/0Q0jr83N8xmD0wm08y3t/f5yanGceT/KmI1Yf7nF+r6N+pye8FXO8zPtvDijtB2KKXe/KH3Id9wTGt8i6IdII4QBwjP6CGMENoe7zwxtoQQCCHivcdal/V7s4VhjFijcTkxjTEaawxG65xcGk7B5UStQ2uDUhrnPZ/VP413EjqS7i8WAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;launch-instance&quot;
+        title=&quot;&quot;
+        src=&quot;/static/f119bc2fc9b1443fea8a28bb2e72a81b/2fd48/launch-instance.png&quot;
+        srcset=&quot;/static/f119bc2fc9b1443fea8a28bb2e72a81b/c26ae/launch-instance.png 158w,
+/static/f119bc2fc9b1443fea8a28bb2e72a81b/6bdcf/launch-instance.png 315w,
+/static/f119bc2fc9b1443fea8a28bb2e72a81b/2fd48/launch-instance.png 508w&quot;
+        sizes=&quot;(max-width: 508px) 100vw, 508px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;In the next page, name the instance - &lt;em&gt;name it in the way it will be self-explanatory&lt;/em&gt;. Below the name section, we choose Amazon Linux here, which means you will launch a virtual server whose OS is Amazon Linux. Since this is meant to be testing, we select free tier for AMI which is the default. It will presumably not be very fast.&lt;/p&gt;
+&lt;p&gt;You should know Amazon will charge you costs incurred when the amount of resource spent passes a certain criteria — 750 hours per month for 12 months with the AWS &lt;a href=&quot;https://aws.amazon.com/ec2/pricing/?loc=ft#Free_tier&quot;&gt;Free Tier&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/21828970ad16d8f4f3551639c7b6eabe/a016c/create-instance.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 87.9746835443038%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAASCAYAAABb0P4QAAAACXBIWXMAAAsTAAALEwEAmpwYAAACxUlEQVR42qVUyY7cOAyt//+Puc8pt2DujZySYLp2L+Wly7YWa7EWu+oNKNd0uoLGXEbAA0mJJp9oipvddo/X1y2Ox1PCfn/AfrdPcrvd4Xg4Yvu6w/mUJb+66WCswzRNMNbCfoD3HpvLpUKel8iyHEVxScizHFlWpL08L96x2iWqqgHnAkIIcM6TFEKuAed5xu9YluVdJv2DPc8RIYTVd3ngw7cbis44B0/ZBIaBYWD8FwYGxtZz0sdRIcYIH8IKH1ICKkGIkRg+GCxLcqTDT/E4I5/PbhUT4wWbMGnotzMm2eP/rtvtho1UBt3AwcQIaydMk0vFpSu4hyT4DzoxpXpSgMm5xJD0FFCYgKzuwQ3VwUIrlWqjlE7Oxk4QXGDyHtpYGG2gtE4BabVvHezkfjEUxmN3KiGNA9ceQlE/OSilYI2B1SIlslrDDEP6OVlRIoQIJi16ptFzSh5xv1PAaUZeXSBdxFVotD2HCx4DZ4mJNgLWOxhjIOsaXEq4GBMjOSo0b1dc+wFxWXC/37FhdQvWXNGVNVhVYSgvMP2Ama4uJIIcEeUILyUWYx77AoECcw7T9cmffBZqm+vpjPx0xuWcozxnyPZHXLIcl6xIdn44Ij+ecK0bGDkiWIsbtY5zEH2PvmnRtW/Q1w5RKWxU3YA1LXjdQnUdWNVgqJpVp7OEFpbxBGJNH8ZRYdYas9KYjYFpW0StsVGMQRJlYxGtxWwnzNMzIrWKsVioRRzZNu2vtkty8R43amwmJHrGIZWGVApKm/WpcYFR6dQ+VPyBsff2+M/G5lWN9pzBDgM841ishXMeUkrEEBH8+txoxTng0HzHz+IFZXdIe/Rn/0UK2O/2qP5+hShKjHkBU1UI8wxGQ+EBCk7LBYu/fvyJL9/+wMv+63vAJ4ZzjFjoYYeISGOJ7NvtOfP9/hhft6crroNheRp7/wCO3WTtEH+NagAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;create-instance&quot;
+        title=&quot;&quot;
+        src=&quot;/static/21828970ad16d8f4f3551639c7b6eabe/f058b/create-instance.png&quot;
+        srcset=&quot;/static/21828970ad16d8f4f3551639c7b6eabe/c26ae/create-instance.png 158w,
+/static/21828970ad16d8f4f3551639c7b6eabe/6bdcf/create-instance.png 315w,
+/static/21828970ad16d8f4f3551639c7b6eabe/f058b/create-instance.png 630w,
+/static/21828970ad16d8f4f3551639c7b6eabe/a016c/create-instance.png 762w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h2&gt;Key-Pair And Firewall&lt;/h2&gt;
+&lt;p&gt;We create key-pair which is &lt;em&gt;&lt;strong&gt;so important that you must not delete it by any accident&lt;/strong&gt;&lt;/em&gt;. Otherwise, there is no way to connect the instance you created with the key-pair via SSH.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/301189bfd471bf71303882caa543a4a6/5e3a3/key-pair-1.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 22.151898734177216%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAECAYAAACOXx+WAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAnUlEQVR42nWOUQuDMAyE+///oHNOtjnHQJyNTdqySr3Rah98MPDBhSO5U6QJVXXBrWlR11e8+g9oZjAzzE7WxsCYost+xFoHFULANGkQEZxzsNZmsxwyH9kCZHu667I776HYcH4mItCa4L1HmnVdcTbJy8SIGAJiWDaWBYpoxjh+czsWySmp9e+E5KVQ6z2of2Oo7xjbDkPzhDw6/AEfGjQjNi5PfgAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;key-pair-1&quot;
+        title=&quot;&quot;
+        src=&quot;/static/301189bfd471bf71303882caa543a4a6/f058b/key-pair-1.png&quot;
+        srcset=&quot;/static/301189bfd471bf71303882caa543a4a6/c26ae/key-pair-1.png 158w,
+/static/301189bfd471bf71303882caa543a4a6/6bdcf/key-pair-1.png 315w,
+/static/301189bfd471bf71303882caa543a4a6/f058b/key-pair-1.png 630w,
+/static/301189bfd471bf71303882caa543a4a6/5e3a3/key-pair-1.png 763w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Name the key-pair so well-explained that you can remember what the instance is. We will choose the default, RSA for type and .pem for the file format here. Click create key pair and it will be downloaded into the drive of your computer.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 589px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/c08c2f2b20bc3f267e6e391fdee42b2f/b1665/key-pair-2.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 72.78481012658227%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAPCAYAAADkmO9VAAAACXBIWXMAAAsTAAALEwEAmpwYAAABoElEQVR42q1Su24UQRCcL3VOCn/ANxASOSLAASIlJbAgcoRknew9P+5md+ex895noe7VWVgy+GwxUql75mbrqnpKSNmibhSaVmMcZwzjhIHry0DfLssCcVXd4eZOovMZqUwvRx4Z1vdIZYTY3u5xv1ewLqHVHq3xaLVbe+2gbYAyBM9njXJQNjzcMV1kws73yEToQ4LzEZ0L8CGC9iFmhLieUx95n/l358OjPqaMaZoZtMR1tYWUEikl/I8lrqp7JhuGATkXlNKjlIKcM9dpmnjYx0IopbC9uUXTtEiJ7CXElNYaExMes4iMFSqtsdvt4UNggkBz9IHhnOc5dZ2DJdiO+86te+rpzoGMFcYYmcRaC2Ms25/nhZUR5nl+Fo8ILzfXqKWEMQZkP77ycR4s142G1oYfhGxSPVx4DYSUNYy16HsKZmEL/1KxKlmwkNV5+qOuaRAUD89hjWz3MJOncFQO/6biKTLKKv0pPZa++Ibm/Aztz69ofnxB/f0Tit5BHKPicE45bVuFcRhQfX6Py49vsDl9h83pW/z6cIJQXeA3gVOOhBew5S0AAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;key-pair-2&quot;
+        title=&quot;&quot;
+        src=&quot;/static/c08c2f2b20bc3f267e6e391fdee42b2f/b1665/key-pair-2.png&quot;
+        srcset=&quot;/static/c08c2f2b20bc3f267e6e391fdee42b2f/c26ae/key-pair-2.png 158w,
+/static/c08c2f2b20bc3f267e6e391fdee42b2f/6bdcf/key-pair-2.png 315w,
+/static/c08c2f2b20bc3f267e6e391fdee42b2f/b1665/key-pair-2.png 589w&quot;
+        sizes=&quot;(max-width: 589px) 100vw, 589px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Sometimes, developers do not allow traffics from some IP addresses for the security. By specifying which IP address is allowed or not, you can secure the instance from possible attacks.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/4452171de38c9bb6af609ab11d47c40c/d44c9/firewall.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 48.10126582278481%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAAAsTAAALEwEAmpwYAAABZ0lEQVR42o2SjXKDIBCEff9Xa5+gTaJpEkVBAhIO0MTtcPlpftqZOrMjjNzH3p7FcrFEuSpRVWuUqxW2tcTBB8QQQHRWjOmieFG6ffOebutpOqJopIVxdNPgAxwlFoUI5w4YhgHW/ijviQgpjZimiTWOE06nE4qyMfgSPTatRlVLdIbgRsCGI+I4wTkHJRVkJ/mtlILWmp3O84znpzB7g8EOXGit5cMyA1SPrpMs1Wt2pvcGvdbYGwPvPQMy9F5FXQu+uakbLg4UcJxn+K6DWpVwQiBIBZISJBVcI3AQ4ubu2WVxzsSxw5xXDjkf8UJg8fYO8bGArir0ZQW9XqP9XMButg+we2iRwz1PibgN3nviSw55IHaAMQbW2MtwLA/hvt0Hh23bcau59WvbomkhOwUKASFEpJRewv9tIAwUjUCG1rsGQrQM2+1qaL3nSWZgTOkl/L+gRS4I4fEH9UQMCvGsq8P/AL8BUXgEZeeR8KQAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;firewall&quot;
+        title=&quot;&quot;
+        src=&quot;/static/4452171de38c9bb6af609ab11d47c40c/f058b/firewall.png&quot;
+        srcset=&quot;/static/4452171de38c9bb6af609ab11d47c40c/c26ae/firewall.png 158w,
+/static/4452171de38c9bb6af609ab11d47c40c/6bdcf/firewall.png 315w,
+/static/4452171de38c9bb6af609ab11d47c40c/f058b/firewall.png 630w,
+/static/4452171de38c9bb6af609ab11d47c40c/d44c9/firewall.png 722w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;When finished, the section called &lt;strong&gt;Summary&lt;/strong&gt; on the right side of the screen will show what you have chosen. If not anything wrong, click and finish launching instance. If you come back to the dashboard, you can see the instance pending. Wait till it will say &lt;strong&gt;created&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/35f05576c12e5db38ae53a2b1d09afbb/27524/pending.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 3.79746835443038%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAABCAYAAADeko4lAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAUUlEQVR42h3M0QpAMBiAUe//PnIjXMojoJS24UfUiNXsE+cBTjQMI/ftCCGw7BdqsvSjRc8HWg7s6fiYsqKOE7qswKQ5ummRdePxHqU0IvIfL9aoSnMk7nSIAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;pending&quot;
+        title=&quot;&quot;
+        src=&quot;/static/35f05576c12e5db38ae53a2b1d09afbb/f058b/pending.png&quot;
+        srcset=&quot;/static/35f05576c12e5db38ae53a2b1d09afbb/c26ae/pending.png 158w,
+/static/35f05576c12e5db38ae53a2b1d09afbb/6bdcf/pending.png 315w,
+/static/35f05576c12e5db38ae53a2b1d09afbb/f058b/pending.png 630w,
+/static/35f05576c12e5db38ae53a2b1d09afbb/27524/pending.png 646w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h2&gt;Connect Instance Via SSH&lt;/h2&gt;
+&lt;p&gt;There are a few ways to connect the instance you&apos;ve just created. For example, you can connect it on the web browser from the dashboard. But we will connect it via SSH because it is faster than the direct connection on the web browser and easier to handle the instance through the terminal of your local computer. Copy the command below.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/21828970ad16d8f4f3551639c7b6eabe/a016c/create-instance.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 87.9746835443038%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAASCAYAAABb0P4QAAAACXBIWXMAAAsTAAALEwEAmpwYAAACxUlEQVR42qVUyY7cOAyt//+Puc8pt2DujZySYLp2L+Wly7YWa7EWu+oNKNd0uoLGXEbAA0mJJp9oipvddo/X1y2Ox1PCfn/AfrdPcrvd4Xg4Yvu6w/mUJb+66WCswzRNMNbCfoD3HpvLpUKel8iyHEVxScizHFlWpL08L96x2iWqqgHnAkIIcM6TFEKuAed5xu9YluVdJv2DPc8RIYTVd3ngw7cbis44B0/ZBIaBYWD8FwYGxtZz0sdRIcYIH8IKH1ICKkGIkRg+GCxLcqTDT/E4I5/PbhUT4wWbMGnotzMm2eP/rtvtho1UBt3AwcQIaydMk0vFpSu4hyT4DzoxpXpSgMm5xJD0FFCYgKzuwQ3VwUIrlWqjlE7Oxk4QXGDyHtpYGG2gtE4BabVvHezkfjEUxmN3KiGNA9ceQlE/OSilYI2B1SIlslrDDEP6OVlRIoQIJi16ptFzSh5xv1PAaUZeXSBdxFVotD2HCx4DZ4mJNgLWOxhjIOsaXEq4GBMjOSo0b1dc+wFxWXC/37FhdQvWXNGVNVhVYSgvMP2Ama4uJIIcEeUILyUWYx77AoECcw7T9cmffBZqm+vpjPx0xuWcozxnyPZHXLIcl6xIdn44Ij+ecK0bGDkiWIsbtY5zEH2PvmnRtW/Q1w5RKWxU3YA1LXjdQnUdWNVgqJpVp7OEFpbxBGJNH8ZRYdYas9KYjYFpW0StsVGMQRJlYxGtxWwnzNMzIrWKsVioRRzZNu2vtkty8R43amwmJHrGIZWGVApKm/WpcYFR6dQ+VPyBsff2+M/G5lWN9pzBDgM841ishXMeUkrEEBH8+txoxTng0HzHz+IFZXdIe/Rn/0UK2O/2qP5+hShKjHkBU1UI8wxGQ+EBCk7LBYu/fvyJL9/+wMv+63vAJ4ZzjFjoYYeISGOJ7NvtOfP9/hhft6crroNheRp7/wCO3WTtEH+NagAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;connect-instance&quot;
+        title=&quot;&quot;
+        src=&quot;/static/21828970ad16d8f4f3551639c7b6eabe/f058b/create-instance.png&quot;
+        srcset=&quot;/static/21828970ad16d8f4f3551639c7b6eabe/c26ae/create-instance.png 158w,
+/static/21828970ad16d8f4f3551639c7b6eabe/6bdcf/create-instance.png 315w,
+/static/21828970ad16d8f4f3551639c7b6eabe/f058b/create-instance.png 630w,
+/static/21828970ad16d8f4f3551639c7b6eabe/a016c/create-instance.png 762w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Then, If you use Windows, open the folder that has the .pem key you have created when launching the instance, click the search bar and enter &lt;strong&gt;cmd&lt;/strong&gt; then it will prompt to show the terminal - &lt;em&gt;you can just open the terminal first and change the path to the folder that has the .pem key&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/64ad1625419b0a56d5511ae39b0a2428/738b8/pem-key.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 32.911392405063296%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAAAsTAAALEwEAmpwYAAABAElEQVR42p2QwW6DMBBE+f8f67lVA1GTtodAwME4VgO2MTavMhUoanPqSCuNtPbbnc3mOTJNAV08IYtX6l2Ofv+gfH5B5AXd8cg1LxjblhmIITDP81YhBGJMjIlhGMjSgwR0SuKV4qtu0KcKKwT2csHKDtdKgrULMEGsddxuA31vSEpAY+wCz6q6QwqBsW5pDtUZke9pD0e6twPRWFYlWFLf91yvGq314kOIizfGkO0OLU11YnQjo/c4pRiahj4NaQTRuQ22AtNGMQZ+0k1b9GXDcy2pTyVKKnxq8lcr6Ld/pKwsK2S6UQh475fp90dfAY/8o8q0+sRav0W5//QffQMxYyEQ8aJTTAAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;pem-key&quot;
+        title=&quot;&quot;
+        src=&quot;/static/64ad1625419b0a56d5511ae39b0a2428/f058b/pem-key.png&quot;
+        srcset=&quot;/static/64ad1625419b0a56d5511ae39b0a2428/c26ae/pem-key.png 158w,
+/static/64ad1625419b0a56d5511ae39b0a2428/6bdcf/pem-key.png 315w,
+/static/64ad1625419b0a56d5511ae39b0a2428/f058b/pem-key.png 630w,
+/static/64ad1625419b0a56d5511ae39b0a2428/738b8/pem-key.png 639w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Paste the command you copied from the dashboard and enter &lt;strong&gt;yes&lt;/strong&gt; to continue connecting. Now, the instance is ready to be handled on the terminal.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/9fbf7c45c42031abfd86f2cc460fa979/6bff2/ssh-terminal.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 36.708860759493675%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAAAsTAAALEwEAmpwYAAAA50lEQVR42pWPyaqFQAxEG3ThynmeQAVBnFD/zQFUBBd+dl3S0Bff7t3FIUmXVipsnmfs+845zxPXdeG+bzzPg+M4sCwL1nX9w7ZtnPdMlbxYkiSI4xhRFCEMQwRBAN/34bouPM+DruswTfOLYRjQNA2qqnKNUBQFkiRBlmWwYRhQ1zWapkFVVei6Dn3fo21bkDaOI6Zp4j29l2WJNE2RZdkXmkUYJpJQKnqkXiC0d7VtG47j8P49C51ZlsXPJXcyFJtIpPPe5/4Hluc5iqIAVYJOoLS0mT6ghb/AKC79TANVYSTMfjX9ACrvycoGfI4OAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;ssh-terminal&quot;
+        title=&quot;&quot;
+        src=&quot;/static/9fbf7c45c42031abfd86f2cc460fa979/f058b/ssh-terminal.png&quot;
+        srcset=&quot;/static/9fbf7c45c42031abfd86f2cc460fa979/c26ae/ssh-terminal.png 158w,
+/static/9fbf7c45c42031abfd86f2cc460fa979/6bdcf/ssh-terminal.png 315w,
+/static/9fbf7c45c42031abfd86f2cc460fa979/f058b/ssh-terminal.png 630w,
+/static/9fbf7c45c42031abfd86f2cc460fa979/40601/ssh-terminal.png 945w,
+/static/9fbf7c45c42031abfd86f2cc460fa979/6bff2/ssh-terminal.png 957w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h2&gt;Download Node&lt;/h2&gt;
+&lt;p&gt;We will download nvm which stands for Node Version Manager to eventually download Node on the instance. You can download it in a second by using the script provided from the official &lt;a href=&quot;https://github.com/nvm-sh/nvm&quot;&gt;repository&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+# then, execute the shell script
+. ~/.nvm/nvm.sh&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;When it is done, enter the following command&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;nvm install 16&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If not anything wrong, you can see each versions after entering the following commands. Now, you can run node.js applications on the EC2 instance!&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;node -v
+npm -v&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;We have set up Node on EC2 instance so far. As I mentioned, you can run node.js applications which could be an API server. Try to deploy your simple Node API server and see if it works well or not. If you have no idea what API is, check out &lt;a href=&quot;https://shkim04.github.io/en/restapi-with-express-mongodb-typescript/&quot;&gt;my previous post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;THANKS FOR READING. SEE YOU NEXT TIME!&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;This is originally posted on my &lt;a href=&quot;https://medium.com/@shkim04/server-how-to-set-up-aws-ec2-6986f659de60&quot;&gt;Medium&lt;/a&gt;.&lt;/em&gt;
+&lt;em&gt;Let&apos;s connect!&lt;/em&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[AWS EC2 인스턴스 생성 후 Node 다운로드]]></title><description><![CDATA[클라우드 서비스는 인터넷을 통해 사용자나 회사에게 온디맨드 형식으로 제공되는 서비스다. 개발자는 흔히 API…]]></description><link>null/aws-ec2-인스턴트-시작-node-설치</link><guid isPermaLink="false">null/aws-ec2-인스턴트-시작-node-설치</guid><pubDate>Tue, 27 Dec 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;클라우드 서비스는 인터넷을 통해 사용자나 회사에게 온디맨드 형식으로 제공되는 서비스다. 개발자는 흔히 API 같은 서버를 이 클라우드 서비스를 통해 배포할 일이 많다.&lt;/p&gt;
+&lt;p&gt;직접 컴퓨터를 설치하고 배포하는 대신에 클라우드 서비스를 통해 어플리케이션을 동작시키는 것이다. 가장 잘 알려진 클라우드 중 하나인 AWS를 알아보고 EC2에 Node를 설치하는 법도 알아보자.&lt;/p&gt;
+&lt;h2&gt;필수&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;AWS 계정 — &lt;em&gt;계정 생성은 검색하면 된다&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;리눅스에 대한 약간의 배경지식&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;EC2 인스턴스&lt;/h2&gt;
+&lt;p&gt;로그인을 하면 EC2 대시보드 중간에 &lt;strong&gt;인스턴스 생성&lt;/strong&gt;을 볼 수 있다. &lt;strong&gt;인스턴스 생성&lt;/strong&gt; 버튼을 누른다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 508px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/f119bc2fc9b1443fea8a28bb2e72a81b/2fd48/launch-instance.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 37.34177215189873%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAAAsTAAALEwEAmpwYAAABR0lEQVR42m2R20odMRiF59m88BX0puCzFB+gQulL9NJboVdqwbNS8YAFlc3emszMnpwzp68k20M9/GGxVv7wL5KsYjadsr+3x+HBEcdHx+zu7HJyckZd11hrMSbBPGnzoWfNYu+cI8ZIYaylrBvKuaLK0MwbjShrhCiRUvLwKJCyRAhJVVVZPz710nnSVVUvDLvoCUoSGvHKjaQ1NW1wtG1H3/d03SunwcTDMLygHwa6vqeQ+5ucri9z8WON841VLr5/4fzbCqdfl5hu/0Q0jr83N8xmD0wm08y3t/f5yanGceT/KmI1Yf7nF+r6N+pye8FXO8zPtvDijtB2KKXe/KH3Id9wTGt8i6IdII4QBwjP6CGMENoe7zwxtoQQCCHivcdal/V7s4VhjFijcTkxjTEaawxG65xcGk7B5UStQ2uDUhrnPZ/VP413EjqS7i8WAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;launch-instance&quot;
+        title=&quot;&quot;
+        src=&quot;/static/f119bc2fc9b1443fea8a28bb2e72a81b/2fd48/launch-instance.png&quot;
+        srcset=&quot;/static/f119bc2fc9b1443fea8a28bb2e72a81b/c26ae/launch-instance.png 158w,
+/static/f119bc2fc9b1443fea8a28bb2e72a81b/6bdcf/launch-instance.png 315w,
+/static/f119bc2fc9b1443fea8a28bb2e72a81b/2fd48/launch-instance.png 508w&quot;
+        sizes=&quot;(max-width: 508px) 100vw, 508px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;다음 페이지에서 인스턴스에 이름을 준다 - &lt;em&gt;이름은 인스턴스를 잘 표현할 수 있게 지어준다&lt;/em&gt;. 이름 영역 아래 Amazon Linux를 선택한다. 이 가상의 컴퓨터의 OS를 리눅스로 설정해준 것이다. 테스트 용으로 만드는 것이기 때문에 무료 티어로 선택한다. 무료 티어이기 때문에 성능이 좋지 않다는 것을 감안해야 한다. 이 &lt;a href=&quot;https://aws.amazon.com/ec2/pricing/?loc=ft#Free_tier&quot;&gt;무료 티어&lt;/a&gt;가 다 끝나면 아마존에서 자동적으로 결제가 진행되니 주의하기 바란다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/21828970ad16d8f4f3551639c7b6eabe/a016c/create-instance.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 87.9746835443038%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAASCAYAAABb0P4QAAAACXBIWXMAAAsTAAALEwEAmpwYAAACxUlEQVR42qVUyY7cOAyt//+Puc8pt2DujZySYLp2L+Wly7YWa7EWu+oNKNd0uoLGXEbAA0mJJp9oipvddo/X1y2Ox1PCfn/AfrdPcrvd4Xg4Yvu6w/mUJb+66WCswzRNMNbCfoD3HpvLpUKel8iyHEVxScizHFlWpL08L96x2iWqqgHnAkIIcM6TFEKuAed5xu9YluVdJv2DPc8RIYTVd3ngw7cbis44B0/ZBIaBYWD8FwYGxtZz0sdRIcYIH8IKH1ICKkGIkRg+GCxLcqTDT/E4I5/PbhUT4wWbMGnotzMm2eP/rtvtho1UBt3AwcQIaydMk0vFpSu4hyT4DzoxpXpSgMm5xJD0FFCYgKzuwQ3VwUIrlWqjlE7Oxk4QXGDyHtpYGG2gtE4BabVvHezkfjEUxmN3KiGNA9ceQlE/OSilYI2B1SIlslrDDEP6OVlRIoQIJi16ptFzSh5xv1PAaUZeXSBdxFVotD2HCx4DZ4mJNgLWOxhjIOsaXEq4GBMjOSo0b1dc+wFxWXC/37FhdQvWXNGVNVhVYSgvMP2Ama4uJIIcEeUILyUWYx77AoECcw7T9cmffBZqm+vpjPx0xuWcozxnyPZHXLIcl6xIdn44Ij+ecK0bGDkiWIsbtY5zEH2PvmnRtW/Q1w5RKWxU3YA1LXjdQnUdWNVgqJpVp7OEFpbxBGJNH8ZRYdYas9KYjYFpW0StsVGMQRJlYxGtxWwnzNMzIrWKsVioRRzZNu2vtkty8R43amwmJHrGIZWGVApKm/WpcYFR6dQ+VPyBsff2+M/G5lWN9pzBDgM841ishXMeUkrEEBH8+txoxTng0HzHz+IFZXdIe/Rn/0UK2O/2qP5+hShKjHkBU1UI8wxGQ+EBCk7LBYu/fvyJL9/+wMv+63vAJ4ZzjFjoYYeISGOJ7NvtOfP9/hhft6crroNheRp7/wCO3WTtEH+NagAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;create-instance&quot;
+        title=&quot;&quot;
+        src=&quot;/static/21828970ad16d8f4f3551639c7b6eabe/f058b/create-instance.png&quot;
+        srcset=&quot;/static/21828970ad16d8f4f3551639c7b6eabe/c26ae/create-instance.png 158w,
+/static/21828970ad16d8f4f3551639c7b6eabe/6bdcf/create-instance.png 315w,
+/static/21828970ad16d8f4f3551639c7b6eabe/f058b/create-instance.png 630w,
+/static/21828970ad16d8f4f3551639c7b6eabe/a016c/create-instance.png 762w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h2&gt;키페어와 방화벽&lt;/h2&gt;
+&lt;p&gt;키페어를 생성한다. 이 키페어는 사용자의 로컬 컴퓨터에서 SSH를 활용하여 EC2에 접속할 때 꼭 필요한 것이니 실수라도 지우지 않도록 명심한다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/301189bfd471bf71303882caa543a4a6/5e3a3/key-pair-1.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 22.151898734177216%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAECAYAAACOXx+WAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAnUlEQVR42nWOUQuDMAyE+///oHNOtjnHQJyNTdqySr3Rah98MPDBhSO5U6QJVXXBrWlR11e8+g9oZjAzzE7WxsCYost+xFoHFULANGkQEZxzsNZmsxwyH9kCZHu667I776HYcH4mItCa4L1HmnVdcTbJy8SIGAJiWDaWBYpoxjh+czsWySmp9e+E5KVQ6z2of2Oo7xjbDkPzhDw6/AEfGjQjNi5PfgAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;key-pair-1&quot;
+        title=&quot;&quot;
+        src=&quot;/static/301189bfd471bf71303882caa543a4a6/f058b/key-pair-1.png&quot;
+        srcset=&quot;/static/301189bfd471bf71303882caa543a4a6/c26ae/key-pair-1.png 158w,
+/static/301189bfd471bf71303882caa543a4a6/6bdcf/key-pair-1.png 315w,
+/static/301189bfd471bf71303882caa543a4a6/f058b/key-pair-1.png 630w,
+/static/301189bfd471bf71303882caa543a4a6/5e3a3/key-pair-1.png 763w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;어떤 EC2에 연결되는지 잘 알 수 있도록 키페어의 이름을 적어준다. 다음 유형과 파일 포맷은 각각의 default값인 RSA와 .pem를 선택한다 키페어 생성을 클릭하면 파일이 드라이브로 다운로드된다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 589px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/c08c2f2b20bc3f267e6e391fdee42b2f/b1665/key-pair-2.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 72.78481012658227%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAPCAYAAADkmO9VAAAACXBIWXMAAAsTAAALEwEAmpwYAAABoElEQVR42q1Su24UQRCcL3VOCn/ANxASOSLAASIlJbAgcoRknew9P+5md+ex895noe7VWVgy+GwxUql75mbrqnpKSNmibhSaVmMcZwzjhIHry0DfLssCcVXd4eZOovMZqUwvRx4Z1vdIZYTY3u5xv1ewLqHVHq3xaLVbe+2gbYAyBM9njXJQNjzcMV1kws73yEToQ4LzEZ0L8CGC9iFmhLieUx95n/l358OjPqaMaZoZtMR1tYWUEikl/I8lrqp7JhuGATkXlNKjlIKcM9dpmnjYx0IopbC9uUXTtEiJ7CXElNYaExMes4iMFSqtsdvt4UNggkBz9IHhnOc5dZ2DJdiO+86te+rpzoGMFcYYmcRaC2Ms25/nhZUR5nl+Fo8ILzfXqKWEMQZkP77ycR4s142G1oYfhGxSPVx4DYSUNYy16HsKZmEL/1KxKlmwkNV5+qOuaRAUD89hjWz3MJOncFQO/6biKTLKKv0pPZa++Ibm/Aztz69ofnxB/f0Tit5BHKPicE45bVuFcRhQfX6Py49vsDl9h83pW/z6cIJQXeA3gVOOhBew5S0AAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;key-pair-2&quot;
+        title=&quot;&quot;
+        src=&quot;/static/c08c2f2b20bc3f267e6e391fdee42b2f/b1665/key-pair-2.png&quot;
+        srcset=&quot;/static/c08c2f2b20bc3f267e6e391fdee42b2f/c26ae/key-pair-2.png 158w,
+/static/c08c2f2b20bc3f267e6e391fdee42b2f/6bdcf/key-pair-2.png 315w,
+/static/c08c2f2b20bc3f267e6e391fdee42b2f/b1665/key-pair-2.png 589w&quot;
+        sizes=&quot;(max-width: 589px) 100vw, 589px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;보안상 IP 주소를 제한할 때가 있는 허용 IP를 명시하여 인스턴스 보안을 강화할 수 있다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/4452171de38c9bb6af609ab11d47c40c/d44c9/firewall.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 48.10126582278481%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAAAsTAAALEwEAmpwYAAABZ0lEQVR42o2SjXKDIBCEff9Xa5+gTaJpEkVBAhIO0MTtcPlpftqZOrMjjNzH3p7FcrFEuSpRVWuUqxW2tcTBB8QQQHRWjOmieFG6ffOebutpOqJopIVxdNPgAxwlFoUI5w4YhgHW/ijviQgpjZimiTWOE06nE4qyMfgSPTatRlVLdIbgRsCGI+I4wTkHJRVkJ/mtlILWmp3O84znpzB7g8EOXGit5cMyA1SPrpMs1Wt2pvcGvdbYGwPvPQMy9F5FXQu+uakbLg4UcJxn+K6DWpVwQiBIBZISJBVcI3AQ4ubu2WVxzsSxw5xXDjkf8UJg8fYO8bGArir0ZQW9XqP9XMButg+we2iRwz1PibgN3nviSw55IHaAMQbW2MtwLA/hvt0Hh23bcau59WvbomkhOwUKASFEpJRewv9tIAwUjUCG1rsGQrQM2+1qaL3nSWZgTOkl/L+gRS4I4fEH9UQMCvGsq8P/AL8BUXgEZeeR8KQAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;firewall&quot;
+        title=&quot;&quot;
+        src=&quot;/static/4452171de38c9bb6af609ab11d47c40c/f058b/firewall.png&quot;
+        srcset=&quot;/static/4452171de38c9bb6af609ab11d47c40c/c26ae/firewall.png 158w,
+/static/4452171de38c9bb6af609ab11d47c40c/6bdcf/firewall.png 315w,
+/static/4452171de38c9bb6af609ab11d47c40c/f058b/firewall.png 630w,
+/static/4452171de38c9bb6af609ab11d47c40c/d44c9/firewall.png 722w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;완료되면 화면의 우측에 &lt;strong&gt;요약&lt;/strong&gt;이라는 컴포넌트가 나온다. 내용에 문제가 없다면 클릭하여 인스턴스 생성을 마무리한다. 다시 대시보드로 페이지를 이동하면 인스턴스가 생성 대기중이라는 걸 확인할 수 있다. 상태가 &lt;strong&gt;생성&lt;/strong&gt;이 될 때까지 기다리면 된다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/35f05576c12e5db38ae53a2b1d09afbb/27524/pending.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 3.79746835443038%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAABCAYAAADeko4lAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAUUlEQVR42h3M0QpAMBiAUe//PnIjXMojoJS24UfUiNXsE+cBTjQMI/ftCCGw7BdqsvSjRc8HWg7s6fiYsqKOE7qswKQ5ummRdePxHqU0IvIfL9aoSnMk7nSIAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;pending&quot;
+        title=&quot;&quot;
+        src=&quot;/static/35f05576c12e5db38ae53a2b1d09afbb/f058b/pending.png&quot;
+        srcset=&quot;/static/35f05576c12e5db38ae53a2b1d09afbb/c26ae/pending.png 158w,
+/static/35f05576c12e5db38ae53a2b1d09afbb/6bdcf/pending.png 315w,
+/static/35f05576c12e5db38ae53a2b1d09afbb/f058b/pending.png 630w,
+/static/35f05576c12e5db38ae53a2b1d09afbb/27524/pending.png 646w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h2&gt;SSH로 연결&lt;/h2&gt;
+&lt;p&gt;인스턴스에 연결하는 방법은 여럿이다. 대시보드에서 직접 웹브라우저로 연결할 수 있으나 SSH를 통해 연결하는 것이 속도가 더 빠르고 다루기 쉬워서 좋다. 아래 명령어를 복사한다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/21828970ad16d8f4f3551639c7b6eabe/a016c/create-instance.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 87.9746835443038%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAASCAYAAABb0P4QAAAACXBIWXMAAAsTAAALEwEAmpwYAAACxUlEQVR42qVUyY7cOAyt//+Puc8pt2DujZySYLp2L+Wly7YWa7EWu+oNKNd0uoLGXEbAA0mJJp9oipvddo/X1y2Ox1PCfn/AfrdPcrvd4Xg4Yvu6w/mUJb+66WCswzRNMNbCfoD3HpvLpUKel8iyHEVxScizHFlWpL08L96x2iWqqgHnAkIIcM6TFEKuAed5xu9YluVdJv2DPc8RIYTVd3ngw7cbis44B0/ZBIaBYWD8FwYGxtZz0sdRIcYIH8IKH1ICKkGIkRg+GCxLcqTDT/E4I5/PbhUT4wWbMGnotzMm2eP/rtvtho1UBt3AwcQIaydMk0vFpSu4hyT4DzoxpXpSgMm5xJD0FFCYgKzuwQ3VwUIrlWqjlE7Oxk4QXGDyHtpYGG2gtE4BabVvHezkfjEUxmN3KiGNA9ceQlE/OSilYI2B1SIlslrDDEP6OVlRIoQIJi16ptFzSh5xv1PAaUZeXSBdxFVotD2HCx4DZ4mJNgLWOxhjIOsaXEq4GBMjOSo0b1dc+wFxWXC/37FhdQvWXNGVNVhVYSgvMP2Ama4uJIIcEeUILyUWYx77AoECcw7T9cmffBZqm+vpjPx0xuWcozxnyPZHXLIcl6xIdn44Ij+ecK0bGDkiWIsbtY5zEH2PvmnRtW/Q1w5RKWxU3YA1LXjdQnUdWNVgqJpVp7OEFpbxBGJNH8ZRYdYas9KYjYFpW0StsVGMQRJlYxGtxWwnzNMzIrWKsVioRRzZNu2vtkty8R43amwmJHrGIZWGVApKm/WpcYFR6dQ+VPyBsff2+M/G5lWN9pzBDgM841ishXMeUkrEEBH8+txoxTng0HzHz+IFZXdIe/Rn/0UK2O/2qP5+hShKjHkBU1UI8wxGQ+EBCk7LBYu/fvyJL9/+wMv+63vAJ4ZzjFjoYYeISGOJ7NvtOfP9/hhft6crroNheRp7/wCO3WTtEH+NagAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;connect-instance&quot;
+        title=&quot;&quot;
+        src=&quot;/static/21828970ad16d8f4f3551639c7b6eabe/f058b/create-instance.png&quot;
+        srcset=&quot;/static/21828970ad16d8f4f3551639c7b6eabe/c26ae/create-instance.png 158w,
+/static/21828970ad16d8f4f3551639c7b6eabe/6bdcf/create-instance.png 315w,
+/static/21828970ad16d8f4f3551639c7b6eabe/f058b/create-instance.png 630w,
+/static/21828970ad16d8f4f3551639c7b6eabe/a016c/create-instance.png 762w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;그리고 윈도우를 사용하면 .pem 키가 저장된 폴더로 이동한다. 검색창을 누르고 &lt;strong&gt;cmd&lt;/strong&gt;를 입력하면 터미널이 열리게 된다 - &lt;em&gt;터미널을 열고 명령어를 통해 .pem 키가 저장된 폴더로 이동해도 된다&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/64ad1625419b0a56d5511ae39b0a2428/738b8/pem-key.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 32.911392405063296%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAAAsTAAALEwEAmpwYAAABAElEQVR42p2QwW6DMBBE+f8f67lVA1GTtodAwME4VgO2MTavMhUoanPqSCuNtPbbnc3mOTJNAV08IYtX6l2Ofv+gfH5B5AXd8cg1LxjblhmIITDP81YhBGJMjIlhGMjSgwR0SuKV4qtu0KcKKwT2csHKDtdKgrULMEGsddxuA31vSEpAY+wCz6q6QwqBsW5pDtUZke9pD0e6twPRWFYlWFLf91yvGq314kOIizfGkO0OLU11YnQjo/c4pRiahj4NaQTRuQ22AtNGMQZ+0k1b9GXDcy2pTyVKKnxq8lcr6Ld/pKwsK2S6UQh475fp90dfAY/8o8q0+sRav0W5//QffQMxYyEQ8aJTTAAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;pem-key&quot;
+        title=&quot;&quot;
+        src=&quot;/static/64ad1625419b0a56d5511ae39b0a2428/f058b/pem-key.png&quot;
+        srcset=&quot;/static/64ad1625419b0a56d5511ae39b0a2428/c26ae/pem-key.png 158w,
+/static/64ad1625419b0a56d5511ae39b0a2428/6bdcf/pem-key.png 315w,
+/static/64ad1625419b0a56d5511ae39b0a2428/f058b/pem-key.png 630w,
+/static/64ad1625419b0a56d5511ae39b0a2428/738b8/pem-key.png 639w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;복사했던 명령어를 붙여 넣고 &lt;strong&gt;yes&lt;/strong&gt;를 입력하면 인스턴스와 연결된다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/9fbf7c45c42031abfd86f2cc460fa979/6bff2/ssh-terminal.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 36.708860759493675%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAAAsTAAALEwEAmpwYAAAA50lEQVR42pWPyaqFQAxEG3ThynmeQAVBnFD/zQFUBBd+dl3S0Bff7t3FIUmXVipsnmfs+845zxPXdeG+bzzPg+M4sCwL1nX9w7ZtnPdMlbxYkiSI4xhRFCEMQwRBAN/34bouPM+DruswTfOLYRjQNA2qqnKNUBQFkiRBlmWwYRhQ1zWapkFVVei6Dn3fo21bkDaOI6Zp4j29l2WJNE2RZdkXmkUYJpJQKnqkXiC0d7VtG47j8P49C51ZlsXPJXcyFJtIpPPe5/4Hluc5iqIAVYJOoLS0mT6ghb/AKC79TANVYSTMfjX9ACrvycoGfI4OAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;ssh-terminal&quot;
+        title=&quot;&quot;
+        src=&quot;/static/9fbf7c45c42031abfd86f2cc460fa979/f058b/ssh-terminal.png&quot;
+        srcset=&quot;/static/9fbf7c45c42031abfd86f2cc460fa979/c26ae/ssh-terminal.png 158w,
+/static/9fbf7c45c42031abfd86f2cc460fa979/6bdcf/ssh-terminal.png 315w,
+/static/9fbf7c45c42031abfd86f2cc460fa979/f058b/ssh-terminal.png 630w,
+/static/9fbf7c45c42031abfd86f2cc460fa979/40601/ssh-terminal.png 945w,
+/static/9fbf7c45c42031abfd86f2cc460fa979/6bff2/ssh-terminal.png 957w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h2&gt;Node 설치&lt;/h2&gt;
+&lt;p&gt;Node 버전 관리 도구인 nvm을 설치한다. 공식 &lt;a href=&quot;https://github.com/nvm-sh/nvm&quot;&gt;레파지토리&lt;/a&gt;에서 나오는 스크립트 대로 진행하면 쉽게 설치할 수 있다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+# then, execute the shell script
+. ~/.nvm/nvm.sh&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;완료되면 다음 명령어를 입력한다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;nvm install 16&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;다음 명령어를 입력하여 각각 버전을 확인한다. 이제 EC2 인스턴스에서 node.js를 실행할 수 있다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;node -v
+npm -v&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;결론&lt;/h2&gt;
+&lt;p&gt;AWs EC2를 생성하고 Node를 설치해보았다. 앞서 말했듯이 node.js 어플리케이션, API 서버 등을 실행할 수 있다. 간단한 node.js API를 배포하여 동작이 잘 되는지 확인해보는 게 어떨지 추천해본다. 혹시 API가 무엇인지 아직 잘 모르는 독자들은 &lt;a href=&quot;https://shkim04.github.io/express-mongodb-typescript%EB%A1%9C-restapi-%EA%B0%9C%EB%B0%9C%ED%95%98%EA%B8%B0/&quot;&gt;이전 글&lt;/a&gt;을 확인하길 바란다.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;읽어 주셔서 감사합니다. To be continued!&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;이 글은 &lt;a href=&quot;https://medium.com/@shkim04/server-how-to-set-up-aws-ec2-6986f659de60&quot;&gt;Medium&lt;/a&gt;에도 업로드 되었습니다.&lt;/em&gt;
+&lt;em&gt;놀러 오세요!&lt;/em&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Express, MongoDB, Typescript로 REST API 개발하기]]></title><description><![CDATA[REST API는 마치 음식점의 메뉴와 같다. 손님이 메뉴를 보면 그 음식점이 어떤 음식들을 요리하는지 알 수 있는 것처럼 개발자가 한 소프트웨어 상품의 API 문서를 보면 무슨 기능을 제공하는지 알 수 있다. API 문서에는 흔히 요청 url…]]></description><link>null/express-mongodb-typescript로-restapi-개발하기</link><guid isPermaLink="false">null/express-mongodb-typescript로-restapi-개발하기</guid><pubDate>Thu, 01 Dec 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;REST API는 마치 음식점의 메뉴와 같다. 손님이 메뉴를 보면 그 음식점이 어떤 음식들을 요리하는지 알 수 있는 것처럼 개발자가 한 소프트웨어 상품의 API 문서를 보면 무슨 기능을 제공하는지 알 수 있다. API 문서에는 흔히 요청 url이 적혀 있고 각 url에 대한 설명을 찾아볼 수 있다. 이 중 한 url에 요청을 보내면 그에 대한 응답을 받는 것이다. 개발자는 이 응답을 받아 가공 후 자신의 앱에 사용하면 된다. 이제 API를 만들어 보자.&lt;/p&gt;
 &lt;h2&gt;필수&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Node.js + Typescript&lt;/li&gt;
 &lt;li&gt;MongoDB&lt;/li&gt;
 &lt;li&gt;Insomnia&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2&gt;MongoDB 데이터베이스 만들기&lt;/h2&gt;
+&lt;h2&gt;MongoDB 데이터베이스&lt;/h2&gt;
 &lt;p&gt;먼저 MongoDB 설정부터 시작하겠다. MongoDB는 NoSQL 데이터베이스로 아주 많이 사용되는 데이터베이스 중 하나이다. 흔히 CRUD라고 말하는 create, retrieve, update, delete 요청을 적용하는 것이 아주 용이하다.&lt;/p&gt;
 &lt;p&gt;MongoDB 사용을 위해서 계정을 만들어야 한다. google이나 github 계정과 연동해서 쉽게 만들 수 있다. 계정을 생성해도 먼저 돈을 지불하지 않으며 추후에 큰 규모의 데이터를 처리할 때 처리량에 따라 지불하면 된다.&lt;/p&gt;
 &lt;p&gt;계정을 생성하고 로그인을 하면 다음과 같은 대시보드가 나온다:&lt;/p&gt;
@@ -168,7 +1836,7 @@
   &lt;/a&gt;
     &lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;위에 보이는 URI가 API에 사용될 예정이다 - &lt;em&gt;Node.js API를 개발하는 것이기 때문에 driver 옵션은 넘어가도 된다&lt;/em&gt;. 이 전 단계에서 생성한 사용자 이름과 비밀번호를 위 사진 속 빨간색 빈 칸에 &lt;em&gt;[your username:your password]&lt;/em&gt; 형태로 넣어야 한다. 필자와 함께 API를 개발하는 것이니 예시는 넘어가도 된다.&lt;/p&gt;
-&lt;h2&gt;프로젝트 폴더 생성하기&lt;/h2&gt;
+&lt;h2&gt;프로젝트 폴더 생성&lt;/h2&gt;
 &lt;p&gt;새로운 프로젝트 폴더를 생성하고 터미널을 열어 아래와 같이 명령어를 입력한다. 해당 명령어를 입력하면 pacakge.json 파일이 생기는데 앱에 필요한 정보나 dependency들을 담고 있는 역할을 한다. 그리고 app.ts 파일을 만든다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;cd [project folder directory]
 npm init -y&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -218,7 +1886,7 @@ npm install &lt;span class=&quot;token operator&quot;&gt;--&lt;/span&gt;save&lt;
         &lt;span class=&quot;token string&quot;&gt;&quot;node_modules/@types&quot;&lt;/span&gt;
     &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2&gt;package.json 스크립트 수정&lt;/h2&gt;
+&lt;h2&gt;package.json&lt;/h2&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 587px; &quot;
@@ -251,7 +1919,7 @@ npm install &lt;span class=&quot;token operator&quot;&gt;--&lt;/span&gt;save&lt;
     &lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;package.json 안에 script 필드 하위에 명령어 두개를 추가해보자. 복잡한 명령어를 key 이름에 저장한 후 간단하게 &lt;em&gt;npm run [key name]&lt;/em&gt; 입력하는 방식으로 해당 명령어를 실행할 수 있다.&lt;/p&gt;
 &lt;p&gt;“npm run dev”를 터미널에 입력하고 엔터를 누르면 실제로 &lt;em&gt;cross-env NODE-ENV=development nodemon --exec ts-node ./app.ts&lt;/em&gt; 가 실행된다. 개발모드로 실행되고 nodemon이 코드 수정이 있을 시 자동으로 재시작한다. &quot;start&quot;는 배포 시 사용된다.&lt;/p&gt;
-&lt;h2&gt;Express 서버 시작&lt;/h2&gt;
+&lt;h2&gt;Express 서버&lt;/h2&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; express&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; Request&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; Response&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; NextFunction &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;express&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 
 &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; app &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;express&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
@@ -274,7 +1942,7 @@ app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=
 &lt;p&gt;콜백함수는 주로 2가지 객체를 인자 값으로 받는데 Request와 Response 객체이다.&lt;/p&gt;
 &lt;p&gt;Request 객체는 API 사용자가로부터 서버가 받는 정보들의 집합이라고 생각하면 된다. API 개발자는 이 Request 객체가 어떤 필드 값을 가지고 있어야 하는지 목적과 방향에 맞게 사용할 수 있다. 사용자로부터 API 키 값을 필수적으로 받아야 하는 상황이 예가 될 수 있다.&lt;/p&gt;
 &lt;p&gt;Response 객체는 API 사용자가 해당 API 라우트로부터 받는 정보이다. API 서버의 목적과 개발 방향에 따라 그 정보가 달라질 것이다.&lt;/p&gt;
-&lt;h2&gt;환경 변수 설정&lt;/h2&gt;
+&lt;h2&gt;환경 변수&lt;/h2&gt;
 &lt;p&gt;환경 변수는 보통 영어는 대문자로 쓰는 것이 일반적이다.&lt;/p&gt;
 &lt;p&gt;프로젝트 폴더 하위에 development.env와 production.env 파일을 만들고 아래와 같이 변수 이름들을 적어 준다.&lt;/p&gt;
 &lt;p&gt;MongoDB로부터 얻은 uri를 &lt;strong&gt;MONGODB_URI&lt;/strong&gt;로 설정한다.&lt;/p&gt;
@@ -283,7 +1951,7 @@ app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=
 &lt;span class=&quot;token constant&quot;&gt;MONGO_URI&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;your mongodb uri&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
 &lt;span class=&quot;token constant&quot;&gt;MONGO_DB&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;test&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;db &lt;span class=&quot;token comment&quot;&gt;// just name whatever you want for development&lt;/span&gt;
 &lt;span class=&quot;token constant&quot;&gt;MONGO_COLLECTION&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;test&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;collection &lt;span class=&quot;token comment&quot;&gt;// just name whatever you want for development&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2&gt;환경에 따른 설정&lt;/h2&gt;
+&lt;h2&gt;환경 변수 지정&lt;/h2&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; dotenv &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;dotenv&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; envFound &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; dotenv&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token template-string&quot;&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;${&lt;/span&gt;process&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;env&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token constant&quot;&gt;NODE_ENV&lt;/span&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;.env&lt;/span&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 
@@ -330,7 +1998,7 @@ app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=
 &lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; connectMongoDB&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;프로젝트 폴더 하위에 파일 db.ts를 만든 뒤, MongoClient를 import한다. 그리고 파일 config.ts 만든 뒤 &lt;em&gt;config.mongodb.uri&lt;/em&gt; 을 인자 값으로 입력한다. 이 uri는 MongoDB 설정 시 얻었던 uri이다.&lt;/p&gt;
 &lt;p&gt;마지막으로 MongoDB를 비동기적으로 연결하도록 promise를 반환 값으로 받게 한다. 이제 API에 테스트 요청을 위해 코드를 수정해보자.&lt;/p&gt;
-&lt;h2&gt;Create A Test User in MongoDB&lt;/h2&gt;
+&lt;h2&gt;테스트 사용자 DB 등록&lt;/h2&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; express&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; Request&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; Response&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; NextFunction &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;express&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; config &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;./config&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; connectMongoDB &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;./db&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
@@ -374,7 +2042,7 @@ app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=
 &lt;p&gt;post 라우트를 추가한다. 이 라우트는 API 사용자로부터 성과 이름을 받고 이를 데이터베이스에 넣는 기능이 목적이다. Request 객체의 body라는 필드에 사용자가 입력한 성과 이름이 저장이 된다.&lt;/p&gt;
 &lt;p&gt;MongoDB promise가 resolve한 값을 connect라는 변수를 선언하여 저장한다 - &lt;em&gt;config.ts에 저장한 데이터베이스와 콜렉션 이름이 여기 쓰인다&lt;/em&gt; - 요청에서 받은 성과 이름을 &lt;em&gt;insertOne&lt;/em&gt; 이라는 함수로 데이터베이스에 입력하게 된다.&lt;/p&gt;
 &lt;p&gt;에러 없이 코드가 실행된다면 post 라우트가 status 코드 200과 함께 &quot;Successfully Created in DB&quot;라는 정보를 사용자에게 보낸다.&lt;/p&gt;
-&lt;h2&gt;Insomnia로 요청 테스트&lt;/h2&gt;
+&lt;h2&gt;Insomnia 요청 테스트&lt;/h2&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 548px; &quot;
@@ -530,8 +2198,8 @@ app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=
       /&gt;
   &lt;/a&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;h2&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;API 서버는 보통 개발자 자신 혹은 회사의 목적에 따라 더욱 커지거나 복잡해진다. 크고 복잡한 API 서버를 개발하는 실력을 키우려면 직접 더 많은 크고 작은 프로젝트들을 개발해보는 방법이 가장 도움이 될 가능성이 높습니다. 예를 들면, 더 많은 라우트를 추가하거나 더 많은 타입 정의들을 써보거나 다른 데이터베이스를 써보는 것입니다. 이 간단한 API로부터 더 멋진 API를 개발하셨으면 좋겠습니다!&lt;/p&gt;
+&lt;h2&gt;결론&lt;/h2&gt;
+&lt;p&gt;API 서버는 보통 개발자 자신 혹은 회사의 목적에 따라 더욱 커지거나 복잡해진다. 크고 복잡한 API 서버를 개발하는 실력을 키우려면 직접 더 많은 크고 작은 프로젝트들을 개발해보는 방법이 가장 도움이 될 가능성이 높다. 예를 들면, 더 많은 라우트를 추가하거나 더 많은 타입 정의들을 써보거나 다른 데이터베이스를 써보는 것이라고 생각한다. 이 간단한 API로부터 더 멋진 API를 개발하기를 바라면서 마친다.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;&lt;strong&gt;읽어 주셔서 감사합니다. To be continued!&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;이 글은 &lt;a href=&quot;https://medium.com/@shkim04/node-js-how-to-create-a-simple-rest-api-with-express-mongodb-and-typescript-54b1d801d073&quot;&gt;Medium&lt;/a&gt;에도 업로드 되었습니다.&lt;/em&gt;
 &lt;em&gt;놀러 오세요!&lt;/em&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[REST API with Express, MongoDB and Typescript]]></title><description><![CDATA[I usually think of REST API as a menu book of a restaurant. When customers look at the menu book, they are able to know what foods the…]]></description><link>null/en/restapi-with-express-mongodb-typescript</link><guid isPermaLink="false">null/en/restapi-with-express-mongodb-typescript</guid><pubDate>Thu, 01 Dec 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;I usually think of REST API as a menu book of a restaurant. When customers look at the menu book, they are able to know what foods the restaurant serves. Similarly, when developers look at a REST API document, they are able to know what kind of features the company, which provides the REST API, serves. In an API document, you can see a list of URLs and descriptions of each URL. If you make a request to one of those URLs, you will get a response from it. Then, you can modify the response as you want for your application.&lt;/p&gt;
@@ -1530,8 +3198,8 @@ npx expo install react-dom react-native-web @expo/webpack-config
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;프로젝트를 실행하게 되면 다음과 같이 동작하게 된다:&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/0047e88dd988a65a3886f3b3b9060f82/2_react-native-modal.gif&quot; alt=&quot;Modal&quot;&gt;&lt;/p&gt;
-&lt;h2&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;팝업 창은 간단하지만 그 쓰임새는 다양할 것이다. 개발하는 사람에 따라 경고를 띄우는 창이 될 수도 있고 날짜를 선택할 수 있는 창이 될 수도 있다. 이 글의 내용을 토대로 적절하게 팝업 창을 사용하면 되겠다.&lt;/p&gt;
+&lt;h2&gt;결론&lt;/h2&gt;
+&lt;p&gt;팝업 창은 간단하지만 그 쓰임새는 다양할 것이다. 개발하는 사람에 따라 경고를 띄우는 창이 될 수도 있고 날짜를 선택할 수 있는 창이 될 수도 있다. 내용이 잘 전달됐길 바라고 각자 알맞게 사용하면 좋을 거 같다.&lt;/p&gt;
 &lt;p&gt;이 글이 많은 분들께 도움이 되었으면 좋겠습니다!&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;&lt;strong&gt;읽어 주셔서 감사합니다. To be continued!&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;이 글은 &lt;a href=&quot;https://medium.com/@shkim04/rn-how-to-create-react-native-modal-component-with-expo-dfc87c406b0a&quot;&gt;Medium&lt;/a&gt;에도 업로드 되었습니다.&lt;/em&gt;
@@ -2066,8 +3734,8 @@ SwiperCore&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span
 
 &lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; App&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;필수적으로 import 해야 하는 css 파일들이 있어야 동작이 된다.&lt;/p&gt;
-&lt;h2&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;간단한 React App으로 Slider를 구현했다. Swiper 라이브러리는 이 글에서 보여준 기능 이외에도 다른 기능들이 있으니 사용자의 의도와 목적에 맞게 적절하게 개발하면 되겠다.&lt;/p&gt;
+&lt;h2&gt;결론&lt;/h2&gt;
+&lt;p&gt;간단한 React App으로 Slider를 구현했다. Swiper 라이브러리는 이 글에서 보여준 기능 이외에도 다른 기능들이 있으니 사용자의 의도와 목적에 맞게 적절하게 개발하시길 바란다.&lt;/p&gt;
 &lt;p&gt;이 글이 React Swiper에 관해 찾는 분들께 도움이 되었으면 좋겠습니다!&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;&lt;strong&gt;읽어 주셔서 감사합니다. To be continued!&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;이 글은 &lt;a href=&quot;https://medium.com/@shkim04/how-to-use-react-swiper-58eef325b09f&quot;&gt;Medium&lt;/a&gt;에도 업로드 되었습니다.&lt;/em&gt;
