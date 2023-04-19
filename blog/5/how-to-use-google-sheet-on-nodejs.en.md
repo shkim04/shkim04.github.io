@@ -4,7 +4,6 @@ date: "2023-01-03T00:00:00.000Z"
 description: "Basic implementation of Google Sheet API on Node.js - We will Read, Clear, and Update data from Google Sheet"
 tag: 
   - NodeJS
-  - Cloud
 ---
 
 **Google Sheet** is very handy due to its incredible flexibility and easy access no matter where you are because it works on browsers. It is also easy to access your Google Sheet from any of your applications via **Google Sheet API**. You can write something to your google sheet via the API or can let the API read data from your google sheet so you can manipulate it for any purpose. 
