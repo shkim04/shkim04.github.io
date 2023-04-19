@@ -1,8 +1,9 @@
 ---
 title: How To Create React Native Modal With Expo
 date: "2022-11-18T00:00:00.000Z"
-description: "With Expo, we can build React Native app without thinking about the platforms. Creating a basic but powerful React Native Modal component will be discussed."
-tag: "Others"
+description: "With Expo, we can build React Native app without thinking about the platforms. Creating a basic but powerful React Native Modal component will be discussed"
+tag: 
+  - Others
 ---
 
 When I first developed a mobile application, I needed to have a small popup window on the same page in order to set up different dates to each items in a list and I wanted the popup window to disappear when I touched the outside of it. Thus, the popup window should be shorter than the full width of a screen. After a few of struggles, I found a simple but great way to create the popup window that fulfilled the conditions by using React Native Modal. Here, I will share the way to create it.

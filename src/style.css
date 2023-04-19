@@ -58,6 +58,7 @@
   --color-heading: #1a202c;
   --color-heading-black: black;
   --color-accent: #d1dce5;
+  /* --color-accent: #afc8db; */
 }
 
 /* HTML elements */
@@ -290,8 +291,8 @@ a:focus {
 
 .post-list-item header p span{
   background-color: #fff;
-  border: 0.1rem solid var(--color-accent);
-  color: var(--color-accent);
+  border: 0.1rem solid #afc8db;
+  color: #afc8db;
   border-radius: 5px;
   padding: var(--spacing-1) var(--spacing-2);
   margin-right: var(--spacing-1);

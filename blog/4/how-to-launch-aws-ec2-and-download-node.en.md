@@ -1,8 +1,9 @@
 ---
 title: How To Launch AWS EC2 Instance And Download Node
 date: "2022-12-27T00:00:00.000Z"
-description: "The guide to launching AWS EC2 which provides a flexible cloud compute service on demand, specfically Linux instance and download Node."
-tag: "AWS"
+description: "The guide to launching AWS EC2 which provides a flexible cloud compute service on demand, specfically Linux instance and download Node"
+tag: 
+    - Cloud
 ---
 
 Cloud service is a service delivered on demand to companies or users through the internet. To developers, cloud service is specifically used to process what is done in a server side, such as an API server. 

@@ -4,19 +4,17 @@ import { Link, graphql } from "gatsby"
 import Bio from "../components/bio"
 import Seo from "../components/seo"
 
-const blogTagsList = ["NodeJS", "ReactJS", "NextJS", "Python", "MongoDB", "Linux", "Docker", "Log", "Others"]
+const blogTagsList = ["NodeJS", "ReactJS", "NextJS", "Python", "MongoDB", "Linux", "Docker", "Log", "Cloud", "Others"]
 
 const Index = ({ data, pageContext: { locale } }) => {
   const posts = data.allMarkdownRemark.nodes
-  const [selectedTag, setSelectedTag] = useState("")
-
+  const [selectedTags, setSelectedTags] = useState([])
+  
   const handleSelectedTag = (tag) => {
-    if(tag === selectedTag) {
-      setSelectedTag('')
-      return
-    }
-    
-    setSelectedTag(tag)
+    let copiedSelectedTags = [...selectedTags];
+    let resultSelectedTag = copiedSelectedTags.indexOf(tag) > -1 ? copiedSelectedTags.filter(selectedTag => selectedTag !== tag) : [...copiedSelectedTags, tag]
+  
+    setSelectedTags(resultSelectedTag)
   }
 
   if (posts.length === 0) {
@@ -38,7 +36,7 @@ const Index = ({ data, pageContext: { locale } }) => {
           <button 
             key={tag + index}
             onClick={() => handleSelectedTag(tag)}
-            className={tag === selectedTag ? "active-tag" : ""}
+            className={selectedTags.indexOf(tag) > -1 ? "active-tag" : ""}
           >
             {tag}
           </button>
@@ -46,7 +44,10 @@ const Index = ({ data, pageContext: { locale } }) => {
       </div>
       <ol style={{ listStyle: `none` }}>
         {posts
-            .filter(post => !selectedTag ? true : selectedTag === post.frontmatter.tag)
+            .filter(post => {
+              if(selectedTags.length === 0) return true
+              return post.frontmatter.tag.find(tag => selectedTags.indexOf(tag) > -1)
+            })
             .map(post => {
               const title = post.frontmatter.title || post.fields.slug
               
@@ -63,7 +64,13 @@ const Index = ({ data, pageContext: { locale } }) => {
                           <span itemProp="headline">{title}</span>
                         </Link>
                       </h2>
-                      <p><span>{post.frontmatter.tag}</span></p>
+                      <p>
+                        {
+                          post.frontmatter.tag.map((tag, index) => (
+                            <span key={tag + index}>{tag}</span>
+                          ))
+                        }
+                      </p>
                       <small>{post.frontmatter.date}</small>
                     </header>
                     <section>

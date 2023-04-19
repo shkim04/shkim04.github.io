@@ -1,8 +1,10 @@
 ---
 title: Node.js에서 Googe Sheet API 사용하기
 date: "2023-01-03T00:00:00.000Z"
-description: "Node.js에 Google Sheet API 연결하여 구글 시트에 담긴 데이터 읽기, 쓰기, 삭제."
-tag: "NodeJS"
+description: "Node.js에 Google Sheet API 연결하여 구글 시트에 담긴 데이터 읽기, 쓰기, 삭제"
+tag: 
+  - NodeJS
+  - Cloud
 ---
 
 **Google Sheet**는 브라우저에서 동작하기 때문에 어디서나 사용할 수 있고 기능이 다양해서 아주 유용한 소프트웨어 상품이다. 이 Google Sheet는 Google이 API를 제공하기 때문에 어느 어플리케이션이라도 쉽게 연결할 수 있다. **Google Sheet API**를 통해서 google sheet에서 입력한 정보를 읽고 가공하는 것이 가능하다.

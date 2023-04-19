@@ -1,8 +1,9 @@
 ---
 title: How To Set Up a Virtual Environment On Windows
 date: "2023-01-19T00:00:00.000Z"
-description: "Describe how to set up a virtual environment, specifically on Windows and why python developers are highly recommended to do it for any Python project."
-tag: "Python"
+description: "Describe how to set up a virtual environment, specifically on Windows and why python developers are highly recommended to do it for any Python project"
+tag: 
+    - Python
 ---
 
 When developing an app with Python, you do not have to think too much about what version of Python you use and what versions of packages you use if you work on a small project. But, in complex software development projects such as an API, you will work with multiple files and packages. These packages are dependent on Python version you are using. Knowing this is crucial because it can cause problems when you have more than one Python project.

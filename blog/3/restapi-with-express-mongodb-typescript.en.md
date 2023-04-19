@@ -1,8 +1,9 @@
 ---
 title: REST API with Express, MongoDB and Typescript
 date: "2022-12-01T00:00:00.000Z"
-description: "Create a simple REST API - From setting up MongoDB for an application to a simple CRUD operation with Node.js express and Typescript."
-tag: "NodeJS"
+description: "Create a simple REST API - From setting up MongoDB for an application to a simple CRUD operation with Node.js express and Typescript"
+tag: 
+  - NodeJS
 ---
 
 I usually think of REST API as a menu book of a restaurant. When customers look at the menu book, they are able to know what foods the restaurant serves. Similarly, when developers look at a REST API document, they are able to know what kind of features the company, which provides the REST API, serves. In an API document, you can see a list of URLs and descriptions of each URL. If you make a request to one of those URLs, you will get a response from it. Then, you can modify the response as you want for your application.

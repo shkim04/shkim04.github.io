@@ -1,8 +1,9 @@
 ---
 title: React Swiper 사용법
 date: "2022-11-13T00:00:00.000Z"
-description: "React Swiper는 화면에 사진들을 효과적으로 보여줄 수 있는 라이브러리입니다. Swiper 라이브러리에 대한 기초를 알아보고 간단한 App을 구현."
-tag: "ReactJS"
+description: "React Swiper는 화면에 사진들을 효과적으로 보여줄 수 있는 라이브러리입니다. Swiper 라이브러리에 대한 기초를 알아보고 간단한 App을 구현"
+tag: 
+  - ReactJS
 ---
 
 React를 배우기 시작하고 실제 웹사이트를 개발할 때, 그림 및 사진을 자주 활용할 기회가 있다. 특히 여러 사진을 한 영역 내에서 보여주는 형식을 흔하게 접할 수 있는데 React Swiper 라이브러리가 이 기능을 구현할 때 적합하다. 이 글을 통해 해당 라이브러리의 기본을 알아보자.

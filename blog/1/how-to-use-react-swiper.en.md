@@ -1,8 +1,9 @@
 ---
 title: How To Use React Swiper
 date: "2022-11-13T00:00:00.000Z"
-description: "React Swiper makes an app look better with pictures and such. Throughout the article, We will figure out how to make a use of React Swiper library by creating a simple React app."
-tag: "ReactJS"
+description: "React Swiper makes an app look better with pictures and such. Throughout the article, We will figure out how to make a use of React Swiper library by creating a simple React app"
+tag: 
+  - ReactJS
 ---
 
 If you just began learning React or working on a React project, you probably want to create a beautiful slider that adds an aesthetic boost to your pictures. In this post, I will walk you through the React Swiper basics and help you create a slider component using the library.
