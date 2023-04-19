@@ -61,7 +61,9 @@ _google sheets_ 에서 빈 sheet를 생성한다. 어플리케이션을 google s
 
 Google Sheet API를 연결하기 위해서 연결할 sheet의 id도 필요하게 된다. 이 id는 해당 sheet의 url에서 확인할 수 있으며 다음과 같다:
 
-> https://docs.google.com/spreadsheets/d/[your-sheet-id]/edit#gid=0
+```
+https://docs.google.com/spreadsheets/d/[your-sheet-id]/edit#gid=0
+```
 
 아래와 같이 간단한 데이터셋을 입력하고 다음 단계로 넘어가자.
 
@@ -102,7 +104,6 @@ const googleAuth = new google.auth.JWT(
 해당 sheet 이름은 화면 아래 탭에 적혀 있다. 위 코드에 각각 알맞은 값을 적어 넣는다.
 
 ![sheet-name](../imgs/5/sheet-name.png)
-
 
 ## Sheet 읽기
 

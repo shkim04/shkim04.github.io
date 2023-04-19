@@ -18,5 +18,9 @@ module.exports = {
   5: {
     ko: "nodejs-에서-google-sheet-사용하는법",
     en: "how-to-use-google-sheet-on-nodejs"
+  },
+  6: {
+    ko: "python-가상환경-설정",
+    en: "how-to-set-up-python-virtual-env"
   }
 }

@@ -61,7 +61,9 @@ When the pop-up screen as shown below shows up, copy and paste your **client ema
 
 Another important thing you should remember for connection is the id of the google sheet you want to handle. You can find the id from the url of the google sheet and It looks like:
 
-> https://docs.google.com/spreadsheets/d/[your-sheet-id]/edit#gid=0
+```
+https://docs.google.com/spreadsheets/d/[your-sheet-id]/edit#gid=0
+```
 
 Let's add some simple data which look like the picture below to the sheet. Now, we are good to go to the next step.
 
@@ -101,7 +103,6 @@ const googleAuth = new google.auth.JWT(
 Recall that there are a few of important things to add into the code to connect to your google sheet. They are **client email, private key** in the json key file, **google sheet id**, and **the exact name of the sheet**. The exact name of the sheet can be named as you want and you can find this on the bottom of the screen. Fill each information with the corresponding variables in the code above.
 
 ![sheet-name](../imgs/5/sheet-name.png)
-
 
 ## Read Data From Sheet
 
