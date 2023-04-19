@@ -1,18 +1,13 @@
 import * as React from "react"
-import {  
-  // Link, 
-  graphql 
-} from "gatsby"
+import { Link, graphql } from "gatsby"
 
 import Bio from "../components/bio"
 import Seo from "../components/seo"
 
+import locales from "../../config/i18n"
+
 const BlogPostTemplate = ({
-  data: { 
-    // previous, 
-    // next, 
-    markdownRemark: post 
-  }, 
+  data: { previous, next, markdownRemark: post }, 
   pageContext: { locale }
 }) => {
   return (
@@ -40,7 +35,7 @@ const BlogPostTemplate = ({
           <Bio locale={locale} />
         </footer>
       </article>
-      {/* <nav className="blog-post-nav">
+      <nav className="blog-post-nav">
         <ul
           style={{
             display: `flex`,
@@ -53,19 +48,19 @@ const BlogPostTemplate = ({
           <li>
             {previous && (
               <Link to={previous.fields.slug} rel="prev">
-                ← {previous.frontmatter.title}
+                ← {locales[locale].prevPost}
               </Link>
             )}
           </li>
           <li>
             {next && (
               <Link to={next.fields.slug} rel="next">
-                {next.frontmatter.title} →
+                {locales[locale].nextPost} →
               </Link>
             )}
           </li>
         </ul>
-      </nav> */}
+      </nav>
     </>
   )
 }

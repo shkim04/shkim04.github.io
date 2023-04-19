@@ -8,6 +8,8 @@ module.exports = {
     siteLanguage: `ko`,
     ogLanguage: `ko-KR`,
     defaultTitle: `Gatsby 한/영 언어 사이트`,
+    prevPost: `이전글`,
+    nextPost: `다음글`
   },
   en: {
     default: false,
@@ -18,5 +20,7 @@ module.exports = {
     siteLanguage: `en`,
     ogLanguage: `en_US`,
     defaultTitle: `Gatsby Starter with Korean/English and CMS`,
+    prevPost: `Prev`,
+    nextPost: `Next`
   }
 }
