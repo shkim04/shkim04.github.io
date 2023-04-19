@@ -24,7 +24,12 @@ const BlogPostTemplate = ({
       >
         <header>
           <h1 itemProp="headline">{post.frontmatter.title}</h1>
-          <p>{post.frontmatter.date}</p>
+          {
+            post.frontmatter.tag.map((tag, index) => (
+              <span key={tag + index}>{tag}</span>
+            ))
+          }
+          <p>{post.frontmatter.date}</p>     
         </header>
         <section
           dangerouslySetInnerHTML={{ __html: post.html }}

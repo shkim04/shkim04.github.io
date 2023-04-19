@@ -11,7 +11,7 @@ const Index = ({ data, pageContext: { locale } }) => {
   const [selectedTags, setSelectedTags] = useState([])
   
   const handleSelectedTag = (tag) => {
-    let copiedSelectedTags = [...selectedTags];
+    let copiedSelectedTags = [...selectedTags]
     let resultSelectedTag = copiedSelectedTags.indexOf(tag) > -1 ? copiedSelectedTags.filter(selectedTag => selectedTag !== tag) : [...copiedSelectedTags, tag]
   
     setSelectedTags(resultSelectedTag)

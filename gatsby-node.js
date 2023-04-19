@@ -86,6 +86,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               en
             }
           }
+          frontmatter {
+            tag
+          }
         }
       }
     }
@@ -100,10 +103,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   }
 
   const posts = result.data.allMarkdownRemark.nodes
-  console.log(posts.map(post => post.frontmatter.tag))
-  // Create blog posts pages
-  // But only if there's at least one markdown file found at "blog" (defined in gatsby-config.js)
-  // `context` is available in the template as a prop and as a variable in GraphQL
+
   // const numSupportedLang = 2
   if (posts.length > 0) {
     posts.forEach((post, index) => {

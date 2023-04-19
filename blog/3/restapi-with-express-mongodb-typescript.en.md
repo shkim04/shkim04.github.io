@@ -292,6 +292,8 @@ You have just created a new user in your database!
 ## Conclusion
 API server can become bigger and more complicated depending on the purpose of the API you develop. To have a better coding skill to create and handle it, I think that you should develop various projects by yourself. For example, it could be achieved as you add some more routes, define more types for variables with Typescript or try another database. I hope you can make this simple API a better version of it by yourself!
 
+Feel free to check out the entire code on my github [repository](https://github.com/shkim04/express_typescript_simple_api).
+
 _**THANKS FOR READING. SEE YOU NEXT TIME!**_
 
 _This is originally posted on my [Medium](https://medium.com/@shkim04/node-js-how-to-create-a-simple-rest-api-with-express-mongodb-and-typescript-54b1d801d073)._

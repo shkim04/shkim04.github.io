@@ -332,6 +332,19 @@ a:focus {
   font-family: var(--font-heading);
 }
 
+.blog-post header span {
+  font-family: var(--font-body);
+  background-color: #fff;
+  border: 0.1rem solid #afc8db;
+  color: #afc8db;
+  border-radius: 5px;
+  padding: var(--spacing-1) var(--spacing-2);
+  margin-right: var(--spacing-1);
+  margin-bottom: var(--spacing-1);
+  font-size: var(--fontSize-0);
+  display: inline-block;
+}
+
 .blog-post-nav ul {
   margin: var(--spacing-0);
 }
