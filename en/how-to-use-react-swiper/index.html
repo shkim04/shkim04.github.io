@@ -54,7 +54,7 @@
 <p>Open the terminal and enter this command shown below</p>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js">npm install swiper</code></pre></div>
 <h2>Install Swiper modules</h2>
-<p>In index.js under the Slider folder, I imported only 4 modules from swiper library that are Navigation, Pagination, EffectFade, Autoplay. If you want to use other modules, you need to import the modules as well. you can find other modules on <a href="https://swiperjs.com/swiper-api#modules">the website</a> and their purposes.</p>
+<p>In index.js under the Slider folder, I imported only 4 modules from swiper library that are <strong>Navigation, Pagination, EffectFade, Autoplay</strong>. If you want to use other modules, you need to import the modules as well. you can find other modules on <a href="https://swiperjs.com/swiper-api#modules">the website</a> and their purposes.</p>
 <p>Now, the Slider component could look like:</p>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span>SliderWrap<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"./swiper.style"</span><span class="token punctuation">;</span>
 <span class="token comment">// styled-component wrap</span>
@@ -100,7 +100,7 @@ SwiperCore<span class="token punctuation">.</span><span class="token function">u
 
 <span class="token keyword">export</span> <span class="token punctuation">{</span>SwiperSlide <span class="token keyword">as</span> Slide<span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token keyword">export</span> <span class="token keyword">default</span> Slider<span class="token punctuation">;</span></code></pre></div>
-<p>The comments in the code block might explain quite a lot. but, you may still be unsure of what swiper.style.js does or just what it is. this is a styled-component in order to apply css rules to the Slider component. Styled-component is a component in which you wrap a target component where you apply css rules. In a later post, I might go into greater details. In the meantime, here is the code:</p>
+<p>The comments in the code block might explain quite a lot. but, you may still be unsure of what swiper.style.js does or just what it is. this is a styled-component in order to apply css rules to the Slider component. <strong>Styled-component</strong> is a component in which you wrap a target component where you apply css rules. In a later post, I might go into greater details. In the meantime, here is the code:</p>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">import</span> styled<span class="token punctuation">,</span> <span class="token punctuation">{</span>css<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"styled-components"</span><span class="token punctuation">;</span>
 
 <span class="token keyword">export</span> <span class="token keyword">const</span> SliderWrap <span class="token operator">=</span> styled<span class="token punctuation">.</span>div<span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
