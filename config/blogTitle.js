@@ -22,5 +22,13 @@ module.exports = {
   6: {
     ko: "python-가상환경-설정",
     en: "how-to-set-up-python-virtual-env"
-  }
+  },
+  7: {
+    ko: "python-pandas-엑셀-사용하기",
+    en: "pandas-for-excel-python"
+  },
+  // 8: {
+  //   ko: "nodejs-aws-sqs-사용하기",
+  //   en: "how-to-use-aws-sqs-nodejs"
+  // }
 }

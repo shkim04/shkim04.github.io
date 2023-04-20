@@ -21,7 +21,7 @@ Once signed in, you can see **Launch instance** in the middle of EC2 dashboard. 
 
 In the next page, name the instance - _name it in the way it will be self-explanatory_. Below the name section, we choose Amazon Linux here, which means you will launch a virtual server whose OS is Amazon Linux. Since this is meant to be testing, we select free tier for AMI which is the default. It will presumably not be very fast. 
 
-You should know Amazon will charge you costs incurred when the amount of resource spent passes a certain criteria — 750 hours per month for 12 months with the AWS [Free Tier](https://aws.amazon.com/ec2/pricing/?loc=ft#Free_tier).
+You should know Amazon will charge you costs incurred when the amount of resource spent passes a certain criteria — _750 hours per month for 12 months with the AWS [Free Tier](https://aws.amazon.com/ec2/pricing/?loc=ft#Free_tier)_.
 
 ![create-instance](../imgs/4/create-instance.png)
 
@@ -45,7 +45,7 @@ When finished, the section called **Summary** on the right side of the screen wi
 ## Connect Instance Via SSH
 There are a few ways to connect the instance you've just created. For example, you can connect it on the web browser from the dashboard. But we will connect it via SSH because it is faster than the direct connection on the web browser and easier to handle the instance through the terminal of your local computer. Copy the command below.
 
-![connect-instance](../imgs/4/create-instance.png)
+![connect-instance](../imgs/4/connect-instance.png)
 
 Then, If you use Windows, open the folder that has the .pem key you have created when launching the instance, click the search bar and enter **cmd** then it will prompt to show the terminal - _you can just open the terminal first and change the path to the folder that has the .pem key_.
 

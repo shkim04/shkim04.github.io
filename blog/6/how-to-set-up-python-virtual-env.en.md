@@ -22,14 +22,14 @@ This is why we have to isolate a Python development environment to a particular 
 Now, I will walk you through how to set up a virtual environment on Windows - _How to set up a virtual environment on Linux or MacOS is also easy to do so feel free to search for it_.
 
 ## Prerequisite
-- Python — whatever version it is, although recommended to download a stable one
+- Python — _whatever version it is, although recommended to download a stable one_
 
 ## Install Virtualenv
 ```
 pip install virtualenv
 ```
 
-Open the terminal and enter the command as shown above. It will install virtualenv package on your machine, which should be globally available. Once finished, check out if it is installed properly by entering this:
+Open the terminal and enter the command as shown above. It will install **virtualenv** package on your machine, which should be globally available. Once finished, check out if it is installed properly by entering this:
 
 ```
 virtualenv --version
@@ -39,7 +39,7 @@ You will see the message showing what version of the package it is. And it will 
 
 ![terminal](../imgs/6/terminal.png)
 
-Or if you see the message as shown below, you should add the path of the executable file of the package, virtualenv.exe, to the system environment variables.
+Or if you see the message as shown below, you should add the path of the executable file of the package, **virtualenv.exe**, to the system environment variables.
 
 ![not-recognized](../imgs/6/not-recognized.png)
 

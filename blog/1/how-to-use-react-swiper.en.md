@@ -32,7 +32,7 @@ npm install swiper
 ```
 
 ## Install Swiper modules
-In index.js under the Slider folder, I imported only 4 modules from swiper library that are Navigation, Pagination, EffectFade, Autoplay. If you want to use other modules, you need to import the modules as well. you can find other modules on [the website](https://swiperjs.com/swiper-api#modules) and their purposes.
+In index.js under the Slider folder, I imported only 4 modules from swiper library that are **Navigation, Pagination, EffectFade, Autoplay**. If you want to use other modules, you need to import the modules as well. you can find other modules on [the website](https://swiperjs.com/swiper-api#modules) and their purposes.
 
 Now, the Slider component could look like:
 ```js
@@ -82,7 +82,7 @@ export {SwiperSlide as Slide};
 export default Slider;
 ```
 
-The comments in the code block might explain quite a lot. but, you may still be unsure of what swiper.style.js does or just what it is. this is a styled-component in order to apply css rules to the Slider component. Styled-component is a component in which you wrap a target component where you apply css rules. In a later post, I might go into greater details. In the meantime, here is the code:
+The comments in the code block might explain quite a lot. but, you may still be unsure of what swiper.style.js does or just what it is. this is a styled-component in order to apply css rules to the Slider component. **Styled-component** is a component in which you wrap a target component where you apply css rules. In a later post, I might go into greater details. In the meantime, here is the code:
 
 ```js
 import styled, {css} from "styled-components";

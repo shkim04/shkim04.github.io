@@ -22,7 +22,7 @@ expo init [your project name]
 // once installed, initialize your project
 ```
 
-You will see these options, choose blank(simply, press the enter key when highlighted)
+You will see these options, choose blank - _simply, press the enter key when highlighted_
 
 ![Create Expo Command](../imgs/2/2-react-native-command.png)
 
@@ -44,7 +44,7 @@ To start your project, enter the command shown below
 ```js
 npm start
 ```
-You will see a QR code and some instructions in the terminal. You can open your expo project on an actual device(Android, iOS) and an emulator. In order to start your project on an actual device, you need to download _**Expo Go**_ app. I scanned the QR code with my iPhone camera. It showed my project and it looked like:
+You will see a QR code and some instructions in the terminal. You can open your expo project on an actual device(Android, iOS) and an emulator. In order to start your project on an actual device, you need to download **Expo Go** app. I scanned the QR code with my iPhone camera. It showed my project and it looked like:
 
 ![Expo basic screen](../imgs/2/2_react-native-expo-basic.png)
 
@@ -52,7 +52,7 @@ You will see a QR code and some instructions in the terminal. You can open your 
 
 ![Folder structure](../imgs/2/2_folder-structure.png)
 
-First, you should import _StyleSheet, View, Modal, TouchableWithoutFeedback_ from React Native. **StyleSheet** allows us to create a style object that stores and manages css rules for a component. **View** is simply an equivalent of a div in React. **TouchableWithoutFeedback** is actually self-explanatory which makes things inside of it touchable without any effect when clicked. **Modal** is the essential element we need to create Popup component. Here is the code:
+First, you should import **StyleSheet, View, Modal, TouchableWithoutFeedback** from React Native. **StyleSheet** allows us to create a style object that stores and manages css rules for a component. **View** is simply an equivalent of a div in React. **TouchableWithoutFeedback** is actually self-explanatory which makes things inside of it touchable without any effect when clicked. **Modal** is the essential element we need to create Popup component. Here is the code:
 
 ```js
 import { StyleSheet, View, Modal } from 'react-native';
@@ -96,16 +96,16 @@ const styles = StyleSheet.create({
 });
 ```
 
-**Popup component** takes _children, visible, transparent, dismiss, margin_ as props. The component returns Modal. Here, Modal only takes _visible, transparent, onRequestClose_ as props. But, there are other props you can use. You can check them on _**[the official website](https://reactnative.dev/docs/modal)**_.
+**Popup component** takes **children, visible, transparent, dismiss, margin** as props. The component returns Modal. Here, Modal only takes **visible, transparent, onRequestClose** as props. But, there are other props you can use. You can check them on **[the official website](https://reactnative.dev/docs/modal)**.
 
-Recall that I want the popup window to disappear when I click the outside of it. TouchableWithoutFeedback is where we do the trick. So, we will make it take up the full screen. To do that, we will set position to “absolute” and set top, bottom, left, right to “0”.
+Recall that I want the popup window to disappear when I click the outside of it. **TouchableWithoutFeedback** is where we do the trick. So, we will make it take up the full screen. To do that, we will set position to `absolute` and set top, bottom, left, right to `0`.
 
-Children prop under View is where the popup window goes. We will pass a content as a prop from the parent component later. Margin prop will be used to set margin for View. What it actually does is to adjust the width of the popup window. If you pass “0” from the parent component, the popup window will take up 100% of the width of the screen. Also, if you pass “20px” or “10%”, the width of the popup content will be shortened.
+**Children** prop under View is where the popup window goes. We will pass a content as a prop from the parent component later. **Margin** prop will be used to set margin for View. What it actually does is to adjust the width of the popup window. If you pass `0` from the parent component, the popup window will take up 100% of the width of the screen. Also, if you pass `20px` or `10%`, the width of the popup content will be shortened.
 
 ## App.js
-Now, we will import **Popup component** and create a button. If we click the button, the Popup will show up. Instead of importing Button from “react-native”, we will import **TouchableOpacity** and make it look like a button because it is easily noticeable when clicked.
+Now, we will import **Popup component** and create a button. If we click the button, the Popup will show up. Instead of importing Button from `react-native`, we will import **TouchableOpacity** and make it look like a button because it is easily noticeable when clicked.
 
-To open and close the popup window, we should store the state of visibility, so we will import useState from “react”. Also, we need to create openPopup, closePopup handlers to set the state of visibility. When we press the button, it will trigger openPopup handler and set the state to “true”. The closePoup handler will be passed to Popup component we created to close itself by setting the state to “false”. Finally, We will add some css rules to the popup window so that we can see them properly.
+To open and close the popup window, we should store the state of visibility, so we will import useState from `react`. Also, we need to create openPopup, closePopup handlers to set the state of visibility. When we press the button, it will trigger openPopup handler and set the state to `true`. The closePoup handler will be passed to Popup component we created to close itself by setting the state to `false`. Finally, We will add some css rules to the popup window so that we can see them properly.
 
 ```js
 import { useState } from 'react';

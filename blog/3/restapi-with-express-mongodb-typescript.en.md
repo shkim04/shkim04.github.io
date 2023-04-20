@@ -23,11 +23,15 @@ Once you created the account and sign in, you can see the dashboard that looks l
 
 ![mongodb-1](../imgs/3/mongodb-1.png)
 
-It is necessary to create a database user and give it a role so that you can have an access to the database from an application. Click _**Database Access**_ in the left side bar to do it and then, click **ADD NEW DATABASE USER** in the right side of the page.
+It is necessary to create a database user and give it a role so that you can have an access to the database from an application. 
+
+Click **Database Access** in the left side bar to do it and then, click **ADD NEW DATABASE USER** in the right side of the page.
 
 ![mongodb-2](../imgs/3/mongodb-2.png)
 
-Enter a username and password. You will need to remember the username and password to use them to connect to the database. Next, select _Atlas admin_ for the role. You can give another role to the user if you allow the user to write and read or just read.
+Enter a username and password. You will need to remember the username and password to use them to connect to the database. 
+
+Next, select **Atlas admin** for the role. You can give another role to the user if you allow the user to write and read or just read.
 
 Now, go back to the dashboard. Click _connect_ so you will get URI to connect our Node.js API server to the database.
 
@@ -70,7 +74,11 @@ npm install --save-dev cross-env @types/node @types/express
 > **MongoDB** _is the official [MongoDB](https://www.mongodb.com/) driver for Node.js._
 
 ## Configure Typescript
-Since typescript support to a strong type checking, potential errors can be easily caught in your editor. To apply it, create tsconfig.json under the project directory and configure typescript. Then, copy and paste the codes shown below. You can change a few of fields under _compilerOptions_ depending on your needs. I won’t go into the detail of the options so, check the official [website](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) if you want to know more about it.
+Since typescript support to a strong type checking, potential errors can be easily caught in your editor. 
+
+Create tsconfig.json under the project directory and configure typescript. Then, copy and paste the codes shown below. 
+
+You can change a few of fields under **compilerOptions** depending on your needs. I won’t go into the detail of the options so, check the official [website](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) if you want to know more about it.
 
 ```js
 {
@@ -110,9 +118,9 @@ Since typescript support to a strong type checking, potential errors can be easi
 ## Modify Scripts in package.json
 ![package-json](../imgs/3/package-json.png)
 
-Let’s add two commands under scripts in package.json. You can assign a complicated command to one of those keys and then, simply run the command by entering _npm run [key name]_.
+Let’s add two commands under scripts in package.json. You can assign a complicated command to one of those keys and then, simply run the command by entering `npm run [key name]`.
 
-You can run the application by entering “npm run dev” which actually executes _cross-env NODE-ENV=development nodemon --exec ts-node ./app.ts_. When file changes occur, the application will be restarted automatically thanks to nodemon. The script, “start” is for when you run the application in production.
+You can run the application by entering `npm run dev` which actually executes `cross-env NODE-ENV=development nodemon --exec ts-node ./app.ts_`. When file changes occur, the application will be restarted automatically thanks to nodemon. The script, **start** is for when you run the application in production.
 
 ## Start Express Server
 ```js
@@ -133,11 +141,11 @@ app.listen(4000, () => {
     console.log("Server is running on 4000");
 })
 ```
-After copying and pasting the code in app.ts, enter npm run dev as mentioned above to start the server. You can see the terminal saying:
+After copying and pasting the code in app.ts, enter `npm run dev` as mentioned above to start the server. You can see the terminal saying:
 
 _the server is listening to the port 4000_.
 
-Each of the routes represents a URL that API users make a request to. Here, you will have a get route and then, pass '/' as its path and a call back function. What happens in the route is that when the API users make a request to the URL of this API, they will get a response showing “Here is the response”. Open a browser and enter http://localhost:4000 to see the response - Since we develop in our own local computer, we can have an access to the API with localhost_.
+Each of the routes represents a URL that API users make a request to. Here, you will have a get route and then, pass '/' as its path and a call back function. What happens in the route is that when the API users make a request to the URL of this API, they will get a response showing _**Here is the response**_. Open a browser and enter http://localhost:4000 to see the response - _Since we develop in our own local computer, we can have an access to the API with localhost_.
 
 The call back function takes mainly 2 objects as its arguments. They are Request and Response object. 
 
@@ -148,7 +156,7 @@ Response object is what the API users will get from the API route. It can be a s
 ## Set Environment Variables
 It is conventional to write environment variables in capital letters.
 
-Create development.env and production.env files under the project directory. In both files, write the variable names as shown below.
+Create **development.env** and **production.env** files under the project directory. In both files, write the variable names as shown below.
 
 Then, assign the mongodb uri that we have gotten in the section above to **MONGODB_URI**.
 
@@ -181,7 +189,7 @@ export default config;
 
 When you develop an application, it is required to test the application so many times before the production. Therefore, you need to set up an environment for testing as well as an environment for production. 
 
-cross-env allows you to set the environment by putting “cross-env NODE_ENV=production” in front of the command to run the application. Then, it can access to a different .env files that you have created so you can create the same code that has two or more different environments.
+cross-env allows you to set the environment by putting `cross-env NODE_ENV=production` in front of the command to run the application. Then, it can access to a different .env files that you have created so you can create the same code that has two or more different environments.
 
 Create a file named config.ts under the project directory and import dotenv to enable us to access to **[process.env.NODE_ENV].env** file. If you set development to NODE_ENV in the command, Dotenv will read variables from development.env here.
 
@@ -263,9 +271,9 @@ app.listen(config.port, () => {
 ```
 Add a post route that will receive a first name and a last name from the API users and will insert the information to the database. These data can be accessed by the property of request object called body. 
 
-Assign what the MongoDB promise resolves to a variable named connection — Notice that the database name and collection name you set in config.ts are passed — and we will insert the first name and last name by the method called _insertOne_. 
+Assign what the MongoDB promise resolves to a variable named connection — Notice that the database name and collection name you set in config.ts are passed — and we will insert the first name and last name by the method called **insertOne**. 
 
-If there is no error that is caught, the post route will send the status code which is 200 and the string saying “Successfully Created in DB” to the API users.
+If there is no error that is caught, the post route will send the status code which is 200 and the string saying _**Successfully Created in DB**_ to the API users.
 
 ## Make A Post Request With Insomnia
 

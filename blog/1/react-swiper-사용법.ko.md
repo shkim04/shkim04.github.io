@@ -32,7 +32,7 @@ npm install swiper
 ```
 
 ## Swiper modules 설치
-Slider 폴더 안에 있는 index.js에 swiper 라이브러리에서 이 App에 활용할 4가지 모듈을 import한다. Navigation, Pagination, EffectFade, Autoplay가 해당 4가지 모듈이다. 다른 기능을 사용하고 싶다면 해당 모듈을 import하면 된다. 다른 모듈에 관한 설명은 Swiper 라이브러리 공식 [웹사이트](https://swiperjs.com/swiper-api#modules)에 나와 있으니 참고하면 된다.
+Slider 폴더 안에 있는 index.js에 swiper 라이브러리에서 이 App에 활용할 4가지 모듈을 import한다. **Navigation, Pagination, EffectFade, Autoplay**들이 해당 4가지 모듈이다. 다른 기능을 사용하고 싶다면 해당 모듈을 import하면 된다. 다른 모듈에 관한 설명은 Swiper 라이브러리 공식 [웹사이트](https://swiperjs.com/swiper-api#modules)에 나와 있으니 참고하면 된다.
 
 Slider 컴포넌트:
 ```js
@@ -82,7 +82,7 @@ export {SwiperSlide as Slide};
 export default Slider;
 ```
 
-주석에 코드에 대한 설명들이 자세히 적혀 있으나 React를 처음 접하게 된 사람들은 swiper.style.js가 정확하게 어떤 역할을 하는지 그리고 어떻게 활용하는지 궁금하실 수도 있다. styled-component라는 라이브러리로 Slider 컴포넌트를 감싸서 해당 컴포넌트에 css를 적용하는 역할을 한다. swiper.style.js 안에 아래 코드와 같이 적어본다:
+주석에 코드에 대한 설명들이 자세히 적혀 있으나 React를 처음 접하게 된 사람들은 swiper.style.js가 정확하게 어떤 역할을 하는지 그리고 어떻게 활용하는지 궁금하실 수도 있다. **styled-component**라는 라이브러리로 Slider 컴포넌트를 감싸서 해당 컴포넌트에 css를 적용하는 역할을 한다. swiper.style.js 안에 아래 코드와 같이 적어본다:
 
 ```js
 import styled, {css} from "styled-components";

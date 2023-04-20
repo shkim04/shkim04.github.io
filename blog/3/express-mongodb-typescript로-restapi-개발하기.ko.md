@@ -1,5 +1,5 @@
 ---
-title: Express, MongoDB, Typescript로 REST API 개발하기
+title: Express, MongoDB, Typescript로 REST API 개발
 date: "2022-12-01T00:00:00.000Z"
 description: "REST API - MongoDB 설정부터 간단한 CRUD 테스트까지 Node.js 프레임워크인 Express와 Typescript로 개발하는 내용입니다."
 tag: 
@@ -23,11 +23,15 @@ MongoDB 사용을 위해서 계정을 만들어야 한다. google이나 github �
 
 ![mongodb-1](../imgs/3/mongodb-1.png)
 
-개발하려고 하는 앱이 데이터베이스에 접근하게 하려면 데이터베이스 사용자를 생성하고 역할을 주어야 한다. 좌측 사이드바에 있는 _**Database Access**_ 누르고 넘어간 페이지의 우측에 보이는 **ADD NEW DATABASE USER** 클릭한다.
+개발하려고 하는 앱이 데이터베이스에 접근하게 하려면 데이터베이스 사용자를 생성하고 역할을 주어야 한다. 
+
+좌측 사이드바에 있는 **Database Access** 누르고 넘어간 페이지의 우측에 보이는 **ADD NEW DATABASE USER** 클릭한다.
 
 ![mongodb-2](../imgs/3/mongodb-2.png)
 
-사용자 이름과 비밀번호를 입력한다. 데이터베이스에 연결할 때 이 두 정보가 필요하니 꼭 기억해두어야 한다. 그리고 해당 사용자에 _Atlas admin_ 역할을 부여한다. 만약 단순히 읽기 역할만 주고 싶거나 읽기/쓰기 역할만 주고 싶을 때는 그에 맞게 권한을 부여하면 된다.
+사용자 이름과 비밀번호를 입력한다. 데이터베이스에 연결할 때 이 두 정보가 필요하니 꼭 기억해두어야 한다. 
+
+다음 해당 사용자에 **Atlas admin** 역할을 부여한다. 만약 단순히 읽기 역할만 주고 싶거나 읽기/쓰기 역할만 주고 싶을 때는 그에 맞게 권한을 부여하면 된다.
 
 다시 대시보드로 페이지를 이동하고 _connect_ 를 클릭하면 개발할 API에 사용될 URI를 얻어야 한다.
 
@@ -70,7 +74,11 @@ npm install --save-dev cross-env @types/node @types/express
 > **MongoDB** _Node.js 용 [MongoDB](https://www.mongodb.com/) 드라이버이다._
 
 ## Typescript 설정
-앞서 설명했듯이 Typescript는 타입 확인을 엄격하게 적용하여 에디터에서 쉽게 에러를 찾을 수 있도록 도와준다. 프로젝트 폴더 하위에 tsconfig.json이라는 파일을 만들고 아래 코드를 입력한다. 개발자의 원하는대로 _compilerOptions_ 을 바꿔주면서 사용하면 된다. 이 설정에 관해서 자세한 설명은 생략하오니 더 많은 정보를 원한다면 [공식 웹사이트](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) 확인해주길 바란다.
+앞서 설명했듯이 Typescript는 타입 확인을 엄격하게 적용하여 에디터에서 쉽게 에러를 찾을 수 있도록 도와준다. 
+
+프로젝트 폴더 하위에 tsconfig.json이라는 파일을 만들고 아래 코드를 입력한다. 
+
+개발자의 원하는대로 **compilerOptions** 을 바꿔주면서 사용하면 된다. 이 설정에 관해서 자세한 설명은 생략하오니 더 많은 정보를 원한다면 [공식 웹사이트](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) 확인해주길 바란다.
 
 ```js
 {
@@ -110,9 +118,9 @@ npm install --save-dev cross-env @types/node @types/express
 ## package.json
 ![package-json](../imgs/3/package-json.png)
 
-package.json 안에 script 필드 하위에 명령어 두개를 추가해보자. 복잡한 명령어를 key 이름에 저장한 후 간단하게 _npm run [key name]_ 입력하는 방식으로 해당 명령어를 실행할 수 있다.
+package.json 안에 script 필드 하위에 명령어 두개를 추가해보자. 복잡한 명령어를 key 이름에 저장한 후 간단하게 `npm run [key name]` 입력하는 방식으로 해당 명령어를 실행할 수 있다.
 
-“npm run dev”를 터미널에 입력하고 엔터를 누르면 실제로 _cross-env NODE-ENV=development nodemon --exec ts-node ./app.ts_ 가 실행된다. 개발모드로 실행되고 nodemon이 코드 수정이 있을 시 자동으로 재시작한다. "start"는 배포 시 사용된다.
+`npm run dev`를 터미널에 입력하고 엔터를 누르면 실제로 `cross-env NODE-ENV=development nodemon --exec ts-node ./app.ts` 가 실행된다. 개발모드로 실행되고 nodemon이 코드 수정이 있을 시 자동으로 재시작한다. **start**는 배포 시 사용된다.
 
 ## Express 서버
 ```js
@@ -133,11 +141,11 @@ app.listen(4000, () => {
     console.log("Server is running on 4000");
 })
 ```
-위 코드를 app.ts 파일에 입력한 뒤 npm run dev를 터미널에 입력하여 서버를 시작한다. 터미널에 다음과 같이 로그가 뜬다:
+위 코드를 app.ts 파일에 입력한 뒤 `npm run dev`를 터미널에 입력하여 서버를 시작한다. 터미널에 다음과 같이 로그가 뜬다:
 
 _the server is listening to the port 4000_.
 
-각각의 라우트는 API를 사용하는 사람이 요청을 보낼 때 쓰이는 url이라고 보면 된다. 위의 코드에는 get 라우트 있는데 경로가 '/'이며 콜백 함수를 파라미터로 가지고 있다. 이 라우트에 요청을 보내게 되면 "Here is the response"라는 응답을 받게 된다. 브라우저를 열고 주소 창에 http://localhost:4000를 입력해보자 - _로컬 환경에서 개발하기 때문에 localhost에 접근할 수 있다_.
+각각의 라우트는 API를 사용하는 사람이 요청을 보낼 때 쓰이는 url이라고 보면 된다. 위의 코드에는 get 라우트 있는데 경로가 '/'이며 콜백 함수를 파라미터로 가지고 있다. 이 라우트에 요청을 보내게 되면 _**Here is the response**_ 라는 응답을 받게 된다. 브라우저를 열고 주소 창에 http://localhost:4000를 입력해보자 - _로컬 환경에서 개발하기 때문에 localhost에 접근할 수 있다_.
 
 콜백함수는 주로 2가지 객체를 인자 값으로 받는데 Request와 Response 객체이다. 
 
@@ -148,7 +156,7 @@ Response 객체는 API 사용자가 해당 API 라우트로부터 받는 정보�
 ## 환경 변수
 환경 변수는 보통 영어는 대문자로 쓰는 것이 일반적이다.
 
-프로젝트 폴더 하위에 development.env와 production.env 파일을 만들고 아래와 같이 변수 이름들을 적어 준다.
+프로젝트 폴더 하위에 **development.env**와 **production.env** 파일을 만들고 아래와 같이 변수 이름들을 적어 준다.
 
 MongoDB로부터 얻은 uri를 **MONGODB_URI**로 설정한다.
 
@@ -181,7 +189,7 @@ export default config;
 
 어플리케이션을 개발할 때 배포 전에 무수히 많은 테스트를 거치는 것이 일반적이다. 이 때문에 개발 설정과 배포 설정을 나누는 것은 굉장히 중요하다. 
 
-cross-env는 환경에 따른 설정을 다르게 적용할 수 있게 도와주는 라이브러리인데 “cross-env NODE_ENV=production” 처럼 입력할 명령어 앞에 두어 어떤 환경인지 명시해 준다. 이 덕분에 다른 .env 파일을 환경에 맞게 설정해주기 때문에 같은 코드를 두번 작성할 필요가 없다.
+cross-env는 환경에 따른 설정을 다르게 적용할 수 있게 도와주는 라이브러리인데 `cross-env NODE_ENV=production` 처럼 입력할 명령어 앞에 두어 어떤 환경인지 명시해 준다. 이 덕분에 다른 .env 파일을 환경에 맞게 설정해주기 때문에 같은 코드를 두번 작성할 필요가 없다.
 
 config.ts 하위에 파일을 만든 뒤 dotenv를 import한다. 이 dotenv가 **[process.env.NODE_ENV].env** 파일에 담긴 정보를 읽어 오는 역할을 한다. 이 때 NODE_ENV는 명령어에서 명시해 줬던 development 혹은 production이 되겠다.
 
@@ -214,7 +222,7 @@ const connectMongoDB: () => Promise<any> = () => {
 
 export default connectMongoDB;
 ```
-프로젝트 폴더 하위에 파일 db.ts를 만든 뒤, MongoClient를 import한다. 그리고 파일 config.ts 만든 뒤 _config.mongodb.uri_ 을 인자 값으로 입력한다. 이 uri는 MongoDB 설정 시 얻었던 uri이다.
+프로젝트 폴더 하위에 파일 db.ts를 만든 뒤, MongoClient를 import한다. 그리고 파일 config.ts 만든 뒤 _config.mongodb.uri_ 을 인자 값으로 입력한다. 이 uri는 MongoDB 설정할 때 얻은 uri이다.
 
 마지막으로 MongoDB를 비동기적으로 연결하도록 promise를 반환 값으로 받게 한다. 이제 API에 테스트 요청을 위해 코드를 수정해보자.
 
@@ -263,9 +271,9 @@ app.listen(config.port, () => {
 ```
 post 라우트를 추가한다. 이 라우트는 API 사용자로부터 성과 이름을 받고 이를 데이터베이스에 넣는 기능이 목적이다. Request 객체의 body라는 필드에 사용자가 입력한 성과 이름이 저장이 된다.
 
-MongoDB promise가 resolve한 값을 connect라는 변수를 선언하여 저장한다 - _config.ts에 저장한 데이터베이스와 콜렉션 이름이 여기 쓰인다_ - 요청에서 받은 성과 이름을 _insertOne_ 이라는 함수로 데이터베이스에 입력하게 된다.
+MongoDB promise가 resolve한 값을 connect라는 변수를 선언하여 저장한다 - _config.ts에 저장한 데이터베이스와 콜렉션 이름이 여기 쓰인다_ - 요청에서 받은 성과 이름을 **insertOne** 이라는 함수로 데이터베이스에 입력하게 된다.
 
-에러 없이 코드가 실행된다면 post 라우트가 status 코드 200과 함께 "Successfully Created in DB"라는 정보를 사용자에게 보낸다.
+에러 없이 코드가 실행된다면 post 라우트가 status 코드 200과 함께 _**Successfully Created in DB**_ 라는 정보를 사용자에게 보낸다.
 
 ## Insomnia 요청 테스트
 

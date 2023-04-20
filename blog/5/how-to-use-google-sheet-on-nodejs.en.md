@@ -28,7 +28,7 @@ Name it properly so that you can remember what it will do.
 
 ![service-account-detail](../imgs/5/service-account-detail.png)
 
-For the sake of convenience, we will give _**Owner role**_ to the service account that we have just created. But, you have to know that the service account should be given different roles depending on the purpose of the usage.
+For the sake of convenience, we will give **Owner role** to the service account that we have just created. But, you have to know that the service account should be given different roles depending on the purpose of the usage.
 
 ![select-role](../imgs/5/select-role.png)
 

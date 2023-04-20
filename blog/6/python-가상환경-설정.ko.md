@@ -1,5 +1,5 @@
 ---
-title: 윈도우에 Python 가상 환경 설치하기
+title: 윈도우에 Python 가상 환경 설치
 date: "2023-01-19T00:00:00.000Z"
 description: "윈도우에 Python 가상 환경을 설치하는 방법을 알아보고 Python 프로젝트를 진행할 때 가상 환경을 설치하는 이유를 설명합니다."
 tag: 
@@ -29,7 +29,7 @@ Python으로 어플리케이션을 개발할 때, 그 프로젝트의 규모가 
 pip install virtualenv
 ```
 
-터미널을 열어 위의 명령어를 입력한다. virtualenv라는 패키지를 전역적으로 설치한다. 완료가 되면 설치가 잘 되었는지 다음 명령어를 입력하여 알 수 있다:
+터미널을 열어 위의 명령어를 입력한다. **virtualenv**라는 패키지를 전역적으로 설치한다. 완료가 되면 설치가 잘 되었는지 다음 명령어를 입력하여 알 수 있다:
 
 ```
 virtualenv --version
@@ -39,11 +39,11 @@ virtualenv --version
 
 ![terminal](../imgs/6/terminal.png)
 
-만약 아래와 같이 virtualenv를 인식하지 못한다는 로그가 출력이 되면 virtualenv 실행 파일을 시스템 환경 변수에 추가해주어야 한다.
+만약 아래와 같이 virtualenv를 인식하지 못한다는 로그가 출력이 되면 **virtualenv.exe**의 경로를 시스템 환경 변수에 추가해주어야 한다.
 
 ![not-recognized](../imgs/6/not-recognized.png)
 
-방법으로 다음과 같다:
+방법은 다음과 같다:
 1. 실행파일의 경로를 확인한다 - _보통 C:\Users\[your user name]\AppData\Roaming\Python\Python[your python version]\Scripts folder 형식일 것이다_
 2. Window 키를 누른 후, 환경 변수 편집을 찾아 클릭한다
 3. **환경 변수**를 클릭한다
@@ -61,7 +61,7 @@ cd /path/to/test_python
 virtualenv [your virtual environment name]
 ```
 
-**test_python** 하위에 **[your virtual environment name]**라는 이름으로 새로운 폴더가 생성된다. 가상 환경의 이름은 알아서 결정하면 된다. 실제로 프로젝트에 가상 환경을 적용하기 위해서는 활성화를 시켜주어야 한다. 다음 명령어를 입력해보자 - _터미널의 경로가 **test_python**이어야 한다는 것을 주의하자_.
+**test_python** 하위에 **[your virtual environment name]** 라는 이름으로 새로운 폴더가 생성된다. 가상 환경의 이름은 알아서 결정하면 된다. 실제로 프로젝트에 가상 환경을 적용하기 위해서는 활성화를 시켜주어야 한다. 다음 명령어를 입력해보자 - _터미널의 경로가 **test_python**이어야 한다는 것을 주의하자_.
 
 ```
 .\[your virtual environment name]\Scripts\activate

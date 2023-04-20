@@ -57,7 +57,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     const defaultKey = findKey(locales, o => o.default === true)
     const isDefaultLang = lang === defaultKey
     const titleByLang = blogTitle[order]
-    
+    console.log(titleByLang, order)
     createNodeField({ node, name: `slug`, value: localizedSlug({isDefaultLang: isDefaultLang, locale: lang, slug: slug}) })
     createNodeField({ node, name: `locale`, value: lang })
     createNodeField({ node, name: `isDefaultLang`, value: isDefaultLang })

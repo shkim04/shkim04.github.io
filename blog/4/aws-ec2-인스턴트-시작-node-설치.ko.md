@@ -1,5 +1,5 @@
 ---
-title: AWS EC2 인스턴스 생성 후 Node 다운로드
+title: AWS EC2 인스턴스 생성 후 Node 설치
 date: "2022-12-27T00:00:00.000Z"
 description: "AWS EC2는 온디맨드 형식의 컴퓨팅 서비스를 제공하는 플랫폼이다. 리눅스 인스턴스를 생성해보고 Node까지 설치하는 가이드입니다."
 tag: 
@@ -19,7 +19,9 @@ tag:
 
 ![launch-instance](../imgs/4/launch-instance.png)
 
-다음 페이지에서 인스턴스에 이름을 준다 - _이름은 인스턴스를 잘 표현할 수 있게 지어준다_. 이름 영역 아래 Amazon Linux를 선택한다. 이 가상의 컴퓨터의 OS를 리눅스로 설정해준 것이다. 테스트 용으로 만드는 것이기 때문에 무료 티어로 선택한다. 무료 티어이기 때문에 성능이 좋지 않다는 것을 감안해야 한다. 이 [무료 티어](https://aws.amazon.com/ec2/pricing/?loc=ft#Free_tier)가 다 끝나면 아마존에서 자동적으로 결제가 진행되니 주의하기 바란다.
+다음 페이지에서 인스턴스에 이름을 준다 - _이름은 인스턴스를 잘 표현할 수 있게 지어준다_. 이름 영역 아래 Amazon Linux를 선택한다. 이 가상의 컴퓨터의 OS를 리눅스로 설정해준 것이다. 테스트 용으로 만드는 것이기 때문에 무료 티어로 선택한다. 무료 티어이기 때문에 성능이 좋지 않다는 것을 감안해야 한다. 
+
+이 [무료 티어](https://aws.amazon.com/ec2/pricing/?loc=ft#Free_tier)가 다 끝나면 아마존에서 자동적으로 결제가 진행되니 주의하기 바란다 - _12개월 간 월 750시간_.
 
 ![create-instance](../imgs/4/create-instance.png)
 
@@ -43,7 +45,7 @@ tag:
 ## SSH로 연결
 인스턴스에 연결하는 방법은 여럿이다. 대시보드에서 직접 웹브라우저로 연결할 수 있으나 SSH를 통해 연결하는 것이 속도가 더 빠르고 다루기 쉬워서 좋다. 아래 명령어를 복사한다.
 
-![connect-instance](../imgs/4/create-instance.png)
+![connect-instance](../imgs/4/connect-instance.png)
 
 그리고 윈도우를 사용하면 .pem 키가 저장된 폴더로 이동한다. 검색창을 누르고 **cmd**를 입력하면 터미널이 열리게 된다 - _터미널을 열고 명령어를 통해 .pem 키가 저장된 폴더로 이동해도 된다_. 
 
