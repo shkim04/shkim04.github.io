@@ -1,7 +1,7 @@
 ---
 title: React Native Modal Expo로 구현하기
 date: "2022-11-18T00:00:00.000Z"
-description: "Expo는 플랫폼에 상관없이 React Native App을 구현할 수 있게 만들어주는 도구입니다. Expo를 활용하여 앱에 Modal 컴포넌트를 효과적으로 적용하는 방법 설명"
+description: "Expo는 플랫폼에 상관없이 React Native App을 구현할 수 있게 만들어주는 도구입니다. Expo를 활용하여 앱에 Modal 컴포넌트를 효과적으로 적용하는 방법에 대한 설명입니다."
 tag: 
   - Others
 ---

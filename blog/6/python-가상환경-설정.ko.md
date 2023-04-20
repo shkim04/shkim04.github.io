@@ -1,7 +1,7 @@
 ---
 title: 윈도우에 Python 가상 환경 설치하기
 date: "2023-01-19T00:00:00.000Z"
-description: "윈도우에 Python 가상 환경을 설치하는 방법을 알아보고 Python 프로젝트를 진행할 때 가상 환경을 설치하는 이유에 대한 설명"
+description: "윈도우에 Python 가상 환경을 설치하는 방법을 알아보고 Python 프로젝트를 진행할 때 가상 환경을 설치하는 이유를 설명합니다."
 tag: 
     - Python
 ---

@@ -1,7 +1,7 @@
 ---
 title: Node.js에서 Googe Sheet API 사용하기
 date: "2023-01-03T00:00:00.000Z"
-description: "Node.js에 Google Sheet API 연결하여 구글 시트에 담긴 데이터 읽기, 쓰기, 삭제"
+description: "Node.js에 Google Sheet API 연결하여 구글 시트에 담긴 데이터 읽기, 쓰기, 삭제해보는 내용입니다."
 tag: 
   - NodeJS
 ---

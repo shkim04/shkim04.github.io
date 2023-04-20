@@ -1,7 +1,7 @@
 ---
 title: Express, MongoDB, Typescript로 REST API 개발하기
 date: "2022-12-01T00:00:00.000Z"
-description: "REST API - MongoDB 설정부터 간단한 CRUD 테스트까지 Node.js 프레임워크인 Express와 Typescript로 개발"
+description: "REST API - MongoDB 설정부터 간단한 CRUD 테스트까지 Node.js 프레임워크인 Express와 Typescript로 개발하는 내용입니다."
 tag: 
   - NodeJS
   - MongoDB
