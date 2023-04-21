@@ -22,7 +22,7 @@ tag:
 - 검색 창에 Error reporting을 입력하고 해당 API를 허용한다
 
 ## Node.js — Express
-Google Error Reporting을 사용하는 법에 중점을 두기 위해 Express API 서버를 만드는 것은 생략한다. 테스트용 Express API가 없는 분은 개인 **[레파지토리]**(https://github.com/shkim04/express_typescript_simple_api)에서 다운로드 받길 바란다. 준비가 되면 프로젝트를 열어 시작해보자.
+Google Error Reporting을 사용하는 법에 중점을 두기 위해 Express API 서버를 만드는 것은 생략한다. 테스트용 Express API가 없는 분은 개인 [**레파지토리**](https://github.com/shkim04/express_typescript_simple_api)에서 다운로드 받길 바란다. 준비가 되면 프로젝트를 열어 시작해보자.
 
 ##  Express에 Google Error Reporting 설정
 ```
@@ -65,7 +65,7 @@ app.get("/error", async (req: Request, res: Response, next: NextFunction): Promi
    }
 });
 ```
-`/error` 라우트를 만드는데 이 라우트에 요청을 보내면 에러를 생성하게 만들어 catch 블락에서 에러를 잡아낼 수 있도록 한다. 이 catch 블락에 **next** 객체가 있는데 _**middleware**_로써 역할을 한다. 
+`/error` 라우트를 만드는데 이 라우트에 요청을 보내면 에러를 생성하게 만들어 catch 블락에서 에러를 잡아낼 수 있도록 한다. 이 catch 블락에 **next** 객체가 있는데 _**middleware**_ 로써 역할을 한다. 
 
 간단히 말하자면 에러 내용이 담긴 문자열을 다른 함수에 전달한다. 아래 코드는 그 에러 내용을 받아 처리하는 부분이다:
 
@@ -83,8 +83,7 @@ Expresss 어플리케이션에서 에러가 발생하면 즉각적으로 **Googl
 - **Email** 란에 있는 **Add new**를 클릭한다
 - 대화 상자를 완료하고 **Save**를 클릭한다
 
-이 notification 채널을 **google error reporting**에 추가한다. 에러가 발생하면 google error reporting에만 기록되고 notification 채널에 등록한 이메일로 알림을 받을 수 있다.
-**google error reporting**에 notification 채널을 등록하는 법은 다음과 같다:
+이 notification 채널을 **google error reporting**에 추가한다. 이제 에러가 발생하면 google error reporting에 기록이 되고 notification 채널에 등록한 이메일로 알림을 받을 수 있다. **google error reporting**에 notification 채널을 등록하는 법은 다음과 같다:
 
 ![error-reporting](../imgs/9/error-reporting.png)
 
