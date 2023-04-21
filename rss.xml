@@ -1,171 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[My perosnal blog that shows what I am working on and thoughts]]></description><link>http://github.com/dylang/node-rss</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 21 Apr 2023 14:32:17 GMT</lastBuildDate><item><title><![CDATA[Node.js에서 Google Error Reporting 사용하기]]></title><description><![CDATA[서비스중인 어플리케이션에 에러가 발생했을 때 개발자에게 에러를 신속하게 확인하고 알리는 것만큼 중요한 것도 없다. 이 목적으로 사용할 수 있는 많은 플랫폼들이 있는데 그 중 Google Error Reporting + Cloud Monitoring…]]></description><link>null/nodejs-google-error-reporting-사용하기</link><guid isPermaLink="false">null/nodejs-google-error-reporting-사용하기</guid><pubDate>Tue, 07 Feb 2023 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;서비스중인 어플리케이션에 에러가 발생했을 때 개발자에게 에러를 신속하게 확인하고 알리는 것만큼 중요한 것도 없다. 이 목적으로 사용할 수 있는 많은 플랫폼들이 있는데 그 중 &lt;strong&gt;Google Error Reporting + Cloud Monitoring&lt;/strong&gt;에 대해서 알아보려고 한다.&lt;/p&gt;
-&lt;h2&gt;필수&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;google cloud 계정&lt;/li&gt;
-&lt;li&gt;google service 계정 — &lt;em&gt;만드는 법을 모르시는 분들은 &lt;a href=&quot;https://shkim04.github.io/nodejs-%EC%97%90%EC%84%9C-google-sheet-%EC%82%AC%EC%9A%A9%ED%95%98%EB%8A%94%EB%B2%95&quot;&gt;이 글&lt;/a&gt;을 보시면 된다&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;Node&lt;/li&gt;
-&lt;li&gt;Insomnia&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Google Error Reporting 허용&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;google clould 프로젝트 대시보드로 이동한다&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;APIs and services&lt;/strong&gt; 클릭&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;ENABLE APIS AND SERVICE&lt;/strong&gt; 클릭&lt;/li&gt;
-&lt;li&gt;검색 창에 Error reporting을 입력하고 해당 API를 허용한다&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Node.js — Express&lt;/h2&gt;
-&lt;p&gt;Google Error Reporting을 사용하는 법에 중점을 두기 위해 Express API 서버를 만드는 것은 생략한다. 테스트용 Express API가 없는 분은 개인 &lt;strong&gt;[레파지토리]&lt;/strong&gt;(&lt;a href=&quot;https://github.com/shkim04/express_typescript_simple_api)%EC%97%90%EC%84%9C&quot;&gt;https://github.com/shkim04/express_typescript_simple_api)에서&lt;/a&gt; 다운로드 받길 바란다. 준비가 되면 프로젝트를 열어 시작해보자.&lt;/p&gt;
-&lt;h2&gt;Express에 Google Error Reporting 설정&lt;/h2&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;npm install --save @google-cloud/error-reporting&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;필요한 라이브러리를 받은 후 error reproting을 정상적으로 동작시키기 위해 &lt;strong&gt;ErrorReporting&lt;/strong&gt; 객체 안에 필요한 키 값들을 알맞게 넣어줘야 한다. 이 키 값들은 &lt;strong&gt;google service account&lt;/strong&gt; 생성하고 난 뒤 추가한 key &lt;code class=&quot;language-text&quot;&gt;json&lt;/code&gt; 파일에서 얻을 수 있다.&lt;/p&gt;
-&lt;p&gt;아래 코드를 메인 스크립트에 추가한 뒤 필요한 값들을 입력한다:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; ErrorReporting &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;@google-cloud/error-reporting&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;token comment&quot;&gt;// Instantiates a client&lt;/span&gt;
-&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; errorReporting &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;ErrorReporting&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-                           &lt;span class=&quot;token literal-property property&quot;&gt;projectId&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;your-project-id&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-                           &lt;span class=&quot;token literal-property property&quot;&gt;keyFilename&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;key.json name&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-                           &lt;span class=&quot;token comment&quot;&gt;// this should look like &apos;hello.json&apos;&lt;/span&gt;
-                           &lt;span class=&quot;token literal-property property&quot;&gt;credentials&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token template-string&quot;&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;/path/to/key.json&lt;/span&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-                           &lt;span class=&quot;token literal-property property&quot;&gt;reportMode&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;always&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-                           &lt;span class=&quot;token comment&quot;&gt;// the reason why I set this to &apos;always&apos; is &lt;/span&gt;
-                           &lt;span class=&quot;token comment&quot;&gt;// because the application is run in development mode&lt;/span&gt;
-                           &lt;span class=&quot;token literal-property property&quot;&gt;logLevel&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-                           &lt;span class=&quot;token literal-property property&quot;&gt;serviceContext&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-                              &lt;span class=&quot;token literal-property property&quot;&gt;service&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;Name your app&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-                              &lt;span class=&quot;token comment&quot;&gt;// ex) Test_APP&lt;/span&gt;
-                              &lt;span class=&quot;token literal-property property&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;specify your version&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-                              &lt;span class=&quot;token comment&quot;&gt;// ex) 0.0.1&lt;/span&gt;
-                           &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-                           &lt;span class=&quot;token comment&quot;&gt;// serviceContext field should be filled&lt;/span&gt;
-                      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2&gt;테스트 Route 추가&lt;/h2&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;/error&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;req&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Request&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Response&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; NextFunction&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Promise&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;token keyword&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;token keyword&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Error&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;this is an intended error in &apos;/error&apos; route&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-   &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-   &lt;span class=&quot;token keyword&quot;&gt;catch&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;err&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;token function&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token template-string&quot;&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&amp;lt;GET &apos;/error route error&gt;: &lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;${&lt;/span&gt;err&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-   &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;/error&lt;/code&gt; 라우트를 만드는데 이 라우트에 요청을 보내면 에러를 생성하게 만들어 catch 블락에서 에러를 잡아낼 수 있도록 한다. 이 catch 블락에 &lt;strong&gt;next&lt;/strong&gt; 객체가 있는데 _&lt;strong&gt;middleware&lt;/strong&gt;_로써 역할을 한다.&lt;/p&gt;
-&lt;p&gt;간단히 말하자면 에러 내용이 담긴 문자열을 다른 함수에 전달한다. 아래 코드는 그 에러 내용을 받아 처리하는 부분이다:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;use&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;errorReporting&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;express&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;위 코드를 테스트 라우트 다음에 적어야 정상적으로 동작하지 주의한다.&lt;/p&gt;
-&lt;h2&gt;Cloud Monitoring Notification 채널 생성&lt;/h2&gt;
-&lt;p&gt;Expresss 어플리케이션에서 에러가 발생하면 즉각적으로 &lt;strong&gt;Google Error Reporting&lt;/strong&gt; 콘솔에 기록이 되는 것을 예상할 수 있다. 하지만 에러가 발생해도 에러가 났는지 알려주는 기능은 없다. 에러가 발생된 것을 알리는 것이 중요한데 google cloud에는 자체적으로 모니터링 서비스가 존재한다. notificiation 채널을 만드는 법은 다음과 같다:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Could Monitoring 대시보드로 이동한다&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Alerting&lt;/strong&gt; 클릭 후 &lt;strong&gt;Edit notification channels&lt;/strong&gt; 클릭한다&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Email&lt;/strong&gt; 란에 있는 &lt;strong&gt;Add new&lt;/strong&gt;를 클릭한다&lt;/li&gt;
-&lt;li&gt;대화 상자를 완료하고 &lt;strong&gt;Save&lt;/strong&gt;를 클릭한다&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;이 notification 채널을 &lt;strong&gt;google error reporting&lt;/strong&gt;에 추가한다. 에러가 발생하면 google error reporting에만 기록되고 notification 채널에 등록한 이메일로 알림을 받을 수 있다.
-&lt;strong&gt;google error reporting&lt;/strong&gt;에 notification 채널을 등록하는 법은 다음과 같다:&lt;/p&gt;
-&lt;p&gt;&lt;span
-      class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 270px; &quot;
-    &gt;
-      &lt;a
-    class=&quot;gatsby-resp-image-link&quot;
-    href=&quot;/static/90d52a35cc67e8e427099c55cc0244b7/01bf6/error-reporting.png&quot;
-    style=&quot;display: block&quot;
-    target=&quot;_blank&quot;
-    rel=&quot;noopener&quot;
-  &gt;
-    &lt;span
-    class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 58.22784810126582%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMCAYAAABiDJ37AAAACXBIWXMAAAsTAAALEwEAmpwYAAABOElEQVR42pVS226CQBDl/z+jD/0IXqzxgcQGSAspNiEkyLrVlCWKirCAp5k1UEHEdpLN7pyZncuZ0QDgfD63p9Hruu7cDX4t/T90tCGnIbmH921aA9i2jSiKFBgEARhj4JzD932cTqeHFWZZhrIsLwGpLcdxIIRQRs/zYFmWwkzTRJIknYD9NknSNIWU8u8tj9kHW6bqiqJQYJ7n6n08HlW7pFP2sQqrqroMhRRynkxeWg5nsxmm0ykMw1BvXdcxn8/Vp3sBiRZKrP1mKFsjkUuVkUpORDgFq+vbNblZm0Y5HHKUkioY5/DetDsc7vc5np9eYVtLBbpOCO9jBRYJfC44XJdh4XHYVoiIxY8rlLLC+xvDer1Txvh7i81mi3SXgX8lCJcCsdiDMYEVFzf8Xcu/16YzlAHbD17ap298LnAEAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
-  &gt;&lt;/span&gt;
-  &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;error-reporting&quot;
-        title=&quot;&quot;
-        src=&quot;/static/90d52a35cc67e8e427099c55cc0244b7/01bf6/error-reporting.png&quot;
-        srcset=&quot;/static/90d52a35cc67e8e427099c55cc0244b7/c26ae/error-reporting.png 158w,
-/static/90d52a35cc67e8e427099c55cc0244b7/01bf6/error-reporting.png 270w&quot;
-        sizes=&quot;(max-width: 270px) 100vw, 270px&quot;
-        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
-        loading=&quot;lazy&quot;
-        decoding=&quot;async&quot;
-      /&gt;
-  &lt;/a&gt;
-    &lt;/span&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Error Reporting 이동한다&lt;/li&gt;
-&lt;li&gt;Configure Notification Channels 클릭한다&lt;/li&gt;
-&lt;li&gt;생성한 notification 선택한다&lt;/li&gt;
-&lt;li&gt;Save 클릭한다&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;테스트 요청&lt;/h2&gt;
-&lt;p&gt;개발 모드에서 어플리케이션을 실행한 후, Insomnia를 통해 테스트 라우트에 다음과 같은 요청을 보내보자:&lt;/p&gt;
-&lt;p&gt;&lt;span
-      class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
-    &gt;
-      &lt;a
-    class=&quot;gatsby-resp-image-link&quot;
-    href=&quot;/static/b89f6da848796785028c382c278255ee/c5bb3/insomnia-request.png&quot;
-    style=&quot;display: block&quot;
-    target=&quot;_blank&quot;
-    rel=&quot;noopener&quot;
-  &gt;
-    &lt;span
-    class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 15.18987341772152%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAADCAYAAACTWi8uAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAsUlEQVR42k3NywqCUBSFYR9FCJTSo0dNHTSIILpMpHlNggbNvELgK9TT9HSmwh/nVNCGD9Zmw16GlCFJkmhpmmqu6yKEQLge9nTCZnHkdnpyWF45rpect3suux2reI4jPHzfx7ZtLMvCUA+iKCIIAqSUhGGo9ziOdVbUbTZzyLKMtm3J85y6rimKgrIstaqqaJoGw/M+DYp6+Mv/VIFpmjwed9R0Xcer7+m/hmHQxnHkDTy6etHgQr30AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
-  &gt;&lt;/span&gt;
-  &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;insomnia-request&quot;
-        title=&quot;&quot;
-        src=&quot;/static/b89f6da848796785028c382c278255ee/f058b/insomnia-request.png&quot;
-        srcset=&quot;/static/b89f6da848796785028c382c278255ee/c26ae/insomnia-request.png 158w,
-/static/b89f6da848796785028c382c278255ee/6bdcf/insomnia-request.png 315w,
-/static/b89f6da848796785028c382c278255ee/f058b/insomnia-request.png 630w,
-/static/b89f6da848796785028c382c278255ee/c5bb3/insomnia-request.png 680w&quot;
-        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
-        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
-        loading=&quot;lazy&quot;
-        decoding=&quot;async&quot;
-      /&gt;
-  &lt;/a&gt;
-    &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;예상한대로 에러 내용이 담긴 응답을 보내준다. 이제 google cloud 콘솔에 에러가 기록이 되었는지 확인한다.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;google error reporting&lt;/strong&gt; 콘솔에 에러가 기록되는 것을 확인할 수 있고 에러의 내용, 어떤 어플리케이션에서 에러가 발생했는지도 확인할 수 있다. 또한, &lt;strong&gt;cloud monitoring&lt;/strong&gt;을 통해 notification 채널을 &lt;strong&gt;google error reporting&lt;/strong&gt;에 추가했으므로 다음과 같이 이메일로 알림을 받게 된다 - &lt;em&gt;이메일을 선택했다는 것을 기억하자&lt;/em&gt;:&lt;/p&gt;
-&lt;p&gt;&lt;span
-      class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
-    &gt;
-      &lt;a
-    class=&quot;gatsby-resp-image-link&quot;
-    href=&quot;/static/d44876630d1f503b00705569ffd06c92/a6d36/alert-mail.png&quot;
-    style=&quot;display: block&quot;
-    target=&quot;_blank&quot;
-    rel=&quot;noopener&quot;
-  &gt;
-    &lt;span
-    class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 18.354430379746837%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAECAYAAACOXx+WAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAsElEQVR42m2O2w7CIBBE+/+fpo/6VHujQEsTaaWFVnsbs5toNEpywnKYMETbtkNrBSklqqqCMTUjZYmiyNmXZYmmMRCi4FkpxQghYIxB21o456C1RgQA4zjCe48QPKZp4nPf9+i6Ds7dOEx+GAbO0R1hreWd8vM8I4SA6HhwuNoacXzh9izLkOcZz9ROv06SBGmavt3rwX8rOp8c7g/P7eu6ctOyLF+Q+/SUI/Z9/+EJjTkwavcN4u4AAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
-  &gt;&lt;/span&gt;
-  &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;alert-mail&quot;
-        title=&quot;&quot;
-        src=&quot;/static/d44876630d1f503b00705569ffd06c92/f058b/alert-mail.png&quot;
-        srcset=&quot;/static/d44876630d1f503b00705569ffd06c92/c26ae/alert-mail.png 158w,
-/static/d44876630d1f503b00705569ffd06c92/6bdcf/alert-mail.png 315w,
-/static/d44876630d1f503b00705569ffd06c92/f058b/alert-mail.png 630w,
-/static/d44876630d1f503b00705569ffd06c92/a6d36/alert-mail.png 650w&quot;
-        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
-        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
-        loading=&quot;lazy&quot;
-        decoding=&quot;async&quot;
-      /&gt;
-  &lt;/a&gt;
-    &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;여기까지 Node.js에 google error reporting을 사용하는 법을 알아보았다.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;읽어 주셔서 감사합니다. To be continued!&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;이 글은 &lt;a href=&quot;https://medium.com/@shkim04/how-to-use-google-error-reporting-on-node-js-45b0a6b3054c&quot;&gt;Medium&lt;/a&gt;에도 업로드 되었습니다.&lt;/em&gt;
-&lt;em&gt;놀러 오세요!&lt;/em&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[How To Use Google Error Reporting On Node.js]]></title><description><![CDATA[For developers, it cannot be mentioned enough that we should catch and alert errors as soon as possible, when an application is in service…]]></description><link>null/en/how-to-use-google-error-reporting-nodejs</link><guid isPermaLink="false">null/en/how-to-use-google-error-reporting-nodejs</guid><pubDate>Tue, 07 Feb 2023 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;For developers, it cannot be mentioned enough that we should catch and alert errors as soon as possible, when an application is in service. There are many tools that help you accomplish this mission. Among many candidates, i will talk about &lt;strong&gt;Google Error Reporting + Cloud Monitoring&lt;/strong&gt; here.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[My perosnal blog that shows what I am working on and thoughts]]></description><link>http://github.com/dylang/node-rss</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 21 Apr 2023 14:39:11 GMT</lastBuildDate><item><title><![CDATA[How To Use Google Error Reporting On Node.js]]></title><description><![CDATA[For developers, it cannot be mentioned enough that we should catch and alert errors as soon as possible, when an application is in service…]]></description><link>null/en/how-to-use-google-error-reporting-nodejs</link><guid isPermaLink="false">null/en/how-to-use-google-error-reporting-nodejs</guid><pubDate>Tue, 07 Feb 2023 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;For developers, it cannot be mentioned enough that we should catch and alert errors as soon as possible, when an application is in service. There are many tools that help you accomplish this mission. Among many candidates, i will talk about &lt;strong&gt;Google Error Reporting + Cloud Monitoring&lt;/strong&gt; here.&lt;/p&gt;
 &lt;h2&gt;Prerequisite&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Google Cloud Account&lt;/li&gt;
@@ -331,7 +164,173 @@
 &lt;p&gt;That’s for it about how to use google error reporting on Node.js.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;&lt;strong&gt;THANKS FOR READING. SEE YOU NEXT TIME!&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;This is originally posted on my &lt;a href=&quot;https://medium.com/@shkim04/how-to-use-google-error-reporting-on-node-js-45b0a6b3054c&quot;&gt;Medium&lt;/a&gt;.&lt;/em&gt;
-&lt;em&gt;Let&apos;s connect!&lt;/em&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[How To Use AWS SQS On Node.js]]></title><description><![CDATA[By the definition in the dictionary, queue for computing is a list of data items, commands, etc., stored so as to be retrievable in a…]]></description><link>null/en/how-to-use-aws-sqs-nodejs</link><guid isPermaLink="false">null/en/how-to-use-aws-sqs-nodejs</guid><pubDate>Sun, 05 Feb 2023 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;By the definition in the dictionary, &lt;strong&gt;queue&lt;/strong&gt; for computing is&lt;/p&gt;
+&lt;em&gt;Let&apos;s connect!&lt;/em&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Node.js에서 Google Error Reporting 사용하기]]></title><description><![CDATA[서비스중인 어플리케이션에 에러가 발생했을 때 개발자에게 에러를 신속하게 확인하고 알리는 것만큼 중요한 것도 없다. 이 목적으로 사용할 수 있는 많은 플랫폼들이 있는데 그 중 Google Error Reporting + Cloud Monitoring…]]></description><link>null/nodejs-google-error-reporting-사용하기</link><guid isPermaLink="false">null/nodejs-google-error-reporting-사용하기</guid><pubDate>Tue, 07 Feb 2023 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;서비스중인 어플리케이션에 에러가 발생했을 때 개발자에게 에러를 신속하게 확인하고 알리는 것만큼 중요한 것도 없다. 이 목적으로 사용할 수 있는 많은 플랫폼들이 있는데 그 중 &lt;strong&gt;Google Error Reporting + Cloud Monitoring&lt;/strong&gt;에 대해서 알아보려고 한다.&lt;/p&gt;
+&lt;h2&gt;필수&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;google cloud 계정&lt;/li&gt;
+&lt;li&gt;google service 계정 — &lt;em&gt;만드는 법을 모르시는 분들은 &lt;a href=&quot;https://shkim04.github.io/nodejs-%EC%97%90%EC%84%9C-google-sheet-%EC%82%AC%EC%9A%A9%ED%95%98%EB%8A%94%EB%B2%95&quot;&gt;이 글&lt;/a&gt;을 보시면 된다&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Node&lt;/li&gt;
+&lt;li&gt;Insomnia&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Google Error Reporting 허용&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;google clould 프로젝트 대시보드로 이동한다&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;APIs and services&lt;/strong&gt; 클릭&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ENABLE APIS AND SERVICE&lt;/strong&gt; 클릭&lt;/li&gt;
+&lt;li&gt;검색 창에 Error reporting을 입력하고 해당 API를 허용한다&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Node.js — Express&lt;/h2&gt;
+&lt;p&gt;Google Error Reporting을 사용하는 법에 중점을 두기 위해 Express API 서버를 만드는 것은 생략한다. 테스트용 Express API가 없는 분은 개인 &lt;a href=&quot;https://github.com/shkim04/express_typescript_simple_api&quot;&gt;&lt;strong&gt;레파지토리&lt;/strong&gt;&lt;/a&gt;에서 다운로드 받길 바란다. 준비가 되면 프로젝트를 열어 시작해보자.&lt;/p&gt;
+&lt;h2&gt;Express에 Google Error Reporting 설정&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;npm install --save @google-cloud/error-reporting&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;필요한 라이브러리를 받은 후 error reproting을 정상적으로 동작시키기 위해 &lt;strong&gt;ErrorReporting&lt;/strong&gt; 객체 안에 필요한 키 값들을 알맞게 넣어줘야 한다. 이 키 값들은 &lt;strong&gt;google service account&lt;/strong&gt; 생성하고 난 뒤 추가한 key &lt;code class=&quot;language-text&quot;&gt;json&lt;/code&gt; 파일에서 얻을 수 있다.&lt;/p&gt;
+&lt;p&gt;아래 코드를 메인 스크립트에 추가한 뒤 필요한 값들을 입력한다:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; ErrorReporting &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;@google-cloud/error-reporting&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;// Instantiates a client&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; errorReporting &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;ErrorReporting&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+                           &lt;span class=&quot;token literal-property property&quot;&gt;projectId&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;your-project-id&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+                           &lt;span class=&quot;token literal-property property&quot;&gt;keyFilename&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;key.json name&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+                           &lt;span class=&quot;token comment&quot;&gt;// this should look like &apos;hello.json&apos;&lt;/span&gt;
+                           &lt;span class=&quot;token literal-property property&quot;&gt;credentials&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token template-string&quot;&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;/path/to/key.json&lt;/span&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+                           &lt;span class=&quot;token literal-property property&quot;&gt;reportMode&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;always&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+                           &lt;span class=&quot;token comment&quot;&gt;// the reason why I set this to &apos;always&apos; is &lt;/span&gt;
+                           &lt;span class=&quot;token comment&quot;&gt;// because the application is run in development mode&lt;/span&gt;
+                           &lt;span class=&quot;token literal-property property&quot;&gt;logLevel&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+                           &lt;span class=&quot;token literal-property property&quot;&gt;serviceContext&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+                              &lt;span class=&quot;token literal-property property&quot;&gt;service&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;Name your app&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+                              &lt;span class=&quot;token comment&quot;&gt;// ex) Test_APP&lt;/span&gt;
+                              &lt;span class=&quot;token literal-property property&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;specify your version&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+                              &lt;span class=&quot;token comment&quot;&gt;// ex) 0.0.1&lt;/span&gt;
+                           &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+                           &lt;span class=&quot;token comment&quot;&gt;// serviceContext field should be filled&lt;/span&gt;
+                      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;테스트 Route 추가&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;/error&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;req&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Request&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Response&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; NextFunction&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Promise&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+   &lt;span class=&quot;token keyword&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Error&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;this is an intended error in &apos;/error&apos; route&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+   &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+   &lt;span class=&quot;token keyword&quot;&gt;catch&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;err&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token function&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token template-string&quot;&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&amp;lt;GET &apos;/error route error&gt;: &lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;${&lt;/span&gt;err&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+   &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;/error&lt;/code&gt; 라우트를 만드는데 이 라우트에 요청을 보내면 에러를 생성하게 만들어 catch 블락에서 에러를 잡아낼 수 있도록 한다. 이 catch 블락에 &lt;strong&gt;next&lt;/strong&gt; 객체가 있는데 &lt;em&gt;&lt;strong&gt;middleware&lt;/strong&gt;&lt;/em&gt; 로써 역할을 한다.&lt;/p&gt;
+&lt;p&gt;간단히 말하자면 에러 내용이 담긴 문자열을 다른 함수에 전달한다. 아래 코드는 그 에러 내용을 받아 처리하는 부분이다:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;use&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;errorReporting&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;express&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;위 코드를 테스트 라우트 다음에 적어야 정상적으로 동작하지 주의한다.&lt;/p&gt;
+&lt;h2&gt;Cloud Monitoring Notification 채널 생성&lt;/h2&gt;
+&lt;p&gt;Expresss 어플리케이션에서 에러가 발생하면 즉각적으로 &lt;strong&gt;Google Error Reporting&lt;/strong&gt; 콘솔에 기록이 되는 것을 예상할 수 있다. 하지만 에러가 발생해도 에러가 났는지 알려주는 기능은 없다. 에러가 발생된 것을 알리는 것이 중요한데 google cloud에는 자체적으로 모니터링 서비스가 존재한다. notificiation 채널을 만드는 법은 다음과 같다:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Could Monitoring 대시보드로 이동한다&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Alerting&lt;/strong&gt; 클릭 후 &lt;strong&gt;Edit notification channels&lt;/strong&gt; 클릭한다&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Email&lt;/strong&gt; 란에 있는 &lt;strong&gt;Add new&lt;/strong&gt;를 클릭한다&lt;/li&gt;
+&lt;li&gt;대화 상자를 완료하고 &lt;strong&gt;Save&lt;/strong&gt;를 클릭한다&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;이 notification 채널을 &lt;strong&gt;google error reporting&lt;/strong&gt;에 추가한다. 이제 에러가 발생하면 google error reporting에 기록이 되고 notification 채널에 등록한 이메일로 알림을 받을 수 있다. &lt;strong&gt;google error reporting&lt;/strong&gt;에 notification 채널을 등록하는 법은 다음과 같다:&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 270px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/90d52a35cc67e8e427099c55cc0244b7/01bf6/error-reporting.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 58.22784810126582%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMCAYAAABiDJ37AAAACXBIWXMAAAsTAAALEwEAmpwYAAABOElEQVR42pVS226CQBDl/z+jD/0IXqzxgcQGSAspNiEkyLrVlCWKirCAp5k1UEHEdpLN7pyZncuZ0QDgfD63p9Hruu7cDX4t/T90tCGnIbmH921aA9i2jSiKFBgEARhj4JzD932cTqeHFWZZhrIsLwGpLcdxIIRQRs/zYFmWwkzTRJIknYD9NknSNIWU8u8tj9kHW6bqiqJQYJ7n6n08HlW7pFP2sQqrqroMhRRynkxeWg5nsxmm0ykMw1BvXdcxn8/Vp3sBiRZKrP1mKFsjkUuVkUpORDgFq+vbNblZm0Y5HHKUkioY5/DetDsc7vc5np9eYVtLBbpOCO9jBRYJfC44XJdh4XHYVoiIxY8rlLLC+xvDer1Txvh7i81mi3SXgX8lCJcCsdiDMYEVFzf8Xcu/16YzlAHbD17ap298LnAEAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;error-reporting&quot;
+        title=&quot;&quot;
+        src=&quot;/static/90d52a35cc67e8e427099c55cc0244b7/01bf6/error-reporting.png&quot;
+        srcset=&quot;/static/90d52a35cc67e8e427099c55cc0244b7/c26ae/error-reporting.png 158w,
+/static/90d52a35cc67e8e427099c55cc0244b7/01bf6/error-reporting.png 270w&quot;
+        sizes=&quot;(max-width: 270px) 100vw, 270px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Error Reporting 이동한다&lt;/li&gt;
+&lt;li&gt;Configure Notification Channels 클릭한다&lt;/li&gt;
+&lt;li&gt;생성한 notification 선택한다&lt;/li&gt;
+&lt;li&gt;Save 클릭한다&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;테스트 요청&lt;/h2&gt;
+&lt;p&gt;개발 모드에서 어플리케이션을 실행한 후, Insomnia를 통해 테스트 라우트에 다음과 같은 요청을 보내보자:&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/b89f6da848796785028c382c278255ee/c5bb3/insomnia-request.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 15.18987341772152%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAADCAYAAACTWi8uAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAsUlEQVR42k3NywqCUBSFYR9FCJTSo0dNHTSIILpMpHlNggbNvELgK9TT9HSmwh/nVNCGD9Zmw16GlCFJkmhpmmqu6yKEQLge9nTCZnHkdnpyWF45rpect3suux2reI4jPHzfx7ZtLMvCUA+iKCIIAqSUhGGo9ziOdVbUbTZzyLKMtm3J85y6rimKgrIstaqqaJoGw/M+DYp6+Mv/VIFpmjwed9R0Xcer7+m/hmHQxnHkDTy6etHgQr30AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;insomnia-request&quot;
+        title=&quot;&quot;
+        src=&quot;/static/b89f6da848796785028c382c278255ee/f058b/insomnia-request.png&quot;
+        srcset=&quot;/static/b89f6da848796785028c382c278255ee/c26ae/insomnia-request.png 158w,
+/static/b89f6da848796785028c382c278255ee/6bdcf/insomnia-request.png 315w,
+/static/b89f6da848796785028c382c278255ee/f058b/insomnia-request.png 630w,
+/static/b89f6da848796785028c382c278255ee/c5bb3/insomnia-request.png 680w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;예상한대로 에러 내용이 담긴 응답을 보내준다. 이제 google cloud 콘솔에 에러가 기록이 되었는지 확인한다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;google error reporting&lt;/strong&gt; 콘솔에 에러가 기록되는 것을 확인할 수 있고 에러의 내용, 어떤 어플리케이션에서 에러가 발생했는지도 확인할 수 있다. 또한, &lt;strong&gt;cloud monitoring&lt;/strong&gt;을 통해 notification 채널을 &lt;strong&gt;google error reporting&lt;/strong&gt;에 추가했으므로 다음과 같이 이메일로 알림을 받게 된다 - &lt;em&gt;이메일을 선택했다는 것을 기억하자&lt;/em&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/d44876630d1f503b00705569ffd06c92/a6d36/alert-mail.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 18.354430379746837%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAECAYAAACOXx+WAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAsElEQVR42m2O2w7CIBBE+/+fpo/6VHujQEsTaaWFVnsbs5toNEpywnKYMETbtkNrBSklqqqCMTUjZYmiyNmXZYmmMRCi4FkpxQghYIxB21o456C1RgQA4zjCe48QPKZp4nPf9+i6Ds7dOEx+GAbO0R1hreWd8vM8I4SA6HhwuNoacXzh9izLkOcZz9ROv06SBGmavt3rwX8rOp8c7g/P7eu6ctOyLF+Q+/SUI/Z9/+EJjTkwavcN4u4AAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;alert-mail&quot;
+        title=&quot;&quot;
+        src=&quot;/static/d44876630d1f503b00705569ffd06c92/f058b/alert-mail.png&quot;
+        srcset=&quot;/static/d44876630d1f503b00705569ffd06c92/c26ae/alert-mail.png 158w,
+/static/d44876630d1f503b00705569ffd06c92/6bdcf/alert-mail.png 315w,
+/static/d44876630d1f503b00705569ffd06c92/f058b/alert-mail.png 630w,
+/static/d44876630d1f503b00705569ffd06c92/a6d36/alert-mail.png 650w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;여기까지 Node.js에 google error reporting을 사용하는 법을 알아보았다.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;읽어 주셔서 감사합니다. To be continued!&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;이 글은 &lt;a href=&quot;https://medium.com/@shkim04/how-to-use-google-error-reporting-on-node-js-45b0a6b3054c&quot;&gt;Medium&lt;/a&gt;에도 업로드 되었습니다.&lt;/em&gt;
+&lt;em&gt;놀러 오세요!&lt;/em&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[How To Use AWS SQS On Node.js]]></title><description><![CDATA[By the definition in the dictionary, queue for computing is a list of data items, commands, etc., stored so as to be retrievable in a…]]></description><link>null/en/how-to-use-aws-sqs-nodejs</link><guid isPermaLink="false">null/en/how-to-use-aws-sqs-nodejs</guid><pubDate>Sun, 05 Feb 2023 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;By the definition in the dictionary, &lt;strong&gt;queue&lt;/strong&gt; for computing is&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;a list of data items, commands, etc., stored so as to be retrievable in a definite order, usually the order of insertion.&lt;/p&gt;
 &lt;/blockquote&gt;
