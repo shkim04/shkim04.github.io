@@ -27,8 +27,12 @@ module.exports = {
     ko: "python-pandas-엑셀-사용하기",
     en: "pandas-for-excel-python"
   },
-  // 8: {
-  //   ko: "nodejs-aws-sqs-사용하기",
-  //   en: "how-to-use-aws-sqs-nodejs"
-  // }
+  8: {
+    ko: "nodejs-aws-sqs-사용하기",
+    en: "how-to-use-aws-sqs-nodejs"
+  },
+  9: {
+    ko: "nodejs-google-error-reporting-사용하기",
+    en: "how-to-use-google-error-reporting-nodejs"
+  }
 }
