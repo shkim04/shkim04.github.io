@@ -1,7 +1,7 @@
 ---
 title: How To Use Google Error Reporting On Node.js
 date: "2023-02-07T00:00:00.000Z"
-description: "Thoughts on how to implement AWS SQS on Node.js application with a possible example to which it can be applied."
+description: "It is so important for developers to catch and alerts errors quickly. Here is how to do it by using Google Error Reporting."
 tag: 
     - Cloud
     - NodeJS
