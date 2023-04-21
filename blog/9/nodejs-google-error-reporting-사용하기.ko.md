@@ -22,7 +22,7 @@ tag:
 - 검색 창에 Error reporting을 입력하고 해당 API를 허용한다
 
 ## Node.js — Express
-Google Error Reporting을 사용하는 법에 중점을 두기 위해 Express API 서버를 만드는 것은 생략한다. 테스트용 Express API가 없는 분은 개인 [**레파지토리**](https://github.com/shkim04/express_typescript_simple_api)에서 다운로드 받길 바란다. 준비가 되면 프로젝트를 열어 시작해보자.
+Google Error Reporting을 사용하는 법에 중점을 두기 위해 Express API 서버를 만드는 것은 생략한다. 테스트용 Express API가 없는 분은 [**여기**](https://github.com/shkim04/express_typescript_simple_api)에서 다운로드 받길 바란다. 준비가 되면 프로젝트를 열어 시작해보자.
 
 ##  Express에 Google Error Reporting 설정
 ```
