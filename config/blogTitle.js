@@ -38,5 +38,13 @@ module.exports = {
   10: {
     ko: "crontab-실무-적용-예시",
     en: "how-i-used-crontab-to-schedule-jobs-for-my-work"
+  },
+  11: {
+    ko: "react-컴포넌트-밖-클릭-감지",
+    en: "how-to-detect-click-outside-react-component"
+  },
+  12: {
+    ko: "custom-dropdown-react-컴포넌트",
+    en: "how-to-create-a-custom-dropdown-react-component"
   }
 }
