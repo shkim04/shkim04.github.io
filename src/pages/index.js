@@ -4,7 +4,7 @@ import { Link, graphql } from "gatsby"
 import Bio from "../components/bio"
 import Seo from "../components/seo"
 
-const blogTagsList = ["NodeJS", "ReactJS", "NextJS", "Python", "MongoDB", "Linux", "Docker", "Log", "Cloud", "Others"]
+const blogTagsList = ["NodeJS", "ReactJS", "Python", "MongoDB", "Linux", "Cloud", "Others"]
 
 const Index = ({ data, pageContext: { locale } }) => {
   const posts = data.allMarkdownRemark.nodes
