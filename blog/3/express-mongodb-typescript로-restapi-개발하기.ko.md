@@ -46,7 +46,7 @@ MongoDB 사용을 위해서 계정을 만들어야 한다. google이나 github �
 위에 보이는 URI가 API에 사용될 예정이다 - _Node.js API를 개발하는 것이기 때문에 driver 옵션은 넘어가도 된다_. 이 전 단계에서 생성한 사용자 이름과 비밀번호를 위 사진 속 빨간색 빈 칸에 _[your username:your password]_ 형태로 넣어야 한다. 필자와 함께 API를 개발하는 것이니 예시는 넘어가도 된다.
 
 ## 프로젝트 폴더 생성
-새로운 프로젝트 폴더를 생성하고 터미널을 열어 아래와 같이 명령어를 입력한다. 해당 명령어를 입력하면 pacakge.json 파일이 생기는데 앱에 필요한 정보나 dependency들을 담고 있는 역할을 한다. 그리고 app.ts 파일을 만든다.
+새로운 프로젝트 폴더를 생성하고 터미널을 열어 아래와 같이 명령어를 입력한다. 해당 명령어를 입력하면 pacakge.json 파일이 생기는데 앱에 필요한 정보나 dependency들을 담고 있는 역할을 한다. 그리고 `app.ts` 파일을 만든다.
 
 
 ```
@@ -120,7 +120,7 @@ npm install --save-dev cross-env @types/node @types/express
 
 package.json 안에 script 필드 하위에 명령어 두개를 추가해보자. 복잡한 명령어를 key 이름에 저장한 후 간단하게 `npm run [key name]` 입력하는 방식으로 해당 명령어를 실행할 수 있다.
 
-`npm run dev`를 터미널에 입력하고 엔터를 누르면 실제로 `cross-env NODE-ENV=development nodemon --exec ts-node ./app.ts` 가 실행된다. 개발모드로 실행되고 nodemon이 코드 수정이 있을 시 자동으로 재시작한다. **start**는 배포 시 사용된다.
+`npm run dev`를 터미널에 입력하고 엔터를 누르면 실제로 ``cross-env NODE-ENV=development nodemon --exec ts-node ./`app.ts`` 가 실행된다. 개발모드로 실행되고 nodemon이 코드 수정이 있을 시 자동으로 재시작한다. **start**는 배포 시 사용된다.
 
 ## Express 서버
 ```js
@@ -141,7 +141,7 @@ app.listen(4000, () => {
     console.log("Server is running on 4000");
 })
 ```
-위 코드를 app.ts 파일에 입력한 뒤 `npm run dev`를 터미널에 입력하여 서버를 시작한다. 터미널에 다음과 같이 로그가 뜬다:
+위 코드를 `app.ts` 파일에 입력한 뒤 `npm run dev`를 터미널에 입력하여 서버를 시작한다. 터미널에 다음과 같이 로그가 뜬다:
 
 _the server is listening to the port 4000_.
 
@@ -191,7 +191,7 @@ export default config;
 
 cross-env는 환경에 따른 설정을 다르게 적용할 수 있게 도와주는 라이브러리인데 `cross-env NODE_ENV=production` 처럼 입력할 명령어 앞에 두어 어떤 환경인지 명시해 준다. 이 덕분에 다른 .env 파일을 환경에 맞게 설정해주기 때문에 같은 코드를 두번 작성할 필요가 없다.
 
-config.ts 하위에 파일을 만든 뒤 dotenv를 import한다. 이 dotenv가 **[process.env.NODE_ENV].env** 파일에 담긴 정보를 읽어 오는 역할을 한다. 이 때 NODE_ENV는 명령어에서 명시해 줬던 development 혹은 production이 되겠다.
+`config.ts` 하위에 파일을 만든 뒤 dotenv를 import한다. 이 dotenv가 **[process.env.NODE_ENV].env** 파일에 담긴 정보를 읽어 오는 역할을 한다. 이 때 NODE_ENV는 명령어에서 명시해 줬던 development 혹은 production이 되겠다.
 
 위 코드 안에 모든 환경 변수 앞에 process.env가 붙어 있다. Node.js에 전역에서 접근할 수 있는 객체이기 때문에 어플리케이션 전체에서 사용될 수 있다.
 
@@ -222,7 +222,7 @@ const connectMongoDB: () => Promise<any> = () => {
 
 export default connectMongoDB;
 ```
-프로젝트 폴더 하위에 파일 db.ts를 만든 뒤, MongoClient를 import한다. 그리고 파일 config.ts 만든 뒤 _config.mongodb.uri_ 을 인자 값으로 입력한다. 이 uri는 MongoDB 설정할 때 얻은 uri이다.
+프로젝트 폴더 하위에 파일 `db.ts`를 만든 뒤, MongoClient를 import한다. 그리고 파일 `config.ts` 만든 뒤 _config.mongodb.uri_ 을 인자 값으로 입력한다. 이 uri는 MongoDB 설정할 때 얻은 uri이다.
 
 마지막으로 MongoDB를 비동기적으로 연결하도록 promise를 반환 값으로 받게 한다. 이제 API에 테스트 요청을 위해 코드를 수정해보자.
 
@@ -271,7 +271,7 @@ app.listen(config.port, () => {
 ```
 post 라우트를 추가한다. 이 라우트는 API 사용자로부터 성과 이름을 받고 이를 데이터베이스에 넣는 기능이 목적이다. Request 객체의 body라는 필드에 사용자가 입력한 성과 이름이 저장이 된다.
 
-MongoDB promise가 resolve한 값을 connect라는 변수를 선언하여 저장한다 - _config.ts에 저장한 데이터베이스와 콜렉션 이름이 여기 쓰인다_ - 요청에서 받은 성과 이름을 **insertOne** 이라는 함수로 데이터베이스에 입력하게 된다.
+MongoDB promise가 resolve한 값을 connect라는 변수를 선언하여 저장한다 - _`config.ts`에 저장한 데이터베이스와 콜렉션 이름이 여기 쓰인다_ - 요청에서 받은 성과 이름을 **insertOne** 이라는 함수로 데이터베이스에 입력하게 된다.
 
 에러 없이 코드가 실행된다면 post 라우트가 status 코드 200과 함께 _**Successfully Created in DB**_ 라는 정보를 사용자에게 보낸다.
 

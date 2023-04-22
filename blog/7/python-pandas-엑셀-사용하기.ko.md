@@ -13,7 +13,7 @@ Pandas의 공식 [웹페이지](https://pandas.pydata.org/) 따르면
 특히, **pandas**는 엑셀 파일에 저장된 데이터를 분석하고 가공할 때 아주 용이하다. 실제 데이터 모델을 가지고 pandas를 엑셀에 활용하는 방법을 알아보자.
 
 ## 필수
-- 가상 환경 설치 — _[이전 글](https://medium.com/@shkim04/python-how-to-set-up-a-virtual-environment-on-windows-3d4858e44a74)에 가상 환경 설치에 대해 글을 적었으니 읽어보길 바란다_
+- 가상 환경 설치 — _[이전 글](https://shkim04.github.io/python-가상환경-설정)에 가상 환경 설치에 대해 글을 적었으니 읽어보길 바란다_
 
 ## pandas 설치
 ```

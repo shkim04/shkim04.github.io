@@ -104,11 +104,11 @@ function App() {
 export default App; 
 ```
 
-red box라는 class 이름을 가진 `div` 태그를 생성하고 _"**If you click here inside this red box, Nothing happens.**"_ 이라는 문자를 입력한다. 이 `div` 태그를 **ClickOutside** 컴포넌트로 감싼다. 
+red box라는 class 이름을 가진 `div` 태그를 생성하고 _**If you click here inside this red box, Nothing happens.**_ 이라는 문자를 입력한다. 이 `div` 태그를 **ClickOutside** 컴포넌트로 감싼다. 
 
 다음, 숨겨진 문자를 가진 `div` 태그의 노출 유무 상태를 전환하는 핸들러 함수를 **ClickOutside** 컴포넌트에 prop으로 보낸다.
 
-이제 빨간 상자 밖을 클릭하면 _"**You clicked outside of the red box! To make this message disappear, click outside of the red box again.**"_ 라는 숨겨진 문자가 나타날 것이다. 다시 빨간 상자 밖을 클릭하면 문자가 사라질 것이다.
+이제 빨간 상자 밖을 클릭하면 _**You clicked outside of the red box! To make this message disappear, click outside of the red box again.**_ 라는 숨겨진 문자가 나타날 것이다. 다시 빨간 상자 밖을 클릭하면 문자가 사라질 것이다.
 
 다른 `div` 태그를 만들어 `useRef` 훅을 이용해서 지칭한 후 exceptionRef prop으로 보내서 그 `div` 태그를 클릭해보길 바란다. **ClickOutside** 컴포넌트 안쪽을 클릭할 때처럼 아무 변화가 없을 것이다.
 

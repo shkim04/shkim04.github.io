@@ -13,7 +13,7 @@ Pandas’s [official website](https://pandas.pydata.org/) says
 Especially, **pandas** is an incredibly easy tool to deal with and analyze data stored in an excel file. We will learn how to implement pandas for excel and practice an example with a real world data.
 
 ## Prerequisite
-- Set up a virtual environment — _I have already covered up how to set up one on my [previous post](https://medium.com/@shkim04/python-how-to-set-up-a-virtual-environment-on-windows-3d4858e44a74)_
+- Set up a virtual environment — _I have already covered up how to set up one on my previous [post](https://shkim04.github.io/en/how-to-set-up-python-virtual-env)_
 
 ## Install pandas
 ```

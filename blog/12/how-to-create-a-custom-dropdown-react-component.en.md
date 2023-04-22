@@ -327,5 +327,5 @@ I think that if you apply some different CSS rules and modify the component, you
 
 _**THANKS FOR READING. SEE YOU NEXT TIME!**_
 
-_This is originally posted on my [Medium](https://medium.com/@shkim04/react-how-to-detect-click-outside-a-component-984fe2e003e8)._
+_This is originally posted on my [Medium](https://medium.com/@shkim04/react-how-to-create-a-custom-dropdown-component-4c3bedffe18e)._
 _Let's connect!_

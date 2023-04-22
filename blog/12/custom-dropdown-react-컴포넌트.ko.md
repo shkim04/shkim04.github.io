@@ -327,5 +327,5 @@ export default App;
 
 _**읽어 주셔서 감사합니다. To be continued!**_
 
-_이 글은 [Medium](https://medium.com/@shkim04/react-how-to-detect-click-outside-a-component-984fe2e003e8)에도 업로드 되었습니다._
+_이 글은 [Medium](https://medium.com/@shkim04/react-how-to-create-a-custom-dropdown-component-4c3bedffe18e)에도 업로드 되었습니다._
 _놀러 오세요!_

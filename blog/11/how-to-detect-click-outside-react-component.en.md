@@ -104,11 +104,11 @@ function App() {
 export default App; 
 ```
 
-Let’s create a `div` tag whose class name is given red box that says _"**If you click here inside this red box, Nothing happens**"_. We will wrap the red box `div` tag around **ClickOutside** component. 
+Let’s create a `div` tag whose class name is given red box that says _**If you click here inside this red box, Nothing happens**_. We will wrap the red box `div` tag around **ClickOutside** component. 
 
 Then, we pass a handler function, which toggles visibility of a `div` tag containing a hidden text to **ClickOutside** component. 
 
-What is expected to happen is when we click the outside of the red box, the hidden text will show up, saying _"**You clicked outside of the red box! To make this message disappear, click outside of the red box again**"_. If clicked again, it will disappear.
+What is expected to happen is when we click the outside of the red box, the hidden text will show up, saying _**You clicked outside of the red box! To make this message disappear, click outside of the red box again**_. If clicked again, it will disappear.
 
 You can create another `div` tag and give it a reference by using `useRef` hook, then pass it as exceptionRef. When you click it, nothing will happens as you click the inside of **ClickOutside** component.
 

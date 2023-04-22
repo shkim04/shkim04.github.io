@@ -78,7 +78,7 @@ npm -v
 ```
 
 ## Conclusion
-We have set up Node on EC2 instance so far. As I mentioned, you can run node.js applications which could be an API server. Try to deploy your simple Node API server and see if it works well or not. If you have no idea what API is, check out [my previous post](https://shkim04.github.io/en/restapi-with-express-mongodb-typescript/).
+We have set up Node on EC2 instance so far. As I mentioned, you can run node.js applications which could be an API server. Try to deploy your simple Node API server and see if it works well or not. If you have no idea what API is, check out my previous [post](https://shkim04.github.io/en/restapi-with-express-mongodb-typescript/).
 
 _**THANKS FOR READING. SEE YOU NEXT TIME!**_
 

@@ -46,7 +46,7 @@ Click the one below when prompt.
 This is the URI that we want to have - _You do not have to care about driver option because we will build a Node.js API_. Make sure you put _[your username:your password]_ you created in the previous step in the red blank. You do not have to check include full driver code example because I will cover that in this post. Let’s move on.
 
 ## Create A Project Folder And Initialize A Node.js API server
-Create a new project folder and go to the directory. After that, open the terminal and enter the command as shown below. It will create a package.json in which you manage the information and dependencies of the application. Then, create app.ts file under the project folder.
+Create a new project folder and go to the directory. After that, open the terminal and enter the command as shown below. It will create a package.json in which you manage the information and dependencies of the application. Then, create `app.ts` file under the project folder.
 
 
 ```
@@ -120,7 +120,7 @@ You can change a few of fields under **compilerOptions** depending on your needs
 
 Let’s add two commands under scripts in package.json. You can assign a complicated command to one of those keys and then, simply run the command by entering `npm run [key name]`.
 
-You can run the application by entering `npm run dev` which actually executes `cross-env NODE-ENV=development nodemon --exec ts-node ./app.ts_`. When file changes occur, the application will be restarted automatically thanks to nodemon. The script, **start** is for when you run the application in production.
+You can run the application by entering `npm run dev` which actually executes ``cross-env NODE-ENV=development nodemon --exec ts-node ./`app.ts``. When file changes occur, the application will be restarted automatically thanks to nodemon. The script, **start** is for when you run the application in production.
 
 ## Start Express Server
 ```js
@@ -141,7 +141,7 @@ app.listen(4000, () => {
     console.log("Server is running on 4000");
 })
 ```
-After copying and pasting the code in app.ts, enter `npm run dev` as mentioned above to start the server. You can see the terminal saying:
+After copying and pasting the code in `app.ts`, enter `npm run dev` as mentioned above to start the server. You can see the terminal saying:
 
 _the server is listening to the port 4000_.
 
@@ -191,7 +191,7 @@ When you develop an application, it is required to test the application so many 
 
 cross-env allows you to set the environment by putting `cross-env NODE_ENV=production` in front of the command to run the application. Then, it can access to a different .env files that you have created so you can create the same code that has two or more different environments.
 
-Create a file named config.ts under the project directory and import dotenv to enable us to access to **[process.env.NODE_ENV].env** file. If you set development to NODE_ENV in the command, Dotenv will read variables from development.env here.
+Create a file named `config.ts` under the project directory and import dotenv to enable us to access to **[process.env.NODE_ENV].env** file. If you set development to NODE_ENV in the command, Dotenv will read variables from development.env here.
 
 Notice that process.env is preceded by the environment variables. You can access to the object globally in Node.js. In other words, you can use it throughout a whole application.
 
@@ -222,7 +222,7 @@ const connectMongoDB: () => Promise<any> = () => {
 
 export default connectMongoDB;
 ```
-Create a file named db.ts under the project directory. Then, import MongoClient and also config object from config.ts and pass _config.mongodb.uri_ you have assigned to connect the application to MongoDB database. 
+Create a file named `db.ts` under the project directory. Then, import MongoClient and also config object from `config.ts` and pass _config.mongodb.uri_ you have assigned to connect the application to MongoDB database. 
 
 Finally, wrap it in the promise so you can connect the application to MongoDB asynchronously through the whole application. Then, we will edit the code to make a test request to the API.
 
@@ -271,7 +271,7 @@ app.listen(config.port, () => {
 ```
 Add a post route that will receive a first name and a last name from the API users and will insert the information to the database. These data can be accessed by the property of request object called body. 
 
-Assign what the MongoDB promise resolves to a variable named connection — Notice that the database name and collection name you set in config.ts are passed — and we will insert the first name and last name by the method called **insertOne**. 
+Assign what the MongoDB promise resolves to a variable named connection — _Notice that the database name and collection name you set in `config.ts` are passed_ — and we will insert the first name and last name by the method called **insertOne**. 
 
 If there is no error that is caught, the post route will send the status code which is 200 and the string saying _**Successfully Created in DB**_ to the API users.
 
