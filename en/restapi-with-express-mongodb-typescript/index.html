@@ -183,7 +183,7 @@
     </span></p>
 <p>This is the URI that we want to have - <em>You do not have to care about driver option because we will build a Node.js API</em>. Make sure you put <em>[your username:your password]</em> you created in the previous step in the red blank. You do not have to check include full driver code example because I will cover that in this post. Let’s move on.</p>
 <h2>Create A Project Folder And Initialize A Node.js API server</h2>
-<p>Create a new project folder and go to the directory. After that, open the terminal and enter the command as shown below. It will create a package.json in which you manage the information and dependencies of the application. Then, create app.ts file under the project folder.</p>
+<p>Create a new project folder and go to the directory. After that, open the terminal and enter the command as shown below. It will create a package.json in which you manage the information and dependencies of the application. Then, create <code class="language-text">app.ts</code> file under the project folder.</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">cd [project folder directory]
 npm init -y</code></pre></div>
 <h2>Install Dependencies For Development</h2>
@@ -266,7 +266,7 @@ npm install <span class="token operator">--</span>save<span class="token operato
   </a>
     </span></p>
 <p>Let’s add two commands under scripts in package.json. You can assign a complicated command to one of those keys and then, simply run the command by entering <code class="language-text">npm run [key name]</code>.</p>
-<p>You can run the application by entering <code class="language-text">npm run dev</code> which actually executes <code class="language-text">cross-env NODE-ENV=development nodemon --exec ts-node ./app.ts_</code>. When file changes occur, the application will be restarted automatically thanks to nodemon. The script, <strong>start</strong> is for when you run the application in production.</p>
+<p>You can run the application by entering <code class="language-text">npm run dev</code> which actually executes <code class="language-text">cross-env NODE-ENV=development nodemon --exec ts-node ./`app.ts</code>. When file changes occur, the application will be restarted automatically thanks to nodemon. The script, <strong>start</strong> is for when you run the application in production.</p>
 <h2>Start Express Server</h2>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">import</span> express<span class="token punctuation">,</span> <span class="token punctuation">{</span> Request<span class="token punctuation">,</span> Response<span class="token punctuation">,</span> NextFunction <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'express'</span><span class="token punctuation">;</span>
 
@@ -284,7 +284,7 @@ app<span class="token punctuation">.</span><span class="token function">get</spa
 app<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">4000</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Server is running on 4000"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre></div>
-<p>After copying and pasting the code in app.ts, enter <code class="language-text">npm run dev</code> as mentioned above to start the server. You can see the terminal saying:</p>
+<p>After copying and pasting the code in <code class="language-text">app.ts</code>, enter <code class="language-text">npm run dev</code> as mentioned above to start the server. You can see the terminal saying:</p>
 <p><em>the server is listening to the port 4000</em>.</p>
 <p>Each of the routes represents a URL that API users make a request to. Here, you will have a get route and then, pass '/' as its path and a call back function. What happens in the route is that when the API users make a request to the URL of this API, they will get a response showing <em><strong>Here is the response</strong></em>. Open a browser and enter <a href="http://localhost:4000">http://localhost:4000</a> to see the response - <em>Since we develop in our own local computer, we can have an access to the API with localhost</em>.</p>
 <p>The call back function takes mainly 2 objects as its arguments. They are Request and Response object.</p>
@@ -317,7 +317,7 @@ app<span class="token punctuation">.</span><span class="token function">listen</
 <span class="token keyword">export</span> <span class="token keyword">default</span> config<span class="token punctuation">;</span></code></pre></div>
 <p>When you develop an application, it is required to test the application so many times before the production. Therefore, you need to set up an environment for testing as well as an environment for production.</p>
 <p>cross-env allows you to set the environment by putting <code class="language-text">cross-env NODE_ENV=production</code> in front of the command to run the application. Then, it can access to a different .env files that you have created so you can create the same code that has two or more different environments.</p>
-<p>Create a file named config.ts under the project directory and import dotenv to enable us to access to <strong>[process.env.NODE_ENV].env</strong> file. If you set development to NODE_ENV in the command, Dotenv will read variables from development.env here.</p>
+<p>Create a file named <code class="language-text">config.ts</code> under the project directory and import dotenv to enable us to access to <strong>[process.env.NODE_ENV].env</strong> file. If you set development to NODE_ENV in the command, Dotenv will read variables from development.env here.</p>
 <p>Notice that process.env is preceded by the environment variables. You can access to the object globally in Node.js. In other words, you can use it throughout a whole application.</p>
 <h2>Access MongoDB From The Application</h2>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">import</span> config <span class="token keyword">from</span> <span class="token string">'./config'</span><span class="token punctuation">;</span>
@@ -344,7 +344,7 @@ app<span class="token punctuation">.</span><span class="token function">listen</
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> connectMongoDB<span class="token punctuation">;</span></code></pre></div>
-<p>Create a file named db.ts under the project directory. Then, import MongoClient and also config object from config.ts and pass <em>config.mongodb.uri</em> you have assigned to connect the application to MongoDB database.</p>
+<p>Create a file named <code class="language-text">db.ts</code> under the project directory. Then, import MongoClient and also config object from <code class="language-text">config.ts</code> and pass <em>config.mongodb.uri</em> you have assigned to connect the application to MongoDB database.</p>
 <p>Finally, wrap it in the promise so you can connect the application to MongoDB asynchronously through the whole application. Then, we will edit the code to make a test request to the API.</p>
 <h2>Create A Test User in MongoDB</h2>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">import</span> express<span class="token punctuation">,</span> <span class="token punctuation">{</span> Request<span class="token punctuation">,</span> Response<span class="token punctuation">,</span> NextFunction <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"express"</span><span class="token punctuation">;</span>
@@ -388,7 +388,7 @@ app<span class="token punctuation">.</span><span class="token function">listen</
   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Server is running on"</span><span class="token punctuation">,</span> config<span class="token punctuation">.</span>port<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>Add a post route that will receive a first name and a last name from the API users and will insert the information to the database. These data can be accessed by the property of request object called body.</p>
-<p>Assign what the MongoDB promise resolves to a variable named connection — Notice that the database name and collection name you set in config.ts are passed — and we will insert the first name and last name by the method called <strong>insertOne</strong>.</p>
+<p>Assign what the MongoDB promise resolves to a variable named connection — <em>Notice that the database name and collection name you set in <code class="language-text">config.ts</code> are passed</em> — and we will insert the first name and last name by the method called <strong>insertOne</strong>.</p>
 <p>If there is no error that is caught, the post route will send the status code which is 200 and the string saying <em><strong>Successfully Created in DB</strong></em> to the API users.</p>
 <h2>Make A Post Request With Insomnia</h2>
 <p><span
