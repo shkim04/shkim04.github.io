@@ -34,5 +34,9 @@ module.exports = {
   9: {
     ko: "nodejs-google-error-reporting-사용하기",
     en: "how-to-use-google-error-reporting-nodejs"
+  },
+  10: {
+    ko: "crontab-실무-적용-예시",
+    en: "how-i-used-crontab-to-schedule-jobs-for-my-work"
   }
 }
