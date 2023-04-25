@@ -1,7 +1,7 @@
 ---
 title: How To Create A Custom Dropdown React Component
 date: "2023-02-23T00:00:00.000Z"
-description: "Dropdown is an UI element that is used in most of websites. ㅑnstead of using a library, I built a custom dropdown component. Here is how."
+description: "Dropdown is an UI element that is used in most of websites. Instead of using a library, I built a custom dropdown component. Here is how."
 tag: 
     - ReactJS
 ---
