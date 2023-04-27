@@ -46,5 +46,9 @@ module.exports = {
   12: {
     ko: "custom-dropdown-react-컴포넌트",
     en: "how-to-create-a-custom-dropdown-react-component"
+  },
+  13: {
+    ko: "python-selenium-사용-요령",
+    en: "python-selenium-tips"
   }
 }
