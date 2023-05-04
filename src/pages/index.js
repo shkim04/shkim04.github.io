@@ -4,10 +4,10 @@ import { Link, graphql } from "gatsby"
 import Bio from "../components/bio"
 import Seo from "../components/seo"
 
-const blogTagsList = ["NodeJS", "ReactJS", "Python", "MongoDB", "Linux", "Cloud", "Others"]
-
 const Index = ({ data, pageContext: { locale } }) => {
   const posts = data.allMarkdownRemark.nodes
+  const blogTagsList = ["NodeJS", "ReactJS", "Python", "MongoDB", "Linux", "Cloud", "Others"]
+  
   const [selectedTags, setSelectedTags] = useState([])
   
   const handleSelectedTag = (tag) => {
@@ -44,10 +44,7 @@ const Index = ({ data, pageContext: { locale } }) => {
       </div>
       <ol style={{ listStyle: `none` }}>
         {posts
-            .filter(post => {
-              if(selectedTags.length === 0) return true
-              return post.frontmatter.tag.find(tag => selectedTags.indexOf(tag) > -1)
-            })
+            .filter(post => selectedTags.length === 0 ? true : post.frontmatter.tag.find(tag => selectedTags.indexOf(tag) > -1))
             .map(post => {
               const title = post.frontmatter.title || post.fields.slug
               
