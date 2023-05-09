@@ -11,7 +11,7 @@ module.exports = {
     title: `Seunghyun's Blog`,
     author: {
       name: `Seunghyun Kim`,
-      summary: `I am a developer who lives in Korea trying to make his way to the world. Talking about different cultures to each other is one of the biggest joy to me, which is why I am also writing in English.`,
+      summary: `I am a developer who lives in Korea trying to make his way to the world. Talking about different cultures to each other is one of the biggest joys to me, which is why I am also writing in English.`,
     },
     description: `My perosnal blog that shows what I am working on and thoughts`
   }
