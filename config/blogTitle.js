@@ -50,5 +50,13 @@ module.exports = {
   13: {
     ko: "python-selenium-사용-요령",
     en: "python-selenium-tips"
-  }
+  },
+  14: {
+    ko: "nvm-windows-node-버전-관리",
+    en: "how-to-manage-node-versions-on-windows-using-nvm"
+  },
+  // 15: {
+  //   ko: "nextjs-세션-적용",
+  //   en: "how-to-apply-session-in-nextjs"
+  // },
 }
