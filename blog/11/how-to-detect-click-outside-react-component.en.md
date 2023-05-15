@@ -1,7 +1,7 @@
 ---
 title: How To Detect Click Outside A React Component
 date: "2023-02-19T00:00:00.000Z"
-description: "We will create a react component that can know whether a click event comes from the outside of it or the inside of it."
+description: ""
 tag: 
     - ReactJS
 ---

@@ -1,7 +1,7 @@
 ---
 title: Python Selenium 사용 요령
 date: "2023-04-28T00:00:00.000Z"
-description: "실제 예를 들어 Python에서 Selenium을 어떻게 효과적으로 사용하는지에 대해 알아봅니다."
+description: ""
 tag: 
     - Python
 ---

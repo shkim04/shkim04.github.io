@@ -1,7 +1,7 @@
 ---
 title: 영역 밖에서 발생하는 클릭 감지하는 React 컴포넌트
 date: "2023-02-19T00:00:00.000Z"
-description: "클릭 이벤트가 안쪽 혹은 바깥쪽 어디에서 일어나는지 알 수 있는 React 컴포넌트를 만드는 내용입니다. "
+description: ""
 tag: 
     - ReactJS
 ---

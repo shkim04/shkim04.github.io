@@ -1,7 +1,7 @@
 ---
 title: How To Set Up a Virtual Environment On Windows
 date: "2023-01-19T00:00:00.000Z"
-description: "Describe how to set up a virtual environment, specifically on Windows and why python developers are highly recommended to do it for any Python project"
+description: ""
 tag: 
     - Python
 ---

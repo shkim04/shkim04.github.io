@@ -1,7 +1,7 @@
 ---
 title: REST API with Express, MongoDB and Typescript
 date: "2022-12-01T00:00:00.000Z"
-description: "Create a simple REST API - From setting up MongoDB for an application to a simple CRUD operation with Node.js express and Typescript"
+description: ""
 tag: 
   - NodeJS
   - MongoDB

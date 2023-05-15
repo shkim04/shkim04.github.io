@@ -1,7 +1,7 @@
 ---
 title: How To Create React Native Modal With Expo
 date: "2022-11-18T00:00:00.000Z"
-description: "With Expo, we can build React Native app without thinking about the platforms. Creating a basic but powerful React Native Modal component will be discussed"
+description: ""
 tag: 
   - Others
 ---

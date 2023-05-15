@@ -1,7 +1,7 @@
 ---
 title: How I Used Crontab To Schedule Jobs On Linux For My Work
 date: "2023-02-14T00:00:00.000Z"
-description: "Cron is a built-in system tool to schedule jobs on Linux. We will learn a piece of knowledge about it with my personal experience."
+description: ""
 tag: 
     - Linux
 ---

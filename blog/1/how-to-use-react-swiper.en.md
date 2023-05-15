@@ -1,7 +1,7 @@
 ---
 title: How To Use React Swiper
 date: "2022-11-13T00:00:00.000Z"
-description: "React Swiper makes an app look better with pictures and such. Throughout the article, We will figure out how to make a use of React Swiper library by creating a simple React app"
+description: ""
 tag: 
   - ReactJS
 ---

@@ -1,7 +1,7 @@
 ---
 title: How To Use Pandas For Excel On Python
 date: "2023-01-30T00:00:00.000Z"
-description: "Pandas is a fantastic tool to analyze data vastly used in Python - We will learn basics of pandas with a real world data."
+description: ""
 tag: 
     - Python
 ---

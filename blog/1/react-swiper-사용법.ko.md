@@ -1,7 +1,7 @@
 ---
 title: React Swiper 사용법
 date: "2022-11-13T00:00:00.000Z"
-description: "React Swiper는 화면에 사진들을 효과적으로 보여줄 수 있는 라이브러리입니다. Swiper 라이브러리에 대한 기초를 알아보고 간단한 App을 구현해봅니다."
+description: ""
 tag: 
   - ReactJS
 ---

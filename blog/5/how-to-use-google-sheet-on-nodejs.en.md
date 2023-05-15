@@ -1,7 +1,7 @@
 ---
 title: How To Use Google Sheet API On Node.js
 date: "2023-01-03T00:00:00.000Z"
-description: "Basic implementation of Google Sheet API on Node.js - We will Read, Clear, and Update data from Google Sheet"
+description: ""
 tag: 
   - NodeJS
 ---

@@ -1,7 +1,7 @@
 ---
 title: Python에서 pandas로 엑셀 다루기
 date: "2023-01-30T00:00:00.000Z"
-description: "Panda는 Python에서 데이터 분석과 가공을 쉽고 빠르게 할 수 있게 도와주는 라이브러리입니다. 실제 데이터 모델로 기초에 대해 알아봅니다."
+description: ""
 tag: 
     - Python
 ---

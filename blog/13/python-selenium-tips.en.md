@@ -1,7 +1,7 @@
 ---
 title: Python Selenium Tips
 date: "2023-04-28T00:00:00.000Z"
-description: "By giving a simplified real-world example, we will learn how to use Selenium clevery on Python."
+description: ""
 tag: 
     - Python
 ---

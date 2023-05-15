@@ -1,7 +1,7 @@
 ---
 title: Crontab 실무에 적용한 예
 date: "2023-02-14T00:00:00.000Z"
-description: "Cron은 리눅스에 내장된 스케줄링 시스템 도구입니다. 개인 경험을 통해 cron에 대한 간단하게 설명하는 내용을 담고 있습니다."
+description: ""
 tag: 
     - Linux
 ---

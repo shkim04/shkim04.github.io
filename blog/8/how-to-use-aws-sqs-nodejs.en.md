@@ -1,7 +1,7 @@
 ---
 title: How To Use AWS SQS On Node.js
 date: "2023-02-05T00:00:00.000Z"
-description: "Thoughts on how to implement AWS SQS on Node.js application with a possible example to which it can be applied."
+description: ""
 tag: 
     - Cloud
     - NodeJS

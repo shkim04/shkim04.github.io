@@ -1,7 +1,7 @@
 ---
 title: Custom Dropdown React 컴포넌트
 date: "2023-02-23T00:00:00.000Z"
-description: "Dropdown은 대부분의 웹사이트에 쓰이는 UI 요소입니다. 라이브러리를 쓰는 대신 직접 만든 Custom Dropdown 컴포넌트를 공유하는 글입니다."
+description: ""
 tag: 
     - ReactJS
 ---

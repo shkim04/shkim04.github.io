@@ -1,7 +1,7 @@
 ---
 title: AWS EC2 인스턴스 생성 후 Node 설치
 date: "2022-12-27T00:00:00.000Z"
-description: "AWS EC2는 온디맨드 형식의 컴퓨팅 서비스를 제공하는 플랫폼이다. 리눅스 인스턴스를 생성해보고 Node까지 설치하는 가이드입니다."
+description: ""
 tag: 
     - Cloud
 ---

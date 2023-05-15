@@ -1,7 +1,7 @@
 ---
 title: Node.js 어플리케이션에서 AWS SQS
 date: "2023-02-05T00:00:00.000Z"
-description: "실제 Node.js 어플리케이션에 적용할 수 있는 예를 제시하여 AWS SQS를 Node.js에서 사용하는 법에 관한 글입니다."
+description: ""
 tag: 
     - Cloud
     - NodeJS

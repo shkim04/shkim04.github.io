@@ -1,7 +1,7 @@
 ---
 title: How To Launch AWS EC2 Instance And Download Node
 date: "2022-12-27T00:00:00.000Z"
-description: "The guide to launching AWS EC2 which provides a flexible cloud compute service on demand, specfically Linux instance and download Node"
+description: ""
 tag: 
     - Cloud
 ---
