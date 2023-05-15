@@ -55,8 +55,8 @@ module.exports = {
     ko: "nvm-windows-node-버전-관리",
     en: "how-to-manage-node-versions-on-windows-using-nvm"
   },
-  // 15: {
-  //   ko: "nextjs-세션-적용",
-  //   en: "how-to-apply-session-in-nextjs"
-  // },
+  15: {
+    ko: "nextjs-세션-적용",
+    en: "how-to-apply-session-in-nextjs"
+  },
 }
