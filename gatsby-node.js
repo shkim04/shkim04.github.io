@@ -22,12 +22,12 @@ exports.onCreatePage = ({ page, actions }) => {
   const { createPage, deletePage } = actions
 
   deletePage(page)
-  
+
   Object.keys(locales).map(lang => {
     const localizedPath = locales[lang].default
       ? page.path
       : `${locales[lang].path}${page.path}`
-    
+
     return createPage({
       ...page,
       path: removeTrailingSlash(localizedPath),
@@ -36,8 +36,8 @@ exports.onCreatePage = ({ page, actions }) => {
         locale: lang,
         isDefaultLang: locales[lang].default,
         titleByLang: {},
-        dateFormat: locales[lang].dateFormat
-      }
+        dateFormat: locales[lang].dateFormat,
+      },
     })
   })
 }
@@ -50,15 +50,23 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 
   if (node.internal.type === `MarkdownRemark`) {
     const postTitleInfo = createFilePath({ node, getNode }).split(".")
-    
+
     const order = postTitleInfo[0].match(/^\/([0-9]+)/)[1]
     const slug = postTitleInfo[0].replace(/^\/([0-9]+)/, "")
     const lang = postTitleInfo[1].replace("/", "")
     const defaultKey = findKey(locales, o => o.default === true)
     const isDefaultLang = lang === defaultKey
     const titleByLang = blogTitle[order]
-    
-    createNodeField({ node, name: `slug`, value: localizedSlug({isDefaultLang: isDefaultLang, locale: lang, slug: slug}) })
+
+    createNodeField({
+      node,
+      name: `slug`,
+      value: localizedSlug({
+        isDefaultLang: isDefaultLang,
+        locale: lang,
+        slug: slug,
+      }),
+    })
     createNodeField({ node, name: `locale`, value: lang })
     createNodeField({ node, name: `isDefaultLang`, value: isDefaultLang })
     createNodeField({ node, name: `titleByLang`, value: titleByLang })
@@ -74,7 +82,10 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   // Get all markdown blog posts sorted by date
   const result = await graphql(`
     {
-      allMarkdownRemark(sort: [{ frontmatter: { date: ASC } }, { fields: { locale: ASC } } ], limit: 1000) {
+      allMarkdownRemark(
+        sort: [{ frontmatter: { date: ASC } }, { fields: { locale: ASC } }]
+        limit: 1000
+      ) {
         nodes {
           id
           fields {
@@ -93,7 +104,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       }
     }
   `)
-  
+
   if (result.errors) {
     reporter.panicOnBuild(
       `There was an error loading your blog posts`,
@@ -108,15 +119,19 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     const numSupportingLang = 2
 
     posts.forEach((post, index) => {
-      const previousPostId = index === 0 || index === 1 ? null : posts[index - numSupportingLang].id
-      const nextPostId = index === posts.length - numSupportingLang || index === posts.length - 1 ? null : posts[index + numSupportingLang].id
+      const previousPostId =
+        index === 0 || index === 1 ? null : posts[index - numSupportingLang].id
+      const nextPostId =
+        index === posts.length - numSupportingLang || index === posts.length - 1
+          ? null
+          : posts[index + numSupportingLang].id
 
       const isDefaultLang = post.fields.isDefaultLang
       const locale = post.fields.locale
       const slug = post.fields.slug
       const titleByLang = post.fields.titleByLang
       const dateFormat = locales[locale].dateFormat
-      
+
       createPage({
         path: slug,
         component: blogPost,
@@ -128,7 +143,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           dateFormat: dateFormat,
           id: post.id,
           previousPostId,
-          nextPostId
+          nextPostId,
         },
       })
     })

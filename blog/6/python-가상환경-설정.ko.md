@@ -1,14 +1,14 @@
 ---
-title: 윈도우에 Python 가상 환경 설치
+title: 윈도우에 Python 가상 환경 설치하기
 date: "2023-01-19T00:00:00.000Z"
 description: ""
-tag: 
-    - Python
+tag:
+  - Python
 ---
 
 Python으로 어플리케이션을 개발할 때, 그 프로젝트의 규모가 작다면 Python 버전 혹은 패키지의 버전에 대해 크게 신경 쓸 일이 없다. 하지만 API 서버같이 복잡한 어플리케이션을 개발하는 경우라면 프로젝트에 많은 파일과 패키지가 사용될 것이다. 이 패키지들은 Python 버전에 영향을 받는다. 하나 이상의 Python 프로젝트들이 컴퓨터에 존재할 때 문제를 일으킬 가능성이 높다.
 
-다음과 같은 예가 있다: 
+다음과 같은 예가 있다:
 
 개인 컴퓨터에서 **my-first-python-project**를 진행하고 있고 이 프로젝트에 필요한 패키지들을 전역적으로 설치했다고 가정하자. 그리고 회사에서 처음으로 맡은 **your-first-assigned-python-project** 를 맡았다고 하자. 개인 Python 프로젝트는 Python 3.6.0 버전으로 개발되고 있고 회사 프로젝트는 3.10.0으로 개발되고 있다. 각각의 프로젝트에 똑같이 사용되는 패키지 **pandas**의 버전이 각각 1.2.0과 1.5.2이다.
 
@@ -21,10 +21,12 @@ Python으로 어플리케이션을 개발할 때, 그 프로젝트의 규모가 
 
 이제 Window에 Python 가상 환경을 설치하는 법을 알아보자 - _Linux 혹은 MacOS에 설치하는 것도 어렵지 않으니 검색해보길 바란다_.
 
-## 필수 
+## 필수
+
 - Python — _버전은 상관없으나 LTS 버전으로 설치하길 권한다_
 
 ## Virtualenv 설치
+
 ```
 pip install virtualenv
 ```
@@ -44,7 +46,8 @@ virtualenv --version
 ![not-recognized](../imgs/6/not-recognized.png)
 
 방법은 다음과 같다:
-1. 실행파일의 경로를 확인한다 - _보통 C:\Users\[your user name]\AppData\Roaming\Python\Python[your python version]\Scripts folder 형식일 것이다_
+
+1. 실행파일의 경로를 확인한다 - *보통 C:\Users\[your user name]\AppData\Roaming\Python\Python[your python version]\Scripts folder 형식일 것이다*
 2. Window 키를 누른 후, 환경 변수 편집을 찾아 클릭한다
 3. **환경 변수**를 클릭한다
 4. **Path** 더블 클릭하거나 클릭 후 편집을 누른다
@@ -54,7 +57,9 @@ virtualenv --version
 5. **virtualenv** 실행 파일의 경로를 추가해준다
 
 ## 가상 환경 생성 및 활성화
+
 **test_python** 파일을 만든다 - _테스트 용으로 만든 폴더가 있다면 사용해도 상관없다_. 이 폴더 하위에 가상 환경을 만들 것이다.
+
 ```
 cd /path/to/test_python
 // create command
@@ -68,7 +73,9 @@ virtualenv [your virtual environment name]
 ```
 
 ## 가상 환경 동작 확인
+
 실제 가상 환경이 동작이 잘 되는지 확인하기 위해 패키지를 설치하고 패키지 목록을 확인해보자.
+
 ```
 pip install pandas
 pip list
@@ -87,6 +94,7 @@ deactivate
 문제가 없다면 패지키 목록에서 **pandas**가 없다는 것을 확인할 수 있을 것이다.
 
 ## 결론
+
 Python 가상 환경에 대해 알아 보았다. 개인 컴퓨터에서 많은 Python 프로젝트를 다룰 때 유용한 도구이다. 각자 프로젝트가 크든 작든 가상 환경을 설치하여 문제 없이 Python 개발을 하길 바란다.
 
 _**읽어 주셔서 감사합니다. To be continued!**_
