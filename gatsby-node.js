@@ -51,12 +51,12 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   if (node.internal.type === `MarkdownRemark`) {
     const postTitleInfo = createFilePath({ node, getNode }).split(".")
 
-    const order = postTitleInfo[0].match(/^\/([0-9]+)/)[1]
-    const slug = postTitleInfo[0].replace(/^\/([0-9]+)/, "")
+    const date = postTitleInfo[0].match(/^\/(\d{4}-\d{2}-\d{2})/)[1]
+    const slug = postTitleInfo[0].replace(/^\/(\d{4}-\d{2}-\d{2})$/, "")
     const lang = postTitleInfo[1].replace("/", "")
     const defaultKey = findKey(locales, o => o.default === true)
     const isDefaultLang = lang === defaultKey
-    const titleByLang = blogTitle[order]
+    const titleByLang = blogTitle[date]
 
     createNodeField({
       node,
