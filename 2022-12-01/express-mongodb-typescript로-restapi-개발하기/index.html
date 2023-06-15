@@ -1,0 +1,557 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><meta name="generator" content="Gatsby 5.8.0"/><meta name="description" content="REST API는 마치 음식점의 메뉴와 같다. 손님이 메뉴를 보면 그 음식점이 어떤 음식들을 요리하는지 알 수 있는 것처럼 개발자가 한 소프트웨어 상품의 API 문서를 보면 무슨 기능을 제공하는지 알 수 있다. API 문서에는 흔히 요청 url이 적혀 있고 각 url…" data-gatsby-head="true"/><meta property="og:title" content="Express, MongoDB, Typescript로 REST API 개발하기" data-gatsby-head="true"/><meta property="og:description" content="REST API는 마치 음식점의 메뉴와 같다. 손님이 메뉴를 보면 그 음식점이 어떤 음식들을 요리하는지 알 수 있는 것처럼 개발자가 한 소프트웨어 상품의 API 문서를 보면 무슨 기능을 제공하는지 알 수 있다. API 문서에는 흔히 요청 url이 적혀 있고 각 url…" data-gatsby-head="true"/><meta property="og:type" content="website" data-gatsby-head="true"/><meta name="medium:card" content="summary" data-gatsby-head="true"/><meta name="meidum:creator" content="" data-gatsby-head="true"/><meta name="medium:title" content="Express, MongoDB, Typescript로 REST API 개발하기" data-gatsby-head="true"/><meta name="medium:description" content="REST API는 마치 음식점의 메뉴와 같다. 손님이 메뉴를 보면 그 음식점이 어떤 음식들을 요리하는지 알 수 있는 것처럼 개발자가 한 소프트웨어 상품의 API 문서를 보면 무슨 기능을 제공하는지 알 수 있다. API 문서에는 흔히 요청 url이 적혀 있고 각 url…" data-gatsby-head="true"/><style data-href="/styles.3f47606194989379c910.css" data-identity="gatsby-global-css">@font-face{font-display:swap;font-family:MontserratVariable;font-style:normal;font-weight:100 900;src:url(/static/montserrat-cyrillic-variable-wghtOnly-normal-f41a9bc7688bda1e84508030cb5c18fe.woff2) format("woff2");unicode-range:u+0301,u+0400-045f,u+0490-0491,u+04b0-04b1,u+2116}@font-face{font-display:swap;font-family:MontserratVariable;font-style:normal;font-weight:100 900;src:url(/static/montserrat-cyrillic-ext-variable-wghtOnly-normal-639b3c91831427d83cd3984af014778c.woff2) format("woff2");unicode-range:u+0460-052f,u+1c80-1c88,u+20b4,u+2de0-2dff,u+a640-a69f,u+fe2e-fe2f}@font-face{font-display:swap;font-family:MontserratVariable;font-style:normal;font-weight:100 900;src:url(/static/montserrat-latin-variable-wghtOnly-normal-b66f2d18f66f15c3ac56a2f4d68b3be5.woff2) format("woff2");unicode-range:u+00??,u+0131,u+0152-0153,u+02bb-02bc,u+02c6,u+02da,u+02dc,u+2000-206f,u+2074,u+20ac,u+2122,u+2191,u+2193,u+2212,u+2215,u+feff,u+fffd}@font-face{font-display:swap;font-family:MontserratVariable;font-style:normal;font-weight:100 900;src:url(/static/montserrat-latin-ext-variable-wghtOnly-normal-9f73369162c4382215d4317ba362fe1e.woff2) format("woff2");unicode-range:u+0100-024f,u+0259,u+1e??,u+2020,u+20a0-20ab,u+20ad-20cf,u+2113,u+2c60-2c7f,u+a720-a7ff}@font-face{font-display:swap;font-family:MontserratVariable;font-style:normal;font-weight:100 900;src:url(data:font/woff2;base64,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) format("woff2");unicode-range:u+0102-0103,u+0110-0111,u+0128-0129,u+0168-0169,u+01a0-01a1,u+01af-01b0,u+1ea0-1ef9,u+20ab}@font-face{font-display:swap;font-family:Merriweather;font-style:normal;font-weight:400;src:url(/static/merriweather-cyrillic-ext-400-normal-2a880e22b1b888ab54652a36d43b7f16.woff2) format("woff2"),url(/static/merriweather-all-400-normal-5e7a0e6a9b864b89292d60ba5da59d4b.woff) format("woff");unicode-range:u+0460-052f,u+1c80-1c88,u+20b4,u+2de0-2dff,u+a640-a69f,u+fe2e-fe2f}@font-face{font-display:swap;font-family:Merriweather;font-style:normal;font-weight:400;src:url(/static/merriweather-cyrillic-400-normal-fde0b55efc50742fb57fbebbb11c572f.woff2) format("woff2"),url(/static/merriweather-all-400-normal-5e7a0e6a9b864b89292d60ba5da59d4b.woff) format("woff");unicode-range:u+0301,u+0400-045f,u+0490-0491,u+04b0-04b1,u+2116}@font-face{font-display:swap;font-family:Merriweather;font-style:normal;font-weight:400;src:url(data:font/woff2;base64,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) format("woff2"),url(/static/merriweather-all-400-normal-5e7a0e6a9b864b89292d60ba5da59d4b.woff) format("woff");unicode-range:u+0102-0103,u+0110-0111,u+0128-0129,u+0168-0169,u+01a0-01a1,u+01af-01b0,u+1ea0-1ef9,u+20ab}@font-face{font-display:swap;font-family:Merriweather;font-style:normal;font-weight:400;src:url(/static/merriweather-latin-ext-400-normal-4657f5ab02d5923d223f96a9155a9bdc.woff2) format("woff2"),url(/static/merriweather-all-400-normal-5e7a0e6a9b864b89292d60ba5da59d4b.woff) format("woff");unicode-range:u+0100-024f,u+0259,u+1e??,u+2020,u+20a0-20ab,u+20ad-20cf,u+2113,u+2c60-2c7f,u+a720-a7ff}@font-face{font-display:swap;font-family:Merriweather;font-style:normal;font-weight:400;src:url(/static/merriweather-latin-400-normal-e009f21405b4d7e893674b69deb4cf4a.woff2) format("woff2"),url(/static/merriweather-all-400-normal-5e7a0e6a9b864b89292d60ba5da59d4b.woff) format("woff");unicode-range:u+00??,u+0131,u+0152-0153,u+02bb-02bc,u+02c6,u+02da,u+02dc,u+2000-206f,u+2074,u+20ac,u+2122,u+2191,u+2193,u+2212,u+2215,u+feff,u+fffd}
+
+/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */html{-webkit-text-size-adjust:100%;line-height:1.15}body{margin:0}main{display:block}h1{font-size:2em;margin:.67em 0}hr{box-sizing:content-box;height:0;overflow:visible}pre{font-family:monospace,monospace;font-size:1em}a{background-color:transparent}abbr[title]{border-bottom:none;text-decoration:underline;-webkit-text-decoration:underline dotted;text-decoration:underline dotted}b,strong{font-weight:bolder}code,kbd,samp{font-family:monospace,monospace;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{padding:.35em .75em .625em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{vertical-align:baseline}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details{display:block}summary{display:list-item}[hidden]{display:none}:root{--maxWidth-none:"none";--maxWidth-xs:20rem;--maxWidth-sm:24rem;--maxWidth-md:28rem;--maxWidth-lg:32rem;--maxWidth-xl:36rem;--maxWidth-2xl:42rem;--maxWidth-3xl:48rem;--maxWidth-4xl:56rem;--maxWidth-full:"100%";--maxWidth-wrapper:var(--maxWidth-2xl);--spacing-px:"1px";--spacing-0:0;--spacing-1:0.25rem;--spacing-2:0.5rem;--spacing-3:0.75rem;--spacing-4:1rem;--spacing-5:1.25rem;--spacing-6:1.5rem;--spacing-8:2rem;--spacing-10:2.5rem;--spacing-12:3rem;--spacing-16:4rem;--spacing-20:5rem;--spacing-24:6rem;--spacing-32:8rem;--fontFamily-sans:"MontserratVariable",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";--fontFamily-serif:"Merriweather","Georgia",Cambria,"Times New Roman",Times,serif;--font-body:var(--fontFamily-serif);--font-heading:var(--fontFamily-sans);--fontWeight-normal:400;--fontWeight-bold:700;--fontWeight-black:900;--fontSize-root:16px;--lineHeight-none:1;--lineHeight-tight:1.1;--lineHeight-normal:1.5;--lineHeight-relaxed:1.625;--fontSize-0:0.833rem;--fontSize-1:1rem;--fontSize-2:1.2rem;--fontSize-3:1.44rem;--fontSize-4:1.728rem;--fontSize-5:2.074rem;--fontSize-6:2.488rem;--fontSize-7:2.986rem;--color-primary:#005b99;--color-text:#2e353f;--color-text-light:#4f5969;--color-heading:#1a202c;--color-heading-black:#000;--color-accent:#d1dce5}*,:after,:before{box-sizing:border-box}html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-size:var(--fontSize-root);line-height:var(--lineHeight-normal)}body{color:var(--color-text);font-family:var(--font-body);font-size:var(--fontSize-1)}footer{padding:var(--spacing-6) var(--spacing-0)}hr{background:var(--color-accent);border:0;height:1px}h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);letter-spacing:-.025em;line-height:var(--lineHeight-tight);margin-bottom:var(--spacing-6);margin-top:var(--spacing-12)}h2,h3,h4,h5,h6{color:var(--color-heading);font-weight:var(--fontWeight-bold)}h1{color:var(--color-heading-black);font-size:var(--fontSize-6);font-weight:var(--fontWeight-black)}h2{font-size:var(--fontSize-5)}h3{font-size:var(--fontSize-4)}h4{font-size:var(--fontSize-3)}h5{font-size:var(--fontSize-2)}h6{font-size:var(--fontSize-1)}h1>a,h2>a,h3>a,h4>a,h5>a,h6>a{color:inherit;text-decoration:none}p{--baseline-multiplier:0.179;--x-height-multiplier:0.35;line-height:var(--lineHeight-relaxed);margin:var(--spacing-0) var(--spacing-0) var(--spacing-8) var(--spacing-0);padding:var(--spacing-0)}p>img{display:block;margin:0 auto;max-width:100%}ol,ul{list-style-image:none;list-style-position:outside;margin-bottom:var(--spacing-8);margin-left:var(--spacing-0);margin-right:var(--spacing-0);padding:var(--spacing-0)}ol li,ul li{padding-left:var(--spacing-0)}li>p,ol li,ul li{margin-bottom:calc(var(--spacing-8)/2)}li :last-child{margin-bottom:var(--spacing-0)}li>ul{margin-left:var(--spacing-8);margin-top:calc(var(--spacing-8)/2)}blockquote{border-left:var(--spacing-1) solid var(--color-primary);color:var(--color-text-light);font-size:var(--fontSize-2);font-style:italic;margin-bottom:var(--spacing-8);margin-left:calc(var(--spacing-6)*-1);margin-right:var(--spacing-8);padding:var(--spacing-0) var(--spacing-0) var(--spacing-0) var(--spacing-6)}blockquote>:last-child{margin-bottom:var(--spacing-0)}blockquote>ol,blockquote>ul{list-style-position:inside}table{border-collapse:collapse;border-spacing:.25rem;margin-bottom:var(--spacing-8);width:100%}table thead tr th{border-bottom:1px solid var(--color-accent)}a{color:var(--color-primary)}a:focus,a:hover{text-decoration:none}.global-wrapper{margin:var(--spacing-0) auto;max-width:var(--maxWidth-wrapper);padding:0 var(--spacing-5) var(--spacing-10) var(--spacing-5)}.global-wrapper[data-is-root-path=true] .bio{margin-bottom:var(--spacing-18)}.global-header{margin-bottom:var(--spacing-12)}.main-heading{font-size:var(--fontSize-7);margin:0}.post-list-item{margin-bottom:var(--spacing-8);margin-top:var(--spacing-8)}.post-list-item p{margin-bottom:var(--spacing-0)}.post-list-item h2{color:var(--color-primary);font-size:var(--fontSize-4);margin-bottom:var(--spacing-2);margin-top:var(--spacing-0)}.post-list-item header{margin-bottom:var(--spacing-4)}.post-list-item header p{display:flex;flex-wrap:wrap}.post-list-item header p span{background-color:#fff;border:.1rem solid #afc8db;border-radius:5px;color:#afc8db;font-size:var(--fontSize-0);margin-bottom:var(--spacing-2);margin-right:var(--spacing-1);padding:var(--spacing-1) var(--spacing-2)}.header-link-home{font-family:var(--font-heading);font-size:var(--fontSize-2);font-weight:var(--fontWeight-bold);text-decoration:none}.bio{display:flex;margin-bottom:var(--spacing-16)}.bio p,.bio-avatar{margin-bottom:var(--spacing-0)}.bio-avatar{border-radius:100%;margin-right:var(--spacing-4);min-width:100px}.blog-post header h1{margin:var(--spacing-0) var(--spacing-0) var(--spacing-4) var(--spacing-0)}.blog-post header p{font-family:var(--font-heading);font-size:var(--fontSize-2)}.blog-post header span{background-color:#fff;border:.1rem solid #afc8db;border-radius:5px;color:#afc8db;display:inline-block;font-family:var(--font-body);font-size:var(--fontSize-0);margin-bottom:var(--spacing-1);margin-right:var(--spacing-1);padding:var(--spacing-1) var(--spacing-2)}.blog-post-nav ul{margin:var(--spacing-0)}.gatsby-highlight{margin-bottom:var(--spacing-8)}.language-nav{display:block}.language-item-container{align-items:center;display:flex;justify-content:flex-end;margin-bottom:5px;width:100%}.language-item{border-right:.2rem solid #d1dce5;list-style:none;padding:0 var(--spacing-2)}.language-item-container .last-item{border:none}.language-item a{color:#000;font-weight:var(--fontWeight-bold);text-decoration:none}.language-item .active-langauge{color:#005b99}.link-container{align-items:center;display:flex;flex-wrap:wrap;justify-content:flex-start;list-style:none}.link-item>a{color:#000;display:inline-block;font-size:var(--fontSize-0);margin:0;padding-right:1.2rem;text-decoration:none;transition:.3s}.link-item>a>svg{display:block;font-size:var(--fontSize-4);margin:0 auto var(--spacing-2) auto;padding:0}.link-item>a:hover{color:#aaa;cursor:pointer;transition:.3s}.blog-tag-list-container{display:flex;flex-wrap:wrap}.blog-tag-list-container button{background-color:#fff;border:.1rem solid #4f5969;border-radius:5px;color:#4f5969;font-size:var(--fontSize-0);margin-bottom:.4rem;margin-right:var(--spacing-2);padding:var(--spacing-2) 1rem}.blog-tag-list-container button:hover{cursor:pointer}.blog-tag-list-container .active-tag{background-color:#4f5969;color:#fff}@media (max-width:42rem){blockquote{margin-left:var(--spacing-0);padding:var(--spacing-0) var(--spacing-0) var(--spacing-0) var(--spacing-4)}ol,ul{list-style-position:inside}.main-heading{font-size:var(--fontSize-5)}}code[class*=language-],pre[class*=language-]{word-wrap:normal;background:none;color:#000;font-family:Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;font-size:1em;-webkit-hyphens:none;hyphens:none;line-height:1.5;tab-size:4;text-align:left;text-shadow:0 1px #fff;white-space:pre;word-break:normal;word-spacing:normal}code[class*=language-] ::selection,code[class*=language-]::selection,pre[class*=language-] ::selection,pre[class*=language-]::selection{background:#b3d4fc;text-shadow:none}@media print{code[class*=language-],pre[class*=language-]{text-shadow:none}}pre[class*=language-]{margin:.5em 0;overflow:auto;padding:1em}:not(pre)>code[class*=language-],pre[class*=language-]{background:#f5f2f0}:not(pre)>code[class*=language-]{border-radius:.3em;padding:.1em;white-space:normal}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#708090}.token.punctuation{color:#999}.token.namespace{opacity:.7}.token.boolean,.token.constant,.token.deleted,.token.number,.token.property,.token.symbol,.token.tag{color:#905}.token.attr-name,.token.builtin,.token.char,.token.inserted,.token.selector,.token.string{color:#690}.language-css .token.string,.style .token.string,.token.entity,.token.operator,.token.url{background:hsla(0,0%,100%,.5);color:#9a6e3a}.token.atrule,.token.attr-value,.token.keyword{color:#07a}.token.class-name,.token.function{color:#dd4a68}.token.important,.token.regex,.token.variable{color:#e90}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}</style><style>.gatsby-image-wrapper{position:relative;overflow:hidden}.gatsby-image-wrapper picture.object-fit-polyfill{position:static!important}.gatsby-image-wrapper img{bottom:0;height:100%;left:0;margin:0;max-width:none;padding:0;position:absolute;right:0;top:0;width:100%;object-fit:cover}.gatsby-image-wrapper [data-main-image]{opacity:0;transform:translateZ(0);transition:opacity .25s linear;will-change:opacity}.gatsby-image-wrapper-constrained{display:inline-block;vertical-align:top}</style><noscript><style>.gatsby-image-wrapper noscript [data-main-image]{opacity:1!important}.gatsby-image-wrapper [data-placeholder-image]{opacity:0!important}</style></noscript><script type="module">const e="undefined"!=typeof HTMLImageElement&&"loading"in HTMLImageElement.prototype;e&&document.body.addEventListener("load",(function(e){const t=e.target;if(void 0===t.dataset.mainImage)return;if(void 0===t.dataset.gatsbyImageSsr)return;let a=null,n=t;for(;null===a&&n;)void 0!==n.parentNode.dataset.gatsbyImageWrapper&&(a=n.parentNode),n=n.parentNode;const o=a.querySelector("[data-placeholder-image]"),r=new Image;r.src=t.currentSrc,r.decode().catch((()=>{})).then((()=>{t.style.opacity=1,o&&(o.style.opacity=0,o.style.transition="opacity 500ms linear")}))}),!0);</script><link rel="preconnect" href="https://www.googletagmanager.com"/><link rel="dns-prefetch" href="https://www.googletagmanager.com"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-Y0S7MC5Z4X"></script><script>
+      
+      
+      if(true) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-Y0S7MC5Z4X', {"send_page_view":false});
+      }
+      </script><link rel="alternate" type="application/rss+xml" title="Gatsby Starter Blog RSS Feed" href="/rss.xml"/><link rel="icon" href="/favicon-32x32.png?v=4a9773549091c227cd2eb82ccd9c5e3a" type="image/png"/><link rel="manifest" href="/manifest.webmanifest" crossorigin="anonymous"/><link rel="apple-touch-icon" sizes="48x48" href="/icons/icon-48x48.png?v=4a9773549091c227cd2eb82ccd9c5e3a"/><link rel="apple-touch-icon" sizes="72x72" href="/icons/icon-72x72.png?v=4a9773549091c227cd2eb82ccd9c5e3a"/><link rel="apple-touch-icon" sizes="96x96" href="/icons/icon-96x96.png?v=4a9773549091c227cd2eb82ccd9c5e3a"/><link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144x144.png?v=4a9773549091c227cd2eb82ccd9c5e3a"/><link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png?v=4a9773549091c227cd2eb82ccd9c5e3a"/><link rel="apple-touch-icon" sizes="256x256" href="/icons/icon-256x256.png?v=4a9773549091c227cd2eb82ccd9c5e3a"/><link rel="apple-touch-icon" sizes="384x384" href="/icons/icon-384x384.png?v=4a9773549091c227cd2eb82ccd9c5e3a"/><link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png?v=4a9773549091c227cd2eb82ccd9c5e3a"/><title data-gatsby-head="true">Express, MongoDB, Typescript로 REST API 개발하기 | 김승현 씨 블로그</title></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div class="global-wrapper" data-is-root-path="false"><header class="global-header"><nav class="language-nav"><ul class="language-item-container"><li class="language-item"><a class="active-langauge" href="/express-mongodb-typescript로-restapi-개발하기/">한국어</a></li><li class="language-item last-item"><a class="" href="/en/restapi-with-express-mongodb-typescript/">English</a></li></ul></nav><div class="global-header-message"><a class="header-link-home" href="/">김승현 씨 블로그</a></div></header><main><article class="blog-post" itemscope="" itemType="http://schema.org/Article"><header><h1 itemProp="headline">Express, MongoDB, Typescript로 REST API 개발하기</h1><span>NodeJS</span><span>MongoDB</span><p>2022년 12월 01일</p></header><section itemProp="articleBody"><p>REST API는 마치 음식점의 메뉴와 같다. 손님이 메뉴를 보면 그 음식점이 어떤 음식들을 요리하는지 알 수 있는 것처럼 개발자가 한 소프트웨어 상품의 API 문서를 보면 무슨 기능을 제공하는지 알 수 있다. API 문서에는 흔히 요청 url이 적혀 있고 각 url에 대한 설명을 찾아볼 수 있다. 이 중 한 url에 요청을 보내면 그에 대한 응답을 받는 것이다. 개발자는 이 응답을 받아 가공 후 자신의 앱에 사용하면 된다. 이제 API를 만들어 보자.</p>
+<h2>필수</h2>
+<ul>
+<li>Node.js + Typescript</li>
+<li>MongoDB</li>
+<li>Insomnia</li>
+</ul>
+<h2>MongoDB 데이터베이스</h2>
+<p>먼저 MongoDB 설정부터 시작하겠다. MongoDB는 NoSQL 데이터베이스로 아주 많이 사용되는 데이터베이스 중 하나이다. 흔히 CRUD라고 말하는 create, retrieve, update, delete 요청을 적용하는 것이 아주 용이하다.</p>
+<p>MongoDB 사용을 위해서 계정을 만들어야 한다. google이나 github 계정과 연동해서 쉽게 만들 수 있다. 계정을 생성해도 먼저 돈을 지불하지 않으며 추후에 큰 규모의 데이터를 처리할 때 처리량에 따라 지불하면 된다.</p>
+<p>계정을 생성하고 로그인을 하면 다음과 같은 대시보드가 나온다:</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/3a8ad2fc6c44825ba1ca050587fc4387/c0255/mongodb-1.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 55.69620253164557%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB2UlEQVR42m2SSW/UQBSE/f+vIA5IkL+AcgERJDiAcuBKQELARJklHi+9eOl2rx+yHSImSUmlbr/nKlW/7uJGVmzaknroCCnS2cBWTGylY68ce+nYScdBOaz35JyZMa9Psfha3vCtLvk9KvZupB00f6oD182RnajY1CXXTclO1mxFTUzpkeH/KG5Vz1ZoftYHjr0ixQR55fLzA8FTOEm4r48c2oreGkIIpJwYXMC4jJ0mhnFkNIZuGBjMuu/HcanP/VlzYlgJQas0U/A474kp0BiPtCyC2Uj3PY0Q6K5HdR21EAilMNYuhidHrmXL9naP0ooQAyFG5pqQLXW7Cmf4uzQPkVLCOY8xhnEcKXbfr/j144pms8F1HTFnZCMRlaAtG0Y9LEKh+yXp3dDuZrtyNu0Hg5kcRX2zZb+5RpUlYbK4EHj16S3PL97w4sM5Z1/eY/ycLjNMEevzI4aYsS4y+UzRaE0pWkbv8DHgguf15QUvP7/j7PKCZx/P6Se7Hi+vmVLOxJSXkCmdPp1iHnqrFNqOSzofPNn5tevjspjJYt2E1Gq5nNGapSY7fd/Tfbf4FLPBv2TzfvKOsm0QneZQ1wuPbYseehopua2q+++yaWiURGiN1JpaCv4CMGROJxLpjUIAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="mongodb-1"
+        title=""
+        src="/static/3a8ad2fc6c44825ba1ca050587fc4387/f058b/mongodb-1.png"
+        srcset="/static/3a8ad2fc6c44825ba1ca050587fc4387/c26ae/mongodb-1.png 158w,
+/static/3a8ad2fc6c44825ba1ca050587fc4387/6bdcf/mongodb-1.png 315w,
+/static/3a8ad2fc6c44825ba1ca050587fc4387/f058b/mongodb-1.png 630w,
+/static/3a8ad2fc6c44825ba1ca050587fc4387/c0255/mongodb-1.png 920w"
+        sizes="(max-width: 630px) 100vw, 630px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></p>
+<p>개발하려고 하는 앱이 데이터베이스에 접근하게 하려면 데이터베이스 사용자를 생성하고 역할을 주어야 한다.</p>
+<p>좌측 사이드바에 있는 <strong>Database Access</strong> 누르고 넘어간 페이지의 우측에 보이는 <strong>ADD NEW DATABASE USER</strong> 클릭한다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/eb846077747d9323877832016910ecf5/c4b7c/mongodb-2.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 81.64556962025317%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAQCAYAAAAWGF8bAAAACXBIWXMAAAsTAAALEwEAmpwYAAACK0lEQVR42o1TiW7sIAzM/39i270TIFy5OEIgmSfYTbvbVtWzNMKYeDLGppJKo+UCQirwB7Lv5xnFtq1g21as6x1p3f3tZZ+tYpyDMo6aMBDWoia0+OfrDdeG4ly3ONesoKEMjAvUlKEVsvg5h7a8rH4OqAhluBKCS9OUoOq6At31UN0EOUaoKaEzEcuyYIkR8QlZWV5zPKUV1TuvcZMtDrTGO7lhjB5T8uiCwfYo1TqLOcxln1JCTKkQzSFgNKbE9uuo2DwgYoN2ExotYOIMG2dQ05XEGBNaodANY0nIKkMIhUT3PW6EwTn/UJxQ2WXGFBxMDHApFn+YLea4lKSM3dai+Au7PceqfpzQ9wPEMEMOHtYYeOdgrYV1Ds65ouyZ4DeifV+1HwfQjyPE6Yz2cMSy5At4VfIX7kxfP6ksoTDWldK2rseWO7dtn5f8A4+z8v2Tss+Sx+MJqm6gbjXcrQYeSdsfpLkBISw/yAqhGUcIziGFKMgD2w0DWinhQ/hM+l+rMkEe6Dz1DWvhvL+PRwhYS4e3gu9K9kY9V1IUHk4nvB1P+Dhf8HY44toQXOsaVypwoQoXIlEzCakkhJRQWpdV5IqkglQKSilwztH1PSrXdRgbAtMyeM5hOcdEGUYmYHuLaU4w/v7M9rnc/fiAD7EgxytDKM5v7yBMw9gEOxl4a+/d1vp1Jn6xfNpOsSC/oCpwDp47nRXpEU5peK0R+gGBtb928mUOvzXsH7Q82LeDGspyAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="mongodb-2"
+        title=""
+        src="/static/eb846077747d9323877832016910ecf5/f058b/mongodb-2.png"
+        srcset="/static/eb846077747d9323877832016910ecf5/c26ae/mongodb-2.png 158w,
+/static/eb846077747d9323877832016910ecf5/6bdcf/mongodb-2.png 315w,
+/static/eb846077747d9323877832016910ecf5/f058b/mongodb-2.png 630w,
+/static/eb846077747d9323877832016910ecf5/c4b7c/mongodb-2.png 903w"
+        sizes="(max-width: 630px) 100vw, 630px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></p>
+<p>사용자 이름과 비밀번호를 입력한다. 데이터베이스에 연결할 때 이 두 정보가 필요하니 꼭 기억해두어야 한다.</p>
+<p>다음 해당 사용자에 <strong>Atlas admin</strong> 역할을 부여한다. 만약 단순히 읽기 역할만 주고 싶거나 읽기/쓰기 역할만 주고 싶을 때는 그에 맞게 권한을 부여하면 된다.</p>
+<p>다시 대시보드로 페이지를 이동하고 <em>connect</em> 를 클릭하면 개발할 API에 사용될 URI를 얻어야 한다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 440px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/6e847138a836b8c5c19669a5a558fc2e/48c0e/mongodb-3.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 57.59493670886076%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMCAYAAABiDJ37AAAACXBIWXMAAAsTAAALEwEAmpwYAAABuUlEQVR42n2RC4+iMBSF/f+/bLPj7iQzo6syKljKwzegKMjl27QNLGM20+Rwem7paXvPKMkEg/AkbI6O9VnY5kJ4FNTRrceZEJ2dDs9C3bS0rYMZHY+OVzhcQJ8gOEKSOewKiM6u3uk0dzXDw9GZWcOpXvKhVyy3ikWyxtsq1ntNsI/4TAOm8Rov3TBLAsJTwnqn8NKAeRIy0T6n6+XrDZfbiHftM40V02hj8a4D/sQKf5/yqlb8WM2YxMrWPlPN2PeYRMZUsS/yr4ZleaNtxFRAHFpxWprGstXfjGEfR5eypLzfqR81dV1TVRWV4bpyc6srHk1D0zSISB/GMJS+h+Yj5jYG4tj+aE58gjF7Rmv3/dOjpn/OYGsrSF5AnkNR0GYZUtf/fa48tWMk0uDlCf7xwWrXsjjAdZ9RvL2RLDzi+YLdx4RsNidIUzZhSKA1QRgSb7fklwsqilBxjE4SYyhE5Ql1aljtBP8Mt0PO+WVM8PuV1csv4p9j8vkCP0lQWluDINSEcUxxvVpeq9DyyDR6kFcPud3A4H6nLW8u8W8S7p9sk+sCkUEwXRDdEV3zbYDSz9s+UKf/AoR4niIIHTLYAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="mongodb-3"
+        title=""
+        src="/static/6e847138a836b8c5c19669a5a558fc2e/48c0e/mongodb-3.png"
+        srcset="/static/6e847138a836b8c5c19669a5a558fc2e/c26ae/mongodb-3.png 158w,
+/static/6e847138a836b8c5c19669a5a558fc2e/6bdcf/mongodb-3.png 315w,
+/static/6e847138a836b8c5c19669a5a558fc2e/48c0e/mongodb-3.png 440w"
+        sizes="(max-width: 440px) 100vw, 440px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></p>
+<p>다음과 같은 버튼을 클릭한다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/0025ae2a27a14902400eb32cda23fdf0/13e20/mongodb-4.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 10.759493670886075%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAACCAYAAABYBvyLAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAcUlEQVR42k2NMQ4CIRQF9/7H8RB29jYmrhHNBvbDBwtZPhkjamLxMq+amXZyYC9HZBFm57hcHafzjObC1hrPWqm1Dn7+Nmhm9N6x38xorTHdH8ItBVJS/Cr4sLL4QNJMLmXwvZiUqDpCUfOI9a/oX/gCLeaZgnQ6wsYAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="mongodb-4"
+        title=""
+        src="/static/0025ae2a27a14902400eb32cda23fdf0/f058b/mongodb-4.png"
+        srcset="/static/0025ae2a27a14902400eb32cda23fdf0/c26ae/mongodb-4.png 158w,
+/static/0025ae2a27a14902400eb32cda23fdf0/6bdcf/mongodb-4.png 315w,
+/static/0025ae2a27a14902400eb32cda23fdf0/f058b/mongodb-4.png 630w,
+/static/0025ae2a27a14902400eb32cda23fdf0/13e20/mongodb-4.png 741w"
+        sizes="(max-width: 630px) 100vw, 630px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/7a7afdf2faffeb26bfe1b80c0e13a6f5/6c2f2/mongodb-5.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 70.25316455696203%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB1UlEQVR42o2TbY+bMBCE8///XNVWuvbb3elCAgGDDfgd+6nsXCIu7bW1NCy28Ozs7nDYUsIEh4keXWJw2OiJaatn5d28Q0dH2CLOOXwI5Jx/wyGkSO9mLjsIv1Si1kguVtXYGclJTyzeIsYJNS+UVUj26/D88krTnBhHyTCMjGJiGAQP3/1x3cg+KgyB12NTs3rvaznzvPDWnFi0Zts2YozE91j2t8t7srvC8lhWjVQzKSViDATvkUrVsm6Et2QlPqr6oPD55YXmdGaSiq7vuQyCixgRk6TtLpzbC70YP6h4JNmfHUrGaZKM01RJSunduWUcRFVXXFCU/08v7yXLeea5aei6Dv3tO+7HT/yXr8inJzqp6IWg7XuObUdfEoqBdhjohEBIWftrncN5fyWc15W3tkWpGd+2VxyP2L7HxoD1rsI4iwv+vneh+NHhY6i+LBVVQmMsk1k42pEpWIwPrN6jnWOLkeIEY0yF1oZVa1ZtkSYzrBkfdyUba1HzjFoW1Lpcp7sGZpOY1q1ekiahyl4nfEzkXPqaK7b0MOViCed8RRlQ7UXIuAg25B2o+Md8OJQJppzI7H+N/Dk+8V/pX+E6zMvC2/lcJ/Q3w36G251uGGrbfgEhukQ89N/sUgAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="mongodb-5"
+        title=""
+        src="/static/7a7afdf2faffeb26bfe1b80c0e13a6f5/f058b/mongodb-5.png"
+        srcset="/static/7a7afdf2faffeb26bfe1b80c0e13a6f5/c26ae/mongodb-5.png 158w,
+/static/7a7afdf2faffeb26bfe1b80c0e13a6f5/6bdcf/mongodb-5.png 315w,
+/static/7a7afdf2faffeb26bfe1b80c0e13a6f5/f058b/mongodb-5.png 630w,
+/static/7a7afdf2faffeb26bfe1b80c0e13a6f5/6c2f2/mongodb-5.png 767w"
+        sizes="(max-width: 630px) 100vw, 630px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></p>
+<p>위에 보이는 URI가 API에 사용될 예정이다 - <em>Node.js API를 개발하는 것이기 때문에 driver 옵션은 넘어가도 된다</em>. 이 전 단계에서 생성한 사용자 이름과 비밀번호를 위 사진 속 빨간색 빈 칸에 <em>[your username:your password]</em> 형태로 넣어야 한다. 필자와 함께 API를 개발하는 것이니 예시는 넘어가도 된다.</p>
+<h2>프로젝트 폴더 생성</h2>
+<p>새로운 프로젝트 폴더를 생성하고 터미널을 열어 아래와 같이 명령어를 입력한다. 해당 명령어를 입력하면 pacakge.json 파일이 생기는데 앱에 필요한 정보나 dependency들을 담고 있는 역할을 한다. 그리고 <code class="language-text">app.ts</code> 파일을 만든다.</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">cd [project folder directory]
+npm init -y</code></pre></div>
+<h2>Dependencies 설치</h2>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js">npm install <span class="token operator">-</span>g typescript
+npm install express ts<span class="token operator">-</span>node dotenv nodemon mongodb
+npm install <span class="token operator">--</span>save<span class="token operator">-</span>dev cross<span class="token operator">-</span>env @types<span class="token operator">/</span>node @types<span class="token operator">/</span>express</code></pre></div>
+<blockquote>
+<p><strong>Express</strong> <em>Node.js 웹 어플리케이션 프레임워크이며 가볍고 다양한 기능을 제공하며 특히 웹과 모바일 어플리케이션에 최적화되어 있다. Express가 API의 핵심 기능을 제공한다고 생각하면 된다.</em></p>
+<p><strong>Dotenv</strong> <em>.env 파일에 선언한 환경 변수들을 process.env라는 객체를 통해 접근할 수 있게 도와주는 라이브러리이다.</em></p>
+<p><strong>Nodemon</strong> <em>Node.js를 기반으로 하는 어플리케이션을 개발할 때 자주 쓰이며 코드를 수정할 시 자동으로 감지하여 어플리케이션을 재시작시켜준다. 배포에는 활용이 되지 않는다.</em></p>
+<p><strong>Typescript</strong> <em>Javascript에 추가적인 문법이 적용되어 에디터에서 재빠르게 에러를 찾아낼 수 있도록 도와준다.</em></p>
+<p><strong>Ts-node</strong> <em>Typescript가 적용된 스크립트가 실행되도록 Javascript로 변환해주는 역할을 한다.</em></p>
+<p><strong>MongoDB</strong> <em>Node.js 용 <a href="https://www.mongodb.com/">MongoDB</a> 드라이버이다.</em></p>
+</blockquote>
+<h2>Typescript 설정</h2>
+<p>앞서 설명했듯이 Typescript는 타입 확인을 엄격하게 적용하여 에디터에서 쉽게 에러를 찾을 수 있도록 도와준다.</p>
+<p>프로젝트 폴더 하위에 tsconfig.json이라는 파일을 만들고 아래 코드를 입력한다.</p>
+<p>개발자의 원하는대로 <strong>compilerOptions</strong> 을 바꿔주면서 사용하면 된다. 이 설정에 관해서 자세한 설명은 생략하오니 더 많은 정보를 원한다면 <a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html">공식 웹사이트</a> 확인해주길 바란다.</p>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token punctuation">{</span>
+    <span class="token string-property property">"buildOnSave"</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"compileOnSave"</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"compilerOptions"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">"charset"</span><span class="token operator">:</span> <span class="token string">"utf8"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"module"</span><span class="token operator">:</span> <span class="token string">"commonjs"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"target"</span><span class="token operator">:</span> <span class="token string">"es2018"</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"lib"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token string">"es2018"</span><span class="token punctuation">,</span>
+            <span class="token string">"dom"</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"noImplicitAny"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"removeComments"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"strictNullChecks"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        <span class="token comment">// "noImplicitThis": true,</span>
+        <span class="token string-property property">"noImplicitThis"</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"alwaysStrict"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"preserveConstEnums"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"sourceMap"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        <span class="token comment">// "esModuleInterop": true,</span>
+        <span class="token string-property property">"esModuleInterop"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"noImplicitReturns"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        <span class="token string-property property">"allowJs"</span><span class="token operator">:</span> <span class="token boolean">true</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"include"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token string">"src"</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"exclude"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"node_modules"</span><span class="token punctuation">,</span> <span class="token string">"reference_deprecated"</span><span class="token punctuation">,</span> <span class="token string">"dist"</span><span class="token punctuation">,</span> <span class="token string">"scripts"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"typeRoots"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token string">"node_modules/@types"</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span></code></pre></div>
+<h2>package.json</h2>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 587px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/f6a56c7b7eecf5b00c935aa498ef8b1f/d72eb/package-json.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 17.088607594936708%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAADCAYAAACTWi8uAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAmUlEQVR42lWOSw7DIAxEcxLcBLDBQNOf1C57/0u9KmTVxWjk55HHS/HB8/2leWf3iqaVZhmLGzVHSo7UnOiWcUs0S5PHdSWEgITw50tW4/r4YKrc3bhW49kr771NvYbz2TuPg90691YYVdm9zJKqaRYeT8RtZWm14+NGTBlL21y4noFDoyi96DkXo2nCUpz8OCASuIggIgQRfm/hV3/PLoNZAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="package-json"
+        title=""
+        src="/static/f6a56c7b7eecf5b00c935aa498ef8b1f/d72eb/package-json.png"
+        srcset="/static/f6a56c7b7eecf5b00c935aa498ef8b1f/c26ae/package-json.png 158w,
+/static/f6a56c7b7eecf5b00c935aa498ef8b1f/6bdcf/package-json.png 315w,
+/static/f6a56c7b7eecf5b00c935aa498ef8b1f/d72eb/package-json.png 587w"
+        sizes="(max-width: 587px) 100vw, 587px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></p>
+<p>package.json 안에 script 필드 하위에 명령어 두개를 추가해보자. 복잡한 명령어를 key 이름에 저장한 후 간단하게 <code class="language-text">npm run [key name]</code> 입력하는 방식으로 해당 명령어를 실행할 수 있다.</p>
+<p><code class="language-text">npm run dev</code>를 터미널에 입력하고 엔터를 누르면 실제로 <code class="language-text">cross-env NODE-ENV=development nodemon --exec ts-node ./`app.ts</code> 가 실행된다. 개발모드로 실행되고 nodemon이 코드 수정이 있을 시 자동으로 재시작한다. <strong>start</strong>는 배포 시 사용된다.</p>
+<h2>Express 서버</h2>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">import</span> express<span class="token punctuation">,</span> <span class="token punctuation">{</span> Request<span class="token punctuation">,</span> Response<span class="token punctuation">,</span> NextFunction <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"express"</span>
+
+<span class="token keyword">const</span> app <span class="token operator">=</span> <span class="token function">express</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>express<span class="token punctuation">.</span><span class="token function">urlencoded</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token literal-property property">extended</span><span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>express<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment">// to parse json of body object</span>
+
+<span class="token comment">// get route -> path '/'</span>
+app<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>req<span class="token operator">:</span> Request<span class="token punctuation">,</span> <span class="token literal-property property">res</span><span class="token operator">:</span> Response<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token parameter"><span class="token keyword">void</span></span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token string">"Here is the response"</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+app<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">4000</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Server is running on 4000"</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre></div>
+<p>위 코드를 <code class="language-text">app.ts</code> 파일에 입력한 뒤 <code class="language-text">npm run dev</code>를 터미널에 입력하여 서버를 시작한다. 터미널에 다음과 같이 로그가 뜬다:</p>
+<p><em>the server is listening to the port 4000</em>.</p>
+<p>각각의 라우트는 API를 사용하는 사람이 요청을 보낼 때 쓰이는 url이라고 보면 된다. 위의 코드에는 get 라우트 있는데 경로가 '/'이며 콜백 함수를 파라미터로 가지고 있다. 이 라우트에 요청을 보내게 되면 <em><strong>Here is the response</strong></em> 라는 응답을 받게 된다. 브라우저를 열고 주소 창에 <a href="http://localhost:4000%EB%A5%BC">http://localhost:4000를</a> 입력해보자 - <em>로컬 환경에서 개발하기 때문에 localhost에 접근할 수 있다</em>.</p>
+<p>콜백함수는 주로 2가지 객체를 인자 값으로 받는데 Request와 Response 객체이다.</p>
+<p>Request 객체는 API 사용자가로부터 서버가 받는 정보들의 집합이라고 생각하면 된다. API 개발자는 이 Request 객체가 어떤 필드 값을 가지고 있어야 하는지 목적과 방향에 맞게 사용할 수 있다. 사용자로부터 API 키 값을 필수적으로 받아야 하는 상황이 예가 될 수 있다.</p>
+<p>Response 객체는 API 사용자가 해당 API 라우트로부터 받는 정보이다. API 서버의 목적과 개발 방향에 따라 그 정보가 달라질 것이다.</p>
+<h2>환경 변수</h2>
+<p>환경 변수는 보통 영어는 대문자로 쓰는 것이 일반적이다.</p>
+<p>프로젝트 폴더 하위에 <strong>development.env</strong>와 <strong>production.env</strong> 파일을 만들고 아래와 같이 변수 이름들을 적어 준다.</p>
+<p>MongoDB로부터 얻은 uri를 <strong>MONGODB_URI</strong>로 설정한다.</p>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token constant">PORT</span><span class="token operator">=</span><span class="token number">4000</span>
+
+<span class="token constant">MONGO_URI</span><span class="token operator">=</span><span class="token punctuation">[</span>your mongodb uri<span class="token punctuation">]</span>
+<span class="token constant">MONGO_DB</span><span class="token operator">=</span>test<span class="token operator">-</span>db <span class="token comment">// just name whatever you want for development</span>
+<span class="token constant">MONGO_COLLECTION</span><span class="token operator">=</span>test<span class="token operator">-</span>collection <span class="token comment">// just name whatever you want for development</span></code></pre></div>
+<h2>환경 변수 지정</h2>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">const</span> dotenv <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'dotenv'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> envFound <span class="token operator">=</span> dotenv<span class="token punctuation">.</span><span class="token function">config</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">NODE_ENV</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">.env</span><span class="token template-punctuation string">`</span></span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>envFound<span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">'Could not find any .env file.'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">let</span> config <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">port</span><span class="token operator">:</span> <span class="token function">parseInt</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">PORT</span><span class="token operator">!</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">mongodb</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">uri</span><span class="token operator">:</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">MONGO_URI</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">db</span><span class="token operator">:</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">MONGO_DB</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">collection</span><span class="token operator">:</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">MONGO_COLLECTION</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> config<span class="token punctuation">;</span></code></pre></div>
+<p>어플리케이션을 개발할 때 배포 전에 무수히 많은 테스트를 거치는 것이 일반적이다. 이 때문에 개발 설정과 배포 설정을 나누는 것은 굉장히 중요하다.</p>
+<p>cross-env는 환경에 따른 설정을 다르게 적용할 수 있게 도와주는 라이브러리인데 <code class="language-text">cross-env NODE_ENV=production</code> 처럼 입력할 명령어 앞에 두어 어떤 환경인지 명시해 준다. 이 덕분에 다른 .env 파일을 환경에 맞게 설정해주기 때문에 같은 코드를 두번 작성할 필요가 없다.</p>
+<p><code class="language-text">config.ts</code> 하위에 파일을 만든 뒤 dotenv를 import한다. 이 dotenv가 <strong>[process.env.NODE_ENV].env</strong> 파일에 담긴 정보를 읽어 오는 역할을 한다. 이 때 NODE_ENV는 명령어에서 명시해 줬던 development 혹은 production이 되겠다.</p>
+<p>위 코드 안에 모든 환경 변수 앞에 process.env가 붙어 있다. Node.js에 전역에서 접근할 수 있는 객체이기 때문에 어플리케이션 전체에서 사용될 수 있다.</p>
+<h2>어플리케이션에 MongoDB 연결</h2>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">import</span> config <span class="token keyword">from</span> <span class="token string">"./config"</span>
+<span class="token keyword">const</span> <span class="token punctuation">{</span> MongoClient <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"mongodb"</span><span class="token punctuation">)</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">connectMongoDB</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> Promise<span class="token operator">&lt;</span>any<span class="token operator">></span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">resolve<span class="token punctuation">,</span> reject</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+    MongoClient<span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span>
+      config<span class="token punctuation">.</span>mongodb<span class="token punctuation">.</span>uri<span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        <span class="token literal-property property">useUnifiedTopology</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">useNewUrlParser</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">(</span><span class="token parameter"><span class="token literal-property property">err</span><span class="token operator">:</span> Error<span class="token punctuation">,</span> <span class="token literal-property property">client</span><span class="token operator">:</span> object</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token function">reject</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+          <span class="token keyword">return</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token function">resolve</span><span class="token punctuation">(</span>client<span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> connectMongoDB</code></pre></div>
+<p>프로젝트 폴더 하위에 파일 <code class="language-text">db.ts</code>를 만든 뒤, MongoClient를 import한다. 그리고 파일 <code class="language-text">config.ts</code> 만든 뒤 <em>config.mongodb.uri</em> 을 인자 값으로 입력한다. 이 uri는 MongoDB 설정할 때 얻은 uri이다.</p>
+<p>마지막으로 MongoDB를 비동기적으로 연결하도록 promise를 반환 값으로 받게 한다. 이제 API에 테스트 요청을 위해 코드를 수정해보자.</p>
+<h2>테스트 사용자 DB 등록</h2>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">import</span> express<span class="token punctuation">,</span> <span class="token punctuation">{</span> Request<span class="token punctuation">,</span> Response<span class="token punctuation">,</span> NextFunction <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"express"</span>
+<span class="token keyword">import</span> config <span class="token keyword">from</span> <span class="token string">"./config"</span>
+<span class="token keyword">import</span> connectMongoDB <span class="token keyword">from</span> <span class="token string">"./db"</span>
+
+<span class="token keyword">const</span> app <span class="token operator">=</span> <span class="token function">express</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>express<span class="token punctuation">.</span><span class="token function">urlencoded</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token literal-property property">extended</span><span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>express<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+app<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>req<span class="token operator">:</span> Request<span class="token punctuation">,</span> <span class="token literal-property property">res</span><span class="token operator">:</span> Response<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token parameter"><span class="token keyword">void</span></span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token string">"Here is the response"</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+app<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token punctuation">(</span>req<span class="token operator">:</span> Request<span class="token punctuation">,</span> <span class="token literal-property property">res</span><span class="token operator">:</span> Response<span class="token punctuation">)</span><span class="token operator">:</span> Promise<span class="token operator">&lt;</span><span class="token keyword">void</span><span class="token operator">></span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">try</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> firstName <span class="token operator">=</span> req<span class="token punctuation">.</span>body<span class="token punctuation">.</span>firstName
+    <span class="token keyword">const</span> lastName <span class="token operator">=</span> req<span class="token punctuation">.</span>body<span class="token punctuation">.</span>lastName
+
+    <span class="token keyword">const</span> client <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">connectMongoDB</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">const</span> db <span class="token operator">=</span> <span class="token keyword">await</span> client<span class="token punctuation">.</span><span class="token function">db</span><span class="token punctuation">(</span>config<span class="token punctuation">.</span>mongodb<span class="token punctuation">.</span>db<span class="token punctuation">)</span>
+    <span class="token keyword">const</span> collection <span class="token operator">=</span> <span class="token keyword">await</span> db<span class="token punctuation">.</span><span class="token function">collection</span><span class="token punctuation">(</span>config<span class="token punctuation">.</span>mongodb<span class="token punctuation">.</span>collection<span class="token punctuation">)</span>
+
+    <span class="token keyword">await</span> collection<span class="token punctuation">.</span><span class="token function">insertOne</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      <span class="token literal-property property">firstName</span><span class="token operator">:</span> firstName<span class="token punctuation">,</span>
+      <span class="token literal-property property">lastName</span><span class="token operator">:</span> lastName<span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+    res<span class="token punctuation">.</span><span class="token function">status</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token string">"Successfully Created in DB"</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    res<span class="token punctuation">.</span><span class="token function">status</span><span class="token punctuation">(</span><span class="token number">500</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token string">"Error Occured in Server"</span><span class="token punctuation">)</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"&lt;POST> '/' error occured"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+app<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span>config<span class="token punctuation">.</span>port<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Server is running on"</span><span class="token punctuation">,</span> config<span class="token punctuation">.</span>port<span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre></div>
+<p>post 라우트를 추가한다. 이 라우트는 API 사용자로부터 성과 이름을 받고 이를 데이터베이스에 넣는 기능이 목적이다. Request 객체의 body라는 필드에 사용자가 입력한 성과 이름이 저장이 된다.</p>
+<p>MongoDB promise가 resolve한 값을 connect라는 변수를 선언하여 저장한다 - <em><code class="language-text">config.ts</code>에 저장한 데이터베이스와 콜렉션 이름이 여기 쓰인다</em> - 요청에서 받은 성과 이름을 <strong>insertOne</strong> 이라는 함수로 데이터베이스에 입력하게 된다.</p>
+<p>에러 없이 코드가 실행된다면 post 라우트가 status 코드 200과 함께 <em><strong>Successfully Created in DB</strong></em> 라는 정보를 사용자에게 보낸다.</p>
+<h2>Insomnia 요청 테스트</h2>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 548px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/21f9724b06b007f1b24f728d04bfc897/a58fe/insomnia-1.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 77.21518987341771%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAPCAYAAADkmO9VAAAACXBIWXMAAAsTAAALEwEAmpwYAAACN0lEQVR42qWTS28SURiG55dwkctwmYEZnGlSmoIF9i5csQIS2LDgD/g/5FYgmhjDD2jVhUIMuse4kQVgpCQ2dEbKNYH6mu/UIWBtrHGSJ9/M4nvOd855hzv/MoV2oWG5WGIxm2M2neF/Hu5F5QS10nOUy0UU8gWUSiUUi0Xkn+RRrVRxfFxGoVBApVJFrVZDtXpdb4N7pD7GA/UhXB4HeN4Ft9sNURThdnuwp6gIyDLsdjvMZjMsFstf4faDewiHQjgKHyEY3IfPJ0KSJEQjESjKfQiCAKfDAcct0GLbcJJfAuHz+Rgk8Pv9DBILogg7NRpsNZOQ5/kdOGo0RLRVqrIkMyFNGT44gCLLUAMBKJIERVGgqCpUVYUsy3C5ro/JgPN6vSBIRFUURDh5HqHDQ7x7+gyfXr1G++QU7dOX6Lx5i977D/jc6WAwGKBer8NqtcLj8TAZyTkSGTJjSho9Fo1i2P6I1bdzLM6GmA/O2Dsmk01EWq0WuyzqvTGhgSGMRCL4Ohzi+2SCka5DG4+hX15iDWC1WjFho9G4KTQmNCCh0+lENBpFv9eDpmnQNQ0XoxGWiwV+XF1thM1m8x+F/T7GNJmus0ry+XyO9Xq9EVL27iSMxWLodruYTqcMEuHXdun7zlsm6NYoEolEAul0GslkkpFKpZDJZJDNZpHL5RCPx9l578Tmd9l2hGw2G4O2RZOYTCZYrfc2f4iLd7HFt7P4xwm3I0ShNxJAzRR4CjUFnKooCDvCn6yHiyWjnxLUAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="insomnia-1"
+        title=""
+        src="/static/21f9724b06b007f1b24f728d04bfc897/a58fe/insomnia-1.png"
+        srcset="/static/21f9724b06b007f1b24f728d04bfc897/c26ae/insomnia-1.png 158w,
+/static/21f9724b06b007f1b24f728d04bfc897/6bdcf/insomnia-1.png 315w,
+/static/21f9724b06b007f1b24f728d04bfc897/a58fe/insomnia-1.png 548w"
+        sizes="(max-width: 548px) 100vw, 548px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></p>
+<p>Insomnia는 오픈 소스 API 클라이언트인데 쉽게 말해서 API를 개발할 때 기능을 확인하는 데 유용한 도구이다. Insomnia를 통해 지금까지 개발한 API의 post 라우트에 요청을 해보자. Insomnia를 다운로드 받았다면 실행한 뒤 위 그림처럼 HTTP Request를 누른다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 475px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/d0c4c2e2644da1b0f59ab116f99b73ec/466da/insomnia-2.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 46.202531645569614%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAACXBIWXMAAAsTAAALEwEAmpwYAAABTUlEQVR42pVRO04DMRDdU1AA2mwIydoe25v9KGxC2E+IhGgQDR0VJVI4ADUFB+ACNNyFa1Bzh4fGK0OCQiSKp5nxjN/4PQfS9iH0EcZ2jHIyQZqmyMYppuUUeZYjDENEUeQio9fruTqK+tg/2MPD7Rtenz/x8viBp9U7AqkkiBSklCBFMFqDVFdrIhfjOIbRBtZaaK0hhICUCqPREO3pDa4vVrha3uOyvUNgbYKiKKCUhBASeZ67i3wpTTPXY9JZOUNTNyjyHESELMuQJAmOhxH6g0OHwTBEoJQCQ2sDY4wbZoLf8HMdaO2coMnAaOtiwFvYq6aucTafo64qJ7mTJSHi2L1keb5EWzVYtAuUJ+VPXwiniJUl1rLkzhf2i0i7fP1FPncz7C/RxrnP/YKAf9WT+rhNLtuxy5JvQv5BLtaxbXhXf4Pwr+Z/F3jCL3hSFNfCwZshAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="insomnia-1"
+        title=""
+        src="/static/d0c4c2e2644da1b0f59ab116f99b73ec/466da/insomnia-2.png"
+        srcset="/static/d0c4c2e2644da1b0f59ab116f99b73ec/c26ae/insomnia-2.png 158w,
+/static/d0c4c2e2644da1b0f59ab116f99b73ec/6bdcf/insomnia-2.png 315w,
+/static/d0c4c2e2644da1b0f59ab116f99b73ec/466da/insomnia-2.png 475w"
+        sizes="(max-width: 475px) 100vw, 475px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></p>
+<p>헤더 안에 Content-Type을 application/json으로 설정하여 body 객체에 접근하게 한다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 474px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/99d9d57ec0466b20709cd661b263fc9b/5595f/insomnia-3.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 32.911392405063296%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAAAsTAAALEwEAmpwYAAABMklEQVR42pWQPU4DMRCF9xxIRGR/bK/t9f5ls2RJooQmEiUFKVLSRJSEA3CAHCASHVdCHICTfMiLEgpoUnya5xnpzRsH0ibkZcVoNKIoCsqypK5ruq4jSRKGwyFhGP4himIuBxds128cXr/Yv3yw330SFCKiUSnjqsJYS5ZlOOd64ziOiaKor0cjv+SnH3M1HHC/2vH8+M7T5sB2fSB4WN6yyQvmQuJGNVVZopREa03btr35UXt8eqXU6SIhY+IkJBERQkQES5dz53JqkaJSi0ktUqYopXEuwxjTG/rkHq/TNMVae5r5arTXhkBqjbKGcqK5XhiaqaVtLTddhhCyT+sTSSl7vP7vfSTInaOqSibznPmqYDwtWC4qZrMCrW2f5BwC/0dN02CNxWh/xi9Zdr7hN3Ol28m4u97JAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="insomnia-1"
+        title=""
+        src="/static/99d9d57ec0466b20709cd661b263fc9b/5595f/insomnia-3.png"
+        srcset="/static/99d9d57ec0466b20709cd661b263fc9b/c26ae/insomnia-3.png 158w,
+/static/99d9d57ec0466b20709cd661b263fc9b/6bdcf/insomnia-3.png 315w,
+/static/99d9d57ec0466b20709cd661b263fc9b/5595f/insomnia-3.png 474w"
+        sizes="(max-width: 474px) 100vw, 474px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></p>
+<p>타입을 JSON으로 두고 firstname, lastname이라는 필드를 가진 객체 형식으로 입력한 뒤 Send 버튼을 누른다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 364px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/7297d056ce9e0ca2da867cc47b51918b/e45a9/insomnia-4.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 31.645569620253163%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAGCAYAAADDl76dAAAACXBIWXMAAAsTAAALEwEAmpwYAAABQUlEQVR42o2Oy2rCUBRF8yk+UmPzvkZ8pCbRoBbUfktHjkon/YFOOnDUQX+kgoiiDgUfn2BABQcOV8kthU4KvbBh7c25+xyl5N/w/N7j5eOB4SiiVC/i1xrEcQvLshBC0O10KQlBNpsln8+Ty+X+lOLWVIZv9zyNBjy+BoiqJgubzSamaeA4Lu12RxZmMhlZ+rv4x6ecZoqum9imwDIcdM2iWLylULhB13Vs25YyDANVVTFNU15sWxaapqHrBsJ1Ea6Q82mmVKpV+r0eg36fVqtJuezheR5RFBHHMY3GHfVaHcdxqFSqRGGI7/tykeeVCYKAMAjlnzRTFosF0+mU2WzGZDJhPp+zXC6lT7Varfgcj1mv1+z3ezabDdvtVvJut5M+VcppplyvV06nE+fzmSRJJF8uF5LDgePx+M1Jwn/fF+z3ExSitnwvAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="insomnia-1"
+        title=""
+        src="/static/7297d056ce9e0ca2da867cc47b51918b/e45a9/insomnia-4.png"
+        srcset="/static/7297d056ce9e0ca2da867cc47b51918b/c26ae/insomnia-4.png 158w,
+/static/7297d056ce9e0ca2da867cc47b51918b/6bdcf/insomnia-4.png 315w,
+/static/7297d056ce9e0ca2da867cc47b51918b/e45a9/insomnia-4.png 364w"
+        sizes="(max-width: 364px) 100vw, 364px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></p>
+<p>MongoDB에 정보가 입력되었다면 다음과 같이 나타난다:</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/2e3f18a7711812153d456cc8711d9d52/d67fd/result.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 56.9620253164557%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAAAsTAAALEwEAmpwYAAABVUlEQVR42p2Sh26TMRCA/f6PB1RAA0ilWW3Tf3j7PD5kk1QRgiD1pE++Yd+wrYy1fN585+7+G3f3G378fOTT181gd3yitUbOGREhxkSplZwLKckgxkithYsoKZnJmRHUxowNkjPWOZZ1RWvNojWr1vgQcM4zzQurNoQYmeYZYywxJaQWVMiJU9DU1jDO4byntoq2dth97VjvaLRRaF7Xkax33/f3eC/qJKJyySMQJdG7TSUPPWUZSJHf/iwEiWffxU5v9sWnXqdXdvs9SRIxxUESGWP/Sf6P3VHHpyPb7RbbR9N60HXv/btQl9F8DIRzh113wePfgVqtYTEa7Qwvy8zD4UAQIdVCKtfkt3u9xXiUUgq5FFoWSnC0FMZar0mBWgq11puo/sJddsdnvnz8wLzf4qcTrCdYXs48g5nh6gP/S1TP2qX/o4f9gdUnwvlc+xut3eQXOORYZKHhD2oAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="result"
+        title=""
+        src="/static/2e3f18a7711812153d456cc8711d9d52/f058b/result.png"
+        srcset="/static/2e3f18a7711812153d456cc8711d9d52/c26ae/result.png 158w,
+/static/2e3f18a7711812153d456cc8711d9d52/6bdcf/result.png 315w,
+/static/2e3f18a7711812153d456cc8711d9d52/f058b/result.png 630w,
+/static/2e3f18a7711812153d456cc8711d9d52/d67fd/result.png 670w"
+        sizes="(max-width: 630px) 100vw, 630px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></p>
+<h2>결론</h2>
+<p>API 서버는 보통 개발자 자신 혹은 회사의 목적에 따라 더욱 커지거나 복잡해진다. 크고 복잡한 API 서버를 개발하는 실력을 키우려면 직접 더 많은 크고 작은 프로젝트들을 개발해보는 방법이 가장 도움이 될 가능성이 높다. 예를 들면, 더 많은 라우트를 추가하거나 더 많은 타입 정의들을 써보거나 다른 데이터베이스를 써보는 것이라고 생각한다. 이 간단한 API로부터 더 멋진 API를 개발하기를 바라면서 마무리하겠다.</p>
+<p>해당 글에서 사용된 코드는 개인 github <a href="https://github.com/shkim04/express_typescript_simple_api">레파지토리</a>에 있으니 필요하시면 확인해 주세요!</p>
+<p><em><strong>읽어 주셔서 감사합니다. To be continued!</strong></em></p>
+<p><em>이 글은 <a href="https://medium.com/@shkim04/node-js-how-to-create-a-simple-rest-api-with-express-mongodb-and-typescript-54b1d801d073">Medium</a>에도 업로드 되었습니다.</em>
+<em>놀러 오세요!</em></p></section><hr/><footer><div class="bio"><div data-gatsby-image-wrapper="" style="width:100px;height:100px" class="gatsby-image-wrapper bio-avatar"><div aria-hidden="true" data-placeholder-image="" style="opacity:1;transition:opacity 500ms linear;background-color:#284828;width:100px;height:100px;position:relative"></div><picture><source type="image/avif" data-srcset="/static/5f5d26b2016c495bc832f060b85e219c/ee81f/profile-pic.avif 100w,/static/5f5d26b2016c495bc832f060b85e219c/3f23b/profile-pic.avif 200w" sizes="100px"/><source type="image/webp" data-srcset="/static/5f5d26b2016c495bc832f060b85e219c/6a679/profile-pic.webp 100w,/static/5f5d26b2016c495bc832f060b85e219c/c0761/profile-pic.webp 200w" sizes="100px"/><img data-gatsby-image-ssr="" layout="fixed" data-main-image="" style="opacity:0" sizes="100px" decoding="async" loading="lazy" data-src="/static/5f5d26b2016c495bc832f060b85e219c/e9b55/profile-pic.png" data-srcset="/static/5f5d26b2016c495bc832f060b85e219c/e9b55/profile-pic.png 100w,/static/5f5d26b2016c495bc832f060b85e219c/fa9a2/profile-pic.png 200w" alt="Profile picture"/></picture><noscript><picture><source type="image/avif" srcSet="/static/5f5d26b2016c495bc832f060b85e219c/ee81f/profile-pic.avif 100w,/static/5f5d26b2016c495bc832f060b85e219c/3f23b/profile-pic.avif 200w" sizes="100px"/><source type="image/webp" srcSet="/static/5f5d26b2016c495bc832f060b85e219c/6a679/profile-pic.webp 100w,/static/5f5d26b2016c495bc832f060b85e219c/c0761/profile-pic.webp 200w" sizes="100px"/><img data-gatsby-image-ssr="" layout="fixed" data-main-image="" style="opacity:0" sizes="100px" decoding="async" loading="lazy" src="/static/5f5d26b2016c495bc832f060b85e219c/e9b55/profile-pic.png" srcSet="/static/5f5d26b2016c495bc832f060b85e219c/e9b55/profile-pic.png 100w,/static/5f5d26b2016c495bc832f060b85e219c/fa9a2/profile-pic.png 200w" alt="Profile picture"/></picture></noscript><script type="module">const t="undefined"!=typeof HTMLImageElement&&"loading"in HTMLImageElement.prototype;if(t){const t=document.querySelectorAll("img[data-main-image]");for(let e of t){e.dataset.src&&(e.setAttribute("src",e.dataset.src),e.removeAttribute("data-src")),e.dataset.srcset&&(e.setAttribute("srcset",e.dataset.srcset),e.removeAttribute("data-srcset"));const t=e.parentNode.querySelectorAll("source[data-srcset]");for(let e of t)e.setAttribute("srcset",e.dataset.srcset),e.removeAttribute("data-srcset");e.complete&&(e.style.opacity=1,e.parentNode.parentNode.querySelector("[data-placeholder-image]").style.opacity=0)}}</script></div><div>독학으로 개발을 입문하여 재밌게 살아가는 개발자입니다. 언어에도 관심이 많아 영어로 글을 쓰기 시작했으며 서로 다른 문화/경험을 나누는 것을 즐깁니다.<br/><section class="social-link-cointainer"><ul class="link-container"><li class="link-item"><a href="https://github.com/shkim04" target="_blank" rel="noreferrer"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 496 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>Github</a></li><li class="link-item"><a href="https://linkedin.com/in/shkim04" target="_blank" rel="noreferrer"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"></path></svg>LinkedIn</a></li><li class="link-item"><a href="https://medium.com/@shkim04" target="_blank" rel="noreferrer"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M0 32v448h448V32H0zm372.2 106.1l-24 23c-2.1 1.6-3.1 4.2-2.7 6.7v169.3c-.4 2.6.6 5.2 2.7 6.7l23.5 23v5.1h-118V367l24.3-23.6c2.4-2.4 2.4-3.1 2.4-6.7V199.8l-67.6 171.6h-9.1L125 199.8v115c-.7 4.8 1 9.7 4.4 13.2l31.6 38.3v5.1H71.2v-5.1l31.6-38.3c3.4-3.5 4.9-8.4 4.1-13.2v-133c.4-3.7-1-7.3-3.8-9.8L75 138.1V133h87.3l67.4 148L289 133.1h83.2v5z"></path></svg>Medium</a></li></ul></section></div></div></footer></article><nav class="blog-post-nav"><ul style="display:flex;flex-wrap:wrap;justify-content:space-between;list-style:none;padding:0"><li><a rel="prev" href="/2022-11-18/react-native-modal-구현하기/">← <!-- -->이전글</a></li><li><a rel="next" href="/2022-12-27/aws-ec2-인스턴트-시작-node-설치/">다음글<!-- --> →</a></li></ul></nav></main><footer>© <!-- -->2023<!-- -->, Built with<!-- --> <a href="https://www.gatsbyjs.com">Gatsby</a> by Seunghyun Kim</footer></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/2022-12-01/express-mongodb-typescript로-restapi-개발하기/";/*]]>*/</script><!-- slice-start id="_gatsby-scripts-1" -->
+          <script
+            id="gatsby-chunk-mapping"
+          >
+            window.___chunkMapping="{\"app\":[\"/app-4f7423432d48d5be8096.js\"],\"component---src-pages-404-js\":[\"/component---src-pages-404-js-a32fda4dcea258eb3b7e.js\"],\"component---src-pages-index-js\":[\"/component---src-pages-index-js-86c8e3c9c2710243b600.js\"],\"component---src-templates-blog-post-js\":[\"/component---src-templates-blog-post-js-3443371af02425f647c0.js\"]}";
+          </script>
+        <script>window.___webpackCompilationHash="7f0779ba33aa5c99226d";</script><script src="/webpack-runtime-44d24643dedd57996d9f.js" async></script><script src="/framework-614c0edc2bc7fce8806a.js" async></script><script src="/app-4f7423432d48d5be8096.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>
