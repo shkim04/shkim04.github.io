@@ -8,7 +8,9 @@ tag:
 
 I recently thought about building my own app that could go on a large scale for a few reasons. First, that would be a great chance to not only learn skills that I haven't used yet but also, advance what I have already known to the next level. Second, I would like to have an app that is specifically for my interest even if people might not find it interesting. Lastly and most importantly, I am just wondering what I go through and learn during the entire journey.
 
-The first things I want to do is to set up a server that serves requests from the frotend of the application first. To do that, I will look into a few of cloud services to run the server of the application. I will talk about the candidates and explain why in this article. Let's get started!
+The first things I want to do is to set up a server that serves requests from the frotend of the application first. To do that, I will look into and talk about a few of cloud services to run the server of the application. Let's get started!
+
+> Disclaimer - This article is **VERY** anecdotal based on my personal experience and brief search. I hope you do not consider this is a sole criteria to choose a suitable cloud service.
 
 ## Google Cloud Run
 
@@ -59,7 +61,7 @@ I guess that is enough about Naver.
 
 I was surprised that I found the market share of **DigitalOcean** was about 2% because I thought they would have more than the number.
 
-Anyway, I got a really good impression on them when I deployed my company's website and MongoDB staging server. First, it is really easy to deploy and set up what needed to be done since their instructions are very straightforward. More importantly, I think it is **VERY** cheap compared to other cloud service providers. Here is [an article](https://www.digitalocean.com/blog/aws-vs-digitalocean-cloud-platform) related to this matter - _Spoiler alert: the article is from DigitalOcean._
+Anyway, I got a really good impression on them when I deployed my company's website and MongoDB staging server. First, it is really easy to deploy and set up what needed to be done since their instructions are very straightforward. More importantly, It seems cheap compared to other cloud service providers. Here is [an article](https://www.digitalocean.com/blog/aws-vs-digitalocean-cloud-platform) related to this matter - _Spoiler alert: the article is from DigitalOcean._
 
 Although it seems the perfect fit for my side project, there is one thing that I wish I could get from them: _**Region**_. Their data center is not nearby any East asian countries. The closest region is **Sigapore**, which it takes us 6.5 hours to get to by a flight. It does not actually matter because my project will be small and could just end up being a test project. But, it could be nice for poeple who lives in East Asia if there is a close one.
 
@@ -67,7 +69,7 @@ Let's wrap things up.
 
 ## Conclusion
 
-I could probably have gone further than this to find a better solution for my project. But, I am sure it will not make any significant difference so, I have stuck to the candidates shown above. After considering a few factors, I decided to use Cloud Run. Here are the two reasons.
+I could probably have gone further than this to find a better solution for my project. But, I am sure it will not make any significant difference so, I have stuck to the candidates shown above. After considering a few factors, I decided to use Cloud Run - _though I may use another service at some point later_. Here are the two reasons.
 
 1. I have wanted to use Google Cloud from the scratch even if I had some experience with it.
 2. At early stage of building the project, I want to focus more on codes, since I will use NestJS which I have hardly used.
