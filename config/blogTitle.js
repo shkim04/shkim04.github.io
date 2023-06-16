@@ -63,4 +63,8 @@ module.exports = {
     ko: "서버용_클라우드_서비스_고르기",
     en: "choose_cloud_service_for_server",
   },
+  "2023-06-16": {
+    ko: "cloud-run에-nestjs-배포하기",
+    en: "deploy_nestjs_to_cloud_run",
+  },
 }
