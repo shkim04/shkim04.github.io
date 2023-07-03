@@ -1,8 +1,9 @@
 ---
-title: Cloud run에 Nestjs app 배포하기
+title: '#2 Cloud run에 Nestjs app 배포하기'
 date: "2023-06-16T00:00:00.000Z"
 description: ""
 tag:
+  - Project
   - Cloud
 ---
 

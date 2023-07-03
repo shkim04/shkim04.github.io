@@ -67,4 +67,9 @@ module.exports = {
     ko: "cloud-run에-nestjs-배포하기",
     en: "deploy_nestjs_to_cloud_run",
   },
+
+  "2023-07-03": {
+    ko: "프로젝트-find-your-wc",
+    en: "project-find-your-wc",
+  },
 }

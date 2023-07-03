@@ -1,8 +1,9 @@
 ---
-title: Choose Cloud Service For Server
+title: '#1 Choose Cloud Service For Server'
 date: "2023-06-14T00:00:00.000Z"
 description: "Reasons and things to consider to choose cloud service for my project"
 tag:
+  - Project
   - Cloud
 ---
 
