@@ -31,6 +31,6 @@ Here is the basic logic that I think I would develop according to the user behav
 
 ![business_logic](../imgs/2023-07-03/business_logic.png)
 
-In the following article, I will write about how to set up and configrue Nestjs + Graphql + Prisma + PostgreSQL.
+In the following article, I will write about how to set up and configrue NestJS + Graphql + Prisma + PostgreSQL.
 
 _**THANKS FOR READING. SEE YOU NEXT TIME!**_

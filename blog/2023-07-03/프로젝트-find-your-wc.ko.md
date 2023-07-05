@@ -31,6 +31,6 @@ tag:
 
 ![business_logic](../imgs/2023-07-03/business_logic.png)
 
-다음 글에서는 Nestjs + Graphql + Prisma + PostgreSQL을 설정하고 시작하는 법에 대해 글을 쓰겠습니다.
+다음 글에서는 NestJS + Graphql + Prisma + PostgreSQL을 설정하고 시작하는 법에 대해 글을 쓰겠습니다.
 
 _**읽어 주셔서 감사합니다. To be continued!**_

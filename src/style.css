@@ -27,12 +27,8 @@
   --spacing-20: 5rem;
   --spacing-24: 6rem;
   --spacing-32: 8rem;
-  --fontFamily-sans: "MontserratVariable", system-ui, -apple-system,
-    BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
-    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
-    "Noto Color Emoji";
-  --fontFamily-serif: "Merriweather", "Georgia", Cambria, "Times New Roman",
-    Times, serif;
+  --fontFamily-sans: system-ui;
+  --fontFamily-serif: system-ui;
   --font-body: var(--fontFamily-serif);
   --font-heading: var(--fontFamily-sans);
   --fontWeight-normal: 400;
@@ -289,7 +285,7 @@ a:focus {
   flex-wrap: wrap;
 }
 
-.post-list-item header p span{
+.post-list-item header p span {
   background-color: #fff;
   border: 0.1rem solid #afc8db;
   color: #afc8db;
@@ -297,7 +293,7 @@ a:focus {
   padding: var(--spacing-1) var(--spacing-2);
   margin-right: var(--spacing-1);
   margin-bottom: var(--spacing-2);
-  font-size: var(--fontSize-0)
+  font-size: var(--fontSize-0);
 }
 
 .header-link-home {
@@ -388,34 +384,34 @@ a:focus {
 
 /* social links */
 .link-container {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	justify-content: flex-start;
-	list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  list-style: none;
 }
 
 .link-item > a {
-	color: #000;
-	text-decoration: none;
-	font-size: var(--fontSize-0);
-	display: inline-block;
-	transition: 0.3s;
-	margin: 0;
-	padding-right: 1.2rem;
+  color: #000;
+  text-decoration: none;
+  font-size: var(--fontSize-0);
+  display: inline-block;
+  transition: 0.3s;
+  margin: 0;
+  padding-right: 1.2rem;
 }
 
 .link-item > a > svg {
-	font-size: var(--fontSize-4);
-	display: block;
-	margin: 0 auto var(--spacing-2) auto;
-	padding: 0;
+  font-size: var(--fontSize-4);
+  display: block;
+  margin: 0 auto var(--spacing-2) auto;
+  padding: 0;
 }
 
 .link-item > a:hover {
-	color: #aaa;
-	transition: 0.3s;
-	cursor: pointer;
+  color: #aaa;
+  transition: 0.3s;
+  cursor: pointer;
 }
 
 /* blog tag */
