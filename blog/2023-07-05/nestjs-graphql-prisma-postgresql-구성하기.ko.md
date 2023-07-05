@@ -157,8 +157,6 @@ src
 - `repository` 파일에 데이터베이스와 CRUD 작업을 처리하는 repository 층을 정의합니다.
 - `service` 파일에 장시간 작업을 queue 추가하는 등의 서비스들을 제공하는 service 층을 정의합니다.
 
-> Note: I took the code first approach - _The opposite is the schema first approach_. For the code first approach, we should annotate classes with proper decorators provided by `@nestjs/graphql`.
-
 > 알림: 필자는 code first 접근법을 사용했습니다 - _반대 개념으로는 schema first가 있습니다_. code first 접근법을 사용하려면 `@nestjs/graphql`에서 제공하는 데코레이터들을 정의된 클래스들에 적절하게 달아줘야 합니다.
 
 `toilet` 모듈과 같이 address, review 모듈도 생성합니다.
