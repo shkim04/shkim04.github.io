@@ -5,9 +5,7 @@ description: ""
 tag:
   - Project
   - NodeJS
-  - GraphQL
-  - Prisma
-  - PostgreSQL
+  - Database
 ---
 
 _[graphql-prisma-postgresql](https://github.com/shkim04/find-your-wc/tree/graphql-prisma-postgresql) 브랜치에서 코드를 확인하실 수 있습니다._

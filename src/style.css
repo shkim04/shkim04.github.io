@@ -354,12 +354,11 @@ main {
 
 /* language switcher */
 .language-nav {
-  display: block;
+  display: flex;
 }
 
 .language-item-container {
   display: flex;
-  justify-content: flex-end;
   align-items: center;
   width: 100%;
   margin-bottom: 5px;
@@ -369,7 +368,6 @@ main {
 .language-item {
   list-style: none;
   padding: 0 var(--spacing-2);
-  border-right: 0.2rem solid #d1dce5;
 }
 
 .language-item-container .last-item {
@@ -379,11 +377,11 @@ main {
 .language-item a {
   text-decoration: none;
   color: #000;
-  font-weight: var(--fontWeight-bold);
+  font-weight: var(--fontWeight-normal);
 }
 
 .language-item .active-langauge {
-  color: #005b99;
+  color: #800020;
 }
 
 /* social links */

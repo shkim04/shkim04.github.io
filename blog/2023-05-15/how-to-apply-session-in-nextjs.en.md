@@ -3,7 +3,7 @@ title: How To Use Session in Next.js
 date: "2023-05-15T00:00:00.000Z"
 description: ""
 tag: 
-    - NextJS
+    - React
 ---
 
 Session is stored and used to communicate clients and servers for a certain amount of time. Today, we will talk about how to implement session in Next.js application. We will create a simple application to understand how it works in Next.js. Let's dig into it.

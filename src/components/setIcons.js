@@ -6,11 +6,15 @@ import { FaPython } from "@react-icons/all-files/fa/FaPython"
 import { FaDatabase } from "@react-icons/all-files/fa/FaDatabase"
 import { FaLinux } from "@react-icons/all-files/fa/FaLinux"
 import { FaCloud } from "@react-icons/all-files/fa/FaCloud"
+import { FaProjectDiagram } from "@react-icons/all-files/fa/FaProjectDiagram"
 
 const SetIcons = ({ iconText }) => {
   let icon
 
   switch (iconText) {
+    case "Project":
+      icon = <FaProjectDiagram />
+      break
     case "NodeJS":
       icon = <FaNodeJs />
       break

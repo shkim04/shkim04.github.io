@@ -3,7 +3,7 @@ title: nvm으로 윈도우에서 Node 버전 관리하기
 date: "2023-05-09T00:00:00.000Z"
 description: ""
 tag: 
-    - Others
+    - NodeJS
 ---
 
 **nvm**은 Node Version Manager의 약자이다. 작업하고 있는 프로젝트에 따라 여러 Node.js 버전들 중 맞는 버전을 선택할 수 있게 해준다. 사실 **nvm**은 대부분 MacOS나 Linux를 지원하고 Windows는 지원하지 않는다. 대신에 **nvm-windows**를 설치하여 Node.js를 설치하고 버전을 관리하면 된다. 거두절미하고 설치하는 방법에 대해 알아보자.

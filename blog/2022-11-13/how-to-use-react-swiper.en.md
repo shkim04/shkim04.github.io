@@ -3,7 +3,7 @@ title: How To Use React Swiper
 date: "2022-11-13T00:00:00.000Z"
 description: ""
 tag: 
-  - ReactJS
+  - React
 ---
 
 If you just began learning React or working on a React project, you probably want to create a beautiful slider that adds an aesthetic boost to your pictures. In this post, I will walk you through the React Swiper basics and help you create a slider component using the library.

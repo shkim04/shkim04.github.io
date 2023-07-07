@@ -3,7 +3,7 @@ title: How To Create A Custom Dropdown React Component
 date: "2023-02-23T00:00:00.000Z"
 description: ""
 tag: 
-    - ReactJS
+    - React
 ---
 
 I am wondering how many of you are satisfied with a dropdown menu created with select tag or imported from some libraries because I have never been able to find one that fits best in exactly what I wanted. So, I just created my own dropdown menu. In this article, I will share how I created **Dropdown** component. If you have had the same experience while developing React application, I may give you some idea to your problems. Let's dive in.

@@ -7,6 +7,7 @@ import Seo from "../components/seo"
 const Index = ({ data }) => {
   const posts = data.allMarkdownRemark.nodes
   const blogTagsList = [
+    "Project",
     "NodeJS",
     "React",
     "Python",
@@ -31,7 +32,7 @@ const Index = ({ data }) => {
     <>
       <div className="blog-tag-list-container">
         <div className="tag-filter-message">Filtered By:</div>
-        <ul className="tag-icon-container">
+        <div className="tag-icon-container">
           {blogTagsList.map((tag, index) => {
             return (
               <button
@@ -48,7 +49,7 @@ const Index = ({ data }) => {
               </button>
             )
           })}
-        </ul>
+        </div>
       </div>
       <ol style={{ listStyle: `none` }}>
         {posts

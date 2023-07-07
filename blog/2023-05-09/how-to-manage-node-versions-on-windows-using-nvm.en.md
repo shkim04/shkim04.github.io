@@ -3,7 +3,7 @@ title: How To Manage Node Version On Windows Using nvm
 date: "2023-05-09T00:00:00.000Z"
 description: ""
 tag: 
-    - Others
+    - NodeJS
 ---
 
 **nvm** stands for Node Version Manager. With its help, you can switch between multiple Node.js versions based on projects you are working on. To clarify, **nvm** does not support Windows but MacOS and Linux. Instead, you can install **nvm-windows** and use it to install Node.js and manage versions of multiple installations. Without further ado, Let's begin to learn how to install it.

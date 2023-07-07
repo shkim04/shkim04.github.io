@@ -3,7 +3,7 @@ title: 영역 밖에서 발생하는 클릭 감지하는 React 컴포넌트
 date: "2023-02-19T00:00:00.000Z"
 description: ""
 tag: 
-    - ReactJS
+    - React
 ---
 
 ![click-outside](../gifs/click-outside.gif)
