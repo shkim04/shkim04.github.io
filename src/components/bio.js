@@ -13,7 +13,7 @@ import siteMetadata from "../../config/siteMetadata"
 
 const Bio = ({ locale }) => {
   const author = siteMetadata[locale].author
-  
+
   return (
     <div className="bio">
       <StaticImage
@@ -21,19 +21,18 @@ const Bio = ({ locale }) => {
         layout="fixed"
         formats={["auto", "webp", "avif"]}
         src="../images/profile-pic.png"
-        width={100}
-        height={100}
+        width={150}
+        height={150}
         quality={95}
         alt="Profile picture"
       />
       {author?.name && (
-        <div>
-          {author?.summary || null}
-          <br/>
+        <>
+          <p className="bio-summary">{author?.summary || null}</p>
+          <br />
           <SocialLinks />
-        </div>
+        </>
       )}
-      
     </div>
   )
 }

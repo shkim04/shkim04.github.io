@@ -1,14 +1,13 @@
 import * as React from "react"
 import { Link, graphql } from "gatsby"
 
-import Bio from "../components/bio"
 import Seo from "../components/seo"
 
 import locales from "../../config/i18n"
 
 const BlogPostTemplate = ({
-  data: { previous, next, markdownRemark: post }, 
-  pageContext: { locale }
+  data: { previous, next, markdownRemark: post },
+  pageContext: { locale },
 }) => {
   return (
     <>
@@ -19,21 +18,13 @@ const BlogPostTemplate = ({
       >
         <header>
           <h1 itemProp="headline">{post.frontmatter.title}</h1>
-          {
-            post.frontmatter.tag.map((tag, index) => (
-              <span key={tag + index}>{tag}</span>
-            ))
-          }
-          <p>{post.frontmatter.date}</p>     
+          <p>{post.frontmatter.date}</p>
         </header>
         <section
           dangerouslySetInnerHTML={{ __html: post.html }}
           itemProp="articleBody"
         />
         <hr />
-        <footer>
-          <Bio locale={locale} />
-        </footer>
       </article>
       <nav className="blog-post-nav">
         <ul
@@ -65,7 +56,10 @@ const BlogPostTemplate = ({
   )
 }
 
-export const Head = ({ data: { markdownRemark: post }, pageContext: { locale } }) => {
+export const Head = ({
+  data: { markdownRemark: post },
+  pageContext: { locale },
+}) => {
   return (
     <Seo
       title={post.frontmatter.title}
@@ -90,10 +84,7 @@ export const pageQuery = graphql`
         title
       }
     }
-    markdownRemark(
-      id: { eq: $id }
-      fields: { locale: { eq: $locale } }
-    ) {
+    markdownRemark(id: { eq: $id }, fields: { locale: { eq: $locale } }) {
       id
       excerpt(pruneLength: 160)
       html

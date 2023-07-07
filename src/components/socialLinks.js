@@ -5,26 +5,37 @@ import { FaMedium } from "@react-icons/all-files/fa/FaMedium"
 
 const SocialLinks = () => {
   return (
-    <section className="social-link-cointainer">
+    <section className="social-link-container">
       <ul className="link-container">
         <li className="link-item">
           <a href="https://github.com/shkim04" target="_blank" rel="noreferrer">
-            <FaGithub />Github
+            <FaGithub />
+            Github
           </a>
         </li>
         <li className="link-item">
-          <a href="https://linkedin.com/in/shkim04" target="_blank" rel="noreferrer">
-            <FaLinkedin />LinkedIn
+          <a
+            href="https://linkedin.com/in/shkim04"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <FaLinkedin />
+            LinkedIn
           </a>
         </li>
         <li className="link-item">
-          <a href="https://medium.com/@shkim04" target="_blank" rel="noreferrer">
-            <FaMedium />Medium
+          <a
+            href="https://medium.com/@shkim04"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <FaMedium />
+            Medium
           </a>
         </li>
       </ul>
     </section>
-  );
-};
+  )
+}
 
-export default SocialLinks;
+export default SocialLinks
