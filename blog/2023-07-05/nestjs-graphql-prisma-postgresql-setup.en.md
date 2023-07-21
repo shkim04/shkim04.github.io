@@ -65,7 +65,7 @@ To begin to set it up, add the following variables in `.env` file:
 ```js
 POSTGRES_HOST='localhost'
 POSTGRES_PORT=5432
-POSTGRES_USERNAME='your-user-name'
+POSTGRES_USER='your-user-name'
 POSTGRES_PASSWORD='your-password'
 POSTGRES_NAME='your-postgres-name'
 ```
@@ -80,7 +80,7 @@ services:
     env_file:
       - .env
     environment:
-      - POSTGRES_USERNAME=${POSTGRES_USERNAME}
+      - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_NAME=${POSTGRES_NAME}
       - POSTGRES_PORT=${POSTGRES_PORT}
