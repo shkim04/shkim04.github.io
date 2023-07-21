@@ -110,7 +110,7 @@ npx prisma migrate dev --name [whatever-you-want]
 Once the migration is done, check if all the tables are created in the database, run a docker command like:
 
 ```
-docker exec -it [your-container-name psql] -U [your-user-name] [your-postgres-name]
+docker exec -it [your-container-name] psql -U [your-user-name] [your-postgres-name]
 // And then, run the following query
 \dt
 ```
@@ -127,7 +127,7 @@ Conveniently, there is the built-in `@nestjs/graphql` module in NestJS. Let's in
 npm i @nestjs/graphql @nestjs/apollo @apollo/server
 ```
 
-We need a module that handles requests and response about toilet data. Let's create the following files in the `toilet` folder` under the `src` folder:
+We need a module that handles requests and response about toilet data. Let's create the following files in the `toilet` folder under the `src` folder:
 
 ```
 src
