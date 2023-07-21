@@ -109,7 +109,7 @@ npx prisma migrate dev --name [whatever-you-want]
 
 등록이 끝나면 다음 명령어로 모든 테이블들이 생성되었는지 확인합니다.
 ```
-docker exec -it [your-container-name psql] -U [your-user-name] [your-postgres-name]
+docker exec -it [your-container-name] psql -U [your-user-name] [your-postgres-name]
 // And then, run the following query
 \dt
 ```
