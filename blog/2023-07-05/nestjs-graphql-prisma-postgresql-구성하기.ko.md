@@ -8,7 +8,7 @@ tag:
   - Database
 ---
 
-_[graphql-prisma-postgresql](https://github.com/shkim04/find-your-wc/tree/graphql-prisma-postgresql) 브랜치에서 코드를 확인하실 수 있습니다._
+_[graphql-prisma-postgresql](https://github.com/shkim04/find-your-wc/tree/graphql-prisma-postgresql) 브랜치에서 전체 코드를 확인하실 수 있습니다._
 
 [지난 글](https://shkim04.github.io/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-find-your-wc/)에 언급된 비즈니스 로직을 개발하기 위해 데이터 모델을 정의해야 합니다. **Prisma**가 직관적이며 타입-안정성을 보장하기 때문에 데이터 모델을 정의하는 목적으로 사용될 것입니다. 모델을 정의하고 나면 사용하고자 하는 데이터베이스에 모델을 등록할 것입니다. 그런 다음 클라이언트와 데이터베이스 사이의 요청과 응답을 처리하는 **GraphQL** 서버를 둘 것입니다.
 

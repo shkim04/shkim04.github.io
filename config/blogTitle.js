@@ -75,4 +75,8 @@ module.exports = {
     ko: "nestjs-graphql-prisma-postgresql-구성하기",
     en: "nestjs-graphql-prisma-postgresql-setup",
   },
+  "2023-08-02": {
+    ko: "nestjs-guards-적용하기",
+    en: "nestjs-guards-setup",
+  },
 }
