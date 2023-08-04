@@ -1,5 +1,5 @@
 ---
-title: '#5 Implement Guards for preventing a review from being deleted'
+title: '#5 Implement Guard for preventing a review from being deleted'
 date: "2023-08-02T00:00:00.000Z"
 description: ""
 tag:
@@ -7,9 +7,7 @@ tag:
   - NodeJS
 ---
 
-_You can see the whole code on the [nestjs-guards](https://github.com/shkim04/find-your-wc/tree/nestjs-guards) branch._
-
-In the last article, we have the core Graphql set, which can do CRUD for Toilet, Address and Review. With this application, we want to collect some information about toilets from random people. But, we should not allow a random person to delete a review that is not written by the person. To achieve this goal, we will implement **Guards** on `review` resolver.
+In the last article, we have the core Graphql set, which can do CRUD for Toilet, Address and Review. With this application, we want to collect some information about toilets from random people. But, we should not allow a random person to delete a review that is not written by the person. To achieve this goal, we will implement **Guard** on `review` resolver.
 
 ## Modify Review Schema
 Since we did not have password field in `Review` model, we will add the field and then, migrate to our database again by entering `npx prisma migrate dev --create-only`.
@@ -65,8 +63,8 @@ export class DeleteReviewInput {
 }
 ```
 
-## Write Guards
-We now will create a folder named `guards` under `src` folder. Inside of the folder, we will have a file named `review.guard.ts`. By using **Guards**, we can take the context of the incoming request and then, by using it, determine whether it is allowed to be handled by **Router Handler** or not. Simply put, it is where authorization/authentication happens.
+## Write Guard
+We now will create a folder named `guards` under `src` folder. Inside of the folder, we will have a file named `review.guard.ts`. By using **Guard**, we can take the context of the incoming request and then, by using it, determine whether it is allowed to be handled by **Router Handler** or not. Simply put, it is where authorization/authentication happens.
 
 ```js
 @Injectable()
@@ -118,9 +116,7 @@ async deleteReview(
 ![delete-forbidden](../imgs/2023-08-02/delete-forbidden.png)
 
 ## Thoughts
-It is a cool thing to use **Guards** to authenticate a user because it has a single responsibility and can be used all over the whole application. But, as you can see, I had the simplest process for the authentication. In the next article, I will elaborate the process by making use of `bcrypt` to hash passwords.
-
-_You can see the whole code on the [nestjs-guards](https://github.com/shkim04/find-your-wc/tree/nestjs-guards) branch._
+It is a cool thing to use **Guard** to authenticate a user because it has a single responsibility and can be used all over the whole application. But, as you can see, I had the simplest process for the authentication. In the next article, I will elaborate the process by making use of `passport` and `bcrypt` to hash passwords.
 
 _**THANKS FOR READING. SEE YOU NEXT TIME!**_
 

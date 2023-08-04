@@ -79,4 +79,8 @@ module.exports = {
     ko: "nestjs-guards-적용하기",
     en: "nestjs-guards-setup",
   },
+  "2023-08-04": {
+    ko: "nestjs-passport-bcrypt로-guards-개선하기",
+    en: "improve-guards-using-nestjs-passport-bcrypt",
+  },
 }

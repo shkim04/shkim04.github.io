@@ -1,5 +1,5 @@
 ---
-title: '#5 리뷰 임의 삭제 방지를 위한 Guards 적용하기'
+title: '#5 리뷰 임의 삭제 방지를 위한 Guard 적용하기'
 date: "2023-08-02T00:00:00.000Z"
 description: ""
 tag:
@@ -7,9 +7,7 @@ tag:
   - NodeJS
 ---
 
-_[nestjs-guards](https://github.com/shkim04/find-your-wc/tree/nestjs-guards) 브랜치에서 전체 코드를 확인하실 수 있습니다._
-
-지난 글에서 Toilet, Address와 Review에 대해 CRUD 작업을 하는 Graphql 서버를 구성했습니다. 이 어플리케이션으로 여러 사람으로부터 화장실에 대한 정보를 얻으려고 합니다. 하지만 임의의 사용자가 자신이 작성하지 않을 리뷰를 지우는 것을 허용하지 않아야 합니다. 이를 위해 `review` Resolver에 **Guards**를 적용할 것입니다.
+지난 글에서 Toilet, Address와 Review에 대해 CRUD 작업을 하는 Graphql 서버를 구성했습니다. 이 어플리케이션으로 여러 사람으로부터 화장실에 대한 정보를 얻으려고 합니다. 하지만 임의의 사용자가 자신이 작성하지 않을 리뷰를 지우는 것을 허용하지 않아야 합니다. 이를 위해 `review` Resolver에 **Guard**를 적용할 것입니다.
 
 ## Review Schema 수정
 `Review` 모델에 password 필드가 없었기 때문에 이 필드를 추가하고 `npx prisma migrate dev --create-only`라는 명령어를 통해 데이터베이스에 재등록을 시킵니다.
@@ -65,8 +63,8 @@ export class DeleteReviewInput {
 }
 ```
 
-## Guards 작성
-`src`폴더 하위에 `guards`라는 폴더를 생성하고 해당 폴더 하위에 `review.guard.ts`라는 파일을 만듭니다. **Guards**를 사용하면 요청 객체에서 정보를 얻어 이를 사용해 **라우터 핸들러**에서 처리해도 될지 말지를 결정할 수 있습니다. 간단하게 말해 authorization/authention이 이루어지는 곳이라고 봐도 되겠습니다. 
+## Guard 작성
+`src`폴더 하위에 `guards`라는 폴더를 생성하고 해당 폴더 하위에 `review.guard.ts`라는 파일을 만듭니다. **Guard**를 사용하면 요청 객체에서 정보를 얻어 이를 사용해 **라우터 핸들러**에서 처리해도 될지 말지를 결정할 수 있습니다. 간단하게 말해 authorization/authention이 이루어지는 곳이라고 봐도 되겠습니다. 
 
 ```js
 @Injectable()
@@ -118,9 +116,7 @@ async deleteReview(
 ![delete-forbidden](../imgs/2023-08-02/delete-forbidden.png)
 
 ## 정리
-**Guards**를 사용하여 사용자를 인증하면 그 인증 기능을 집중시켜 어플리케이션 전체에 사용할 수 있다는 것이 큰 매력입니다. 하지만 보시다시피 필자는 인증을 아주 단순하게 처리했습니다. 다음 글에서는 `bcrypt`를 사용하여 이 과정을 심화시켜 보겠습니다.
-
-_[nestjs-guards](https://github.com/shkim04/find-your-wc/tree/nestjs-guards) 브랜치에서 전체 코드를 확인하실 수 있습니다._
+**Guard**를 사용하여 사용자를 인증하면 그 인증 기능을 집중시켜 어플리케이션 전체에 사용할 수 있다는 것이 큰 매력입니다. 하지만 보시다시피 필자는 인증을 아주 단순하게 처리했습니다. 다음 글에서는 `passport`와 `bcrypt`를 사용하여 이 과정을 심화시켜 보겠습니다.
 
 _**읽어 주셔서 감사합니다. To be continued!**_
 
