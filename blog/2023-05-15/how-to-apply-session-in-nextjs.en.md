@@ -20,7 +20,7 @@ npm install iron-session
 ## Goal
 We will create two pages. One is the index page and the other is login page. In the index page, we will display a username if any user is logged in or a text saying _**I'm Guest User**_ as a default. What will happen in the login page is that we will make a request to an API to log in. If the request succeeds, it will redirect to the index page. Finally, we will need the API to handle log-in request, which is where we save session data.
 
-The goal here is once a user is logged in, we will see if their name shows and when the page is refreshed, the name still stays still for a certain amount of time. 
+The goal here is once a user is logged in, we will see if their name shows and when the page is refreshed, the name stays still for a certain amount of time. 
 
 ## App Structure
 This is the structure of the core part under the project folder:

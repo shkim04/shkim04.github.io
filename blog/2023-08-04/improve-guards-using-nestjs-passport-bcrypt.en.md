@@ -7,8 +7,6 @@ tag:
   - NodeJS
 ---
 
-_You can see the whole code on the [nestjs-auth](https://github.com/shkim04/find-your-wc/tree/nestjs-auth) branch._
-
 I have implemented **Guard** and have it put on the delete method in `review` resolver so that no one can delete a review without being authenticated. However, it was too simple to be a proper strategy for authentication. We should improve the process for the sake of security. To do it, we will use `passport` and `bcrypt`.
 
 ## Install dependencies
@@ -129,8 +127,6 @@ Notice that it throws `Unauthorized`.
 
 ### Delete a review with right password
 ![delete-authorized](../imgs/2023-08-04/delete-authorized.png)
-
-_You can see the whole code on the [nestjs-auth](https://github.com/shkim04/find-your-wc/tree/nestjs-auth) branch._
 
 _**THANKS FOR READING. SEE YOU NEXT TIME!**_
 

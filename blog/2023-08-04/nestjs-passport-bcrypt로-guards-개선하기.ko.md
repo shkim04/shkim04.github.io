@@ -7,8 +7,6 @@ tag:
   - NodeJS
 ---
 
-_[nestjs-auth](https://github.com/shkim04/find-your-wc/tree/nestjs-auth) 브랜치에서 전체 코드를 확인하실 수 있습니다._
-
 인증이 안된 사용자가 리뷰를 삭제하지 못하도록 `review` resolver에 있는 delete 메소드에 **Guard**를 적용했습니다. 그러나 인증이 지나치게 간단하여 적절하지 못한 방법입니다. 보안을 위해 인증 과정을 개선할 필요가 있습니다. 이를 위해 `passport`와 `bcrypt`를 사용할 것입니다.
 
 ## 디펜던시 설치
@@ -130,8 +128,6 @@ async deleteReview(
 
 ### 정상 비밀번호로 삭제 요청
 ![delete-authorized](../imgs/2023-08-04/delete-authorized.png)
-
-_[nestjs-auth](https://github.com/shkim04/find-your-wc/tree/nestjs-auth) 브랜치에서 전체 코드를 확인하실 수 있습니다._
 
 _**읽어 주셔서 감사합니다. To be continued!**_
 
