@@ -83,4 +83,8 @@ module.exports = {
     ko: "nestjs-passport-bcrypt로-guards-개선하기",
     en: "improve-guards-using-nestjs-passport-bcrypt",
   },
+  "2023-08-17": {
+    ko: "mixin과-pipe로-guard-리팩토링하기",
+    en: "refactor-guard-using-mixin-and-pipe",
+  },
 }
