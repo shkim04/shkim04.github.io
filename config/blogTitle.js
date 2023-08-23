@@ -87,4 +87,8 @@ module.exports = {
     ko: "mixin과-pipe로-guard-리팩토링하기",
     en: "refactor-guard-using-mixin-and-pipe",
   },
+  "2023-08-23": {
+    ko: "nestjs-graphql-redis로-캐싱하기",
+    en: "caching-with-nestjs-graphql-redis",
+  },
 }
