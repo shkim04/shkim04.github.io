@@ -11,7 +11,7 @@ tag:
 
 ## 예외 필터 생성
 
-`excpetion-filters` 폴더 하위에 `prisma-exception.filter.ts`를 생성합니다. 그리고 다음 코드를 작성할 것입니다.
+`excpetion-filters` 폴더 하위에 `prisma-exception.filter.ts`를 생성합니다. 그리고 다음 코드를 작성합니다.
 
 ```js
 @Catch(Prisma.PrismaClientKnownRequestError)
@@ -99,10 +99,10 @@ GraphQLModule.forRootAsync<ApolloDriverConfig>({
 ### 예외 필터와 포맷 에러가 있는 경우
 ![with-formatting](../imgs/2023-08-31/with-formatting.png)
 
-잘 포맷된 에러와 함꼐 알맞은 메시지가 전달되었습니다.
+잘 포맷된 에러와 함께 알맞은 메시지가 전달되는 것을 볼 수 있습니다.
 
 _**읽어 주셔서 감사합니다. To be continued!**_
 
 ### 참조
-- https://docs.nestjs.com/techniques/caching
-- https://www.tomray.dev/nestjs-caching-redis
+- https://docs.nestjs.com/graphql/other-features
+- https://stackoverflow.com/questions/61045881/why-arent-nestjs-graphql-validation-errors-placed-in-the-error-message-field
