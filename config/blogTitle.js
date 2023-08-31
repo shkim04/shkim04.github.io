@@ -91,4 +91,8 @@ module.exports = {
     ko: "nestjs-graphql-redis로-캐싱하기",
     en: "caching-with-nestjs-graphql-redis",
   },
+  "2023-08-31": {
+    ko: "nestjs-graphql-logging-예외-처리",
+    en: "nestjs-graphql-logging-and-exception-handling",
+  },
 }
