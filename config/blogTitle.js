@@ -95,4 +95,8 @@ module.exports = {
     ko: "nestjs-graphql-logging-예외-처리",
     en: "nestjs-graphql-logging-and-exception-handling",
   },
+  "2023-09-13": {
+    ko: "nextjs-기본-설정-및-graphql-요청",
+    en: "nextjs-basic-setup-and-request-graphql",
+  },
 }
