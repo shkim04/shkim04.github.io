@@ -99,4 +99,8 @@ module.exports = {
     ko: "nextjs-기본-설정-및-graphql-요청",
     en: "nextjs-basic-setup-and-request-graphql",
   },
+  "2023-09-20": {
+    ko: "nextjs-app-router로-graphql-mutation-쿼리-요청하기",
+    en: "nextjs-graphql-mutation-query-using-app-router",
+  },
 }
