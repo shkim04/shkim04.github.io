@@ -4,7 +4,7 @@ date: "2023-09-13T00:00:00.000Z"
 description: ""
 tag:
   - Project
-  - ReactJS
+  - React
 ---
 
 화장실 정보를 CRUD 작업을 할 수 있는 Nestjs-graphql 백엔드 어플리케이션이 있으니 이 정보들을 다루고 보여주는 Nextjs 어플리케이션을 만들려고 합니다.

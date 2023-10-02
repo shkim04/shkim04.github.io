@@ -4,7 +4,7 @@ date: "2023-09-20T00:00:00.000Z"
 description: ""
 tag:
   - Project
-  - ReactJS
+  - React
 ---
 
 The web application has pages that dynamically show toilets information by a country, city and street. However, users should be able to register a toilet by giving us an address and review about the toilet in the first place. So, we will create a route named `/contribute` that write a form that contains toilet information and make graphql mutation query using it.

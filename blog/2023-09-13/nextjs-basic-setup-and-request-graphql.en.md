@@ -4,7 +4,7 @@ date: "2023-09-13T00:00:00.000Z"
 description: ""
 tag:
   - Project
-  - ReactJS
+  - React
 ---
 
 Now that I have Nestjs-graphql backend to do CRUD operation for toilets information, I will create a simple Nextjs application that interacts with the information. Let's dive into it.
