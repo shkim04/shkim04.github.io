@@ -103,4 +103,8 @@ module.exports = {
     ko: "nextjs-app-router로-graphql-mutation-쿼리-요청하기",
     en: "nextjs-graphql-mutation-query-using-app-router",
   },
+  "2023-10-09": {
+    ko: "nextjs-app-router-사용시-데이터-수정하기",
+    en: "nextjs-update-data-approach-using-app-router",
+  },
 }
