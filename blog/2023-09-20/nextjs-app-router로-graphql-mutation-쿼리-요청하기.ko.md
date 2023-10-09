@@ -233,7 +233,7 @@ export default function Contribute() {
 
 ```
 src/app
-├── contribute
+└── contribute
     ├── action.ts
     └── page.tsx
 ```

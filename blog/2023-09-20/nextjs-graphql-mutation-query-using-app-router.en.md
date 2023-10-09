@@ -233,7 +233,7 @@ To do it, we will create a file named `action.ts` under `contribute` folder.
 
 ```
 src/app
-├── contribute
+└── contribute
     ├── action.ts
     └── page.tsx
 ```
