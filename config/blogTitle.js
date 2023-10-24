@@ -107,4 +107,8 @@ module.exports = {
     ko: "nextjs-app-router-사용시-데이터-수정하기",
     en: "nextjs-update-data-approach-using-app-router",
   },
+  "2023-10-24": {
+    ko: "nestjs-prisma를-이용한-집계-추가하기",
+    en: "add-aggregation-using-prisma-in-nestjs",
+  },
 }
