@@ -36,7 +36,7 @@ export class PrismaClientExceptionFilter implements GqlExceptionFilter {
 }
 ```
 
-This exception filter will catch prism client request error as passed in `catch` decorator. It will throw execptions with suitable messages, which are corresponding to each of prisma error codes. 
+This exception filter will catch prisma client request error as passed in `catch` decorator. It will throw execptions with suitable messages, which are corresponding to each of prisma error codes. 
 
 Unlike REST API, we do not use `response` object and custom it to send clients back. Instead, we have thrown http exceptions so that `GraphQLModule` will pick these up and send them back to clients.
 
