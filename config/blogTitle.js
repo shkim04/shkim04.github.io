@@ -111,4 +111,8 @@ module.exports = {
     ko: "nestjs-prisma를-이용한-집계-추가하기",
     en: "add-aggregation-using-prisma-in-nestjs",
   },
+  "2023-10-25": {
+    ko: "nextjs-어플리케이션에-집계-데이터-보여주기",
+    en: "display-aggregated-data-in-nextjs",
+  },
 }
