@@ -115,4 +115,8 @@ module.exports = {
     ko: "nextjs-어플리케이션에-집계-데이터-보여주기",
     en: "display-aggregated-data-in-nextjs",
   },
+  "2023-11-03": {
+    ko: "pnpm으로-dockerfile에서-multi-stage-빌드하기",
+    en: "multi-stage-build-in-dockerfile-using-pnpm",
+  },
 }
