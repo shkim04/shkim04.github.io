@@ -22,13 +22,15 @@ tag:
 
 **pnpm** 공식 문서에 따르면 `pnpm fetch`와 `pnpm install --offline`를 사용하면 많은 시간을 아낄 수 있다고 나옵니다.
 
+마지막으로 어플리케이션에서 **Prisma**를 사용하기 때문에 prisma 클라이언트를 생성하기 위해 `RUN pnpm exec prisma generate`를 추가해야 합니다.
+
 ## Build 단계
 
 ![build-stage](../imgs/2023-11-03/build-stage.png)
 
 이제 development 단계에서 생성한 `node_modules` 폴더를 복사할 수 있습니다. 그리고 어플리케이션 구동할 떄 필요한 정보가 담긴 **.env** 파일도 복사했습니다.
 
-**Prisma**를 사용한다면 이 단계에서 migration하는 명령어를 적어줘야 합니다. 마지막으로 빌드를 마친 후 패키지를 설치할 때 `--prod` 플래그를 사용하면 배포에 필요한 패키지만 설치가 됩니다.
+마지막으로 빌드를 마친 후 패키지를 설치할 때 `--prod` 플래그를 사용하면 배포에 필요한 패키지만 설치가 됩니다.
 
 ## Production 단계
 
