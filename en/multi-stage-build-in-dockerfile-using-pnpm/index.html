@@ -22,24 +22,25 @@
     >
       <a
     class="gatsby-resp-image-link"
-    href="/static/0a4c667333bada5394731421fa2357fd/c1c45/development-stage.png"
+    href="/static/0c03facdffeb46f04279d9e0979fae24/fe8a7/development-stage.png"
     style="display: block"
     target="_blank"
     rel="noopener"
   >
     <span
     class="gatsby-resp-image-background-image"
-    style="padding-bottom: 61.39240506329114%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMCAYAAABiDJ37AAAACXBIWXMAABYlAAAWJQFJUiTwAAABhUlEQVR42pWS25LiIBRF/Q8N4U6AQCSJjrZW25enmf//nz3FwenybfRh1c5DWHX2gY2fDGKxiLNDqLk4DKOGtgJmkOCSo2c9+v45NmE2GFeLcbGU+ThgSFUo70KBvucPh+7f/CH/UYVOW2hroIKDMRayCrQEUwKM9+i2W3S7HcG6rsFq7sAYQ7fbout2BAlP6YT5/I54vaAcr1gvn8i3G9bff1A+vhDLEePyC2G/wAwRflpgQ80Zxkekwxt8nhHKEUJIbKy2sMpCCgUzBDoY8gznx0ZMxBATlLEQUoFLCaE0fStqpSG1aRPOcUHxBT5kDKk0cqEKtV7LO7UqY+gZe8juBxJ64yE4h4kJPk3wubQK+wPifCB5KCvcmMGF/P8tJ5cRaQcHqquMAReC6gilSEI1n5CRsO5PGwdtB0JICc75z43Sj7Xes+/wlM/IecV0vmG5fqO83VAun5hO71D3Rb/CxmmHIWR6AnVCpS1NaX1swhemI2F2CTHuafmtYhO0B8xenvAv8y9VZPE2IJ0AAAAASUVORK5CYII='); background-size: cover; display: block;"
+    style="padding-bottom: 35.44303797468354%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAABYlAAAWJQFJUiTwAAAA3ElEQVR42p2PW07DMBBFsw+wHTvxM3GckLb0Kfa/qoNiQALUD8rH0Z25Gh1pmt1yIp8vlOOVcrxRysy6n1nXiRIdS/IsQ2BO/ge1i54Sfc0xBjoXaFJe8DET8oKNA0oKtBBoKTG6xWh9l+5Op1pNM9kRbyM2ZcI4Y/oe3X2wHUgpkVJ9y6/5164USima4CI+z6Sy0ruASyMuDrg4Yjbp5+FfaXKcqmxYdlVmeot4fkIIgVLyceHLuGc63Jher0yHC/P5DRtTfeVRWRUmN+CHTKtbWq1ptan8R7YJ3wFh2caA/smLygAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
   ></span>
   <img
         class="gatsby-resp-image-image"
         alt="development-stage"
         title=""
-        src="/static/0a4c667333bada5394731421fa2357fd/f058b/development-stage.png"
-        srcset="/static/0a4c667333bada5394731421fa2357fd/c26ae/development-stage.png 158w,
-/static/0a4c667333bada5394731421fa2357fd/6bdcf/development-stage.png 315w,
-/static/0a4c667333bada5394731421fa2357fd/f058b/development-stage.png 630w,
-/static/0a4c667333bada5394731421fa2357fd/c1c45/development-stage.png 824w"
+        src="/static/0c03facdffeb46f04279d9e0979fae24/f058b/development-stage.png"
+        srcset="/static/0c03facdffeb46f04279d9e0979fae24/c26ae/development-stage.png 158w,
+/static/0c03facdffeb46f04279d9e0979fae24/6bdcf/development-stage.png 315w,
+/static/0c03facdffeb46f04279d9e0979fae24/f058b/development-stage.png 630w,
+/static/0c03facdffeb46f04279d9e0979fae24/40601/development-stage.png 945w,
+/static/0c03facdffeb46f04279d9e0979fae24/fe8a7/development-stage.png 1223w"
         sizes="(max-width: 630px) 100vw, 630px"
         style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
         loading="lazy"
@@ -47,9 +48,10 @@
       />
   </a>
     </span></p>
-<p>Installing <code class="language-text">pnpm</code> is added to the script by writing <code class="language-text">RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm</code>.</p>
+<p>Installing <code class="language-text">pnpm</code> is added to the script by writing <code class="language-text">RUN wget -qO /bin/pnpm "https://github.com/pnpm/pnpm/releases/latest/download/pnpm-linuxstatic-x64" &amp;&amp; chmod +x /bin/pnpm</code>.</p>
 <p>Notice that instead of <strong>install</strong>, <strong>fetch</strong> is used for loading packages and it only requires <code class="language-text">pnpm-lock.yaml</code> file - <em>I reason that <code class="language-text">pnpm fetch</code> is equivalent to <code class="language-text">npm ci</code> when you use <code class="language-text">npm</code> for the build.</em></p>
 <p>According to the official document of <strong>pnpm</strong>, <code class="language-text">pnpm fetch</code> and <code class="language-text">pnpm install --offline</code> will save so much time.</p>
+<p>Lastly, since we use <strong>Prisma</strong> in the application, we should add <code class="language-text">RUN pnpm exec prisma generate</code> to generate prisma client.</p>
 <h2>Build stage</h2>
 <p><span
       class="gatsby-resp-image-wrapper"
@@ -57,25 +59,25 @@
     >
       <a
     class="gatsby-resp-image-link"
-    href="/static/7896d69dd312f8bc509f328c9a19b74a/fbf08/build-stage.png"
+    href="/static/78f279d415af6f7fd15acad423c019af/d9b5d/build-stage.png"
     style="display: block"
     target="_blank"
     rel="noopener"
   >
     <span
     class="gatsby-resp-image-background-image"
-    style="padding-bottom: 63.92405063291139%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAABYlAAAWJQFJUiTwAAABnklEQVR42p1T7Y6bMBDkQQLGxN822AECXK7JNY2aqmrV93+bqVi43OVOqpT+GK0/0HhndshMI2GTgo0SLikoL1CWJRhj/4UsDBpxNGgGjfTsEDqFSnAwVhLxjXyun9aveEdopIGwGtJ5bKsKXAnkRY58s0GeL7Uoig/IUeQriuKesAs93DDBt3v0hzPi8Sva4xlpOqHZH5CeTrD1DjpEgnI1TJ0QuhG26SC0pQduhMkmeOUhjKcPbZ3AeUUoOX+H+z2vtuBV9cnvzAgDKTWUC5DWUQdCGVRy9lJBaEMEBWOLvFfJa2XrGWNLzQ7xCT4NmK5/MJyv2F9+of1yQXf6jvHbT/QvP1B3E6QNpMDv9nC7Hr4dENqRJLvUI3QTXOyQJROhbEAcj2j6EfX+Gdo3JGkr1Wr6PFV2m/oCTmB3+xKZVY4IyHBfw8YWZl5bv/rzWCazQ3vEcPmN/uW6TC52JI0IOX882Ea5t65cgAkJW6WR55u3ID/0p5hZZk9Zm0mF0pTJuUPb7Cga7EN4/02oAmxIqISg5NPFLR7Fwx3+BabcdC8NR6xRAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+    style="padding-bottom: 40.50632911392405%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAYAAAD5nd/tAAAACXBIWXMAABYlAAAWJQFJUiTwAAABG0lEQVR42pWP7U6EMBBFeQ+hZWhpS7cfsGyURdFN/OH7P9E1DKy6GhP9cdI7TXsnpzgNZ6T5EWlakKdnpJwRY4dgWyY5g7jn6D7P9f76JhgNby2UsSh8GOB8QpeOMD6AagnTEIxWMErB6lvML7NWDeqaUITWw7QOynYwXUBNDWRNkESohERZVqiqCmVZMmu+zpyFYIQQkFKgGP0R4XTG/eUNx+UVeVowzC8Y5gt8HqFtB3tIcDHDxZ6Xts6zkTZuL5IfFNFG+P6EfloQxom1tXVolAYRbTQKpDZWgxVSGjXRTRkX5jgiPTxxqfGRP1XlHW/m7Ttf8838vdCZA2zIGz6ynnYejW5/6PyF4mADXEistSqw2p7/W7YWvgOXwuSLR1uIJwAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
   ></span>
   <img
         class="gatsby-resp-image-image"
         alt="build-stage"
         title=""
-        src="/static/7896d69dd312f8bc509f328c9a19b74a/f058b/build-stage.png"
-        srcset="/static/7896d69dd312f8bc509f328c9a19b74a/c26ae/build-stage.png 158w,
-/static/7896d69dd312f8bc509f328c9a19b74a/6bdcf/build-stage.png 315w,
-/static/7896d69dd312f8bc509f328c9a19b74a/f058b/build-stage.png 630w,
-/static/7896d69dd312f8bc509f328c9a19b74a/40601/build-stage.png 945w,
-/static/7896d69dd312f8bc509f328c9a19b74a/fbf08/build-stage.png 962w"
+        src="/static/78f279d415af6f7fd15acad423c019af/f058b/build-stage.png"
+        srcset="/static/78f279d415af6f7fd15acad423c019af/c26ae/build-stage.png 158w,
+/static/78f279d415af6f7fd15acad423c019af/6bdcf/build-stage.png 315w,
+/static/78f279d415af6f7fd15acad423c019af/f058b/build-stage.png 630w,
+/static/78f279d415af6f7fd15acad423c019af/40601/build-stage.png 945w,
+/static/78f279d415af6f7fd15acad423c019af/d9b5d/build-stage.png 1224w"
         sizes="(max-width: 630px) 100vw, 630px"
         style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
         loading="lazy"
@@ -84,7 +86,7 @@
   </a>
     </span></p>
 <p>We can now copy <code class="language-text">node_modules</code> folder created from the development stage. I have also copied <strong>.env</strong> file since it has some information when running the application.</p>
-<p>If you use <strong>Prisma</strong>, this stage is where you write to migrate it to make sure it will work. Finally by using <code class="language-text">--prod</code> flag for installing packages after the build, Only production packages will be installed.</p>
+<p>Finally by using <code class="language-text">--prod</code> flag for installing packages after the build, Only production packages will be installed.</p>
 <h2>Production stage</h2>
 <p><span
       class="gatsby-resp-image-wrapper"
@@ -92,24 +94,24 @@
     >
       <a
     class="gatsby-resp-image-link"
-    href="/static/e9556e83e36c69f590156c7e5046ceae/e4374/production-stage.png"
+    href="/static/e99298f940617a5de8bbdbee98688ec5/681f1/production-stage.png"
     style="display: block"
     target="_blank"
     rel="noopener"
   >
     <span
     class="gatsby-resp-image-background-image"
-    style="padding-bottom: 34.177215189873415%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAABYlAAAWJQFJUiTwAAABFklEQVR42p3RyY6cMBCAYR6ksXF5K2PA0Et6ehapNe//Tv9oIIkU5ZQcPqkutXc6R8Yt7XRJ5Bqw1v63rl4S60Np98y4BVIVjDWY/mDNPxbMIRE04zURy0hURZzgYsClwCAOa8zBHow5WPMr7n8ydHOaKeuKbmdqu1LXGzmPpHUhn1dEM4NzOPE4EZz3SIi7QQTxER8zPmWcE7qmjRgL9fLKfHtQb6/ocibXxvbyZPnxRj3fqJcX2v2D7f2T+fpge3uicyOWiXG9MrYrPia6KVdSirS2Mk4zy9KY6oSqMk4TIZe9e0hK1EoqE+IDPuk+telPmL4/fK9cYib6AQ2CHyzFO0oQshe8O/2R0J9OO/v7buavp3wB85HID8nMkMoAAAAASUVORK5CYII='); background-size: cover; display: block;"
+    style="padding-bottom: 20.88607594936709%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAECAYAAACOXx+WAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAyklEQVR42j2PW3KDMBAEuYdAQqCHJSSQwQabpHz/W3XKcpKPqen52K3qJpqAywmTItYHbEy40TF4Rx8c2ltk29LVCFohaNtPZNehpER2bWUpJU0JC9YF8n6yHCfp9iRe7/i0UPYv8u+e1p18PynPF/PxzfJ4EZYVFxPTdpC2R+WmhIJzF9K6M9+O2nFe8VNm3g5iueFz4ZKvld+Hb/48m+j7Hj0a9DjS64FmcgFvepIdMFoxGV052AGrRdWsSn/aQvxzVVaqatdWih8LhHS+oidIvQAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
   ></span>
   <img
         class="gatsby-resp-image-image"
         alt="production-stage"
         title=""
-        src="/static/e9556e83e36c69f590156c7e5046ceae/f058b/production-stage.png"
-        srcset="/static/e9556e83e36c69f590156c7e5046ceae/c26ae/production-stage.png 158w,
-/static/e9556e83e36c69f590156c7e5046ceae/6bdcf/production-stage.png 315w,
-/static/e9556e83e36c69f590156c7e5046ceae/f058b/production-stage.png 630w,
-/static/e9556e83e36c69f590156c7e5046ceae/e4374/production-stage.png 927w"
+        src="/static/e99298f940617a5de8bbdbee98688ec5/f058b/production-stage.png"
+        srcset="/static/e99298f940617a5de8bbdbee98688ec5/c26ae/production-stage.png 158w,
+/static/e99298f940617a5de8bbdbee98688ec5/6bdcf/production-stage.png 315w,
+/static/e99298f940617a5de8bbdbee98688ec5/f058b/production-stage.png 630w,
+/static/e99298f940617a5de8bbdbee98688ec5/681f1/production-stage.png 899w"
         sizes="(max-width: 630px) 100vw, 630px"
         style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
         loading="lazy"
@@ -123,7 +125,7 @@
 <h3>References</h3>
 <ul>
 <li><a href="https://pnpm.io/cli/fetch">https://pnpm.io/cli/fetch</a></li>
-</ul></section><hr/></article><nav class="blog-post-nav"><ul style="display:flex;flex-wrap:wrap;justify-content:space-between;list-style:none;padding:0"><li><a rel="prev" href="/en/display-aggregated-data-in-nextjs/">← <!-- -->Prev</a></li><li></li></ul></nav></main></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/en/multi-stage-build-in-dockerfile-using-pnpm/";/*]]>*/</script><!-- slice-start id="_gatsby-scripts-1" -->
+</ul></section><hr/></article><nav class="blog-post-nav"><ul style="display:flex;flex-wrap:wrap;justify-content:space-between;list-style:none;padding:0"><li><a rel="prev" href="/en/display-aggregated-data-in-nextjs/">← <!-- -->Prev</a></li><li><a rel="next" href="/en/link-postgresql-redis-application-in-docker-compose/">Next<!-- --> →</a></li></ul></nav></main></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/en/multi-stage-build-in-dockerfile-using-pnpm/";/*]]>*/</script><!-- slice-start id="_gatsby-scripts-1" -->
           <script
             id="gatsby-chunk-mapping"
           >
