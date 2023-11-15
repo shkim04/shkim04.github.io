@@ -119,4 +119,8 @@ module.exports = {
     ko: "pnpm으로-dockerfile에서-multi-stage-빌드하기",
     en: "multi-stage-build-in-dockerfile-using-pnpm",
   },
+  "2023-11-15": {
+    ko: "docker-compose로-postgresql과-redis-어플리케이션에-연결하기",
+    en: "link-postgresql-redis-application-in-docker-compose",
+  },
 }
