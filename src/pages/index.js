@@ -31,7 +31,7 @@ const Index = ({ data }) => {
   return (
     <>
       <div className="blog-tag-list-container">
-        <div className="tag-filter-message">Filtered By:</div>
+        <div className="tag-filter-message">Filter By:</div>
         <div className="tag-icon-container">
           {blogTagsList.map((tag, index) => {
             return (

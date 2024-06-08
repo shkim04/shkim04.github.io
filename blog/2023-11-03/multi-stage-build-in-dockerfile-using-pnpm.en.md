@@ -6,7 +6,7 @@ tag:
   - Project
 ---
 
-I chose to use **npm** as the package manager in the beginning as usual. But, I have changed it into **pnpm** and migrated it to this project since I was curious what it is like - _I am not sure but I think it might impose a potential danger on the application. I should look more into this topic later._ 
+I chose to use **npm** as the package manager in the beginning as usual. But, I have changed it into **pnpm** and migrated it to this project since I was curious what it is like - _pnpm is different from npm and could break the build system. In production, we definitely make sure to test it properly to swtich._ 
 
 I had to change **Docker** script for it was written for **npm**. Let me break down the Dockerfile that I have implemented.
 
